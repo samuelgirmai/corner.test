@@ -4,7 +4,7 @@ import CONFIG from '../config/config'
 exports.login = async(login) => {
   let prop = {
     method: 'POST',
-    url: CONFIG.ACCOUNT.URL+'/logins',
+    url: CONFIG.AUTH.URL+'/logins',
     data: {
       login: login
     }
@@ -18,7 +18,7 @@ exports.logout = async(skey) => {
  
   let prop = {
     method: 'POST',
-    url: CONFIG.ACCOUNT.URL+'/logouts',
+    url: CONFIG.AUTH.URL+'/logouts',
     data: {
       skey: skey
     }
@@ -28,13 +28,27 @@ exports.logout = async(skey) => {
 
   return ret;
 }
-
 exports.signup = async(signup) => {
   let prop = {
     method: 'POST',
     url: CONFIG.ACCOUNT.URL+'/signups',
     data: {
       signup: signup
+    }
+  }
+
+  let ret = await API.request(prop);
+
+  return ret;
+}
+
+exports.read_history = async(info) => {
+
+  let prop = {
+    method: 'POST',
+    url: CONFIG.EMR.URL+'/history',
+    data: {
+      info: info
     }
   }
 

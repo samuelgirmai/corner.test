@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Sample EMR app",
   "scripts": {
-    "emr": "babel-node ./logic/main.js"
+    "emr": "babel-node ./logic/main.js",
+    "start": "babel-node ./logic/main.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {
