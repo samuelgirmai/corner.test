@@ -7,8 +7,13 @@ var printMessage = require('print-message');
 const signup_prompt = [
   {
     type: 'input',
-    name: 'full_name',
-    message: 'Full Name: ',
+    name: 'given',
+    message: 'Given Name: ',
+  },
+  {
+    type: 'input',
+    name: 'family',
+    message: 'Family Name: ',
   },
   {
     type: 'input',
@@ -42,8 +47,8 @@ export async function signup()
  
   info = await inquirer.prompt(signup_prompt);
 
-  if(!info.phone_number || !info.email){
-    printMessage(['Phone or Email unavailable'], {borderColor: 'green'});
+  if(!info.phone_number){
+    printMessage(['Phone unavailable'], {borderColor: 'green'});
     return;
   }
   type = await inquirer.prompt(type_prompt);
