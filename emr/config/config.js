@@ -5,14 +5,14 @@ const URL_EMR = 'http://127.0.0.1:5560';
 const URI_STREAM='http://127.0.0.1:8890'
 
 const auth = {
-  URL: URL_AUTH+''
+  URL: URL_AUTH+'/platform/auth/v1'
 }
 const account = {
-  URL: URL_ACCOUNT+'/accounts'
+  URL: URL_ACCOUNT+'/platform/accounts/v1'
 }
 
 const emr = {
-  URL: URL_EMR+'/emr'
+  URL: URL_EMR+'/app/emr/v1'
 }
 
 const stream = {
