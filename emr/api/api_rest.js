@@ -56,3 +56,18 @@ exports.read_history = async(info) => {
 
   return ret;
 }
+exports.write_history = async(info) => {
+
+  let prop = {
+    method: 'POST',
+    url: CONFIG.EMR.URL+'/history/add',
+    data: {
+      info: info
+    }
+  }
+
+  let ret = await API.request(prop);
+
+  return ret;
+}
+  

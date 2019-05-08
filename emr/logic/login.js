@@ -36,5 +36,5 @@ export async function login()
   printMessage(['Login Successfull'], {borderColor: 'green'});
   printMessage([JSON.stringify(ret.session)], {borderColor: 'green'});
 
-  return ret.session.access_token;
+  return ret.session;
 }
