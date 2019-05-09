@@ -2,7 +2,7 @@ import inquirer from 'inquirer'
 import {signup} from './signup'
 import {login} from './login'
 import {read_history, write_history} from './history'
-
+import {get_stats} from './stats';
 let sess = {}
 
 const main_prompt = [
@@ -10,7 +10,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'MAIN WINDOW',
-    choices: ['login', 'signup', 'mhistory.read','mhistory.write']
+    choices: ['login', 'signup', 'mhistory.read','mhistory.write', 'stats']
   }
 ];
 
@@ -30,6 +30,9 @@ async function _start()
       break;
     case 'mhistory.write':
       await write_history(sess);
+      break;
+    case 'stats':
+      await get_stats(sess);
       break;
   }
    _start();

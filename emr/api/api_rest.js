@@ -28,6 +28,7 @@ exports.logout = async(skey) => {
 
   return ret;
 }
+
 exports.signup = async(signup) => {
   let prop = {
     method: 'POST',
@@ -61,6 +62,21 @@ exports.write_history = async(info) => {
   let prop = {
     method: 'POST',
     url: CONFIG.EMR.URL+'/history/add',
+    data: {
+      info: info
+    }
+  }
+
+  let ret = await API.request(prop);
+
+  return ret;
+}
+
+exports.get_stats = async(info) => {
+
+  let prop = {
+    method: 'POST',
+    url: CONFIG.EMR.URL+'/stats',
     data: {
       info: info
     }

@@ -79,7 +79,9 @@ export async function write_history(sess)
 
   info.resourceType = type.type;
   info.access_token = sess.access_token;
-  info.uid = sess.uid;
+  info.performer_uid = sess.uid;
+  info.patient_uid = '';
+
   info.issued = new Date();
 
   ret = await API.write_history(info);
