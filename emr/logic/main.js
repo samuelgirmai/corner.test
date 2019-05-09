@@ -1,16 +1,16 @@
 import inquirer from 'inquirer'
 import {signup} from './signup'
 import {login} from './login'
-import {read_history} from './emr'
-
-let access_token = null;
+import {read_history, write_history} from './history'
+import {get_stats} from './stats';
+let sess = {}
 
 const main_prompt = [
   {
     type: 'list',
     name: 'main',
     message: 'MAIN WINDOW',
-    choices: ['login', 'signup', 'md-history']
+    choices: ['login', 'signup', 'mhistory.read','mhistory.write', 'stats']
   }
 ];
 
@@ -20,13 +20,19 @@ async function _start()
   switch(option.main){
     case 'signup':
       await signup();
-      access_token = null;  
+      sess.access_token = null;  
       break;
     case 'login':
-      access_token = await login();
+      sess = await login();
       break;
-    case 'md-history':
-      await read_history(access_token);
+    case 'mhistory.read':
+      await read_history(sess);
+      break;
+    case 'mhistory.write':
+      await write_history(sess);
+      break;
+    case 'stats':
+      await get_stats(sess);
       break;
   }
    _start();
