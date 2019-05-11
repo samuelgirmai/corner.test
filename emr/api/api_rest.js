@@ -47,7 +47,7 @@ exports.read_history = async(info) => {
 
   let prop = {
     method: 'POST',
-    url: CONFIG.EMR.URL+'/history',
+    url: CONFIG.EMR_HISTORY.URL+'/history',
     data: {
       info: info
     }
@@ -61,7 +61,7 @@ exports.write_history = async(info) => {
 
   let prop = {
     method: 'POST',
-    url: CONFIG.EMR.URL+'/history/add',
+    url: CONFIG.EMR_HISTORY.URL+'/history/add',
     data: {
       info: info
     }
@@ -76,7 +76,7 @@ exports.get_stats = async(info) => {
 
   let prop = {
     method: 'POST',
-    url: CONFIG.EMR.URL+'/stats',
+    url: CONFIG.EMR_STATS.URL+'/stats',
     data: {
       info: info
     }

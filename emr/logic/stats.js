@@ -30,6 +30,5 @@ export async function get_stats(sess)
     printMessage([ret.error], {borderColor: 'green'});
     return;
   }
-
   printMessage(['Statistics: ', JSON.stringify(ret.stats)], {borderColor: 'green'});
 }
