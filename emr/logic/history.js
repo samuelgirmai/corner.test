@@ -91,7 +91,7 @@ export async function write_history(sess)
     return;
   }
   printMessage(['Diagnosis record saved'], {borderColor: 'green'});
-  printMessage(['MRD  ', JSON.stringify(ret.mrn)], {borderColor: 'green'});
+  printMessage(['Medical Record Number(MRN) ', JSON.stringify(ret.mrn)], {borderColor: 'green'});
 
 }
 
