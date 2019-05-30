@@ -12,7 +12,7 @@ function _print(o, key) {
   console.log(JSON.stringify(o.result[key], 0, '  '));
 }
 
-/*export async function create_service()
+export async function create_service()
 {
   let ret;
 
@@ -27,37 +27,16 @@ function _print(o, key) {
   }
 
   let data = {
-    app_key: CONFIG.C_LICENSE,
-    sii: u
-  }
-
-  ret = await API.run(data, '/users/services/write');
-
-  _print(ret, '');
-}*/
-
-/*export async function create_client()
-{
-  let ret;
-
-  let u = {
-    name: "test.client",
-    desc: "test client",
-    address: {
-      phone_number: "0933",
-      email: "test.client@bokri.xyz"
+    auth: {
+      app_key: CONFIG.C_LICENSE,
+      sii: u
     }
   }
 
-  let data = {
-    app_key: CONFIG.C_LICENSE,
-    cii: u
-  }
+  ret = await API.run(data, '/users/service/write');
 
-  ret = await API.run(data, '/users/clients/write');
-
-  _print(ret, '');
-}*/
+  _print(ret, 'user_id');
+}
 
 /*export async function create_person()
 {
