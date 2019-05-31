@@ -1,6 +1,8 @@
 import inquirer from 'inquirer'
 import {
   create_service,
+  create_client,
+  create_person,
   list_services,
   list_clients,
   list_caps,
@@ -14,7 +16,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'auth test window',
-    choices: ['create_service', 'list_services', 'list_clients', 'list_caps', 'list_maps', 'allow_caps', 'revoke_caps']
+    choices: ['create_service', 'create_client', 'create_person', 'list_services', 'list_clients', 'list_caps', 'list_maps', 'allow_caps', 'revoke_caps']
   }
 ];
 
@@ -26,6 +28,12 @@ async function _start()
   switch(option.main){
     case 'create_service':
       await create_service();
+      break;
+    case 'create_client':
+      await create_client();
+      break;
+    case 'create_person':
+      await create_person();
       break;
     case 'list_services':
       await list_services();

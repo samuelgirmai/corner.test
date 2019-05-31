@@ -2,14 +2,27 @@ import inquirer from 'inquirer';
 import API from '../api/api_rest';
 import CONFIG from '../config/config'
 
-function _print(o, key) {
+function _print(o, key) 
+{
   if(o.status == "err"){
     console.log(JSON.stringify(o, 0, '  '));
 
     return;
   }
 
-  console.log(JSON.stringify(o.result[key], 0, '  '));
+  if(o.key){
+    console.log(JSON.stringify(o.result[key], 0, '  '));
+
+    return;
+  }
+
+  if(o.result){
+    console.log(JSON.stringify(o.result, 0, '  '));
+
+    return;
+  }
+
+  console.log(JSON.stringify(o, 0, '  '));
 }
 
 export async function create_service()
@@ -33,28 +46,53 @@ export async function create_service()
     }
   }
 
-  ret = await API.run(data, '/users/service/write');
+  ret = await API.run(data, '/platform/auth/users/service/write');
 
-  _print(ret, 'user_id');
+  _print(ret, null);
 }
 
-/*export async function create_person()
+export async function create_client()
+{
+  let ret;
+
+  let u = {
+    name: "test.client",
+    desc: "test client",
+    address: {
+      phone_number: "0944",
+      email: "test.client@bokri.xyz"
+    }
+  }
+
+  let data = {
+    auth: {
+      app_key: CONFIG.C_LICENSE,
+      cii: u
+    }
+  }
+
+  ret = await API.run(data, '/platform/auth/users/client/write');
+
+  _print(ret, null);
+}
+
+export async function create_person()
 {
   let ret;
 
   let u = {
     name: "Berhane",
-    fname: "Hagos",
-    mname: "Zimam",
-    mfname: "Zemzem",
+    fname: "Farah",
+    mname: "Zemzem",
+    mfname: "Gidey",
     gender: "M",
     dob: "12/12/12",
     address: {
       region: "Tigray",
       zone: "Debub",
-      woreda: "Mekoni",
+      woreda: "Azebo",
       house_no: "121",
-      phone_number: "0944"
+      phone_number: "0955"
     }
   }
 
@@ -65,10 +103,10 @@ export async function create_service()
     }
   }
 
-  ret = await API.run(data, '/users/persons/write');
+  ret = await API.run(data, '/platform/auth/users/person/write');
   
-  _print(ret, '');
-}*/
+  _print(ret, null);
+}
 
 export async function list_services()
 {
@@ -80,7 +118,7 @@ export async function list_services()
     }
   }
 
-  ret = await API.run(data, '/users/services/list');
+  ret = await API.run(data, '/platform/auth/users/services/list');
 
   _print(ret, 'services');
 }
@@ -95,7 +133,7 @@ export async function list_clients()
     }
   }
 
-  ret = await API.run(data, '/users/clients/list');
+  ret = await API.run(data, '/platform/auth/users/clients/list');
 
   _print(ret, 'clients');
 }
@@ -110,7 +148,7 @@ export async function list_caps()
     }
   }
 
-  ret = await API.run(data, '/caps/list');
+  ret = await API.run(data, '/platform/auth/caps/list');
 
   _print(ret, 'caps');
 }
@@ -125,7 +163,7 @@ export async function list_maps()
     }
   }
 
-  ret = await API.run(data, '/maps/list');
+  ret = await API.run(data, '/platform/auth/maps/list');
 
   _print(ret, 'maps');
 }
@@ -156,9 +194,9 @@ export async function allow_caps(caps)
     }
   }
 
-  ret = await API.run(data, '/caps/allow');
+  ret = await API.run(data, '/platform/auth/caps/allow');
 
-  console.log(JSON.stringify(ret, 0, '  '));
+  _print(ret, 'allowed_caps');
 }
 
 export async function revoke_caps(caps)
@@ -175,8 +213,8 @@ export async function revoke_caps(caps)
     }
   }
 
-  ret = await API.run(data, '/caps/revoke');
+  ret = await API.run(data, '/platform/auth/caps/revoke');
 
-  console.log(JSON.stringify(ret, 0, '  '));
+  _print(ret, 'revoked_caps');
 }
 
