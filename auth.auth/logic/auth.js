@@ -30,18 +30,18 @@ export async function create_service()
   let ret;
 
   let u = {
-    name: "test.service",
-    desc: "test service",
+    name: "mru.service",
+    desc: "mru service",
     host: "127.0.0.1:5560",
     address: {
       phone_number: "0911",
-      email: "test.service@bokri.xyz"
+      email: "mru.service@bokri.xyz"
     }
   }
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE,
+      license: CONFIG.C_LICENSE,
       sii: u
     }
   }
@@ -56,17 +56,17 @@ export async function create_client()
   let ret;
 
   let u = {
-    name: "test.client",
-    desc: "test client",
+    name: "mru.client",
+    desc: "mru client",
     address: {
       phone_number: "0944",
-      email: "test.client@bokri.xyz"
+      email: "mru.client@bokri.xyz"
     }
   }
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE,
+      license: CONFIG.C_LICENSE,
       cii: u
     }
   }
@@ -98,7 +98,7 @@ export async function create_person()
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE,
+      license: CONFIG.C_LICENSE,
       pii: u
     }
   }
@@ -114,7 +114,7 @@ export async function list_services()
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE
+      license: CONFIG.C_LICENSE
     }
   }
 
@@ -129,7 +129,7 @@ export async function list_clients()
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE
+      license: CONFIG.C_LICENSE
     }
   }
 
@@ -144,7 +144,7 @@ export async function list_caps()
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE
+      license: CONFIG.C_LICENSE
     }
   }
 
@@ -159,7 +159,7 @@ export async function list_maps()
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE
+      license: CONFIG.C_LICENSE
     }
   }
 
@@ -188,7 +188,7 @@ export async function allow_caps(caps)
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE,
+      license: CONFIG.C_LICENSE,
       uid: p.uid,
       caps: [p.cap_id]
     }
@@ -207,7 +207,7 @@ export async function revoke_caps(caps)
 
   let data = {
     auth: {
-      app_key: CONFIG.C_LICENSE,
+      license: CONFIG.C_LICENSE,
       uid: p.uid,
       caps: [p.cap_id]
     }
