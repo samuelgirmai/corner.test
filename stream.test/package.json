@@ -1,11 +1,11 @@
 {
-  "name": "EMR",
+  "name": "auto_chat",
   "version": "0.1.0",
-  "description": "Sample EMR app",
+  "description": "NHP shell client",
   "scripts": {
-    "emr": "babel-node ./logic/main.js",
-    "test": "babel-node ./logic/test.js",
-    "start": "babel-node ./logic/main.js"
+    "0": "babel-node ./app0.js",
+    "1": "babel-node ./app1.js",
+    "2": "babel-node ./app2.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {

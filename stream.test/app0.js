@@ -4,38 +4,34 @@ import STREAM from '../../corner.backend/tools/stream'
 var st;
 
 var test_init = async() => {
-  st = await STREAM.connect(CONFIG.stream);
+  st = await STREAM.connect(CONFIG.stream, "/emr/stats")
 
-  STREAM.join(st, CONFIG.auth.license);
+  STREAM.join(st, {
+    id: CONFIG.auth0.license
+  });
 
   let events = [
     {
       e_name: 'e_stat',
       cb: on_stat
-    },
-    {
-      e_name: 'e_query',
-      cb: on_search
     }
   ]
 
   STREAM.listen(st, events);
 
-  let s = {
-    from: argv[1],
-    to: "B",
-    e_name: "e_live",
+  let p = {
+    from: CONFIG.auth0.license,
+    to: "A",
+    e_name: "e_test",
     data: "we are live!"
   }
 
-  STREAM.send(st, s);
+  STREAM.send(st, p);
 }
 
-function on_stat(data)
+function on_stat(p)
 {
-  console.log('on_stat = '+data);
-
-  STREAM.exit(st, user);
+  console.log(JSON.stringify(p, 0, '  '));
 }
 
 function on_search(data)
