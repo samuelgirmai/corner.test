@@ -5,7 +5,7 @@ var socket = null;
 
 async function sockInit()
 {
-  let prop = {
+  /*let prop = {
     transports: ['websocket'],
     reconnection: true,
     reconnectionDelay: 1000,
@@ -13,7 +13,20 @@ async function sockInit()
     reconnectionAttempts: Infinity
   };
 
-  socket = io.connect(CONFIG.STREAM.URI, prop);
+  socket = io.connect(CONFIG.STREAM.URI, prop);*/
+
+  var chat = io.connect('http://localhost:3333/chat');
+  var news = io.connect('http://localhost:3333/news');
+
+  console.log("hello stream");
+
+ chat.on('connect', function () {
+    chat.emit('hi!');
+  });
+  
+  news.on('news', function () {
+    news.emit('woot');
+  });
 }
 
 export function send(e_type, data)
