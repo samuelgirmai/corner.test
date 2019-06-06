@@ -5,7 +5,8 @@
   "scripts": {
     "0": "babel-node ./app0.js",
     "1": "babel-node ./app1.js",
-    "2": "babel-node ./app2.js"
+    "2": "babel-node ./app2.js",
+    "3": "babel-node ./app3.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {

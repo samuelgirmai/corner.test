@@ -8,6 +8,9 @@ const config = {
   auth2: {
     license: "E"
   },
+  auth3: {
+    license: "F"
+  },
   proxy: {
     url: "http://127.0.0.1:9999",
   },
