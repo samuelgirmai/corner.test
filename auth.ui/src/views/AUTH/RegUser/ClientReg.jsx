@@ -12,6 +12,8 @@ import TagsInput from 'react-tagsinput'
 import Button from 'elements/CustomButton/CustomButton.jsx';
 import Card from 'components/Card/Card.jsx';
 
+import AUTH from 'logic/auth';
+
 class ClientReg extends React.Component{
     constructor(props){
         super(props);
@@ -26,8 +28,15 @@ class ClientReg extends React.Component{
         }
     }
 
-    onReg = () => {
-      alert(JSON.stringify(this.cii, 0, ' '));
+    onReg = async() => {
+      let r = await AUTH.create_client(this.cii);
+
+      if(r.status == "err"){
+        alert(r.status);
+      }
+      else {
+        alert(r.status);
+      }
     }
 
     render(){

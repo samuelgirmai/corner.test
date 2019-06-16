@@ -9,6 +9,8 @@ import{
 import Card from 'components/Card/Card.jsx';
 import Button from 'elements/CustomButton/CustomButton.jsx';
 
+import AUTH from 'logic/auth';
+
 class ServiceReg extends React.Component{
     constructor(props){
         super(props);
@@ -25,9 +27,17 @@ class ServiceReg extends React.Component{
         }
     }
 
-    onReg = () => {
+    onReg = async() => {
       this.sii.host = this.sii.host+":"+this.sii.port;
-      alert(JSON.stringify(this.sii, 0, ' '));
+
+      let r = await AUTH.create_service(this.sii);
+
+      if(r.status == "err"){
+        alert(r.status);
+      }
+      else {
+        alert(r.status);
+      }
     }
 
     render(){

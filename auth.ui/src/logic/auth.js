@@ -31,16 +31,6 @@ export async function create_service(u)
 {
   let ret;
 
-  /*let u = {
-    name: "mru.service",
-    desc: "mru service",
-    host: "127.0.0.1:5560",
-    address: {
-      phone_number: "0911",
-      email: "mru.service@bokri.xyz"
-    }
-  }*/
-
   let data = {
     auth: {
       license: CONFIG.auth.license,
@@ -59,15 +49,6 @@ export async function create_client(u)
 {
   let ret;
 
-  /*let u = {
-    name: "mru.client",
-    desc: "mru client",
-    address: {
-      phone_number: "0944",
-      email: "mru.client@bokri.xyz"
-    }
-  }*/
-
   let data = {
     auth: {
       license: CONFIG.auth.license,
@@ -79,28 +60,12 @@ export async function create_client(u)
 
   _print(ret, null);
 
-  return;
+  return ret;
 }
 
 export async function create_person(u)
 {
   let ret;
-
-  /*let u = {
-    name: "Berhane",
-    fname: "Farah",
-    mname: "Zemzem",
-    mfname: "Gidey",
-    gender: "M",
-    dob: "12/12/12",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      house_no: "121",
-      phone_number: "0955"
-    }
-  }*/
 
   let data = {
     auth: {
@@ -200,6 +165,24 @@ export async function list_persons()
   return ret;
 }
 
+export async function remove_person(uid)
+{
+  let ret;
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license,
+      uid: uid
+    }
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/person/delete');
+
+  _print(ret, 'allowed_caps');
+
+  return ret;
+}
+
 export async function list_caps()
 {
   let ret;
@@ -282,6 +265,7 @@ const AUTH =  {
   create_service: create_service,
   create_client: create_client,
   create_person: create_person,
+  remove_person: remove_person,
   list_services: list_services,
   list_clients: list_clients,
   list_persons: list_persons,

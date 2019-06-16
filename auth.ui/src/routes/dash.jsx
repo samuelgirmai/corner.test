@@ -13,17 +13,17 @@ import ExtendedTables from 'views/Tables/ExtendedTables.jsx';
 import DataTables from 'views/Tables/DataTables.jsx';
 
 //import Dashboard from 'views/AUTH/Dashboard.jsx'
-import RegisterMain from 'views/AUTH/RegisterMain.jsx'
-import UserListMain from 'views/AUTH/UserListMain.jsx'
-import CapsListMain from 'views/AUTH/CapsListMain.jsx'
-import LogsListMain from 'views/AUTH/LogsListMain.jsx'
+import RegUserMain from 'views/AUTH/RegUserMain.jsx'
+import ListUserMain from 'views/AUTH/ListUserMain.jsx'
+import ListCapsMain from 'views/AUTH/ListCapsMain.jsx'
+import ListLogsMain from 'views/AUTH/ListLogsMain.jsx'
 //var pages = [{ path: "/pages/user-page", name: "User Page", mini: "UP", component: UserPage }].concat(pagesRoutes);
 
 var dashRoutes = [
-    { path: "/register", name: "Registration", icon: "fa fa-id-card-o", component: RegisterMain },
-    { path: "/user_list", name: "User List", icon: "fa fa-list", component: UserListMain },
-    { path: "/caps", name: "Caps List", icon: "fa fa-cogs", component: CapsListMain },
- { path: "/logs", name: "Logs", icon: "fa fa-eye", component: LogsListMain },
+    { path: "/register", name: "Registration", icon: "fa fa-id-card-o", component: RegUserMain },
+    { path: "/user_list", name: "User List", icon: "fa fa-list", component: ListUserMain },
+    { path: "/caps", name: "Caps List", icon: "fa fa-cogs", component: ListCapsMain },
+ { path: "/logs", name: "Logs", icon: "fa fa-eye", component: ListLogsMain },
 
     /*{ path: "/claim", name: "Claim", icon: "fa fa-question-circle-o", component: ClaimMain },
     { path: "/settlement", name: "Settlement", icon: "fa fa-money", component: SettlementMain },

@@ -1,6 +1,7 @@
 import CONFIG from 'config/config';
 import STORE from 'store/main';
 import STREAM from 'stream/stream';
+import AUTH from 'logic/auth';
 
 import React, { Component } from 'react';
 import {
@@ -61,8 +62,8 @@ class ExtendedTables extends Component{
     STREAM.listen(st, events);
   }
 
-  on_notif = () => {
-    alert('person created');
+  on_notif = (s) => {
+    alert(JSON.stringify(s, 0, '  '));
   }
 
   add = () => {
@@ -74,6 +75,12 @@ class ExtendedTables extends Component{
   remove = () => {
     return(
       <Tooltip id="remove">Revoke CAPs</Tooltip>
+    );
+  }
+
+  del = () => {
+    return(
+      <Tooltip id="del">Delete User</Tooltip>
     );
   }
 
@@ -109,6 +116,17 @@ class ExtendedTables extends Component{
     });
   }
 
+  onDeleteUser = async(user_id) => {
+    let r = await AUTH.remove_person(user_id);
+
+    if(r.status == "err"){
+      alert(r.status);
+    }
+    else {
+      alert(r.status);
+    }
+  }
+
   list = () => {
     let table = this.state.persons;
 
@@ -132,6 +150,11 @@ class ExtendedTables extends Component{
                 <OverlayTrigger placement="top" overlay={this.remove()}>
                     <Button simple bsStyle="danger" bsSize="xs"onClick={() => {this.openRevokeCaps(table[i].user_id)}}>
                         <i className="fa fa-minus"></i>
+                    </Button>
+                </OverlayTrigger>
+                <OverlayTrigger placement="top" overlay={this.del()}>
+                    <Button simple bsStyle="danger" bsSize="xs"onClick={() => {this.onDeleteUser(table[i].user_id)}}>
+                        <i className="fa fa-trash"></i>
                     </Button>
                 </OverlayTrigger>
               </td>
@@ -159,7 +182,7 @@ class ExtendedTables extends Component{
                                                 <th className="text-center">Last Name</th>
                                                 <th className="text-center">Date of Birth</th>
                                                 <th className="text-center">Gender</th>
-                                                <th className="text-center">CAPS</th>
+                                                <th className="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>

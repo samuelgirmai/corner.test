@@ -121,9 +121,11 @@ class AllowCaps extends React.Component {
     let r = await AUTH.allow_caps(uid, caps);
 
     if(r.status == "err"){
+      alert(r.status)
       //message.error(r.status);
     }
     else {
+      alert(r.status);
       //message.success(r.status);
     }
   }

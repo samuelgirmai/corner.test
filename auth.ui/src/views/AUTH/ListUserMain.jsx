@@ -7,9 +7,9 @@ import {
 } from 'react-bootstrap';
 
 import Card from 'components/Card/Card.jsx';
-import PersonList from 'views/AUTH/UserList/PersonList.jsx';
-import ServiceList from 'views/AUTH/UserList/ServiceList.jsx';
-import ClientList from 'views/AUTH/UserList/ClientList.jsx';
+import PersonList from 'views/AUTH/ListUser/PersonList.jsx';
+import ServiceList from 'views/AUTH/ListUser/ServiceList.jsx';
+import ClientList from 'views/AUTH/ListUser/ClientList.jsx';
 //import AccountStats from 'views/CBHI/AccountStats.jsx';
 
 class AccountListMain extends Component{

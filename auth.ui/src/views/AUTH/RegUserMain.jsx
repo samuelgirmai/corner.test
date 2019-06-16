@@ -7,9 +7,9 @@ import {
 } from 'react-bootstrap';
 
 import Card from 'components/Card/Card.jsx';
-import ClientReg from 'views/AUTH/UserReg/ClientReg.jsx';
-import ServiceReg from 'views/AUTH/UserReg/ServiceReg.jsx';
-import PersonReg from 'views/AUTH/UserReg/PersonReg.jsx';
+import ClientReg from 'views/AUTH/RegUser/ClientReg.jsx';
+import ServiceReg from 'views/AUTH/RegUser/ServiceReg.jsx';
+import PersonReg from 'views/AUTH/RegUser/PersonReg.jsx';
 //import AccountStats from 'views/CBHI/AccountStats.jsx'
 
 class RegisterMain extends Component{

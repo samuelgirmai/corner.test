@@ -31,10 +31,52 @@ async function init_stream()
     id: CONFIG.auth.license
   });
 
+  STREAM.listen(st, [{
+    e_name: 'e_notif',
+    cb: on_notif
+  }]);
 
   return 1;
 }
 
+async function on_notif(p)
+{
+  //alert(JSON.stringify(p, 0, '  '));
+  switch(p.data.type){
+    case 'create_person':
+      /*
+       * FIXME: inefficient; but the idea
+       * is to update the store when a user
+       * is created
+       */
+      await AUTH.list_persons();
+      break;
+    case 'remove_person':
+      /*
+       * FIXME: inefficient; but the idea
+       * is to update the store when a user
+       * is created
+       */
+      await AUTH.list_persons();
+      break;
+    case 'create_client':
+      /*
+       * FIXME: inefficient; but the idea
+       * is to update the store when a user
+       * is created
+       */
+      await AUTH.list_clients();
+      break;
+    case 'create_service':
+      /*
+       * FIXME: inefficient; but the idea
+       * is to update the store when a user
+       * is created
+       */
+      await AUTH.list_services();
+      break;
+  }
+}
 
 const INIT = {
   init: init,
