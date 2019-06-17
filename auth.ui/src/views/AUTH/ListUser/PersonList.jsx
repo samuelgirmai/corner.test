@@ -22,6 +22,8 @@ import ModalContainer from 'views/AUTH/ModalContainer';
 import AllowCaps from 'views/AUTH/AllowCaps';
 import RevokeCaps from 'views/AUTH/RevokeCaps';
 
+import PersonReg from 'views/AUTH/RegUser/PersonReg';
+
 import img1 from 'assets/img/blog-1.jpg';
 import img2 from 'assets/img/blog-2.jpg';
 import img3 from 'assets/img/blog-3.jpg';
@@ -41,29 +43,9 @@ class ExtendedTables extends Component{
     this.state = {
       persons: STORE.read('persons', null),
       allow: null,
-      revoke: null
+      revoke: null,
+      register: null
     }
-  }
-
-  async componentDidMount(){
-    st = await STREAM.connect(CONFIG.stream, "/platform/notif")
-
-    STREAM.join(st, {
-      id: CONFIG.license
-    });
-
-    let events = [
-      {
-        e_name: 'e_notif',
-        cb: this.on_notif
-      }
-    ]
-
-    STREAM.listen(st, events);
-  }
-
-  on_notif = (s) => {
-    alert(JSON.stringify(s, 0, '  '));
   }
 
   add = () => {
@@ -85,7 +67,7 @@ class ExtendedTables extends Component{
   }
 
   clean = () => {
-    this.setState({allow: null, revoke: null});
+    this.setState({allow: null, revoke: null, register: null});
   }
 
   openAllowCaps = (user_id) => {
@@ -97,7 +79,7 @@ class ExtendedTables extends Component{
 
     this.setState({
       allow: (
-        <ModalContainer mount={AllowCaps} args={args} clean={this.clean}/>
+        <ModalContainer mount={AllowCaps} clean={this.clean}/>
       )
     });
   }
@@ -124,7 +106,19 @@ class ExtendedTables extends Component{
     }
     else {
       alert(r.status);
+      /*reload store*/
+      this.setState({
+        persons: STORE.read('persons', null)
+      });
     }
+  }
+
+  openRegPerson = () => {
+    this.setState({
+      register: (
+        <ModalContainer mount={PersonReg} clean={this.clean}/>
+      )
+    });
   }
 
   list = () => {
@@ -132,73 +126,91 @@ class ExtendedTables extends Component{
 
     let rows = [];
 
-        for(let i=0; i<table.length; i++){
-          rows.push(                                            
-            <tr>
-                <td className="text-center">{i+1}</td>
-                <td className="text-center">{table[i].user_id}</td>
-                <td className="text-center">{table[i].name}</td>
-                <td className="text-center">{table[i].fname}</td>
-                <td className="text-center">{table[i].dob}</td>
-                <td className="text-center">{table[i].gender}</td>
-                <td className="text-center">
-                <OverlayTrigger placement="top" overlay={this.add()}>
-                    <Button simple bsStyle="success" bsSize="xs" onClick={() => {this.openAllowCaps(table[i].user_id)}}>
-                        <i className="fa fa-plus"></i>
-                    </Button>
-                </OverlayTrigger>
-                <OverlayTrigger placement="top" overlay={this.remove()}>
-                    <Button simple bsStyle="danger" bsSize="xs"onClick={() => {this.openRevokeCaps(table[i].user_id)}}>
-                        <i className="fa fa-minus"></i>
-                    </Button>
-                </OverlayTrigger>
-                <OverlayTrigger placement="top" overlay={this.del()}>
-                    <Button simple bsStyle="danger" bsSize="xs"onClick={() => {this.onDeleteUser(table[i].user_id)}}>
-                        <i className="fa fa-trash"></i>
-                    </Button>
-                </OverlayTrigger>
-              </td>
-            </tr>
-          )
-        }
-
-      return rows;
+    for(let i=0; i<table.length; i++){
+      rows.push(                                            
+        <tr>
+          <td className="text-center">{i+1}</td>
+          <td className="text-center">{table[i].user_id}</td>
+          <td className="text-center">{table[i].name}</td>
+          <td className="text-center">{table[i].fname}</td>
+          <td className="text-center">{table[i].dob}</td>
+          <td className="text-center">{table[i].gender}</td>
+          <td className="text-center">
+          <OverlayTrigger placement="top" overlay={this.add()}>
+            <Button simple bsStyle="success" bsSize="xs" onClick={() => {this.openAllowCaps(table[i].user_id)}}>
+              <i className="fa fa-plus"></i>
+            </Button>
+          </OverlayTrigger>
+          <OverlayTrigger placement="top" overlay={this.remove()}>
+            <Button simple bsStyle="danger" bsSize="xs" onClick={() => {this.openRevokeCaps(table[i].user_id)}}>
+              <i className="fa fa-minus"></i>
+            </Button>
+          </OverlayTrigger>
+          <OverlayTrigger placement="top" overlay={this.del()}>
+            <Button simple bsStyle="danger" bsSize="xs" onClick={() => {this.onDeleteUser(table[i].user_id)}}>
+              <i className="fa fa-trash"></i>
+            </Button>
+          </OverlayTrigger>
+          </td>
+        </tr>
+      )
     }
 
-    render(){
-        return (
-            <div className="main-content">
-                <Grid fluid>
-                    <Row>
-                        <Col md={12}>
-                            <Card
-                                content={
-                                    <Table responsive>
-                                        <thead>
-                                            <tr>
-                                                <th className="text-center">#</th>
-				        	<th className="text-center">Person ID</th>
-                                                <th className="text-center">First Name</th>
-                                                <th className="text-center">Last Name</th>
-                                                <th className="text-center">Date of Birth</th>
-                                                <th className="text-center">Gender</th>
-                                                <th className="text-center">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-					  {this.list()}
-                                        </tbody>
-                                    </Table>
-                                }
-                            />
-                            {this.state.allow}
-                            {this.state.revoke}
-                        </Col>
-                    </Row>
-                </Grid>
-            </div>
-        );
+    return rows;
+  }
+
+  render(){
+    if(!this.state.persons.length){
+      return (
+        <div className="main-content text-center">
+          <Grid fluid>
+            <Row>
+              <Col md={12}>
+                <Button className="text-center" simple  bsSize="xs" onClick={this.openRegPerson}>
+                  <i className="fa fa-user"></i> New Person
+               </Button>
+             </Col>
+             {this.state.register}
+           </Row>
+         </Grid>
+       </div>
+      );
     }
+
+    return (
+      <div className="main-content">
+        <Grid fluid>
+          <Row>
+            <Col md={12}>
+              <Card
+                content={
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th className="text-center">#</th>
+                        <th className="text-center">Person ID</th>
+                        <th className="text-center">First Name</th>
+                        <th className="text-center">Last Name</th>
+                        <th className="text-center">Date of Birth</th>
+                        <th className="text-center">Gender</th>
+                        <th className="text-center">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.list()}
+                    </tbody>
+                  </Table>
+                }
+              />
+              {this.state.allow}
+              {this.state.revoke}
+              {this.state.register}
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 export default ExtendedTables;

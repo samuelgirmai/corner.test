@@ -16,6 +16,7 @@ import Button from 'elements/CustomButton/CustomButton.jsx';
 import ModalContainer from 'views/AUTH/ModalContainer';
 import AllowCaps from 'views/AUTH/AllowCaps';
 import RevokeCaps from 'views/AUTH/RevokeCaps';
+import ClientReg from 'views/AUTH/RegUser/ClientReg';
 
 import img1 from 'assets/img/blog-1.jpg';
 import img2 from 'assets/img/blog-2.jpg';
@@ -47,7 +48,7 @@ class ExtendedTables extends Component{
       clients: STORE.read('clients', null),
       allow: null,
       revoke: null,
-      refresh: 0
+      register: null
     }
   }
 
@@ -99,70 +100,95 @@ class ExtendedTables extends Component{
     });
   }
 
+  openRegClient = () => {
+    this.setState({
+      register: (
+        <ModalContainer mount={ClientReg} clean={this.clean}/>
+      )
+    });
+  }
 
   list = () => {
     let table = this.state.clients;
 
     let rows = [];
 
-        for(let i=0; i<table.length; i++){
-          rows.push(                                            
-            <tr>
-                <td className="text-center">{i+1}</td>
-                <td className="text-center">{table[i].user_id}</td>
-                <td className="text-center">{table[i].name}</td>
-                <td className="text-center">{table[i].license}</td>
-                <td className="text-center">
-                <OverlayTrigger placement="top" overlay={this.add()}>
-                    <Button simple bsStyle="success" bsSize="xs" onClick={() => {this.openAllowCaps(table[i].user_id)}}>
-                        <i className="fa fa-plus"></i>
-                    </Button>
-                </OverlayTrigger>
-                <OverlayTrigger placement="top" overlay={this.remove()}>
-                    <Button simple bsStyle="danger" bsSize="xs">
-                        <i className="fa fa-minus" onClick={() => {this.openRevokeCaps(table[i].user_id)}}></i>
-                    </Button>
-                </OverlayTrigger>
-              </td>
-            </tr>
-          )
-        }
-
-      return rows;
+    for(let i=0; i<table.length; i++){
+      rows.push(                                            
+        <tr>
+          <td className="text-center">{i+1}</td>
+          <td className="text-center">{table[i].user_id}</td>
+          <td className="text-center">{table[i].name}</td>
+          <td className="text-center">{table[i].license}</td>
+          <td className="text-center">
+            <OverlayTrigger placement="top" overlay={this.add()}>
+              <Button simple bsStyle="success" bsSize="xs" onClick={() => {this.openAllowCaps(table[i].user_id)}}>
+                <i className="fa fa-plus"></i>
+              </Button>
+            </OverlayTrigger>
+            <OverlayTrigger placement="top" overlay={this.remove()}>
+              <Button simple bsStyle="danger" bsSize="xs">
+                <i className="fa fa-minus" onClick={() => {this.openRevokeCaps(table[i].user_id)}}></i>
+              </Button>
+            </OverlayTrigger>
+          </td>
+        </tr>
+      )
     }
 
-    render(){
-        return (
-            <div className="main-content">
-                <Grid fluid>
-                    <Row>
-                        <Col md={10} mdOffset={1}>
-                            <Card
-                                content={
-                                    <Table responsive>
-                                        <thead>
-                                            <tr>
-                                                <th className="text-center">#</th>
-             					<th className="text-center">Client ID</th>
-                                                <th className="text-center">Client Name</th>
-                                                <th className="text-center">LICENSE</th>
-                                                <th className="text-center">CAPS</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-					  {this.list()}
-                                        </tbody>
-                                    </Table>
-                                }
-                            />
-                            {this.state.revoke}
-                            {this.state.allow}
-                        </Col>
-                    </Row>
-                </Grid>
-            </div>
-        );
+    return rows;
+  }
+
+  render(){
+    if(!this.state.clients.length){
+      return (
+        <div className="main-content text-center">
+          <Grid fluid>
+            <Row>
+              <Col md={12}>
+                <Button className="text-center" simple  bsSize="xs" onClick={this.openRegClient}>
+                  <i className="fa fa-desktop"></i> New Client
+               </Button>
+             </Col>
+             {this.state.register}
+           </Row>
+         </Grid>
+       </div>
+      );
     }
+
+    return (
+      <div className="main-content">
+        <Grid fluid>
+          <Row>
+            <Col md={10} mdOffset={1}>
+              <Card
+                content={
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th className="text-center">#</th>
+                        <th className="text-center">Client ID</th>
+                        <th className="text-center">Client Name</th>
+                        <th className="text-center">LICENSE</th>
+                        <th className="text-center">CAPS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.list()}
+                    </tbody>
+                  </Table>
+                }
+              />
+              {this.state.revoke}
+              {this.state.allow}
+              {this.state.register}
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 export default ExtendedTables;

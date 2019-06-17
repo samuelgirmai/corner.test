@@ -177,7 +177,7 @@ class AllowCaps extends React.Component {
                         </FormGroup>
                     </Col>
                 </Row>
-                <Row>{"\0"}</Row>
+             
                 <Row>
                      <Col md={10} mdOffset={5}>
                        <Button onClick={this.onAllowCap}>Allow Caps</Button>
