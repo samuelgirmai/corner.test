@@ -37,7 +37,7 @@ import img5 from 'assets/img/blog-5.jpg';
   }
 ]*/
 
-class ExtendedTables extends Component{
+class RegClient extends Component{
   constructor(props){
     super(props);
     
@@ -48,7 +48,7 @@ class ExtendedTables extends Component{
       clients: STORE.read('clients', null),
       allow: null,
       revoke: null,
-      register: null
+      reg: null
     }
   }
 
@@ -102,7 +102,7 @@ class ExtendedTables extends Component{
 
   openRegClient = () => {
     this.setState({
-      register: (
+      reg: (
         <ModalContainer mount={ClientReg} clean={this.clean}/>
       )
     });
@@ -150,7 +150,7 @@ class ExtendedTables extends Component{
                   <i className="fa fa-desktop"></i> New Client
                </Button>
              </Col>
-             {this.state.register}
+             {this.state.reg}
            </Row>
          </Grid>
        </div>
@@ -182,7 +182,7 @@ class ExtendedTables extends Component{
               />
               {this.state.revoke}
               {this.state.allow}
-              {this.state.register}
+              {this.state.reg}
             </Col>
           </Row>
         </Grid>
@@ -191,4 +191,4 @@ class ExtendedTables extends Component{
   }
 }
 
-export default ExtendedTables;
+export default RegClient;

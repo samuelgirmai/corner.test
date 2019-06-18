@@ -1,101 +1,85 @@
-//import API_SOCK from '../../../../api/api_sock'
-import CONFIG from 'config/config';
-import STREAM from 'api/stream';
 import React, { Component } from 'react';
 import ChartistGraph from 'react-chartist';
-import { Grid, Row, Col } from 'react-bootstrap';
-
-//import API_STREAM from 'api/api_sock';
+import {Grid, Row, Col} from 'react-bootstrap';
 import {Card} from 'components/Card/Card.jsx';
 import {StatsCard} from 'components/Card/StatsCard.jsx';
-import {Tasks} from 'components/Tasks/Tasks.jsx';
 
+import CONFIG from 'config/config'
+import STREAM from 'stream/stream'
 import STORE from 'store/main'
+import AUTH from 'logic/auth'
 
-class AccountStats extends Component {
+class UserStats extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      person: STORE.read('stats', 'person_count'),
-      service: STORE.read('stats', 'service_count'),
-      client: STORE.read('stats', 'client_count'),
-    }
-
-    let handle = {
-      onStat: this.updateDashboard
-    }
-
-    STREAM.connect(CONFIG.stream);
-  }
-
-  updateDashboard = (stat) => {
-    switch(stat.payload.stat){
-      case 'person_count':
-        this.setState({
-          person: stat.payload.data
-        });
-        break;
-      case 'service_count':
-        this.setState({
-          service_count: stat.payload.data
-        });
-        break;
-      case 'client_count':
-        this.setState({
-          client: stat.payload.data
-        });
-        break;
+      users: STORE.read('stats', 'users')
     }
   }
 
-  updatePerson = () => {
+  componentDidMount(){
+    STREAM.listen("/platform/stats", [{
+      e_name: 'e_stats',
+      cb: this.onStats
+    }]);
+  }
+
+  getStats = async() => {
+    await AUTH.get_stats();
+
     this.setState({
-      person: ++this.state.person,
-      client: ++this.state.client
-    })
+      users: STORE.read('stats', 'users')
+    });
   }
 
-  updateService = () => {
-    this.setState({
-      service: ++this.state.service,
-      client: ++this.state.client
-    })
-  }
-
-    render() {
-        return (
-                    <Row>
-                        <Col lg={4} sm={6}>
-                            <StatsCard
-                                bigIcon={<i className="pe-7s-note text-success"></i>}
-                                statsText="Client"
-                                statsValue={this.state.client.toString()}
-                                statsIcon={<i className="fa fa-refresh"></i>}
-                                statsIconText="Updated now"
-                            />
-                        </Col>
-                        <Col lg={4} sm={6}>
-                            <StatsCard
-                                bigIcon={<i className="fa fa-hospital-o text-success"></i>}
-                                statsText="Service"
-                                statsValue={this.state.service.toString()}
-                                statsIcon={<i className="fa fa-refresh"></i>}
-                                statsIconText="Updated now"
-                            />
-                        </Col>
-                        <Col lg={4} sm={6}>
-                            <StatsCard
-                                bigIcon={<i className="pe-7s-users text-success"></i>}
-                                statsText="Person"
-                                statsValue={this.state.person.toString()}
-                                statsIcon={<i className="fa fa-refresh"></i>}
-                                statsIconText="Updated now"
-                            />
-                        </Col>
-                     </Row>
-        );
+  onStats = (p) => {
+    switch(p.data.type){
+      case 'users':
+        this.setState({
+          users: p.data.val
+        });
+        break;
     }
+  }
+
+  render() {
+    return (
+      <div className="main-content">
+      <Grid fluid>
+      <Row>
+        <Col md={4}>
+          <StatsCard
+            bigIcon={<i className="fa fa-user-o"></i>}
+            statsText="Persons"
+            statsValue={this.state.users.person.toString()}
+            statsIcon={<a onClick={this.getStats}><i className="fa fa-refresh"></i></a>}
+            statsIconText="Updated now"
+          />
+        </Col>
+        <Col md={4}>
+          <StatsCard
+            bigIcon={<i className="fa fa-desktop"></i>}
+            statsText="Clients"
+            statsValue={this.state.users.client.toString()}
+            statsIcon={<a onClick={this.getStats}><i className="fa fa-refresh"></i></a>}
+            statsIconText="Updated now"
+          />
+        </Col>
+        <Col md={4}>
+          <StatsCard
+            bigIcon={<i className="fa fa-server"></i>}
+            statsText="Services"
+            statsValue={this.state.users.service.toString()}
+            statsIcon={<a onClick={this.getStats}><i className="fa fa-refresh"></i></a>}
+            statsIconText="Updated now"
+          />
+        </Col>
+      </Row>
+      </Grid>
+      </div>
+    );
+  }
 }
 
-export default AccountStats;
+export default UserStats;

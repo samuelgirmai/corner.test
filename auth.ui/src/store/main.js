@@ -6,6 +6,13 @@ class Store {
   clients = null;
   services = null;
   logs = null;
+  stats = {
+    users: {
+      person: 0,
+      client: 0,
+      service: 0
+    }
+  }
 };
 
 var _store;
@@ -49,6 +56,8 @@ export function read(doc, arg)
       return read_services(arg);
     case 'logs':
       return read_logs(arg);
+    case 'stats':
+      return read_stats(arg);
   }
 }
 
@@ -121,6 +130,15 @@ function read_logs(status)
   return _store.logs;
 }
 
+function read_stats(type)
+{
+  if(!_store.stats[type]){
+    return [];
+  }
+
+  return _store.stats[type];
+}
+
 export function write(doc, data)
 {
   switch(doc){
@@ -139,7 +157,14 @@ export function write(doc, data)
     case 'logs':
       _store.logs = data;
       break;
+    case 'stats':
+      write_stats(data);
+      break;
   }
+}
+
+function write_stats(stats){
+  _store.stats[stats.type] = stats.val;
 }
 
 

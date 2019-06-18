@@ -60,13 +60,13 @@ class ServiceReg extends React.Component{
                     </Col>
                     <Col md={4}>
                         <FormGroup>
-                            <ControlLabel>Host</ControlLabel>
+                            <ControlLabel>REST API Host</ControlLabel>
                             <FormControl type="text" name="host" placeholder="127.0.0.1" onChange={(e)=>{this.sii.host = e.target.value}}/>
                         </FormGroup>
                     </Col>
                     <Col md={2}>
                         <FormGroup>
-                            <ControlLabel>Port</ControlLabel>
+                            <ControlLabel>REST API Port</ControlLabel>
                             <FormControl type="text" name="port" placeholder="5500" onChange={(e)=>{this.sii.port=e.target.value}}/>
                         </FormGroup>
                     </Col>

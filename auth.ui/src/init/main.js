@@ -3,8 +3,6 @@ import STREAM from 'stream/stream'
 import STORE from 'store/main'
 import AUTH from 'logic/auth'
 
-var handle;
-var st;
 export async function init()
 {
   await init_stream();
@@ -21,17 +19,23 @@ async function init_data()
   await AUTH.list_clients();
   await AUTH.list_services();
   await AUTH.list_logs();
+  await AUTH.get_stats();
 }
 
 async function init_stream()
 {
-  st = await STREAM.connect(CONFIG.stream, "/platform/notif")
+  await STREAM.connect(CONFIG.stream, "/platform/notif")
+  await STREAM.connect(CONFIG.stream, "/platform/stats")
 
-  STREAM.join(st, {
+  STREAM.join("/platform/notif", {
     id: CONFIG.auth.license
   });
 
-  STREAM.listen(st, [{
+  STREAM.join("/platform/stats", {
+    id: CONFIG.auth.license
+  });
+
+  STREAM.listen("/platform/notif", [{
     e_name: 'e_notif',
     cb: on_notif
   }]);

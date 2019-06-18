@@ -1,12 +1,10 @@
 import CONFIG from './config/config'
 import STREAM from '../../corner.backend/tools/stream'
 
-var st;
-
 var test_init = async() => {
-  st = await STREAM.connect(CONFIG.stream, "/emr/stats")
+  await STREAM.connect(CONFIG.stream, "/emr/stats")
 
-  STREAM.join(st, {
+  STREAM.join("/emr/stats", {
     id: CONFIG.auth1.license
   });
 
@@ -17,7 +15,7 @@ var test_init = async() => {
     }
   ]
 
-  STREAM.listen(st, events);
+  STREAM.listen("/emr/stats", events);
 
   let p = {
     from: CONFIG.auth1.license,
@@ -26,7 +24,7 @@ var test_init = async() => {
     data: "we are live!"
   }
 
-  STREAM.send(st, p);
+  STREAM.send("/emr/stats", p);
 }
 
 function on_stat(p)

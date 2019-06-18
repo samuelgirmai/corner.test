@@ -1,5 +1,5 @@
 import CONFIG from './config/config'
-import STREAM from '../../corner.backend/tools/stream'
+import STREAM from './stream/stream'
 
 var stdin = process.openStdin();
 stdin.setRawMode(true);
@@ -8,12 +8,10 @@ stdin.setEncoding('utf-8');
 
 var needle = "";
 
-var st;
-
 var test_init = async() => {
-  st = await STREAM.connect(CONFIG.stream, "/emr/search")
+  await STREAM.connect(CONFIG.stream, "/emr/search")
 
-  STREAM.join(st, {
+  STREAM.join("/emr/search", {
     id: CONFIG.auth3.license
   });
 
@@ -24,7 +22,7 @@ var test_init = async() => {
     }
   ]
 
-  STREAM.listen(st, events);
+  STREAM.listen("/emr/search", events);
 }
 
 
@@ -48,7 +46,7 @@ stdin.on("data", function(key) {
     }
   }
 
-  STREAM.send(st, p);
+  STREAM.send("/emr/search", p);
 });
 
 function on_search(p)

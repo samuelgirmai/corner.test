@@ -24,25 +24,7 @@ import img3 from 'assets/img/blog-3.jpg';
 import img4 from 'assets/img/blog-4.jpg';
 import img5 from 'assets/img/blog-5.jpg';
 
-
-/*var table = [
-  {
-    user_id: "123121",
-    name: "Auth",
-    host: "127.0.0.1",
-    port: 5555,
-    date: "30/08/2016",
-  },
-  {
-    user_id: "123121",
-    name: "Auth",
-    host: "127.0.0.1",
-    port: 5555,
-    date: "30/08/2016",
-  }
-]*/
-
-class ExtendedTables extends Component{
+class RegService extends Component{
   constructor(props){
     super(props);
     
@@ -53,7 +35,7 @@ class ExtendedTables extends Component{
       services: STORE.read('services', null),
       allow: null,
       revoke: null,
-      register: null
+      reg: null
     }
   }
 
@@ -107,7 +89,7 @@ class ExtendedTables extends Component{
 
   openRegService = () => {
     this.setState({
-      register: (
+      reg: (
         <ModalContainer mount={ServiceReg} clean={this.clean}/>
       )
     });
@@ -156,7 +138,7 @@ class ExtendedTables extends Component{
                   <i className="fa fa-server"></i> New Service
                </Button>
              </Col>
-             {this.state.register}
+             {this.state.reg}
            </Row>
          </Grid>
        </div>
@@ -176,7 +158,7 @@ class ExtendedTables extends Component{
                         <th className="text-center">#</th>
                         <th className="text-center">Service ID</th>
                         <th className="text-center">Service Name</th>
-                        <th className="text-center">Host</th>
+                        <th className="text-center">REST API Host</th>
                         <th className="text-center">License</th>
                         <th className="text-center">CAPS</th>
                       </tr>
@@ -189,7 +171,7 @@ class ExtendedTables extends Component{
               />
               {this.state.allow}
               {this.state.revoke}
-              {this.state.register}
+              {this.state.reg}
             </Col>
           </Row>
         </Grid>
@@ -198,4 +180,4 @@ class ExtendedTables extends Component{
   }
 }
 
-export default ExtendedTables;
+export default RegService;

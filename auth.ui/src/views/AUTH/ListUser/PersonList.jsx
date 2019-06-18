@@ -33,7 +33,7 @@ import img5 from 'assets/img/blog-5.jpg';
 var clr;
 var st;
 
-class ExtendedTables extends Component{
+class RegPerson extends Component{
   constructor(props){
     super(props);
     
@@ -44,7 +44,7 @@ class ExtendedTables extends Component{
       persons: STORE.read('persons', null),
       allow: null,
       revoke: null,
-      register: null
+      reg: null
     }
   }
 
@@ -67,7 +67,7 @@ class ExtendedTables extends Component{
   }
 
   clean = () => {
-    this.setState({allow: null, revoke: null, register: null});
+    this.setState({allow: null, revoke: null, reg: null});
   }
 
   openAllowCaps = (user_id) => {
@@ -101,21 +101,21 @@ class ExtendedTables extends Component{
   onDeleteUser = async(user_id) => {
     let r = await AUTH.remove_person(user_id);
 
-    if(r.status == "err"){
-      alert(r.status);
-    }
-    else {
+    if(r.status == "ok"){
       alert(r.status);
       /*reload store*/
       this.setState({
         persons: STORE.read('persons', null)
       });
     }
+    else {
+      alert(r.status);
+    }
   }
 
   openRegPerson = () => {
     this.setState({
-      register: (
+      reg: (
         <ModalContainer mount={PersonReg} clean={this.clean}/>
       )
     });
@@ -170,7 +170,7 @@ class ExtendedTables extends Component{
                   <i className="fa fa-user"></i> New Person
                </Button>
              </Col>
-             {this.state.register}
+             {this.state.reg}
            </Row>
          </Grid>
        </div>
@@ -204,7 +204,7 @@ class ExtendedTables extends Component{
               />
               {this.state.allow}
               {this.state.revoke}
-              {this.state.register}
+              {this.state.reg}
             </Col>
           </Row>
         </Grid>
@@ -213,4 +213,4 @@ class ExtendedTables extends Component{
   }
 }
 
-export default ExtendedTables;
+export default RegPerson;

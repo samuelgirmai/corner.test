@@ -33,6 +33,7 @@ export function stream_send(s_name, data)
 
 export function stream_listen(s_name, events)
 {
+  //alert(JSON.stringify(events, 0, '  '))
   for(let i = 0; i < events.length; i++) {
     streams[s_name].on(events[i].e_name, (data) => {
       events[i].cb(data);

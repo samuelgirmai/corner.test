@@ -260,6 +260,29 @@ export async function revoke_caps(uid, caps)
   return ret;
 }
 
+export async function get_stats()
+{
+  let ret;
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license
+    },
+    param: {
+      type: "users"
+    }
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/users/stats');
+
+  if(ret.status == "ok"){
+    STORE.write('stats', ret.result.stats);
+  }
+
+  _print(ret, 'persons');
+
+  return ret;
+}
 
 const AUTH =  {
   create_service: create_service,
@@ -273,7 +296,8 @@ const AUTH =  {
   list_maps: list_maps,
   allow_caps: allow_caps,
   revoke_caps: revoke_caps,
-  list_logs: list_logs
+  list_logs: list_logs,
+  get_stats: get_stats
 };
 
 export default AUTH;

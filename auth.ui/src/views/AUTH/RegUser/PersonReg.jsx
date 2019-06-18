@@ -21,7 +21,7 @@ import AUTH from 'logic/auth';
 import PersonalInfo from 'views/AUTH/PersonalInfo';
 import Address from 'views/AUTH/Address';
 
-class Step1 extends React.Component{
+class PersonReg extends React.Component{
     constructor(props){
         super(props);
 
@@ -77,4 +77,4 @@ class Step1 extends React.Component{
     }
 }
 
-export default Step1;
+export default PersonReg;
