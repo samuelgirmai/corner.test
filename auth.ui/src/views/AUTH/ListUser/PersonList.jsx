@@ -79,7 +79,7 @@ class RegPerson extends Component{
 
     this.setState({
       allow: (
-        <ModalContainer mount={AllowCaps} clean={this.clean}/>
+        <ModalContainer mount={AllowCaps} args={args} clean={this.clean}/>
       )
     });
   }
