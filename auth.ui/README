@@ -1,0 +1,15 @@
+Instructions
+============
+1. npm install
+2. npm start (opens the development server at localhost:3000 and also opens a browser).
+
+3. Some setups: The server runs at port 3000 which is different from where the microservices (eg. muxer) is running. But Chrome (and most browsers) have a CORS policy which restricts a browser to access resources from different host. To avert this, you can install third party anti-CORS plugins. Such as the following, with which I have tested it.
+
+  Plugin name: Allow-Control-Allow-Origin:* 
+  By:  vitvad
+
+On the "intercepted URLs" field of the plugin, insert the following (which is the streaming microservice's address)
+
+  "Intercepted URL": http://127.0.0.1:9999/*
+
+That is it!
