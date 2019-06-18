@@ -16,9 +16,7 @@ class UserStats extends Component {
     this.state = {
       users: STORE.read('stats', 'users')
     }
-  }
 
-  componentDidMount(){
     STREAM.listen("/platform/stats", [{
       e_name: 'e_stats',
       cb: this.onStats
@@ -34,8 +32,13 @@ class UserStats extends Component {
   }
 
   onStats = (p) => {
+    //alert(JSON.stringify(p, 0, '  '));
     switch(p.data.type){
       case 'users':
+        /*write stats to store*/
+        STORE.write('stats', p.data);
+
+        /*update view*/
         this.setState({
           users: p.data.val
         });
