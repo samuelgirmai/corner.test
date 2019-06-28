@@ -1,6 +1,4 @@
-import CONFIG from 'config/config';
 import STORE from 'store/main';
-import STREAM from 'stream/stream';
 import AUTH from 'logic/auth';
 
 import React, { Component } from 'react';
@@ -10,6 +8,8 @@ import {
     OverlayTrigger,
     Tooltip
 } from 'react-bootstrap';
+
+import {AlertList, Alert, AlertContainer} from 'react-bs-notifier';
 
 // react component that creates a switch button that changes from on to off mode
 import Switch from 'react-bootstrap-switch';

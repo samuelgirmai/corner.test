@@ -24,8 +24,8 @@ var dashRoutes = [
     { path: "/register", name: "Registration", icon: "fa fa-id-card-o", component: RegUserMain },
     { path: "/user_list", name: "User List", icon: "fa fa-list", component: ListUserMain },
     { path: "/caps", name: "Caps List", icon: "fa fa-cogs", component: ListCapsMain },
-    { path: "/stats", name: "Mini Stats", icon: "fa fa-line-chart", component: UserStats },
- { path: "/logs", name: "Logs", icon: "fa fa-eye", component: ListLogsMain },
+    { path: "/stats", name: "Mini Stats", icon: "fa fa-bar-chart", component: UserStats },
+ { path: "/logs", name: "Logs", icon: "fa fa-user-secret", component: ListLogsMain },
 
     /*{ path: "/claim", name: "Claim", icon: "fa fa-question-circle-o", component: ClaimMain },
     { path: "/settlement", name: "Settlement", icon: "fa fa-money", component: SettlementMain },

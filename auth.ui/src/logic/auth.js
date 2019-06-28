@@ -183,6 +183,42 @@ export async function remove_person(uid)
   return ret;
 }
 
+export async function remove_client(uid)
+{
+  let ret;
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license,
+      uid: uid
+    }
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/client/delete');
+
+  _print(ret, 'allowed_caps');
+
+  return ret;
+}
+
+export async function remove_service(uid)
+{
+  let ret;
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license,
+      uid: uid
+    }
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/service/delete');
+
+  _print(ret, 'allowed_caps');
+
+  return ret;
+}
+
 export async function list_caps()
 {
   let ret;
@@ -289,6 +325,8 @@ const AUTH =  {
   create_client: create_client,
   create_person: create_person,
   remove_person: remove_person,
+  remove_client: remove_client,
+  remove_service: remove_service,
   list_services: list_services,
   list_clients: list_clients,
   list_persons: list_persons,

@@ -72,6 +72,8 @@ class ExtendedTables extends Component{
                     <Row>
                         <Col md={12}>
                             <Card
+                                title={"Capabilities ("+this.state.caps.length+")"}
+                                category="List of capabilities exported by all services"
                                 content={
                                     <Table responsive>
                                         <thead>

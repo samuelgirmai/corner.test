@@ -1,4 +1,5 @@
 import STORE from 'store/main';
+import AUTH from 'logic/auth';
 
 import React, { Component } from 'react';
 import {
@@ -55,6 +56,12 @@ class RegService extends Component{
     );
   }
 
+  del = () => {
+    return(
+      <Tooltip id="del">Delete User</Tooltip>
+    );
+  }
+
   clean = () => {
     this.setState({allow: null});
   }
@@ -87,6 +94,21 @@ class RegService extends Component{
     });
   }
 
+  onDeleteUser = async(user_id) => {
+    let r = await AUTH.remove_service(user_id);
+
+    if(r.status == "ok"){
+      alert(r.status);
+      /*reload store*/
+      this.setState({
+        services: STORE.read('services', null)
+      });
+    }
+    else {
+      alert(r.status);
+    }
+  }
+
   openRegService = () => {
     this.setState({
       reg: (
@@ -117,8 +139,13 @@ class RegService extends Component{
             <OverlayTrigger placement="top" overlay={this.remove()} onClick={() => {this.openRevokeCaps(table[i].user_id)}}>
               <Button simple bsStyle="danger" bsSize="xs">
                 <i className="fa fa-minus"></i>
+                </Button>
+             </OverlayTrigger>
+            <OverlayTrigger placement="top" overlay={this.del()}>
+              <Button simple bsStyle="danger" bsSize="xs" onClick={() => {this.onDeleteUser(table[i].user_id)}}>
+                <i className="fa fa-trash"></i>
               </Button>
-            </OverlayTrigger>
+             </OverlayTrigger>
           </td>
         </tr>
       )
@@ -160,7 +187,7 @@ class RegService extends Component{
                         <th className="text-center">Service Name</th>
                         <th className="text-center">REST API Host</th>
                         <th className="text-center">License</th>
-                        <th className="text-center">CAPS</th>
+                        <th className="text-center">ACTIONS</th>
                       </tr>
                     </thead>
                     <tbody>

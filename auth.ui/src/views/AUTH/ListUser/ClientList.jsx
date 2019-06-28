@@ -1,4 +1,5 @@
 import STORE from 'store/main';
+import AUTH from 'logic/auth';
 
 import React, { Component } from 'react';
 import {
@@ -68,6 +69,12 @@ class RegClient extends Component{
     );
   }
 
+  del = () => {
+    return(
+      <Tooltip id="del">Delete User</Tooltip>
+    );
+  }
+
   clean = () => {
     this.setState({revoke: null, allow: null});
   }
@@ -98,6 +105,21 @@ class RegClient extends Component{
         <ModalContainer mount={RevokeCaps} args={args} clean={this.clean}/>
       )
     });
+  }
+
+  onDeleteUser = async(user_id) => {
+    let r = await AUTH.remove_client(user_id);
+
+    if(r.status == "ok"){
+      alert(r.status);
+      /*reload store*/
+      this.setState({
+        clients: STORE.read('clients', null)
+      });
+    }
+    else {
+      alert(r.status);
+    }
   }
 
   openRegClient = () => {
@@ -131,6 +153,12 @@ class RegClient extends Component{
                 <i className="fa fa-minus" onClick={() => {this.openRevokeCaps(table[i].user_id)}}></i>
               </Button>
             </OverlayTrigger>
+          <OverlayTrigger placement="top" overlay={this.del()}>
+            <Button simple bsStyle="danger" bsSize="xs" onClick={() => {this.onDeleteUser(table[i].user_id)}}>
+              <i className="fa fa-trash"></i>
+            </Button>
+          </OverlayTrigger>
+
           </td>
         </tr>
       )
@@ -171,7 +199,7 @@ class RegClient extends Component{
                         <th className="text-center">Client ID</th>
                         <th className="text-center">Client Name</th>
                         <th className="text-center">LICENSE</th>
-                        <th className="text-center">CAPS</th>
+                        <th className="text-center">ACTIONS</th>
                       </tr>
                     </thead>
                     <tbody>

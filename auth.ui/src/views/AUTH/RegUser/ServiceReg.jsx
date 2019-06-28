@@ -32,6 +32,8 @@ class ServiceReg extends React.Component{
 
       let r = await AUTH.create_service(this.sii);
 
+      //this.sii.host = "";
+
       if(r.status == "err"){
         alert(r.status);
       }
