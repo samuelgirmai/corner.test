@@ -24,7 +24,7 @@ function _print(o, key)
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-export async function create_cofficer(token)
+export async function create_user()
 {
   let ret;
 
@@ -54,13 +54,13 @@ export async function create_cofficer(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/write');
+  ret = await API.run(data, '/app/emr/triage/user/write');
 
   _print(ret, null);
 
 }
 
-export async function read_cofficer(token)
+export async function read_user(token)
 {
   let ret, data;
 
@@ -69,11 +69,11 @@ export async function read_cofficer(token)
       token: CONFIG.TOKEN
     },
     param: {
-      user_id: "735043"
+      user_id: "467505"
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/read');
+  ret = await API.run(data, '/app/emr/triage/user/read');
 
   _print(ret, null);
 }
@@ -94,7 +94,7 @@ export async function change_security()
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/security/write');
+  ret = await API.run(data, '/app/emr/infotics/user/security/write');
 
   _print(ret, null);
 }
@@ -108,13 +108,13 @@ export async function signin()
       license: CONFIG.C_LICENSE,
     }, 
     param: {
-      user_id: "735043",
-      username: "245322",
-      password: "75565361",
+      user_id: "649304",
+      username: "822794",
+      password: "08587278",
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/access/write');
+  ret = await API.run(data, '/app/emr/triage/user/access/write');
   
   _print(ret, 'token');
 }
@@ -132,12 +132,12 @@ export async function signout(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/access/delete');
+  ret = await API.run(data, '/app/emr/triage/user/access/delete');
 
   _print(ret, null);
 }
 
-export async function create_patient(token)
+export async function create_idata(token)
 {
   let ret;
 
@@ -168,13 +168,13 @@ export async function create_patient(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/patient/write');
+  ret = await API.run(data, '/app/emr/infotics/idata/write');
 
   _print(ret, null);
 
 }
 
-export async function read_patient(token)
+export async function read_idata(token)
 {
   let ret, data;
 
@@ -187,46 +187,8 @@ export async function read_patient(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/patient/read');
+  ret = await API.run(data, '/app/emr/infotics/idata//read');
 
   _print(ret, null);
 }
-
-export async function issue_pcard(token)
-{
-  let ret, data;
-
-  data = {
-     auth: {
-      license: CONFIG.C_LICENSE,
-      },
-      param: {
-        user_id: "412960"
-      }
-   }
-
-  ret = await API.run(data, '/app/emr/mru/patient/card/write');
-
-  _print(ret, null);
-}
-
-export async function print_pcard(token)
-{
-  let ret, data;
-
-  data = {
-   auth: {
-      license: CONFIG.C_LICENSE,
-    },
-    param: {
-      card_id: "412960"
-    }
-  }
-
-  ret = await API.run(data, '/app/emr/mru/patient/card/print');
-
-  _print(ret, null);
-}
-
-
 

@@ -3,13 +3,11 @@ import inquirer from 'inquirer'
 import {
   signin,
   signout,
-  create_cofficer,
-  create_patient,
-  read_cofficer,
-  read_patient,
-  issue_pcard,
-  print_pcard
-} from './mru'
+  create_user,
+  read_user,
+  read_idata,
+  create_idata,
+} from './infotics';
 
 const main_prompt = [
   {
@@ -33,25 +31,17 @@ async function _start()
       await signout();
       break;
     case 'create.cofficer':
-      await create_cofficer(token);
+      await create_user();
       break;
     case 'read.cofficer':
-      await read_cofficer(token);
+      await read_user(token);
       break;
     case 'create.patient':
-      await create_patient(token);
+      await create_idata(token);
       break;
     case 'read.patient':
-      await read_patient(token);
+      await read_idata(token);
       break;
-    case 'issue.pcard':
-      await issue_pcard(token);
-      break;
-    case 'print.pcard':
-      await print_pcard(token);
-      break;
-
-
   }
    _start();
 }
