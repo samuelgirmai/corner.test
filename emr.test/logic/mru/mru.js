@@ -1,5 +1,5 @@
-import API from '../api/api_rest';
-import CONFIG from '../config/config'
+import API from '../../api/api_rest';
+import CONFIG from '../../config/config'
 
 function _print(o, key) 
 {
@@ -29,8 +29,8 @@ export async function create_cofficer(token)
   let ret;
 
   let u = {
-    name: "Abebe",
-    fname: "Adane",
+    name: "Solomon",
+    fname: "Leul",
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
@@ -41,7 +41,7 @@ export async function create_cofficer(token)
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "095886"
+      phone_number: "0918228"
     }
   }
 
@@ -54,7 +54,7 @@ export async function create_cofficer(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/cofficer/write');
+  ret = await API.run(data, '/app/emr/mru/user/write');
 
   _print(ret, null);
 
@@ -69,11 +69,11 @@ export async function read_cofficer(token)
       token: CONFIG.TOKEN
     },
     param: {
-      person_id: "774533"
+      user_id: "735043"
     }
   }
 
-  ret = await API.run(data, '/app/emr/cofficer/read');
+  ret = await API.run(data, '/app/emr/mru/user/read');
 
   _print(ret, null);
 }
@@ -94,7 +94,7 @@ export async function change_security()
     }
   }
 
-  ret = await API.run(data, '/platform/auth/users/person/security/write');
+  ret = await API.run(data, '/app/emr/mru/user/security/write');
 
   _print(ret, null);
 }
@@ -106,27 +106,33 @@ export async function signin()
   let data = {
     auth: {
       license: CONFIG.C_LICENSE,
-      username: "642556",
-      password: "31854092"
+    }, 
+    param: {
+      user_id: "735043",
+      username: "245322",
+      password: "75565361",
     }
   }
 
-  ret = await API.run(data, '/platform/auth/users/access/write');
+  ret = await API.run(data, '/app/emr/mru/user/access/write');
   
   _print(ret, 'token');
 }
 
-export async function signout()
+export async function signout(token)
 {
   let ret;
 
   let data = {
     auth: {
+      license: CONFIG.C_LICENSE,
+    },
+    param: {
       token: CONFIG.TOKEN
     }
   }
 
-  ret = await API.run(data, '/platform/auth/users/access/delete');
+  ret = await API.run(data, '/app/emr/mru/user/access/delete');
 
   _print(ret, null);
 }
@@ -148,7 +154,7 @@ export async function create_patient(token)
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0959"
+      phone_number: "09191388"
     }
   }
 
@@ -157,11 +163,12 @@ export async function create_patient(token)
       license: CONFIG.C_LICENSE,
     }, 
     param: {
+      token: token,
       pii: u
     }
   }
 
-  ret = await API.run(data, '/app/emr/patient/write');
+  ret = await API.run(data, '/app/emr/mru/patient/write');
 
   _print(ret, null);
 
@@ -172,33 +179,33 @@ export async function read_patient(token)
   let ret, data;
 
   data = {
-    auth: {
-      token: CONFIG.TOKEN
+   auth: {
+      license: CONFIG.C_LICENSE,
     },
     param: {
-      person_id: "049045"
+      user_id: "412960"
     }
   }
 
-  ret = await API.run(data, '/app/emr/patient/read');
+  ret = await API.run(data, '/app/emr/mru/patient/read');
 
   _print(ret, null);
 }
 
-export async function issue_pcard(token)
+export async function renew_pcard(token)
 {
   let ret, data;
 
   data = {
-    auth: {
-      token: CONFIG.TOKEN
-    },
-    param: {
-      person_id: "049045"
-    }
-  }
+     auth: {
+      license: CONFIG.C_LICENSE,
+      },
+      param: {
+        user_id: "412960"
+      }
+   }
 
-  ret = await API.run(data, '/app/emr/patient/card/write');
+  ret = await API.run(data, '/app/emr/mru/patient/card/write');
 
   _print(ret, null);
 }
@@ -208,18 +215,15 @@ export async function print_pcard(token)
   let ret, data;
 
   data = {
-    auth: {
-      token: CONFIG.TOKEN
+   auth: {
+      license: CONFIG.C_LICENSE,
     },
     param: {
-      card_id: "556520"
+      card_id: "412960"
     }
   }
 
-  ret = await API.run(data, '/app/emr/patient/card/read');
+  ret = await API.run(data, '/app/emr/mru/patient/card/print');
 
   _print(ret, null);
 }
-
-
-

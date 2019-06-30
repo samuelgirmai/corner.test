@@ -4,23 +4,23 @@ import {
   signin,
   signout,
   create_cofficer,
-  create_patient,
   read_cofficer,
+  create_patient,
   read_patient,
-  issue_pcard,
+  renew_pcard,
   print_pcard
-} from './mru'
+} from './mru';
 
 const main_prompt = [
   {
     type: 'list',
     name: 'main',
     message: 'auth test window',
-    choices: ['signin', 'signout', 'create.cofficer', 'read.cofficer', 'create.patient', 'read.patient', 'issue.pcard', 'print.pcard']
+    choices: ['signin', 'signout', 'create.cofficer', 'read.cofficer', 'create.patient', 'read.patient', 'renew.pcard', 'print.pcard', '<<back']
   }
 ];
 
-async function _start()
+export async function mru_start()
 {
   var token;
 
@@ -32,8 +32,8 @@ async function _start()
     case 'signout':
       await signout();
       break;
-    case 'create.cofficer':
-      await create_cofficer(token);
+    case 'create.user':
+      await create_cofficer();
       break;
     case 'read.cofficer':
       await read_cofficer(token);
@@ -44,16 +44,16 @@ async function _start()
     case 'read.patient':
       await read_patient(token);
       break;
-    case 'issue.pcard':
-      await issue_pcard(token);
+    case 'renew.pcard':
+      await renew_pcard(token);
       break;
     case 'print.pcard':
       await print_pcard(token);
       break;
-
-
+    case '<<back':
+      return;
   }
-   _start();
+  mru_start();
 }
-_start();
 
+mru_start();
