@@ -162,7 +162,7 @@ export async function create_precord(token)
     }
   }
 
-  ret = await API.run(data, '/apps/emr/practner/patient/record/write');
+  ret = await API.run(data, '/app/emr/practner/patient/record/write');
 
   _print(ret, null);
 
@@ -182,7 +182,7 @@ export async function read_precord(token)
     }
   }
 
-  ret = await API.run(data, '/apps/emr/practner/patient/record/read');
+  ret = await API.run(data, '/app/emr/practner/patient/record/read');
 
   _print(ret, null);
 }
