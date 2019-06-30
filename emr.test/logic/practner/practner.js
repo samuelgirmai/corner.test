@@ -1,5 +1,5 @@
-import API from '../api/api_rest';
-import CONFIG from '../config/config'
+import API from '../../api/api_rest';
+import CONFIG from '../../config/config'
 
 function _print(o, key) 
 {
@@ -24,12 +24,12 @@ function _print(o, key)
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-export async function create_user()
+export async function create_user(token)
 {
   let ret;
 
   let u = {
-    name: "Abebe",
+    name: "Yohanes",
     fname: "Adane",
     mname: "Zemzem",
     mfname: "Gidey",
@@ -41,7 +41,7 @@ export async function create_user()
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "095886"
+      phone_number: "09111123"
     }
   }
 
@@ -54,7 +54,7 @@ export async function create_user()
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/write');
+  ret = await API.run(data, '/app/emr/practner/user/write');
 
   _print(ret, null);
 
@@ -66,14 +66,15 @@ export async function read_user(token)
 
   data = {
     auth: {
-      token: CONFIG.TOKEN
+      license: CONFIG.C_LICENSE,
+      //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "467505"
+      user_id: "695649"
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/read');
+  ret = await API.run(data, '/app/emr/practner/user/read');
 
   _print(ret, null);
 }
@@ -94,7 +95,7 @@ export async function change_security()
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/user/security/write');
+  ret = await API.run(data, '/app/emr/practner/user/security/write');
 
   _print(ret, null);
 }
@@ -108,13 +109,13 @@ export async function signin()
       license: CONFIG.C_LICENSE,
     }, 
     param: {
-      user_id: "649304",
-      username: "822794",
-      password: "08587278",
+      user_id: "695649",
+      username: "245322",
+      password: "75565361",
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/access/write');
+  ret = await API.run(data, '/app/emr/practner/user/access/write');
   
   _print(ret, 'token');
 }
@@ -132,29 +133,22 @@ export async function signout(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/access/delete');
+  ret = await API.run(data, '/app/emr/practner/user/access/delete');
 
   _print(ret, null);
 }
 
-export async function create_idata(token)
+export async function create_precord(token)
 {
   let ret;
 
-  let u = {
-    name: "Nati",
-    fname: "Solomon",
-    mname: "Abeba",
-    mfname: "Haile",
-    gender: "M",
-    dob: "12/12/12",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      hous_no: "122",
-      phone_number: "09191388"
+  let rec = {
+    dialog: {
+      chief_complaint: 'test',
+      visit_repeat: 'false',
+      medication: 'test',
+      symptom: 'test',
+      remark: 'test'
     }
   }
 
@@ -163,18 +157,18 @@ export async function create_idata(token)
       license: CONFIG.C_LICENSE,
     }, 
     param: {
-      token: token,
-      pii: u
+      mrn: "327652",
+      rec: rec
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/idata/write');
+  ret = await API.run(data, '/apps/emr/practner/patient/record/write');
 
   _print(ret, null);
 
 }
 
-export async function read_idata(token)
+export async function read_precord(token)
 {
   let ret, data;
 
@@ -183,12 +177,12 @@ export async function read_idata(token)
       license: CONFIG.C_LICENSE,
     },
     param: {
-      user_id: "412960"
+      mrn: "327652",
+      rid: "542325"
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/idata//read');
+  ret = await API.run(data, '/apps/emr/practner/patient/record/read');
 
   _print(ret, null);
 }
-

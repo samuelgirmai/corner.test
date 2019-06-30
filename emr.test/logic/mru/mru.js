@@ -1,5 +1,5 @@
-import API from '../api/api_rest';
-import CONFIG from '../config/config'
+import API from '../../api/api_rest';
+import CONFIG from '../../config/config'
 
 function _print(o, key) 
 {
@@ -29,8 +29,8 @@ export async function create_cofficer(token)
   let ret;
 
   let u = {
-    name: "Abebe",
-    fname: "Adane",
+    name: "Solomon",
+    fname: "Leul",
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
@@ -41,7 +41,7 @@ export async function create_cofficer(token)
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "095886"
+      phone_number: "0918228"
     }
   }
 
@@ -192,7 +192,7 @@ export async function read_patient(token)
   _print(ret, null);
 }
 
-export async function issue_pcard(token)
+export async function renew_pcard(token)
 {
   let ret, data;
 
@@ -227,6 +227,3 @@ export async function print_pcard(token)
 
   _print(ret, null);
 }
-
-
-

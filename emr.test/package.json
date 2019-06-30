@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "Sample EMR app",
   "scripts": {
-    "mru": "babel-node ./logic/main.js"
+    "mru": "babel-node ./logic/mru/main.js",
+    "practner": "babel-node ./logic/practner/main.js",
+    "triage": "babel-node ./logic/triage/main.js",
+    "infotics": "babel-node ./logic/infotics/main.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {
