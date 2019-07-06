@@ -6,7 +6,8 @@
     "mru": "babel-node ./logic/mru/main.js",
     "practner": "babel-node ./logic/practner/main.js",
     "triage": "babel-node ./logic/triage/main.js",
-    "infotics": "babel-node ./logic/infotics/main.js"
+    "infotics": "babel-node ./logic/infotics/main.js",
+    "admin": "babel-node ./logic/admin/main.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {
