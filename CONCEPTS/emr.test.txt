@@ -1,0 +1,69 @@
+'push-button' testing: 
+----------------------
+- Mock datas: 
+  - clients, services, patients, users, records [emr.test/data/*]
+
+- EMR services initialization:
+  - Create EMR services:   (use services mock data)
+  - Allow them  auth 'export' capability
+  - Export emr service caps(mru, practner, triage, infotics, admin)
+  - allow emr services, caps they need(e.g. admin:  user caps of emr services)
+
+   services_init()
+
+Clients
+-------
+- Admin:
+  - create N number of users;  (use users mock data)
+  - assign roles 
+    - cofficer(1), 
+    - triage(1), 
+    - informatic(1), 
+    - practitioners(N-3))
+
+  admin_start();
+
+-Informatics: 
+ - create static datas;(use infotics_data mock data
+
+  infotics_start();
+
+- Card officer: 
+  - create patients (NUM);  use patients mock data
+  - assign patients practitioner
+
+  mru_start();
+
+- Triage:
+  - view assignemnts, if any
+  - read registered patients 
+  - do assignments 
+
+  triage_start();
+
+- Practitioner: 
+  - read assigned patients
+  - read history of a patient, if any
+  - create new record;   use mock data
+
+  practner_start();
+
+---------------------------------------------------------
+
+emr_start()
+{
+ /*
+  * Initialize emr services
+  */
+  - service_init();
+
+  /*
+   * test emr micro services
+   */
+   - admin_start()
+   - infotics_start()
+   - mru_start()
+   - triage_start()
+   - practner_start()
+}
+
