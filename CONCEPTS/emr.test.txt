@@ -11,9 +11,9 @@
 
    services_init()
 
-Clients
--------
-- Admin:
+Clients Test Procedures
+-----------------------
+1. Admin:
   - create N number of users;  (use users mock data)
   - assign roles 
     - cofficer(1), 
@@ -23,34 +23,43 @@ Clients
 
   admin_start();
 
--Informatics: 
+2. Informatics:
+ - signin 
  - create static datas;(use infotics_data mock data
+ - read static datas
+ - signout
 
   infotics_start();
 
-- Card officer: 
+3. Card officer: 
+  - signin
   - create patients (NUM);  use patients mock data
   - assign patients practitioner
+  - read  patients
+  - signout
 
-  mru_start();
+  mru_start(cofficer_cred);
 
-- Triage:
+4. Triage:
+  - signin
   - view assignemnts, if any
   - read registered patients 
   - do assignments 
+  - signout
+  
+  triage_start(triage_cred);
 
-  triage_start();
-
-- Practitioner: 
+5. Practitioner: 
+  - signin
   - read assigned patients
   - read history of a patient, if any
   - create new record;   use mock data
+  - signout
 
-  practner_start();
+  practner_start(pract_cred);
 
 ---------------------------------------------------------
-
-emr_start()
+emr_client_start()
 {
  /*
   * Initialize emr services
@@ -60,10 +69,14 @@ emr_start()
   /*
    * test emr micro services
    */
-   - admin_start()
-   - infotics_start()
-   - mru_start()
-   - triage_start()
-   - practner_start()
-}
+   - users = admin_start()
 
+   - infotics_start(users['informatic'])
+
+   - mru_start(users['cofficer'])
+
+   - triage_start(users['triage'])
+
+   - practner_start(users['practitioner'])
+
+}
