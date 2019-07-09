@@ -1,0 +1,82 @@
+'push-button' testing: 
+----------------------
+- Mock datas: 
+  - clients, services, patients, users, records [emr.test/data/*]
+
+- EMR services initialization:
+  - Create EMR services:   (use services mock data)
+  - Allow them  auth 'export' capability
+  - Export emr service caps(mru, practner, triage, infotics, admin)
+  - allow emr services, caps they need(e.g. admin:  user caps of emr services)
+
+   services_init()
+
+Clients Test Procedures
+-----------------------
+1. Admin:
+  - create N number of users;  (use users mock data)
+  - assign roles 
+    - cofficer(1), 
+    - triage(1), 
+    - informatic(1), 
+    - practitioners(N-3))
+
+  admin_start();
+
+2. Informatics:
+ - signin 
+ - create static datas;(use infotics_data mock data
+ - read static datas
+ - signout
+
+  infotics_start();
+
+3. Card officer: 
+  - signin
+  - create patients (NUM);  use patients mock data
+  - assign patients practitioner
+  - read  patients
+  - signout
+
+  mru_start(cofficer_cred);
+
+4. Triage:
+  - signin
+  - view assignemnts, if any
+  - read registered patients 
+  - do assignments 
+  - signout
+  
+  triage_start(triage_cred);
+
+5. Practitioner: 
+  - signin
+  - read assigned patients
+  - read history of a patient, if any
+  - create new record;   use mock data
+  - signout
+
+  practner_start(pract_cred);
+
+---------------------------------------------------------
+emr_client_start()
+{
+ /*
+  * Initialize emr services
+  */
+  - service_init();
+
+  /*
+   * test emr micro services
+   */
+   - users = admin_start()
+
+   - infotics_start(users['informatic'])
+
+   - mru_start(users['cofficer'])
+
+   - triage_start(users['triage'])
+
+   - practner_start(users['practitioner'])
+
+}
