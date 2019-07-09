@@ -159,7 +159,7 @@ export async function get_stats()
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/stats');
+  ret = await API.run(data, '/app/emr/admin/stats/read');
 
   _print(ret, null);
 }
