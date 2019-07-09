@@ -187,7 +187,7 @@ class AllowCaps extends React.Component {
              }
 	  />
         </Grid>
-        //{this.state.alert}
+        {/*this.state.alert*/}
       </div>
     )
   }

@@ -47,7 +47,7 @@ export async function create_cofficer(token)
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       pii: u
@@ -66,7 +66,7 @@ export async function read_cofficer(token)
 
   data = {
     auth: {
-      token: CONFIG.TOKEN
+      token: CONFIG.auth.token
     },
     param: {
       user_id: "735043"
@@ -89,7 +89,7 @@ export async function change_security()
 
   let data = {
     auth: {
-      token: CONFIG.TOKEN,
+      token: CONFIG.auth.token,
       sec: sec
     }
   }
@@ -105,7 +105,7 @@ export async function signin()
  
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       user_id: "735043",
@@ -125,10 +125,10 @@ export async function signout(token)
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
-      token: CONFIG.TOKEN
+      token: CONFIG.auth.token
     }
   }
 
@@ -160,7 +160,7 @@ export async function create_patient(token)
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       token: token,
@@ -180,7 +180,7 @@ export async function read_patient(token)
 
   data = {
    auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
       user_id: "412960"
@@ -198,7 +198,7 @@ export async function renew_pcard(token)
 
   data = {
      auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
       },
       param: {
         user_id: "412960"
@@ -216,7 +216,7 @@ export async function print_pcard(token)
 
   data = {
    auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
       card_id: "412960"

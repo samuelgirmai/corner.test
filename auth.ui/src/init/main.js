@@ -25,13 +25,13 @@ async function init_data()
 async function init_stream()
 {
   await STREAM.connect(CONFIG.stream, "/platform/notif")
-  await STREAM.connect(CONFIG.stream, "/platform/stats")
+  await STREAM.connect(CONFIG.stream, "/auth/stats")
 
   STREAM.join("/platform/notif", {
     id: CONFIG.auth.license
   });
 
-  STREAM.join("/platform/stats", {
+  STREAM.join("/auth/stats", {
     id: CONFIG.auth.license
   });
 

@@ -241,6 +241,29 @@ export async function list_caps()
   return ret;
 }
 
+export async function remove_cap(service_id, cap_id)
+{
+  let ret;
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license,
+      service_id: service_id,
+      cap_id: cap_id
+    }
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/caps/delete');
+
+  /*if(ret.status == "ok"){
+    STORE.del('caps', {service_id: service_id, cap_id: cap_id});
+  }*/
+
+  _print(ret, 'caps');
+
+  return ret;
+}
+
 export async function list_maps()
 {
   let ret;
@@ -309,7 +332,7 @@ export async function get_stats()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/platform/users/stats');
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/stats/read');
 
   if(ret.status == "ok"){
     STORE.write('stats', ret.result.stats);
@@ -331,6 +354,7 @@ const AUTH =  {
   list_clients: list_clients,
   list_persons: list_persons,
   list_caps: list_caps,
+  remove_cap: remove_cap,
   list_maps: list_maps,
   allow_caps: allow_caps,
   revoke_caps: revoke_caps,

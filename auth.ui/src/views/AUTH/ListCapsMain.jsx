@@ -1,5 +1,7 @@
 import STORE from 'store/main';
 
+import AUTH from 'logic/auth';
+
 import React, { Component } from 'react';
 import {
     Grid, Row, Col,
@@ -40,6 +42,13 @@ class ExtendedTables extends Component{
     return(<Tooltip id="del" pointerColor="#C1DFDF">Delete CAP</Tooltip>);
   }
 
+  onDeleteCap = async(service_id, cap_id) => {
+    //alert(service_id +"  "+cap_id);
+    let r = await AUTH.remove_cap(service_id, cap_id);
+
+    alert(r.status);
+  }
+
   list = () => {
     let table = this.state.caps;
 
@@ -53,7 +62,7 @@ class ExtendedTables extends Component{
                 <td className="text-left">{table[i].cap_id}</td>
                 <td className="text-center">
                 <OverlayTrigger placement="top" overlay={this.del()}>
-                    <Button simple bsStyle="danger" bsSize="xs">
+                    <Button simple bsStyle="danger" bsSize="xs" onClick={()=> {this.onDeleteCap(table[i].service_id, table[i].cap_id)}}>
                         <i className="fa fa-trash"></i>
                     </Button>
                 </OverlayTrigger>

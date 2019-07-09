@@ -42,12 +42,14 @@ class RevokeCaps extends React.Component {
     let tcaps = this.state.tcaps;
     let acaps = this.state.acaps[0].cap;
 
-    //alert(JSON.stringify(this.state.acaps, 0, '  '));
-
     let selectCap = [];
 
     for(let i=0; i<acaps.length; ++i){
       let cap = _.filter(tcaps, {'cap_id': acaps[i]});
+
+      if(!cap.length){
+        break;
+      }
 
       let item = {
         value: cap[0].cap_id,

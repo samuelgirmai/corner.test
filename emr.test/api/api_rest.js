@@ -5,7 +5,7 @@ async function run(param, name)
 {
   let prop = {
     method: 'POST',
-    url: CONFIG.PROXY_URL+name,
+    url: CONFIG.proxy.url+name,
     data: param
   }
 

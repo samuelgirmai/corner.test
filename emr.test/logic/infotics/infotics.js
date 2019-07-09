@@ -47,7 +47,7 @@ export async function create_user()
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       pii: u
@@ -66,7 +66,7 @@ export async function read_user(token)
   data = {
     auth: {
       //token: CONFIG.TOKEN		//FIXME: use token
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
       user_id: "899934"
@@ -89,7 +89,7 @@ export async function change_security()
 
   let data = {
     auth: {
-      token: CONFIG.TOKEN,
+      token: CONFIG.auth.token,
       sec: sec
     }
   }
@@ -105,7 +105,7 @@ export async function signin()
  
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       user_id: "899934",
@@ -125,10 +125,10 @@ export async function signout(token)
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
-      token: CONFIG.TOKEN
+      token: CONFIG.auth.token
     }
   }
 
@@ -147,7 +147,7 @@ export async function create_idata(token)
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       type: 'drug',
@@ -167,7 +167,7 @@ export async function read_idata(token)
 
   data = {
    auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
       type: 'drug',

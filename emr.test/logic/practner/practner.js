@@ -47,7 +47,7 @@ export async function create_user(token)
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       pii: u
@@ -66,7 +66,7 @@ export async function read_user(token)
 
   data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
       //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
@@ -90,7 +90,7 @@ export async function change_security()
 
   let data = {
     auth: {
-      token: CONFIG.TOKEN,
+      token: CONFIG.auth.token,
       sec: sec
     }
   }
@@ -106,7 +106,7 @@ export async function signin()
  
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       user_id: "695649",
@@ -126,10 +126,10 @@ export async function signout(token)
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
-      token: CONFIG.TOKEN
+      token: CONFIG.auth.token
     }
   }
 
@@ -154,7 +154,7 @@ export async function create_precord(token)
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       mrn: "327652",
@@ -174,7 +174,7 @@ export async function read_precord(token)
 
   data = {
    auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
       mrn: "327652",

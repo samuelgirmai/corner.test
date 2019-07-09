@@ -17,7 +17,7 @@ class UserStats extends Component {
       users: STORE.read('stats', 'users')
     }
 
-    STREAM.listen("/platform/stats", [{
+    STREAM.listen("/auth/stats", [{
       e_name: 'e_stats',
       cb: this.onStats
     }]);
