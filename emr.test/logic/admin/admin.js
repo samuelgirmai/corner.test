@@ -47,7 +47,7 @@ export async function create_user()
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       pii: u,
@@ -67,10 +67,10 @@ export async function remove_user()
 
   data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
-      user_id: "387369",
+      user_id: "615942",
       user_type: "cofficer"
     }
   }
@@ -86,7 +86,7 @@ export async function list_users()
 
   data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }
   }
 
@@ -101,7 +101,7 @@ export async function assign_role()
  
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }, 
     param: {
       user_id: "387369",
@@ -120,7 +120,7 @@ export async function revoke_role()
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
       user_id: "387369",
@@ -137,7 +137,7 @@ export async function get_role()
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     },
     param: {
       user_id: "387369",
@@ -155,7 +155,7 @@ export async function get_stats()
 
   let data = {
     auth: {
-      license: CONFIG.C_LICENSE,
+      license: CONFIG.auth.license,
     }
   }
 
