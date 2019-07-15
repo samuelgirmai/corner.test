@@ -1,12 +1,12 @@
 const config = {
  auth: {
-    license: "762284713531"
+    license: "520099654961"
   },
   proxy: {
-    url: "http://127.0.0.1:9999",
+    url: "http://127.0.0.1:22000",
   },
   stream: {
-    url: "http://localhost:8890"
+    url: "http://localhost:22003"
   },
   fs: {
     name: "rethinkdb",
