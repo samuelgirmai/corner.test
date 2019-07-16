@@ -3,6 +3,7 @@ import CONFIG from '../../config/config'
 
 function _print(o, key) 
 {
+
   if(o.status == "err"){
     console.log(JSON.stringify(o, 0, '  '));
 
@@ -41,7 +42,7 @@ export async function create_user()
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0918222827278"
+      phone_number: "095889997"
     }
   }
 
@@ -51,7 +52,10 @@ export async function create_user()
     }, 
     param: {
       pii: u,
-      user_type: 'cofficer'
+     // user_type: 'cofficer'
+      //user_type: 'triage'
+      //user_type: 'practitioner'
+      user_type: 'informatics'
     }
   }
 
@@ -70,8 +74,11 @@ export async function remove_user()
       license: CONFIG.C_LICENSE,
     },
     param: {
-      user_id: "387369",
-      user_type: "cofficer"
+      user_id: "332618",
+      //user_type: "cofficer"
+      //user_type: "triage"
+      //user_type: "practitioner"
+      user_type: "informatics"
     }
   }
 
@@ -87,7 +94,7 @@ export async function list_users()
   data = {
     auth: {
       license: CONFIG.C_LICENSE,
-    }
+    },
   }
 
   ret = await API.run(data, '/app/emr/admin/user/list');
@@ -104,10 +111,14 @@ export async function assign_role()
       license: CONFIG.C_LICENSE,
     }, 
     param: {
-      user_id: "387369",
-      user_type: 'cofficer'
+      user_id: "332618",
+       //user_type: "cofficer"
+      //user_type: "triage"
+      //user_type: "practitioner"
+      user_type: "informatics"
     }
-  }
+
+    }
 
   ret = await API.run(data, '/app/emr/admin/user/role/write');
   
@@ -123,7 +134,7 @@ export async function revoke_role()
       license: CONFIG.C_LICENSE,
     },
     param: {
-      user_id: "387369",
+      user_id: "332618",
     }
   }
 
@@ -140,7 +151,7 @@ export async function get_role()
       license: CONFIG.C_LICENSE,
     },
     param: {
-      user_id: "387369",
+      user_id: "332618",
     }
   }
 
@@ -159,7 +170,7 @@ export async function get_stats()
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/stats');
+  ret = await API.run(data, '/app/emr/admin/stats/read');
 
   _print(ret, null);
 }

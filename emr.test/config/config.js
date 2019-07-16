@@ -1,6 +1,6 @@
 const config = {
-  PROXY_URL: "http://127.0.0.1:9999",
-  C_LICENSE: "209320850969",
+  PROXY_URL: "http://127.0.0.1:22000",
+  C_LICENSE: "587629441007",
   TOKEN: "795376430343"
 }
 
