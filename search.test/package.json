@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "description": "NHP shell client",
   "scripts": {
-    "0": "babel-node ./app0.js",
-    "1": "babel-node ./app1.js",
-    "2": "babel-node ./app2.js",
+    "search": "babel-node ./app.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {

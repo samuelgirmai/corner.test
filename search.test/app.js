@@ -9,10 +9,10 @@ stdin.setEncoding('utf-8');
 var needle = "";
 
 var test_init = async() => {
-  await STREAM.connect(CONFIG.stream, "/emr/search")
+  await STREAM.connect(CONFIG.stream, "/platform/auth/search")
 
-  STREAM.join("/emr/search", {
-    id: CONFIG.auth3.license
+  STREAM.join("/platform/auth/search", {
+    id: CONFIG.auth.license
   });
 
   let events = [
@@ -22,31 +22,36 @@ var test_init = async() => {
     }
   ]
 
-  STREAM.listen("/emr/search", events);
+  STREAM.listen("/platform/auth/search", events);
 }
 
 
 stdin.on("data", function(key) {
-  needle += key;
-
+  console.log(key.charCodeAt(0));
   if(key == '\u0003'){
     process.exit();
   }
+  else if(key == '\u007F'){
+    needle = needle.slice(0, -1);
+  }
+  else {
+    needle += key;
+  }
 
   let p = {
-    from: CONFIG.auth3.license,
-    to: "B",
+    from: CONFIG.auth.license,
+    to: "177652917178",
     e_name: "e_search",
     data: {
-      type: "patient",
+      type: "cap",
       args: {
-        type: "name",
+        type: "desc",
         needle: needle
       }
     }
   }
 
-  STREAM.send("/emr/search", p);
+  STREAM.send("/platform/auth/search", p);
 });
 
 function on_search(p)
