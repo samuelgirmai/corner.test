@@ -7,7 +7,8 @@
     "practner": "babel-node ./logic/practner/main.js",
     "triage": "babel-node ./logic/triage/main.js",
     "infotics": "babel-node ./logic/infotics/main.js",
-    "admin": "babel-node ./logic/admin/main.js"
+    "admin": "babel-node ./logic/admin/main.js",
+    "lab": "babel-node ./logic/lab/main.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {

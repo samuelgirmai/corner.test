@@ -2,23 +2,30 @@ import inquirer from 'inquirer'
 
 import {
   mru_start,
-} from './mru/main';
+} from './mru/main'
+
 import {
   practner_start,
 } from './practner/main';
+
 import {
   infotics_start,
 } from './infotics/main';
+
 import {
-  triage_start,
+  triage_start
 } from './triage/main';
+
+import {
+  lab_start
+} from './lab/main';
 
 const main_prompt = [
   {
     type: 'list',
     name: 'main',
     message: 'EMR Test application',
-    choices: ['MRU', 'Practitioner', 'Informatics', 'Triage', 'Exit']
+    choices: ['MRU', 'Triage', 'Practitioner', 'Laboratory', 'Informatics', 'Exit']
   }
 ];
 
@@ -39,6 +46,9 @@ async function _start()
       break;
     case 'Triage':
       ret = await triage_start();
+      break;
+    case 'Laboratory':
+      ret = await lab_start();
       break;
     case 'Exit':
       process.exit();
