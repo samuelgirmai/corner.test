@@ -109,6 +109,21 @@ class ExtendedTables extends Component{
       return rows;
     }
 
+    selector = () => {
+      return (
+        <FormGroup>
+          <ControlLabel>Select a service ({this.state.caps.length})</ControlLabel>
+            <Select name="services" placeholder="Select Services"
+              closeOnSelect={true}
+              value={this.state.service}
+              options={this.state.selectService}
+              autoFocus={true}
+              onChange={(value) => this.onSelectService(value)}
+          />
+        </FormGroup>
+      );
+    }
+
     render(){
 
         return (
@@ -117,11 +132,10 @@ class ExtendedTables extends Component{
                     <Row>
                         <Col md={12}>
                             <Card
-                                title={"Total Capabilities ("+this.state.caps.length+")"}
-                                category="List of capabilities per services"
+                                title={this.selector()}
                                 content={
                                   <div>
-                                  <Row>
+                                  {/*<Row>
                                   <Col md={3}>
                                       <FormGroup>
                                           <ControlLabel>Select a service</ControlLabel>
@@ -134,7 +148,7 @@ class ExtendedTables extends Component{
                                             />
                                       </FormGroup>
                                   </Col>
-                              </Row>
+                              </Row>*/}
                                     <Table responsive>
                                         <thead>
                                             <tr>
