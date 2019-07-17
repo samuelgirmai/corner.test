@@ -15,7 +15,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'admin test window',
-    choices: ['create.user', 'remove.user', 'list.users','assign.role', 'revoke.role', 'get.role', 'get.stats', '<<back']
+    choices: ['create.user', 'remove.user', 'list.users', 'assign.role', 'revoke.role', 'get.role', 'get.stats', '<<back']
   }
 ];
 
@@ -32,7 +32,7 @@ export async function admin_start()
       await remove_user();
       break;
     case 'list.users':
-     list_users();
+     await list_users();
      break;
     case 'assign.role':
       await assign_role();

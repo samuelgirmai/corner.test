@@ -1,4 +1,5 @@
 import STORE from 'store/main';
+import _ from 'lodash';
 
 import AUTH from 'logic/auth';
 
@@ -7,8 +8,11 @@ import {
     Grid, Row, Col,
     Table,
     OverlayTrigger,
-    Tooltip
+    Tooltip,
+    FormGroup, ControlLabel
 } from 'react-bootstrap';
+
+import Select from 'react-select'
 // react component that creates a switch button that changes from on to off mode
 import Switch from 'react-bootstrap-switch';
 
@@ -29,13 +33,41 @@ class ExtendedTables extends Component{
     let rows = [];
 
     this.state = {
-      caps: STORE.read('caps', null)
+      caps: STORE.read('caps', null),
+      selectService: null,
+      service: null
     }
-  }
+
+    this.services = STORE.read('services', null);
+
+  } 
 
   componentDidMount(){
-    //alert(JSON.stringify(this.a, 0, '  '))
-    //this.setState({refresh: 1});
+    this.setState({
+      selectService: this.getSelectService(),
+      service: _.filter(this.getSelectService(), (i) => i.label === 'auth')[0]
+    })
+
+  }
+
+  onSelectService = (value) => {
+    this.setState({service: value})
+  }
+
+  getSelectService = () => {
+
+    let selectService= [];
+
+    for(let i=0; i<this.services.length; ++i){
+      let item = {
+        value: this.services[i].user_id,
+        label: this.services[i].name
+      }
+
+      selectService.push(item);
+    }
+
+    return selectService;
   }
 
   del = () => {
@@ -50,12 +82,15 @@ class ExtendedTables extends Component{
   }
 
   list = () => {
-    let table = this.state.caps;
+    let table = [];
 
+    if(this.state.service)
+      table =_.filter(this.state.caps, (c) => c.service_id === this.state.service.value)
+ 
     let rows = [];
         for(let i=0; i<table.length; i++){
           rows.push(                                            
-            <tr>
+            <tr key={i}>
                 <td className="text-left">{i+1}</td>
                 <td className="text-description">{table[i].desc}</td>
                 <td className="text-left">{table[i].uri}</td>
@@ -75,29 +110,45 @@ class ExtendedTables extends Component{
     }
 
     render(){
+
         return (
             <div className="main-content">
                 <Grid fluid>
                     <Row>
                         <Col md={12}>
                             <Card
-                                title={"Capabilities ("+this.state.caps.length+")"}
-                                category="List of capabilities exported by all services"
+                                title={"Total Capabilities ("+this.state.caps.length+")"}
+                                category="List of capabilities per services"
                                 content={
+                                  <div>
+                                  <Row>
+                                  <Col md={3}>
+                                      <FormGroup>
+                                          <ControlLabel>Select a service</ControlLabel>
+                                           <Select name="services" placeholder="Select Services"
+                                                closeOnSelect={true}
+                                                value={this.state.service}
+                                                options={this.state.selectService}
+                                                autoFocus={true}
+                                                onChange={(value) => this.onSelectService(value)}
+                                            />
+                                      </FormGroup>
+                                  </Col>
+                              </Row>
                                     <Table responsive>
                                         <thead>
                                             <tr>
                                                 <th className="text-center">#</th>
-				        	<th className="text-description">Cap Name</th>
+				        	                              <th className="text-description">Cap Name</th>
                                                 <th className="text-left">Cap URI</th>
                                                 <th className="text-left">Cap ID</th>
                                                 <th className="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-					  {this.list()}
+					                                {this.list()}
                                         </tbody>
-                                    </Table>
+                                    </Table></div>
                                 }
                             />
                         </Col>
