@@ -42,7 +42,8 @@ class ExtendedTables extends Component{
   componentDidMount(){
     this.setState({
       selectService: this.getSelectService(),
-      service: _.filter(this.getSelectService(), (i) => i.label === 'auth')[0],
+      //service: null
+      //service: _.filter(this.getSelectService(), (i) => i.label === 'auth')[0],
     })
 
   }
@@ -52,13 +53,15 @@ class ExtendedTables extends Component{
   }
 
   getSelectService = () => {
-
+    let serviceCap = 0;
     let selectService= [];
 
     for(let i=0; i<this.services.length; ++i){
+      serviceCap = _.filter(this.state.caps, (c) => c.service_id === this.services[i].user_id)
+
       let item = {
         value: this.services[i].user_id,
-        label: this.services[i].name
+        label: this.services[i].name+" ("+serviceCap.length+")"
       }
 
       selectService.push(item);
@@ -83,6 +86,9 @@ class ExtendedTables extends Component{
 
     if(this.state.service){
       table =_.filter(this.state.caps, (c) => c.service_id === this.state.service.value)
+    }
+    else {
+      table = this.state.caps
     }
 
     for(let i=0; i<table.length; i++){

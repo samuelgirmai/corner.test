@@ -19,7 +19,7 @@ async function init_data()
   await AUTH.list_clients();
   await AUTH.list_services();
   await AUTH.list_logs();
-  await AUTH.get_stats();
+  await AUTH.get_stats("users", null);
 }
 
 async function init_stream()

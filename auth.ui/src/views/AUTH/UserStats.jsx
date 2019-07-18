@@ -23,8 +23,8 @@ class UserStats extends Component {
     }]);
   }
 
-  getStats = async() => {
-    await AUTH.get_stats();
+  getStats = async(arg) => {
+    await AUTH.get_stats("users", arg);
 
     this.setState({
       users: STORE.read('stats', 'users')
@@ -56,7 +56,7 @@ class UserStats extends Component {
             bigIcon={<i className="fa fa-user-o"></i>}
             statsText="Persons"
             statsValue={this.state.users.person.toString()}
-            statsIcon={<a onClick={this.getStats}><i className="fa fa-refresh"></i></a>}
+            statsIcon={<a onClick={ () => this.getStats("person")}><i className="fa fa-refresh"></i></a>}
             statsIconText="Updated now"
           />
         </Col>
@@ -65,7 +65,7 @@ class UserStats extends Component {
             bigIcon={<i className="fa fa-desktop"></i>}
             statsText="Clients"
             statsValue={this.state.users.client.toString()}
-            statsIcon={<a onClick={this.getStats}><i className="fa fa-refresh"></i></a>}
+            statsIcon={<a onClick={() => this.getStats("client")}><i className="fa fa-refresh"></i></a>}
             statsIconText="Updated now"
           />
         </Col>
@@ -74,7 +74,7 @@ class UserStats extends Component {
             bigIcon={<i className="fa fa-server"></i>}
             statsText="Services"
             statsValue={this.state.users.service.toString()}
-            statsIcon={<a onClick={this.getStats}><i className="fa fa-refresh"></i></a>}
+            statsIcon={<a onClick={() => this.getStats("service")}><i className="fa fa-refresh"></i></a>}
             statsIconText="Updated now"
           />
         </Col>

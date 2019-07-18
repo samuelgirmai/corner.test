@@ -319,17 +319,19 @@ export async function revoke_caps(uid, caps)
   return ret;
 }
 
-export async function get_stats()
+export async function get_stats(type, args)
 {
   let ret;
 
   let data = {
     auth: {
-      license: CONFIG.auth.license
+      license: CONFIG.auth.license,
+      type: type,
+      args: args
     },
-    param: {
+    /*param: {
       type: "users"
-    }
+    }*/
   }
 
   ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/stats/read');
