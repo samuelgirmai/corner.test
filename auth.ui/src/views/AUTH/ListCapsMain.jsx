@@ -9,7 +9,8 @@ import {
     Table,
     OverlayTrigger,
     Tooltip,
-    FormGroup, ControlLabel
+    FormGroup, ControlLabel,
+    Badge
 } from 'react-bootstrap';
 
 import Select from 'react-select'
@@ -52,6 +53,10 @@ class ExtendedTables extends Component{
     this.setState({service: value})
   }
 
+  badgeCapCount = (name, count) => {
+    return(<div>{name+" "}<Badge variant="light">{count}</Badge></div>)
+  }
+
   getSelectService = () => {
     let serviceCap = 0;
     let selectService= [];
@@ -61,7 +66,7 @@ class ExtendedTables extends Component{
 
       let item = {
         value: this.services[i].user_id,
-        label: this.services[i].name+" ("+serviceCap.length+")"
+        label: this.badgeCapCount(this.services[i].name, serviceCap.length)
       }
 
       selectService.push(item);
