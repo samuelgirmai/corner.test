@@ -120,7 +120,7 @@ class ExtendedTables extends Component{
   capServices = () => {
     return (
       <FormGroup>
-        <ControlLabel>Select a service (total = {this.state.caps.length} CAPS)</ControlLabel>
+        <ControlLabel>{this.badgeCapCount("Select service", this.state.caps.length)}</ControlLabel>
           <Select name="services" placeholder="Select Services"
           closeOnSelect={true}
           value={this.state.service}
