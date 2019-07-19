@@ -5,6 +5,7 @@ import {
   signout,
   create_user,
   read_user,
+  read_stats,
   read_precord,
   create_precord,
 } from './practner';
@@ -14,7 +15,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Practitioner Test App',
-    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.precord', 'read.precord', '<<back']
+    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.precord', 'read.precord', 'read.stats','<<back']
   }
 ];
 
@@ -25,10 +26,10 @@ export async function practner_start()
   let option = await inquirer.prompt(main_prompt);
   switch(option.main){
     case 'signin':
-      await signin();
+      token = await signin();
       break;
     case 'signout':
-      await signout();
+      await signout(token);
       break;
     case 'create.user':
       await create_user();
@@ -41,6 +42,9 @@ export async function practner_start()
       break;
     case 'read.precord':
       await read_precord(token);
+      break;
+    case 'read.stats':
+      await read_stats(token);
       break;
     case '<<back':
       return;

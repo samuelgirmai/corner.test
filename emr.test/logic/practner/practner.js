@@ -70,7 +70,7 @@ export async function read_user(token)
       //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "695649"
+      user_id: "759572"
     }
   }
 
@@ -84,8 +84,8 @@ export async function change_security()
   let ret;
 
   let sec = {
-    username: "083403",
-    password: "12264627"
+    username: "607479",
+    password: "39262394"
   }
 
   let data = {
@@ -109,9 +109,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "695649",
-      username: "245322",
-      password: "75565361",
+      user_id: "759572",
+      username: "607479",
+      password: "39262394",
     }
   }
 
@@ -129,7 +129,8 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      token: CONFIG.auth.token
+      user_id: "759572",
+      token: token
     }
   }
 
@@ -178,7 +179,7 @@ export async function read_precord(token)
     },
     param: {
       mrn: "327652",
-      rid: "542325"
+      rid: "299208"
     }
   }
 
@@ -186,3 +187,32 @@ export async function read_precord(token)
 
   _print(ret, null);
 }
+
+export async function read_stats(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      type: "visit_count",
+      //type: "drug_count",
+      //type: "ncod_count",
+      args: {
+        type: "monthly",
+        date: "07/2019",
+        //did: "72553"
+        //nid: "1234"
+        //lid: "2114"
+
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/practner/stats/read');
+
+  _print(ret, null);
+}
+    
