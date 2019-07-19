@@ -18,13 +18,15 @@ import ListUserMain from 'views/AUTH/ListUserMain.jsx'
 import ListCapsMain from 'views/AUTH/ListCapsMain.jsx'
 import ListLogsMain from 'views/AUTH/ListLogsMain.jsx'
 import UserStats from 'views/AUTH/UserStats.jsx'
+import Dashboard from 'views/AUTH/Dashboard.jsx'
+
 //var pages = [{ path: "/pages/user-page", name: "User Page", mini: "UP", component: UserPage }].concat(pagesRoutes);
 
 var dashRoutes = [
     { path: "/register", name: "Registration", icon: "fa fa-id-card-o", component: RegUserMain },
     { path: "/user_list", name: "User List", icon: "fa fa-list", component: ListUserMain },
     { path: "/caps", name: "Caps List", icon: "fa fa-cogs", component: ListCapsMain },
-    { path: "/stats", name: "Mini Stats", icon: "fa fa-bar-chart", component: UserStats },
+    { path: "/stats", name: "Mini Stats", icon: "fa fa-bar-chart", component: Dashboard },
  { path: "/logs", name: "Logs", icon: "fa fa-user-secret", component: ListLogsMain },
 
     /*{ path: "/claim", name: "Claim", icon: "fa fa-question-circle-o", component: ClaimMain },
