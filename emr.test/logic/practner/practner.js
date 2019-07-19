@@ -145,12 +145,15 @@ export async function create_precord(token)
 
   let rec = {
     dialog: {
-      chief_complaint: 'test',
+      chief_complaint: 'non stop headache',
       visit_repeat: 'false',
-      medication: 'test',
-      symptom: 'test',
-      remark: 'test'
-    }
+      drug: ['111', '222'],
+      symptom: 'test symptom',
+      remark: 'test remark'
+    },
+    lab: ['71', '24', '32', '40'],
+    ncod: ['25', '51', '10', '21', '23'],
+    drug: ['13', '23', '43', '12']
   }
 
   let data = {
@@ -179,7 +182,7 @@ export async function read_precord(token)
     },
     param: {
       mrn: "327652",
-      rid: "299208"
+      rid: "973728"
     }
   }
 
@@ -193,20 +196,20 @@ export async function read_stats(token)
   let ret, data;
 
   data = {
-   auth: {
+    auth: {
       license: CONFIG.auth.license,
     },
     param: {
       type: "visit_count",
       //type: "drug_count",
       //type: "ncod_count",
+      //type: "lab_count"
       args: {
-        type: "monthly",
-        date: "07/2019",
-        //did: "72553"
-        //nid: "1234"
-        //lid: "2114"
-
+        type: "daily",
+        date: "19/07/2019",
+        did: "13"
+        //nid: "51"
+        //lid: "71"
       }
     }
   }
