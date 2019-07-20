@@ -227,3 +227,25 @@ export async function print_pcard(token)
 
   _print(ret, null);
 }
+
+export async function read_stats(token)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      type: "cards_status",
+      args: {
+        type: "all",
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/mru/stats/read');
+
+  _print(ret, null);
+}
+
