@@ -7,6 +7,8 @@ import {
   read_user,
   read_assign,
   create_assign,
+  update_assign,
+  update_status
 } from './triage';
 
 const main_prompt = [
@@ -14,7 +16,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Triage test app',
-    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.assign', 'read.assign', '<<back']
+    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.assign', 'read.assign', 'update.status', 'update.assign', '<<back']
   }
 ];
 
@@ -41,6 +43,12 @@ export async function triage_start()
       break;
     case 'read.assign':
       await read_assign(token);
+      break;
+    case 'update.assign':
+      await update_assign(token);
+      break;
+    case 'update.status':
+      await update_status(token);
       break;
     case '<<back':
       return;

@@ -69,7 +69,7 @@ export async function read_user(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "036895"
+      user_id: "949596"
     }
   }
 
@@ -137,13 +137,74 @@ export async function signout(token)
   _print(ret, null);
 }
 
+export async function create_assign(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: '253129',
+      status: 1,
+      assign: {
+        catagory: 'BLUE',
+        dept_id: '133133'
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/assign/write');
+
+  _print(ret, null);
+}
+
+export async function update_assign(token)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      tid: '164022',
+      status: 2,
+      assign: {
+        catagory: 'BLUE',
+        dept_id: '133133'
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/assign/update');
+
+  _print(ret, null);
+}
+
+export async function update_status(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      tid: '164022',
+      status: 2
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/assign/status/update');
+
+  _print(ret, null);
+}
+
 export async function read_assign(token)
 {
   let ret;
-
-  let drug = {
-    name: 'paracetamol'
-  }
 
   let data = {
     auth: {
@@ -157,27 +218,5 @@ export async function read_assign(token)
   ret = await API.run(data, '/app/emr/triage/assign/read');
 
   _print(ret, null);
-
 }
 
-export async function create_assign(token)
-{
-  let ret, data;
-
-  data = {
-   auth: {
-      license: CONFIG.auth.license,
-    },
-    param: {
-      mrn: '262626',
-      assign: {
-        catagory: 'BLUE',
-        dept_id: '133133'
-      }
-    }
-  }
-
-  ret = await API.run(data, '/app/emr/triage/assign/write');
-
-  _print(ret, null);
-}
