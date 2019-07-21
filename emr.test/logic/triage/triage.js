@@ -220,3 +220,25 @@ export async function read_assign(token)
   _print(ret, null);
 }
 
+export async function read_stats(token)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      type: "queue_length",
+      args: {
+        type: "daily",
+        date: "21/07/2019"
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/stats/read');
+
+  _print(ret, null);
+}
+
