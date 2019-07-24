@@ -183,7 +183,7 @@ export async function read_patient(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "412960"
+      mrn: "412960"
     }
   }
 
@@ -201,7 +201,7 @@ export async function renew_pcard(token)
       license: CONFIG.auth.license,
       },
       param: {
-        user_id: "412960"
+        mrn: "412960"
       }
    }
 
