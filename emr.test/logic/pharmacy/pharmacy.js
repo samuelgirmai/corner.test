@@ -70,7 +70,7 @@ export async function read_user(token)
       //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "759572"
+      user_id: "821737"
     }
   }
 
@@ -109,9 +109,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "759572",
-      username: "607479",
-      password: "39262394",
+      user_id: "821737",
+      username: "820722",
+      password: "84538387",
     }
   }
 
@@ -129,8 +129,8 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "759572",
-      token: token
+      user_id: "821737",
+      token: CONFIG.auth.token
     }
   }
 

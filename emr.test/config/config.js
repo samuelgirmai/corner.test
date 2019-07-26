@@ -1,6 +1,6 @@
 const config = {
  auth: {
-    token: "697328922369",
+    token: "407841710821",
     license: "738064025340"
   },
   proxy: {

@@ -42,7 +42,7 @@ export async function create_user()
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "095889997"
+      phone_number: "0911188397"
     }
   }
 
@@ -52,10 +52,12 @@ export async function create_user()
     }, 
     param: {
       pii: u,
-      user_type: 'cofficer'
+      //user_type: 'cofficer'
       //user_type: 'triage'
       //user_type: 'practitioner'
       //user_type: 'informatics'
+      //user_type: 'labtech'
+      user_type: 'pharmacist'
     }
   }
 
@@ -74,12 +76,13 @@ export async function remove_user()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "332618",
+      user_id: "908031",
       //user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
       //user_type: "laboratory"
-      user_type: "informatics"
+      //user_type: "informatics"
+      user_type: "pharmacist"
     }
   }
 
@@ -112,12 +115,13 @@ export async function assign_role()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "332618",
-       //user_type: "cofficer"
+      user_id: "908031",
+      //user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
       //user_type: "laboratory"
-      user_type: "informatics"
+      //user_type: "informatics"
+        user_type: "pharmacist"
     }
 
     }
@@ -136,7 +140,7 @@ export async function revoke_role()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "332618",
+      user_id: "908031",
     }
   }
 
@@ -153,7 +157,7 @@ export async function get_role()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "332618",
+      user_id: "908031",
     }
   }
 
