@@ -10,7 +10,7 @@ async function Run(f, prog)
     if(f.arg[i].type == "func"){
       arg[f.arg[i].name] = await Run(prog[f.arg[i].data], prog);
     }
-    else {
+    else if(f.arg[i].type == "data"){
       arg[f.arg[i].name] = await Data(f.arg[i].data);
     }
   }

@@ -1,6 +1,6 @@
 import NET from '../net/api'
 
-async function Random(type)
+async function Mockaroo(type)
 {
   let prop = {
     method: 'GET',
@@ -13,6 +13,6 @@ async function Random(type)
 
 export async function Data(type)
 {
-  return await Random(type);
+  return await Mockaroo(type);
 }
 
