@@ -1,0 +1,146 @@
+import API from '../../api/api_rest';
+import CONFIG from '../../config/config'
+
+export async function create_patient(arg)
+{
+  let data = {
+    auth: {
+      token: arg.token,
+    }, 
+    param: {
+      pii: arg.pii
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/patient/write');
+}
+
+export async function get_patient(arg)
+{
+  let data = {
+    auth: {
+      token: arg.token,
+    },
+    param: {
+      mrn: arg.mrn
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/patient/read');
+}
+
+export async function renew_pcard(arg)
+{
+  let data = {
+    auth: {
+      token: arg.token,
+    },
+    param: {
+      mrn: arg.mrn
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/patient/card/write');
+}
+
+export async function print_pcard(arg)
+{
+  let data = {
+    auth: {
+      token: arg.token,
+    },
+    param: {
+      card_id: arg.card_id
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/patient/card/print');
+}
+
+export async function create_user(arg)
+{
+  let data = {
+    auth: {
+      token: arg.token,
+    }, 
+    param: {
+      pii: arg.pii
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/user/write');
+}
+
+export async function get_user(arg)
+{
+  let data = {
+    auth: {
+      token: arg.token
+    },
+    param: {
+      user_id: arg.user_id
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/user/read');
+}
+
+export async function change_security(arg)
+{
+  let data = {
+    auth: {
+      license: arg.license
+    },
+    param: {
+      token: arg.token,
+      password: arg.password
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/user/security/write');
+}
+
+export async function signin()
+{
+  let data = {
+    auth: {
+      token: arg.token,
+    }, 
+    param: {
+      username: arg.username,
+      password: arg.password,
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/user/access/write');
+}
+
+export async function signout(arg)
+{
+  let data = {
+    auth: {
+      token: arg.token,
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/user/access/delete');
+}
+
+
+export async function get_stats(arg)
+{
+  let data = {
+    auth: {
+      token: arg.token,
+    },
+    param: {
+      type: "cards_status",
+      args: {
+        type: "all",
+      }
+    }
+  }
+
+  return await API.run(data, '/app/emr/mru/stats/read');
+}
+

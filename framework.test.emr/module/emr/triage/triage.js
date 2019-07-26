@@ -24,13 +24,13 @@ function _print(o, key)
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-export async function create_cofficer(token)
+export async function create_user()
 {
   let ret;
 
   let u = {
-    name: "Solomon",
-    fname: "Leul",
+    name: "Kebede",
+    fname: "Adane",
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
@@ -41,7 +41,7 @@ export async function create_cofficer(token)
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0918228"
+      phone_number: "0955555"
     }
   }
 
@@ -54,26 +54,26 @@ export async function create_cofficer(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/write');
+  ret = await API.run(data, '/app/emr/triage/user/write');
 
   _print(ret, null);
-
 }
 
-export async function read_cofficer(token)
+export async function read_user(token)
 {
   let ret, data;
 
   data = {
     auth: {
-      token: CONFIG.auth.token
+      //token: CONFIG.TOKEN   //FIXME token should be used
+      license: CONFIG.auth.license,
     },
     param: {
-      user_id: "279118"
+      user_id: "949596"
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/read');
+  ret = await API.run(data, '/app/emr/triage/user/read');
 
   _print(ret, null);
 }
@@ -94,7 +94,7 @@ export async function change_security()
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/security/write');
+  ret = await API.run(data, '/app/emr/triage/user/security/write');
 
   _print(ret, null);
 }
@@ -108,13 +108,13 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "279118",
-      username: "905839",
-      password: "30525361",
+      user_id: "036895",
+      username: "633116",
+      password: "65934462",
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/access/write');
+  ret = await API.run(data, '/app/emr/triage/user/access/write');
   
   _print(ret, 'token');
 }
@@ -128,103 +128,94 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "279118",
       token: CONFIG.auth.token
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/access/delete');
+  ret = await API.run(data, '/app/emr/triage/user/access/delete');
 
   _print(ret, null);
 }
 
-export async function create_patient(token)
+export async function create_assign(token)
 {
-  let ret;
+  let ret, data;
 
-  let u = {
-    name: "Nati",
-    fname: "Solomon",
-    mname: "Abeba",
-    mfname: "Haile",
-    gender: "M",
-    dob: "12/12/12",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      hous_no: "122",
-      phone_number: "09191388"
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: '253129',
+      status: 1,
+      assign: {
+        catagory: 'BLUE',
+        dept_id: '133133'
+      }
     }
   }
+
+  ret = await API.run(data, '/app/emr/triage/assign/write');
+
+  _print(ret, null);
+}
+
+export async function update_assign(token)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      tid: '164022',
+      status: 2,
+      assign: {
+        catagory: 'BLUE',
+        dept_id: '133133'
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/assign/update');
+
+  _print(ret, null);
+}
+
+export async function update_status(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      tid: '164022',
+      status: 2
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/assign/status/update');
+
+  _print(ret, null);
+}
+
+export async function read_assign(token)
+{
+  let ret;
 
   let data = {
     auth: {
       license: CONFIG.auth.license,
     }, 
     param: {
-      token: token,
-      pii: u
+      tid: '157829'
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/patient/write');
-
-  _print(ret, null);
-
-}
-
-export async function read_patient(token)
-{
-  let ret, data;
-
-  data = {
-   auth: {
-      license: CONFIG.auth.license,
-    },
-    param: {
-      mrn: "412960"
-    }
-  }
-
-  ret = await API.run(data, '/app/emr/mru/patient/read');
-
-  _print(ret, null);
-}
-
-export async function renew_pcard(token)
-{
-  let ret, data;
-
-  data = {
-     auth: {
-      license: CONFIG.auth.license,
-      },
-      param: {
-        mrn: "412960"
-      }
-   }
-
-  ret = await API.run(data, '/app/emr/mru/patient/card/write');
-
-  _print(ret, null);
-}
-
-export async function print_pcard(token)
-{
-  let ret, data;
-
-  data = {
-   auth: {
-      license: CONFIG.auth.license,
-    },
-    param: {
-      card_id: "412960"
-    }
-  }
-
-  ret = await API.run(data, '/app/emr/mru/patient/card/print');
+  ret = await API.run(data, '/app/emr/triage/assign/read');
 
   _print(ret, null);
 }
@@ -238,14 +229,15 @@ export async function read_stats(token)
       license: CONFIG.auth.license,
     },
     param: {
-      type: "cards_status",
+      type: "queue_length",
       args: {
-        type: "all",
+        type: "daily",
+        date: "21/07/2019"
       }
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/stats/read');
+  ret = await API.run(data, '/app/emr/triage/stats/read');
 
   _print(ret, null);
 }
