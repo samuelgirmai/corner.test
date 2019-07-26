@@ -100,11 +100,11 @@ export async function change_security(arg)
   return await API.run(data, '/app/emr/mru/user/security/write');
 }
 
-export async function signin()
+export async function signin(arg)
 {
   let data = {
     auth: {
-      token: arg.token,
+      license: arg.license,
     }, 
     param: {
       username: arg.username,

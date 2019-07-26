@@ -1,6 +1,10 @@
 import {
-  scenario_1
+  scenario_1,
 } from './test/scenario_1'
+
+import {
+  scenario_2,
+} from './test/scenario_2'
 
 import {
   Test
@@ -8,7 +12,7 @@ import {
 
 async function _start()
 {
-  Test(scenario_1);
+  Test(scenario_2);
 }
 
 _start();

@@ -20,7 +20,7 @@ export const scenario_1 = {
         data: "signin_cofficer"
       },
       {
-        type: "data",
+        type: "var",
         name: "pii",
         data: 'pii'
       }
@@ -40,7 +40,7 @@ export const scenario_1 = {
     cb: MRU.create_cofficer,
     arg: [
       {
-        type: "data",
+        type: "var",
         name: "pii",
         data: "pii"
       }
