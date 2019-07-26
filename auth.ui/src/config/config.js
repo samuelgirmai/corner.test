@@ -1,6 +1,6 @@
 const config = {
  auth: {
-    license: "508026275640"
+    license: "086299578939"
   },
   proxy: {
     url: "http://127.0.0.1:22000",

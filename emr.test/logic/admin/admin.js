@@ -52,10 +52,10 @@ export async function create_user()
     }, 
     param: {
       pii: u,
-     // user_type: 'cofficer'
+      user_type: 'cofficer'
       //user_type: 'triage'
       //user_type: 'practitioner'
-      user_type: 'informatics'
+      //user_type: 'informatics'
     }
   }
 

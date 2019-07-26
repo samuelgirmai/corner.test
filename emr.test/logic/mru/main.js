@@ -33,7 +33,7 @@ export async function mru_start()
     case 'signout':
       await signout();
       break;
-    case 'create.user':
+    case 'create.cofficer':
       await create_cofficer();
       break;
     case 'read.cofficer':

@@ -20,12 +20,16 @@ import {
   lab_start
 } from './lab/main';
 
+import {
+  pharmacy_start
+} from './pharmacy/main';
+
 const main_prompt = [
   {
     type: 'list',
     name: 'main',
     message: 'EMR Test application',
-    choices: ['MRU', 'Triage', 'Practitioner', 'Laboratory', 'Informatics', 'Exit']
+    choices: ['MRU', 'Triage', 'Practitioner', 'Laboratory', 'Informatics', 'Pharmacy', 'Exit']
   }
 ];
 
@@ -49,6 +53,9 @@ async function _start()
       break;
     case 'Laboratory':
       ret = await lab_start();
+      break;
+    case 'Pharmacy':
+      ret = await pharmacy_start();
       break;
     case 'Exit':
       process.exit();

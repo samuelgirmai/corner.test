@@ -69,7 +69,7 @@ export async function read_cofficer(token)
       token: CONFIG.auth.token
     },
     param: {
-      user_id: "735043"
+      user_id: "279118"
     }
   }
 
@@ -108,9 +108,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "735043",
-      username: "245322",
-      password: "75565361",
+      user_id: "279118",
+      username: "905839",
+      password: "30525361",
     }
   }
 
@@ -128,6 +128,7 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
+      user_id: "279118",
       token: CONFIG.auth.token
     }
   }
