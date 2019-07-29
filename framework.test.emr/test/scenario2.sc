@@ -1,7 +1,9 @@
+import {Test} from '../core/logic'
 import MRU from '../module/emr/mru/mru'
 
-module.exports = {
+let scenario = {
   _start: {
+    name: "get_patient",
     cb: MRU.get_patient,
     arg: [
       {
@@ -17,6 +19,7 @@ module.exports = {
     ]
   },
   create_patient: {
+    name: "create_patient",
     cb: MRU.create_patient,
     arg: [
       {
@@ -32,8 +35,15 @@ module.exports = {
     ]
   },
   get_license: {
+    name: "get_license",
     cb: MRU.get_license,
     arg: []
   },
+}
+
+module.exports = () => {
+  for(let i = 0; i<10; i++){
+    Test(scenario);
+  }
 }
 

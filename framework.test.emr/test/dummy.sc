@@ -1,7 +1,9 @@
+import {Test} from '../core/logic'
 import MRU from '../module/emr/mru/mru_dummy.js'
 
-module.exports = {
+let scenario = {
   _start: {
+    name: "get_patient",
     cb: MRU.get_patient,
     arg: [
       {
@@ -12,6 +14,7 @@ module.exports = {
     ]
   },
   create_patient: {
+    name: "create_patient",
     cb: MRU.create_patient,
     arg: [
       {
@@ -27,6 +30,7 @@ module.exports = {
     ]
   },
   signin_cofficer: {
+    name: "signin_cofficer",
     cb: MRU.signin_cofficer,
     arg: [
       {
@@ -37,6 +41,7 @@ module.exports = {
     ]
   },
   create_cofficer: {
+    name: "create_cofficer",
     cb: MRU.create_cofficer,
     arg: [
       {
@@ -48,3 +53,6 @@ module.exports = {
   }
 }
 
+module.exports = async() => {
+  await Test(scenario);
+}

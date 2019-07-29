@@ -1,7 +1,9 @@
+import {Test} from '../core/logic'
 import MRU from '../module/emr/mru/mru'
 
-module.exports = {
+let scenario = {
   _start: {
+    name: "get_stats",
     cb: MRU.get_stats,
     arg: [
       {
@@ -12,9 +14,13 @@ module.exports = {
     ]
   },
   get_license: {
+    name: "get_license",
     cb: MRU.get_license,
     arg: []
   }
 }
 
-//export default scenario;
+module.exports = async() => {
+  await Test(scenario);
+}
+

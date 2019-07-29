@@ -4,7 +4,7 @@ import {
 
 async function Run(f, prog)
 {
-  let arg = {};
+  let ret, arg = {};
   
   for(let i = 0; i<f.arg.length; i++){
     if(f.arg[i].type == "func"){
@@ -18,9 +18,13 @@ async function Run(f, prog)
     }
   }
 
-  //console.log(JSON.stringify(arg, 0, '  '));
+  console.log("running func(%s) ...", f.name);
 
-  return await f.cb(arg);
+  ret =  await f.cb(arg);
+
+  console.log("return(%s)  = %s", f.name, JSON.stringify(ret, 0, '  '));
+
+  return ret;
 }
 
 export function Test(prog)

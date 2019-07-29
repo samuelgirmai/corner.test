@@ -1,7 +1,3 @@
-import {
-  Test
-} from './core/logic'
-
 async function _main()
 {
   if(process.argv.length != 3){
@@ -9,7 +5,9 @@ async function _main()
     process.exit();
   }
 
-  Test(require(process.argv[2]));
+  let Test = require(process.argv[2]);
+
+  Test();
 }
 
 _main();
