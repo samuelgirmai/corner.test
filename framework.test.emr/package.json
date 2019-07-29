@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Sample EMR app",
   "scripts": {
-    "mru": "babel-node ./main.js"
+    "test": "babel-node ./main.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {

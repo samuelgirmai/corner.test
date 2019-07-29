@@ -13,6 +13,8 @@ async function Mockaroo(type)
 
 export async function Data(type)
 {
+  console.log("fetching data (%s) ...", type);
+
   return await Mockaroo(type);
 }
 

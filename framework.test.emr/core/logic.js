@@ -18,6 +18,8 @@ async function Run(f, prog)
     }
   }
 
+  //console.log(JSON.stringify(arg, 0, '  '));
+
   return await f.cb(arg);
 }
 

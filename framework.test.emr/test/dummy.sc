@@ -1,6 +1,6 @@
-import MRU from '../module/emr/mru/mru'
+import MRU from '../module/emr/mru/mru_dummy.js'
 
-export const scenario_1 = {
+module.exports = {
   _start: {
     cb: MRU.get_patient,
     arg: [
