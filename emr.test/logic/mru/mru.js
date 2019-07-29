@@ -143,19 +143,19 @@ export async function create_patient(token)
   let ret;
 
   let u = {
-    name: "Nati",
-    fname: "Solomon",
-    mname: "Abeba",
-    mfname: "Haile",
+    name: "Berhe",
+    fname: "Belay",
+    mname: "Zimam",
+    mfname: "Taye",
     gender: "M",
     dob: "12/12/12",
     address: {
       region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
+      zone: "Mirab",
+      woreda: "Humera",
+      kebele: "01",
       hous_no: "122",
-      phone_number: "09191388"
+      phone_number: "49191366"
     }
   }
 

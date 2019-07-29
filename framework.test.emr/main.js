@@ -1,15 +1,14 @@
-import {
-  scenario_1
-} from './test/scenario_1'
-
-import {
-  Test
-} from './core/logic'
-
-async function _start()
+async function _main()
 {
-  Test(scenario_1);
+  if(process.argv.length != 3){
+    console.log("usage: npm test scenario_file");
+    process.exit();
+  }
+
+  let Test = require(process.argv[2]);
+
+  Test();
 }
 
-_start();
+_main();
 

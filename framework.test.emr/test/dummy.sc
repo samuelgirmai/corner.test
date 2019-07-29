@@ -1,7 +1,9 @@
-import MRU from '../module/emr/mru/mru'
+import {Test} from '../core/logic'
+import MRU from '../module/emr/mru/mru_dummy.js'
 
-export const scenario_1 = {
+let scenario = {
   _start: {
+    name: "get_patient",
     cb: MRU.get_patient,
     arg: [
       {
@@ -12,6 +14,7 @@ export const scenario_1 = {
     ]
   },
   create_patient: {
+    name: "create_patient",
     cb: MRU.create_patient,
     arg: [
       {
@@ -20,13 +23,14 @@ export const scenario_1 = {
         data: "signin_cofficer"
       },
       {
-        type: "data",
+        type: "var",
         name: "pii",
         data: 'pii'
       }
     ]
   },
   signin_cofficer: {
+    name: "signin_cofficer",
     cb: MRU.signin_cofficer,
     arg: [
       {
@@ -37,10 +41,11 @@ export const scenario_1 = {
     ]
   },
   create_cofficer: {
+    name: "create_cofficer",
     cb: MRU.create_cofficer,
     arg: [
       {
-        type: "data",
+        type: "var",
         name: "pii",
         data: "pii"
       }
@@ -48,3 +53,6 @@ export const scenario_1 = {
   }
 }
 
+module.exports = async() => {
+  await Test(scenario);
+}
