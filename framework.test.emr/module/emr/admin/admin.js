@@ -18,8 +18,6 @@ export async function create_user(arg)
 {
   let data, ret;
 
-console.log(arg.pii)
-
   data = {
     auth: {
       license: CONFIG.auth.license,
