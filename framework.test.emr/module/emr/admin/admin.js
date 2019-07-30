@@ -1,179 +1,136 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
+import _ from 'lodash';
 
-function _print(o, key) 
+export async function get_license()
 {
-
-  if(o.status == "err"){
-    console.log(JSON.stringify(o, 0, '  '));
-
-    return;
-  }
-
-  if(o.key){
-    console.log(JSON.stringify(o.result[key], 0, '  '));
-
-    return;
-  }
-
-  if(o.result){
-    console.log(JSON.stringify(o.result, 0, '  '));
-
-    return;
-  }
-
-  console.log(JSON.stringify(o, 0, '  '));
+  return CONFIG.auth.license
 }
 
-export async function create_user()
+export async function get_userType()
 {
-  let ret;
+  let user_types = ["informatics", "practitioner", "pharmacist", "cofficer", "labratory"];
 
-  let u = {
-    name: "Solomon",
-    fname: "Leul",
-    mname: "Zemzem",
-    mfname: "Gidey",
-    gender: "M",
-    dob: "12/12/12",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      hous_no: "122",
-      phone_number: "095889997"
-    }
-  }
+  return   _.sample(user_types)
+}
 
-  let data = {
+export async function create_user(arg)
+{
+  let data, ret;
+
+console.log(arg.pii)
+
+  data = {
     auth: {
       license: CONFIG.auth.license,
     }, 
     param: {
-      pii: u,
-     // user_type: 'cofficer'
-      //user_type: 'triage'
-      //user_type: 'practitioner'
-      user_type: 'informatics'
+      pii: arg.pii,
+      user_type: arg.user_type
     }
   }
 
   ret = await API.run(data, '/app/emr/admin/user/write');
 
-  _print(ret, null);
+  console.log(ret);
 
+  return (ret.status === 'ok')? ret.result.user_id: null
 }
 
-export async function remove_user()
-{
-  let ret, data;
-
-  data = {
-    auth: {
-      license: CONFIG.auth.license,
-    },
-    param: {
-      user_id: "332618",
-      //user_type: "cofficer"
-      //user_type: "triage"
-      //user_type: "practitioner"
-      //user_type: "laboratory"
-      user_type: "informatics"
-    }
-  }
-
-  ret = await API.run(data, '/app/emr/admin/user/delete');
-
-  _print(ret, null);
-}
-
-export async function list_users()
+export async function list_users(arg)
 {
   let ret, data;;
 
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }
   }
 
   ret = await API.run(data, '/app/emr/admin/user/list');
 
-  _print(ret, null);
+  console.log(ret); 
 }
 
-export async function assign_role()
+export async function assign_role(arg)
 {
-  let ret;
+  let data, ret;
  
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      user_id: "332618",
-       //user_type: "cofficer"
-      //user_type: "triage"
-      //user_type: "practitioner"
-      //user_type: "laboratory"
-      user_type: "informatics"
+      user_id: arg.user_id,
+      user_type: arg.user_type
     }
 
-    }
+  }
 
   ret = await API.run(data, '/app/emr/admin/user/role/write');
-  
-  _print(ret, 'ret');
+
+  console.log(ret)  
 }
 
-export async function revoke_role()
+export async function revoke_role(arg)
 {
-  let ret;
+  let data, ret;
 
-  let data = {
+  data = {
     auth: {
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "332618",
+      user_id: arg.user_id,
     }
   }
 
   ret = await API.run(data, '/app/emr/admin/user/role/delete');
 
-  _print(ret, null);
+  console.log(ret);
 }
-export async function get_role()
-{
-  let ret;
 
-  let data = {
+export async function get_role(arg)
+{
+  let data, ret;
+
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      user_id: "332618",
+      user_id: arg.user_id,
     }
   }
 
   ret = await API.run(data, '/app/emr/admin/user/role/read');
 
-  _print(ret, null);
+  console.log('Role: ', ret);
+
+  return ret.status
 }
 
-export async function get_stats()
+export async function get_stats(arg)
 {
   let ret;
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }
   }
 
   ret = await API.run(data, '/app/emr/admin/stats/read');
 
-  _print(ret, null);
+  console.log(ret);
 }
-   
+  
+const ADMIN = {
+  get_userType: 	get_userType,
+  get_license:          get_license,
+  create_user:          create_user,
+  assign_role:          assign_role,
+  get_role:             get_role
+}
+
+export default ADMIN;

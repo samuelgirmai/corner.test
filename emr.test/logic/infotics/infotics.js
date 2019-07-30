@@ -69,7 +69,7 @@ export async function read_user(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "899934"
+      user_id: "750133"
     }
   }
 
@@ -108,9 +108,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "899934",
-      username: "550517",
-      password: "07254790",
+      user_id: "750133",
+      username: "616005",
+      password: "95650100",
     }
   }
 
@@ -171,7 +171,7 @@ export async function read_idata(token)
     },
     param: {
       type: 'drug',
-      iid: "510374"
+      iid: "975715"
     }
   }
 

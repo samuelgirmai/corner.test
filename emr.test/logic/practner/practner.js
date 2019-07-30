@@ -70,7 +70,7 @@ export async function read_user(token)
       //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "759572"
+      user_id: "229932"
     }
   }
 
@@ -109,9 +109,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "759572",
-      username: "607479",
-      password: "39262394",
+      user_id: "229932",
+      username: "051977",
+      password: "38947885",
     }
   }
 
@@ -161,7 +161,7 @@ export async function create_precord(token)
       license: CONFIG.auth.license,
     }, 
     param: {
-      mrn: "327652",
+      mrn: "191379",
       rec: rec
     }
   }
@@ -181,8 +181,8 @@ export async function read_precord(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "327652",
-      rid: "973728"
+      mrn: "191379",
+      rid: "087747"
     }
   }
 

@@ -69,7 +69,7 @@ export async function read_cofficer(token)
       token: CONFIG.auth.token
     },
     param: {
-      user_id: "279118"
+      user_id: "514982"
     }
   }
 
@@ -108,9 +108,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "279118",
-      username: "905839",
-      password: "30525361",
+      user_id: "514982",
+      username: "583884",
+      password: "83625935",
     }
   }
 
@@ -128,7 +128,7 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "279118",
+      user_id: "514982",
       token: CONFIG.auth.token
     }
   }
@@ -184,7 +184,7 @@ export async function read_patient(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "412960"
+      mrn: "191379"
     }
   }
 
@@ -202,7 +202,7 @@ export async function renew_pcard(token)
       license: CONFIG.auth.license,
       },
       param: {
-        mrn: "412960"
+        mrn: "191379"
       }
    }
 
@@ -220,7 +220,7 @@ export async function print_pcard(token)
       license: CONFIG.auth.license,
     },
     param: {
-      card_id: "412960"
+      mrn: "191379"
     }
   }
 

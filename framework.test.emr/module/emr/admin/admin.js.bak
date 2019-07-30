@@ -42,7 +42,7 @@ export async function create_user()
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "09111397"
+      phone_number: "095889997"
     }
   }
 
@@ -52,12 +52,10 @@ export async function create_user()
     }, 
     param: {
       pii: u,
-      //user_type: 'cofficer'
+     // user_type: 'cofficer'
       //user_type: 'triage'
-      user_type: 'practitioner'
-      //user_type: 'informatics'
-      //user_type: 'labtech'
-      //user_type: 'pharmacist'
+      //user_type: 'practitioner'
+      user_type: 'informatics'
     }
   }
 
@@ -76,13 +74,12 @@ export async function remove_user()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "141714",
+      user_id: "332618",
       //user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
       //user_type: "laboratory"
-      //user_type: "informatics"
-      user_type: "pharmacist"
+      user_type: "informatics"
     }
   }
 
@@ -115,13 +112,12 @@ export async function assign_role()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "141714",
-      //user_type: "cofficer"
+      user_id: "332618",
+       //user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
       //user_type: "laboratory"
-      //user_type: "informatics"
-        user_type: "pharmacist"
+      user_type: "informatics"
     }
 
     }
@@ -140,7 +136,7 @@ export async function revoke_role()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "141714",
+      user_id: "332618",
     }
   }
 
@@ -157,7 +153,7 @@ export async function get_role()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "141714",
+      user_id: "332618",
     }
   }
 
@@ -180,4 +176,11 @@ export async function get_stats()
 
   _print(ret, null);
 }
-   
+
+const ADMIN = {
+  create_user: create_user,
+  list_users: list_users,
+  assign_role: assign_role,
+  get_role: get_role,
+}; 
+export default ADMIN;  

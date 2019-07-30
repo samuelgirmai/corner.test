@@ -69,7 +69,7 @@ export async function read_user(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "949596"
+      user_id: "636539"
     }
   }
 
@@ -108,9 +108,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "036895",
-      username: "633116",
-      password: "65934462",
+      user_id: "636539",
+      username: "336238",
+      password: "24820303",
     }
   }
 
@@ -146,7 +146,7 @@ export async function create_assign(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: '253129',
+      mrn: '191379',
       status: 1,
       assign: {
         catagory: 'BLUE',
@@ -169,7 +169,7 @@ export async function update_assign(token)
       license: CONFIG.auth.license,
     },
     param: {
-      tid: '164022',
+      tid: '116084',
       status: 2,
       assign: {
         catagory: 'BLUE',
@@ -192,7 +192,7 @@ export async function update_status(token)
       license: CONFIG.auth.license,
     },
     param: {
-      tid: '164022',
+      tid: '116084',
       status: 2
     }
   }
@@ -211,7 +211,7 @@ export async function read_assign(token)
       license: CONFIG.auth.license,
     }, 
     param: {
-      tid: '157829'
+      tid: '116084'
     }
   }
 
