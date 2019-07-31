@@ -41,8 +41,8 @@ let scenario = {
   },
 }
 
-module.exports = () => {
-  for(let i = 0; i<10; i++){
+module.exports = (num) => {
+  for(let i = 0; i<num; i++){
     Test(scenario);
   }
 }

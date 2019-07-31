@@ -1,184 +1,157 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
-function _print(o, key) 
+export async function get_license()
 {
-  if(o.status == "err"){
-    console.log(JSON.stringify(o, 0, '  '));
-
-    return;
-  }
-
-  if(o.key){
-    console.log(JSON.stringify(o.result[key], 0, '  '));
-
-    return;
-  }
-
-  if(o.result){
-    console.log(JSON.stringify(o.result, 0, '  '));
-
-    return;
-  }
-
-  console.log(JSON.stringify(o, 0, '  '));
+  return CONFIG.auth.license
 }
 
-export async function create_user(token)
+export async function create_user(arg)
 {
-  let ret;
+  let data, ret;
 
-  let u = {
-    name: "Yohanes",
-    fname: "Adane",
-    mname: "Zemzem",
-    mfname: "Gidey",
-    gender: "M",
-    dob: "12/12/12",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      hous_no: "122",
-      phone_number: "09111123"
-    }
-  }
-
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      pii: u
+      pii: arg.pii
     }
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/user/write');
 
-  _print(ret, null);
-
+  return (ret.status === 'ok')? ret.result.user.user_id: null
 }
 
-export async function read_user(token)
+export async function get_user(arg)
 {
   let ret, data;
 
+  if(!arg.user_id)
+    return null;
+
   data = {
     auth: {
-      license: CONFIG.auth.license,
-      //token: CONFIG.TOKEN  //FIXME use token
+      license: arg.license,
     },
     param: {
-      user_id: "141714"
+      user_id: arg.user_id
     }
   }
-
   ret = await API.run(data, '/app/emr/pharmacy/user/read');
 
-  _print(ret, null);
+  return (ret.status === 'ok')? ret.result: null
 }
 
-export async function change_security()
+export async function change_security(arg)
 {
-  let ret;
+  let data, ret;
 
-  let sec = {
-    username: "607479",
-    password: "39262394"
-  }
-
-  let data = {
+  data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      token: arg.license
+    },
+    param: {
+      token: arg.token,
+      password: "121211"
     }
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/user/security/write');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function signin()
+export async function signin(arg)
 {
-  let ret;
- 
-  let data = {
+  let data, ret = {};
+
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      user_id: "141714",
-      username: "820722",
-      password: "84538387",
+      username: arg.username,
+      password: arg.password,
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/access/write');
+  ret = {} //await API.run(data, '/app/emr/pharmacy/user/access/write');
   
-  _print(ret, 'token');
+  return ret;
 }
 
-export async function signout(token)
+export async function signout(arg)
 {
-  let ret;
+  let ret, data;
 
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
-    param: {
-      user_id: "821737",
-      token: CONFIG.auth.token
-    }
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/user/access/delete');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function create_dispense(token)
+export async function create_dispense(arg)
 {
-  let ret;
+  let data, ret;
+
+  if(!arg.result)
+    return null;
 
   let  dispense  = {
   
   }
 
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      mrn: "191379",
-      rid: "087747",
+      mrn: arg.result.mrn,
+      rid: arg.result.rid,
       dispense: dispense
     }
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/dispense/write');
-
-  _print(ret, null);
-
+  
+  return ret.status = "ok"?ret.result.did: null;
 }
 
-export async function read_dispense(token)
+export async function read_dispense(arg)
 {
   let ret, data;
 
+  if(!arg.did)
+    return null;
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      did: "600235"
+      did: arg.did
     }
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/dispense/read');
 
-  _print(ret, null);
+  return ret;
 }
 
+const PHM = {
+  get_license:          get_license,
+  create_pharmacist:    create_user,
+  get_pharmacist:       get_user,
+  signin_pharmacist:    signin,
+  create_dispense:      create_dispense,
+  get_dispense:         read_dispense,
+}
+
+export default PHM;

@@ -1,182 +1,149 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
-function _print(o, key) 
-{
-  if(o.status == "err"){
-    console.log(JSON.stringify(o, 0, '  '));
-
-    return;
-  }
-
-  if(o.key){
-    console.log(JSON.stringify(o.result[key], 0, '  '));
-
-    return;
-  }
-
-  if(o.result){
-    console.log(JSON.stringify(o.result, 0, '  '));
-
-    return;
-  }
-
-  console.log(JSON.stringify(o, 0, '  '));
-}
-
-export async function create_user(token)
-{
-  let ret;
-
-  let u = {
-    name: "Jamal",
-    fname: "Mohammed",
-    mname: "Hassan",
-    mfname: "Abulrahman",
-    gender: "M",
-    dob: "12/12/10",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      hous_no: "122",
-      phone_number: "0988898989"
-    }
-  }
-
-  let data = {
-    auth: {
-      license: CONFIG.auth.license,
-    }, 
-    param: {
-      pii: u
-    }
-  }
-
-  ret = await API.run(data, '/app/emr/lab/user/write');
-
-  _print(ret, null);
-
-}
-
-export async function read_user(token)
+export async function create_user(arg)
 {
   let ret, data;
 
   data = {
     auth: {
-      license: CONFIG.auth.license,
-      //token: CONFIG.TOKEN  //FIXME use token
+      license: arg.license,
+    }, 
+    param: {
+      pii: arg.pii
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/lab/user/write');
+
+  return ret.status == "ok"? ret.result.user_id: null;
+}
+
+export async function get_user(arg)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: arg.license,
     },
     param: {
-      user_id: "676233"
+      user_id: arg.user_id
     }
   }
 
   ret = await API.run(data, '/app/emr/lab/user/read');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function change_security()
+export async function change_security(arg)
 {
-  let ret;
+  let ret, data;
 
-  let sec = {
-    username: "083403",
-    password: "12264627"
-  }
-
-  let data = {
+  data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      license: arg.license,
+    },
+    param: {
+      token: arg.token,
+      password: "329323"
     }
   }
 
   ret = await API.run(data, '/app/emr/lab/user/security/update');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function signin()
+export async function signin(arg)
 {
-  let ret;
+  let data, ret;
  
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      user_id: "695649",
-      username: "245322",
-      password: "75565361",
+      user_id: arg.user_id,
+      username: arg.username,
+      password: arg.password,
     }
   }
 
   ret = await API.run(data, '/app/emr/lab/user/access/write');
   
-  _print(ret, 'token');
+  return ret;
 }
 
-export async function signout(token)
+export async function signout(arg)
 {
-  let ret;
+  let ret, data;
 
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      token: CONFIG.auth.token
+      user_id: arg.user_id,
+      token: arg.token
     }
   }
 
   ret = await API.run(data, '/app/emr/lab/user/access/delete');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function create_result(token)
+export async function create_result(arg)
 {
-  let ret;
+  let ret, data;
 
   let result = {
     
   }
 
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      mrn: "327652",
-      rid: "312313",
+      mrn: arg.mrn,
+      rid: arg.rid,
       result: result
     }
   }
 
   ret = await API.run(data, '/app/emr/lab/result/write');
 
-  _print(ret, null);
-
+  return ret.status == "ok"? ret.result.lid: null;
 }
 
-export async function read_result(token)
+export async function read_result(arg)
 {
   let ret, data;
 
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      lid: "327652"
+      lid: arg.lid
     }
   }
 
   ret = await API.run(data, '/app/emr/lab/result/read');
 
-  _print(ret, null);
+  return ret;
 }
+
+const LAB = {
+  create_labratory:     create_user,
+  get_labratory:        get_user,
+  signin_labratory:     signin,
+  create_result:        create_result,
+  read_result:          read_result,
+}
+
+export default LAB;
+

@@ -1,152 +1,110 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
-function _print(o, key) 
-{
-  if(o.status == "err"){
-    console.log(JSON.stringify(o, 0, '  '));
-
-    return;
-  }
-
-  if(o.key){
-    console.log(JSON.stringify(o.result[key], 0, '  '));
-
-    return;
-  }
-
-  if(o.result){
-    console.log(JSON.stringify(o.result, 0, '  '));
-
-    return;
-  }
-
-  console.log(JSON.stringify(o, 0, '  '));
-}
-
 export async function create_user()
 {
-  let ret;
+  let data, ret;
 
-  let u = {
-    name: "Kebede",
-    fname: "Adane",
-    mname: "Zemzem",
-    mfname: "Gidey",
-    gender: "M",
-    dob: "12/12/12",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      hous_no: "122",
-      phone_number: "0955555"
-    }
-  }
-
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      pii: u
+      pii: arg.pii
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/user/write');
 
-  _print(ret, null);
+  return ret.status == "ok"?ret.result.user_id: null;
 }
 
-export async function read_user(token)
+export async function get_user(arg)
 {
   let ret, data;
 
   data = {
     auth: {
-      //token: CONFIG.TOKEN   //FIXME token should be used
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      user_id: "949596"
+      user_id: arg.user_id
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/user/read');
 
-  _print(ret, null);
+  return ret.status == "ok"?ret.result: null;
 }
 
-export async function change_security()
+export async function change_security(arg)
 {
-  let ret;
+  let data, ret;
 
-  let sec = {
-    username: "083403",
-    password: "12264627"
-  }
-
-  let data = {
+  data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      token: arg.token,
+    },
+    param: {
+      token: arg.token,
+      password: "722222"
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/user/security/write');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function signin()
+export async function signin(arg)
 {
-  let ret;
+  let data, ret;
  
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      user_id: "036895",
-      username: "633116",
-      password: "65934462",
+      user_id: arg.user_id,
+      username: arg.username,
+      password: arg.password,
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/user/access/write');
   
-  _print(ret, 'token');
+  return ret;
 }
 
-export async function signout(token)
+export async function signout(arg)
 {
   let ret;
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      token: CONFIG.auth.token
+      user_id: arg.user_id,
+      token: arg.token
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/user/access/delete');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function create_assign(token)
+export async function create_assign(arg)
 {
   let ret, data;
 
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      mrn: '253129',
+      mrn: arg.mrn,
       status: 1,
       assign: {
         catagory: 'BLUE',
@@ -157,19 +115,19 @@ export async function create_assign(token)
 
   ret = await API.run(data, '/app/emr/triage/assign/write');
 
-  _print(ret, null);
+  return ret.status == "ok"?ret.result.tid: null;
 }
 
-export async function update_assign(token)
+export async function update_assign(arg)
 {
   let ret, data;
 
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      tid: '164022',
+      tid: arg.rid,
       status: 2,
       assign: {
         catagory: 'BLUE',
@@ -180,53 +138,53 @@ export async function update_assign(token)
 
   ret = await API.run(data, '/app/emr/triage/assign/update');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function update_status(token)
+export async function update_status(arg)
 {
   let ret, data;
 
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      tid: '164022',
+      tid: arg.tid,
       status: 2
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/assign/status/update');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function read_assign(token)
+export async function read_assign(arg)
 {
   let ret;
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      tid: '157829'
+      tid: arg.tid
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/assign/read');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function read_stats(token)
+export async function read_stats(arg)
 {
   let ret, data;
 
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
       type: "queue_length",
@@ -239,6 +197,15 @@ export async function read_stats(token)
 
   ret = await API.run(data, '/app/emr/triage/stats/read');
 
-  _print(ret, null);
+  return ret;
 }
+
+const TRI = {
+  create_triage:     create_user,
+  get_triage:        get_user,
+  signin_triage:     signin,
+  create_assign:     create_assign,
+  read_assign:       read_assign,
+}
+export default TRI;
 

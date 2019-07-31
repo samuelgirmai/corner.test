@@ -1,153 +1,111 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
-function _print(o, key) 
-{
-  if(o.status == "err"){
-    console.log(JSON.stringify(o, 0, '  '));
-
-    return;
-  }
-
-  if(o.key){
-    console.log(JSON.stringify(o.result[key], 0, '  '));
-
-    return;
-  }
-
-  if(o.result){
-    console.log(JSON.stringify(o.result, 0, '  '));
-
-    return;
-  }
-
-  console.log(JSON.stringify(o, 0, '  '));
-}
-
-export async function create_user()
-{
-  let ret;
-
-  let u = {
-    name: "Abebe",
-    fname: "Adane",
-    mname: "Zemzem",
-    mfname: "Gidey",
-    gender: "M",
-    dob: "12/12/12",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      hous_no: "122",
-      phone_number: "093333334"
-    }
-  }
-
-  let data = {
-    auth: {
-      license: CONFIG.auth.license,
-    }, 
-    param: {
-      pii: u
-    }
-  }
-
-  ret = await API.run(data, '/app/emr/infotics/user/write');
-
-  _print(ret, null);
-}
-
-export async function read_user(token)
+export async function create_user(arg)
 {
   let ret, data;
 
   data = {
     auth: {
-      //token: CONFIG.TOKEN		//FIXME: use token
-      license: CONFIG.auth.license,
+      license: arg.license,
+    }, 
+    param: {
+      pii: arg.pii
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/infotics/user/write');
+
+  return ret.status == "ok"?ret.result.user_id: null;
+}
+
+export async function get_user(arg)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: arg.license,
     },
     param: {
-      user_id: "899934"
+      user_id: arg.user_id
     }
   }
 
   ret = await API.run(data, '/app/emr/infotics/user/read');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function change_security()
+export async function change_security(arg)
 {
-  let ret;
+  let ret, data;
 
-  let sec = {
-    username: "083403",
-    password: "12264627"
-  }
-
-  let data = {
+  data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      license: arg.license
+    },
+    param: {
+      token: arg.token,
+      password: "32233"
     }
   }
 
   ret = await API.run(data, '/app/emr/infotics/user/security/write');
 
-  _print(ret, null);
+  return ret
 }
 
-export async function signin()
+export async function signin(arg)
 {
-  let ret;
+  let ret, data;
  
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      user_id: "899934",
-      username: "550517",
-      password: "07254790",
+      user_id: arg.user_id,
+      username: arg.username,
+      password: arg.password,
     }
   }
 
   ret = await API.run(data, '/app/emr/infotics/user/access/write');
   
-  _print(ret, 'token');
+  return ret;
 }
 
-export async function signout(token)
+export async function signout(arg)
 {
-  let ret;
+  let ret, data;
 
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      token: CONFIG.auth.token
+      user_id: arg.user_id,
+      token: arg.token
     }
   }
 
   ret = await API.run(data, '/app/emr/infotics/user/access/delete');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function create_idata(token)
+export async function create_idata(arg)
 {
-  let ret;
+  let ret, data;
 
   let drug = {
     name: 'paracetamol'
   }
 
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
       type: 'drug',
@@ -157,25 +115,34 @@ export async function create_idata(token)
 
   ret = await API.run(data, '/app/emr/infotics/idata/write');
 
-  _print(ret, null);
-
+  return ret.status == "ok"?ret.result.iid:null;
 }
 
-export async function read_idata(token)
+export async function read_idata(arg)
 {
   let ret, data;
 
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
       type: 'drug',
-      iid: "510374"
+      iid: arg.iid
     }
   }
 
   ret = await API.run(data, '/app/emr/infotics/idata/read');
 
-  _print(ret, null);
+  return ret;
 }
+const INF = {
+  create_informatics:    create_user,
+  get_informatics:       get_user,
+  signin_informatics:    signin,
+  create_idata:          create_idata,
+  read_idata:            read_idata,
+}
+
+export default INF;
+

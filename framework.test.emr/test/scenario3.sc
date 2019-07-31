@@ -1,3 +1,6 @@
+/*
+ * Admin test scenario
+ */
 import {Test} from '../core/logic'
 import ADMIN from '../module/emr/admin/admin'
 
@@ -72,8 +75,8 @@ let scenario = {
   }
 }
 
-module.exports = async() => {
-  for(let i = 0; i<10; i++){
+module.exports = async(num) => {
+  for(let i = 0; i < num; i++){
     await Test(scenario);
   }
 }

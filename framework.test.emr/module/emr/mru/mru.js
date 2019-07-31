@@ -22,8 +22,8 @@ export async function create_patient(arg)
   ret = await API.run(data, '/app/emr/mru/patient/write');
 
   //console.log("@create_patient: "+JSON.stringify(ret, 0, '  '));
-
-  return ret.result.patient.mrn;
+     
+  return ret.status == "ok"? ret.result.patient.mrn: null;
 }
 
 export async function get_patient(arg)
@@ -110,6 +110,9 @@ export async function get_user(arg)
 {
   let data, ret;
 
+  if(!arg.user_id)
+    return;
+
   data = {
     auth: {
       license: arg.license
@@ -123,7 +126,7 @@ export async function get_user(arg)
 
   //console.log("@get_user: "+JSON.stringify(ret, 0, '  '));
 
-  return ret;
+  return ret.status == "ok"?ret.result:null;
 }
 
 export async function change_security(arg)
@@ -161,7 +164,7 @@ export async function signin(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/access/write');
+  ret = {}//await API.run(data, '/app/emr/mru/user/access/write');
 
   //console.log("@signin: "+JSON.stringify(ret, 0, '  '));
 
@@ -212,6 +215,9 @@ export async function get_stats(arg)
 
 const MRU = {
   get_license:		get_license,
+  create_cofficer:      create_user,
+  get_cofficer:         get_user,
+  signin_cofficer:      signin,
   create_patient:	create_patient,
   get_patient:		get_patient,
   get_stats:		get_stats

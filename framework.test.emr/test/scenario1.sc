@@ -20,7 +20,7 @@ let scenario = {
   }
 }
 
-module.exports = async() => {
+module.exports = async(num) => {
   await Test(scenario);
 }
 

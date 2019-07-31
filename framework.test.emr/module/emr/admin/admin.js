@@ -9,7 +9,7 @@ export async function get_license()
 
 export async function get_userType()
 {
-  let user_types = ["informatics", "practitioner", "pharmacist", "cofficer", "labratory"];
+  let user_types=["informatics", "practitioner", "pharmacist", "cofficer", "laboratory", "triage"];
 
   return   _.sample(user_types)
 }
@@ -20,7 +20,7 @@ export async function create_user(arg)
 
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
       pii: arg.pii,
@@ -32,7 +32,7 @@ export async function create_user(arg)
 
   console.log(ret);
 
-  return (ret.status === 'ok')? ret.result.user_id: null
+  return (ret.status === 'ok')? ret.result.user.user_id: null
 }
 
 export async function list_users(arg)
@@ -54,6 +54,9 @@ export async function assign_role(arg)
 {
   let data, ret;
  
+  if(!arg.user_id) 
+     return null;
+
   data = {
     auth: {
       license: arg.license,
@@ -68,6 +71,8 @@ export async function assign_role(arg)
   ret = await API.run(data, '/app/emr/admin/user/role/write');
 
   console.log(ret)  
+  
+  return (ret.status == 'err')? null: ret.result.user_id;
 }
 
 export async function revoke_role(arg)
@@ -91,6 +96,10 @@ export async function revoke_role(arg)
 export async function get_role(arg)
 {
   let data, ret;
+
+  if(!arg.user_id)
+    return null;
+
 
   data = {
     auth: {

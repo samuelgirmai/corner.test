@@ -42,7 +42,7 @@ export async function create_user()
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "09111397"
+      phone_number: "09111922"
     }
   }
 
@@ -79,10 +79,10 @@ export async function remove_user()
       user_id: "141714",
       //user_type: "cofficer"
       //user_type: "triage"
-      //user_type: "practitioner"
+      user_type: "practitioner"
       //user_type: "laboratory"
       //user_type: "informatics"
-      user_type: "pharmacist"
+      //user_type: "pharmacist"
     }
   }
 
@@ -115,13 +115,13 @@ export async function assign_role()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "141714",
+      user_id: "322487",
       //user_type: "cofficer"
       //user_type: "triage"
-      //user_type: "practitioner"
+      user_type: "practitioner"
       //user_type: "laboratory"
       //user_type: "informatics"
-        user_type: "pharmacist"
+       //user_type: "pharmacist"
     }
 
     }

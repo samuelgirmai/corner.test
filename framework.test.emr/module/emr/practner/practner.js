@@ -1,149 +1,112 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
-function _print(o, key) 
+export async function create_user(arg)
 {
-  if(o.status == "err"){
-    console.log(JSON.stringify(o, 0, '  '));
+  let data, ret;
 
-    return;
-  }
-
-  if(o.key){
-    console.log(JSON.stringify(o.result[key], 0, '  '));
-
-    return;
-  }
-
-  if(o.result){
-    console.log(JSON.stringify(o.result, 0, '  '));
-
-    return;
-  }
-
-  console.log(JSON.stringify(o, 0, '  '));
-}
-
-export async function create_user(token)
-{
-  let ret;
-
-  let u = {
-    name: "Yohanes",
-    fname: "Adane",
-    mname: "Zemzem",
-    mfname: "Gidey",
-    gender: "M",
-    dob: "12/12/12",
-    address: {
-      region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      hous_no: "122",
-      phone_number: "09111123"
-    }
-  }
-
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      pii: u
+      pii: arg.pii
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/user/write');
 
-  _print(ret, null);
-
+  return (ret.status === 'ok')? ret.result.user.user_id: null
 }
 
-export async function read_user(token)
+export async function get_user(arg)
 {
   let ret, data;
 
+  if(!arg.user_id)
+    return null;
+
   data = {
     auth: {
-      license: CONFIG.auth.license,
-      //token: CONFIG.TOKEN  //FIXME use token
+      license: arg.license,
     },
     param: {
-      user_id: "759572"
+      user_id: arg.user_id
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/user/read');
 
-  _print(ret, null);
+  return ret.status == "ok"?ret.result: null;
 }
 
-export async function change_security()
+export async function change_security(arg)
 {
-  let ret;
+  let data, ret;
 
-  let sec = {
-    username: "607479",
-    password: "39262394"
-  }
-
-  let data = {
+  data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      license: arg.license,
+    },
+    param: {
+      token: arg.token,
+      password: "332322"
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/user/security/write');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function signin()
+export async function signin(arg)
 {
-  let ret;
+  let data, ret;
  
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      user_id: "759572",
-      username: "607479",
-      password: "39262394",
+      username: arg.username,
+      password: arg.password,
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/user/access/write');
-  
-  _print(ret, 'token');
+  ret = {}//await API.run(data, '/app/emr/practner/user/access/write');
+ 
+  return ret; 
 }
 
-export async function signout(token)
+export async function signout(arg)
 {
-  let ret;
+  let data, ret;
 
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
-      user_id: "759572",
-      token: token
+      user_id: arg.user_id,
+      token: arg.token
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/user/access/delete');
-
-  _print(ret, null);
+  
+  return ret;
 }
 
-export async function create_precord(token)
+export async function create_precord(arg)
 {
-  let ret;
+  let data, rec, ret;
 
-  let rec = {
+  console.log("arg: ", arg);
+
+  if(!arg.mrn)
+    return null;
+
+  rec = {
     dialog: {
       chief_complaint: 'non stop headache',
       visit_repeat: 'false',
@@ -156,23 +119,22 @@ export async function create_precord(token)
     drug: ['13', '23', '43', '12']
   }
 
-  let data = {
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     }, 
     param: {
-      mrn: "327652",
+      mrn: arg.mrn,
       rec: rec
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/patient/record/write');
 
-  _print(ret, null);
-
+  return ret.status == "ok"?{rid: ret.result.rid, mrn: arg.mrn}: null
 }
 
-export async function read_precord(token)
+export async function read_precord(arg)
 {
   let ret, data;
 
@@ -181,23 +143,23 @@ export async function read_precord(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "327652",
-      rid: "973728"
+      mrn: arg.mrn,
+      rid: arg.rid
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/patient/record/read');
 
-  _print(ret, null);
+  return ret;
 }
 
-export async function read_stats(token)
+export async function read_stats(arg)
 {
   let ret, data;
 
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: arg.license,
     },
     param: {
       type: "visit_count",
@@ -216,6 +178,15 @@ export async function read_stats(token)
 
   ret = await API.run(data, '/app/emr/practner/stats/read');
 
-  _print(ret, null);
+  return ret;
 }
-    
+
+const PRT = {
+  create_practitioner:    create_user,
+  get_practitioner:       get_user,
+  signin_practitioner:    signin,
+  create_precord:         create_precord,
+  read_precord:           read_precord,
+}
+
+export default PRT;
