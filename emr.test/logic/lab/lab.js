@@ -129,6 +129,7 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
+      user_id: "695649",
       token: CONFIG.auth.token
     }
   }

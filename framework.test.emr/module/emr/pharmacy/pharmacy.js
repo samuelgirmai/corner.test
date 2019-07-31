@@ -54,7 +54,7 @@ export async function change_security(arg)
     },
     param: {
       token: arg.token,
-      password: "121211"
+      password: arg.password
     }
   }
 

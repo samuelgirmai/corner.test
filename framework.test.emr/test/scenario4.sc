@@ -1,5 +1,5 @@
 /*
- * a scenario involving cofficer, practitioner, pharmacist
+ * a scenario involving card officer, practitioner, pharmacist
  */
 
 import {Test} from '../core/logic'
