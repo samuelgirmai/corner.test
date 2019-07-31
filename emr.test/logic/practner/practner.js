@@ -182,12 +182,56 @@ export async function read_precord(token)
     },
     param: {
       mrn: "191379",
-      rid: "087747"
+      rid: "060459"
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/patient/record/read');
 
+  _print(ret, null);
+}
+
+export async function modify_precord(token)
+{
+  let rec, ret, data;
+
+  rec = {
+    dialog: {
+      visit_repeat: 'true',
+    }
+  }
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "191379",
+      rid: "060459",
+      rec: rec
+    }
+  }
+  
+  ret = await API.run(data, '/app/emr/practner/patient/record/update');
+  
+  _print(ret, null);
+}
+export async function remove_precord(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "191379",
+      rid: "060459"
+    }
+  }
+  
+  ret = await API.run(data, '/app/emr/practner/patient/record/delete');
+  
   _print(ret, null);
 }
 

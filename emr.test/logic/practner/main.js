@@ -8,6 +8,8 @@ import {
   read_stats,
   read_precord,
   create_precord,
+  modify_precord,
+  remove_precord,
 } from './practner';
 
 const main_prompt = [
@@ -15,7 +17,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Practitioner Test App',
-    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.precord', 'read.precord', 'read.stats','<<back']
+    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
   }
 ];
 
@@ -42,6 +44,12 @@ export async function practner_start()
       break;
     case 'read.precord':
       await read_precord(token);
+      break;
+    case 'modify.precord':
+      await modify_precord(token);
+      break;
+    case 'remove.precord':
+      await remove_precord(token);
       break;
     case 'read.stats':
       await read_stats(token);
