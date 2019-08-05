@@ -34,14 +34,14 @@ export async function create_cofficer(token)
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/1999",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0918228"
+      phone_number: "0999998227"
     }
   }
 
@@ -148,14 +148,15 @@ export async function create_patient(token)
     mname: "Zimam",
     mfname: "Taye",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/2012",
     address: {
       region: "Tigray",
       zone: "Mirab",
       woreda: "Humera",
       kebele: "01",
       hous_no: "122",
-      phone_number: "49191366"
+      phone_number: "0949191361"
+
     }
   }
 
@@ -184,7 +185,7 @@ export async function read_patient(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "191379"
+      mrn: "228602"
     }
   }
 
