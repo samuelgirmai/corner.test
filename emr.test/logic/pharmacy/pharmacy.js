@@ -34,14 +34,14 @@ export async function create_user(token)
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/2011",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "09111123"
+      phone_number: "0910897726"
     }
   }
 
@@ -109,9 +109,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "141714",
-      username: "820722",
-      password: "84538387",
+      user_id: "896257",
+      username: "188579",
+      password: "x!P5w@D0",
     }
   }
 
@@ -144,7 +144,9 @@ export async function create_dispense(token)
   let ret;
 
   let  dispense  = {
-  
+    info: {
+      instruction: "one per day"
+    }
   }
 
   let data = {
@@ -173,7 +175,7 @@ export async function read_dispense(token)
       license: CONFIG.auth.license,
     },
     param: {
-      did: "600235"
+      did: "155998"
     }
   }
 

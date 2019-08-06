@@ -34,14 +34,14 @@ export async function create_user(token)
     mname: "Hassan",
     mfname: "Abulrahman",
     gender: "M",
-    dob: "12/12/10",
+    dob: "12/12/2010",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0988898989"
+      phone_number: "0911898977"
     }
   }
 
@@ -70,7 +70,7 @@ export async function read_user(token)
       //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "676233"
+      user_id: "286803"
     }
   }
 
@@ -109,9 +109,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "695649",
-      username: "245322",
-      password: "75565361",
+      user_id: "286803",
+      username: "178734",
+      password: "g&J2p)M1",
     }
   }
 
@@ -129,7 +129,7 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "695649",
+      user_id: "286803",
       token: CONFIG.auth.token
     }
   }
@@ -144,7 +144,10 @@ export async function create_result(token)
   let ret;
 
   let result = {
-    
+    order: {
+      catagory: 'default',
+      type: {}
+    } 
   }
 
   let data = {
@@ -152,8 +155,8 @@ export async function create_result(token)
       license: CONFIG.auth.license,
     }, 
     param: {
-      mrn: "327652",
-      rid: "312313",
+      mrn: "191379",
+      rid: "930355",
       result: result
     }
   }
@@ -173,7 +176,7 @@ export async function read_result(token)
       license: CONFIG.auth.license,
     },
     param: {
-      lid: "327652"
+      lid: "971354"
     }
   }
 

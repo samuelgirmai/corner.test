@@ -34,14 +34,14 @@ export async function create_user(token)
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/1919",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "09111123"
+      phone_number: "0916828191"
     }
   }
 
@@ -70,7 +70,7 @@ export async function read_user(token)
       //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "229932"
+      user_id: "528548"
     }
   }
 
@@ -109,9 +109,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "229932",
-      username: "051977",
-      password: "38947885",
+      user_id: "528548",
+      username: "756756",
+      password: "v%F2r*A2",
     }
   }
 
@@ -182,7 +182,7 @@ export async function read_precord(token)
     },
     param: {
       mrn: "191379",
-      rid: "060459"
+      rid: "930355"
     }
   }
 
@@ -207,7 +207,7 @@ export async function modify_precord(token)
     },
     param: {
       mrn: "191379",
-      rid: "060459",
+      rid: "930355",
       rec: rec
     }
   }
@@ -226,7 +226,7 @@ export async function remove_precord(token)
     },
     param: {
       mrn: "191379",
-      rid: "060459"
+      rid: "930355"
     }
   }
   

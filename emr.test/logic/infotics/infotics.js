@@ -34,14 +34,14 @@ export async function create_user()
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/1999",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "093333334"
+      phone_number: "0931372727"
     }
   }
 
@@ -108,9 +108,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "750133",
+      user_id: "941944",
       username: "616005",
-      password: "95650100",
+      password: "a$E7g)F8",
     }
   }
 
@@ -128,7 +128,7 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "750133",
+      user_id: "941944",
       token: CONFIG.auth.token
     }
   }
@@ -172,7 +172,7 @@ export async function read_idata(token)
     },
     param: {
       type: 'drug',
-      iid: "975715"
+      iid: "696521"
     }
   }
 

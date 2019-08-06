@@ -41,7 +41,7 @@ export async function create_cofficer(token)
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0999998227"
+      phone_number: "0910333411"
     }
   }
 
@@ -66,10 +66,10 @@ export async function read_cofficer(token)
 
   data = {
     auth: {
-      token: CONFIG.auth.token
+      license: CONFIG.auth.license
     },
     param: {
-      user_id: "514982"
+      user_id: "977178"
     }
   }
 
@@ -108,9 +108,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "514982",
-      username: "583884",
-      password: "83625935",
+      user_id: "748232",
+      username: "290157",
+      password: "e^G9s!L5",
     }
   }
 
@@ -128,8 +128,8 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "514982",
-      token: CONFIG.auth.token
+      user_id: "748232",
+      token: "876042516422"
     }
   }
 
@@ -155,7 +155,7 @@ export async function create_patient(token)
       woreda: "Humera",
       kebele: "01",
       hous_no: "122",
-      phone_number: "0949191361"
+      phone_number: "0919191361"
 
     }
   }

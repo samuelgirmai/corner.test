@@ -34,14 +34,14 @@ export async function create_user()
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/2011",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0955555"
+      phone_number: "0911907655"
     }
   }
 
@@ -108,9 +108,9 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "636539",
+      user_id: "650018",
       username: "336238",
-      password: "24820303",
+      password: "w$K9y*M0",
     }
   }
 
@@ -128,7 +128,7 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "636539",
+      user_id: "650018",
       token: CONFIG.auth.token
     }
   }
@@ -150,7 +150,7 @@ export async function create_assign(token)
       mrn: '191379',
       status: 1,
       assign: {
-        catagory: 'BLUE',
+        catagory: 'Blue',
         dept_id: '133133'
       }
     }
@@ -212,7 +212,7 @@ export async function read_assign(token)
       license: CONFIG.auth.license,
     }, 
     param: {
-      tid: '116084'
+      tid: '933039'
     }
   }
 
