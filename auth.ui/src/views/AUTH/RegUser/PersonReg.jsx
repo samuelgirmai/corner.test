@@ -28,12 +28,15 @@ class PersonReg extends React.Component{
         this.pii = {
           name: "",
           fname: "",
+          mname: "blob",
+          mfname: "blob",
           dob: "",
           gender: "",
           address: {
             region: "tigray",
             zone: "",
-            wereda: "",
+            woreda: "",
+            hous_no: "001",
             kebele: "",
             phone_number: []
           }

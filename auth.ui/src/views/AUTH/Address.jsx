@@ -41,11 +41,11 @@ class Address extends React.Component{
                        </FormGroup>
                       <FormGroup>
                         <ControlLabel>Wereda</ControlLabel>
-                        <Select name="wereda" value={this.state.wereda}
+                        <Select name="woreda" value={this.state.woreda}
                           options={[
                             {value: 1,label:"Wukro"},
                           ]}
-                          onChange={(t) => {this.props.address.wereda=t.label; this.setState({ wereda: t})}}
+                          onChange={(t) => {this.props.address.woreda=t.label; this.setState({ woreda: t})}}
                         />
                       </FormGroup>
                       <FormGroup>

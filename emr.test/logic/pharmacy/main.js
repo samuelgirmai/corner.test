@@ -3,6 +3,7 @@ import inquirer from 'inquirer'
 import {
   signin,
   signout,
+  change_passwd,
   create_user,
   read_user,
   read_dispense,
@@ -14,15 +15,16 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Pharmacy Test App',
-    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.dispense', 'read.dispense','<<back']
+    choices: ['signin', 'signout', 'change.passwd','create.user', 'read.user', 'create.dispense', 'read.dispense','<<back']
   }
 ];
 
+var token = null;
+
 export async function pharmacy_start()
 {
-  var token;
-
   let option = await inquirer.prompt(main_prompt);
+
   switch(option.main){
     case 'signin':
       token = await signin();
@@ -30,11 +32,14 @@ export async function pharmacy_start()
     case 'signout':
       await signout(token);
       break;
+    case 'change.passwd':
+      await change_passwd(token);
+      break;
     case 'create.user':
       await create_user();
       break;
     case 'read.user':
-      await read_user(token);
+      await read_user();
       break;
     case 'create.dispense':
       await create_dispense(token);

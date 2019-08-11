@@ -59,17 +59,16 @@ export async function create_user()
   _print(ret, null);
 }
 
-export async function read_user(token)
+export async function read_user()
 {
   let ret, data;
 
   data = {
     auth: {
-      //token: CONFIG.TOKEN		//FIXME: use token
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "750133"
+      user_id: "770175"
     }
   }
 
@@ -78,23 +77,32 @@ export async function read_user(token)
   _print(ret, null);
 }
 
-export async function change_security()
+export async function change_passwd(token)
 {
   let ret;
 
-  let sec = {
-    username: "083403",
-    password: "12264627"
+  let security = {
+    username: "764636",
+    oldpassword: "k$H2t#N0",
+    password: "j@G3n)O2",
+  }
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
   }
 
   let data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      security: security
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/user/security/write');
+  ret = await API.run(data, '/app/emr/infotics/user/security/update');
 
   _print(ret, null);
 }
@@ -108,28 +116,33 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "941944",
-      username: "616005",
-      password: "a$E7g)F8",
+      username: "764636",
+      password: "k$H2t#N0",
     }
   }
 
   ret = await API.run(data, '/app/emr/infotics/user/access/write');
   
   _print(ret, 'token');
+
+  return ret.status == "ok"?ret.result.token: null;
 }
 
 export async function signout(token)
 {
-  let ret;
+  let ret, data;
 
-  let data = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
     auth: {
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "941944",
-      token: CONFIG.auth.token
+      token: token
     }
   }
 
@@ -140,15 +153,21 @@ export async function signout(token)
 
 export async function create_idata(token)
 {
-  let ret;
+  let ret, drug;
 
-  let drug = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  drug = {
     name: 'paracetamol'
   }
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     }, 
     param: {
       type: 'drug',
@@ -166,13 +185,19 @@ export async function read_idata(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
-   auth: {
-      license: CONFIG.auth.license,
+    auth: {
+      //license: CONFIG.auth.license, 
+     token: token
     },
     param: {
       type: 'drug',
-      iid: "696521"
+      iid: "972553"
     }
   }
 

@@ -42,7 +42,7 @@ export async function get_patient(arg)
 
   //console.log("@get_patient: "+JSON.stringify(ret, 0, '  '));
 
-  return ret.status == "ok"? ret.result.med: null;
+  return ret.status == "ok"? ret.result.patient: null;
 }
 
 export async function renew_pcard(arg)
@@ -97,10 +97,7 @@ export async function create_user(arg)
       pii: arg.pii
     }
   }
-  arg.pii.address.phone_number = '0981818181'
- 
- console.log(arg.pii);
-
+  
   ret = await API.run(data, '/app/emr/mru/user/write');
 
   //console.log("@create_user: "+JSON.stringify(ret, 0, '  '));
@@ -128,7 +125,7 @@ export async function get_user(arg)
 
   //console.log("@get_user: "+JSON.stringify(ret, 0, '  '));
 
-  return ret.status == "ok"? ret.result.med: null;
+  return ret.status == "ok"? ret.result.user: null;
 }
 
 export async function change_security(arg)
@@ -209,7 +206,7 @@ export async function get_stats(arg)
 
   ret = await API.run(data, '/app/emr/mru/stats/read');
 
-  //console.log("@get_stats: "+JSON.stringify(ret, 0, '  '));
+  console.log("@get_stats: "+JSON.stringify(ret, 0, '  '));
   return ret.status == "ok"? ret.result.stats: null;
 }
 

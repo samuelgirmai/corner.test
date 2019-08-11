@@ -33,7 +33,9 @@ export async function create_service(u)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
+    },
+    param: {
       sii: u
     }
   }
@@ -51,7 +53,9 @@ export async function create_client(u)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
+    },
+    param: {
       cii: u
     }
   }
@@ -69,7 +73,9 @@ export async function create_person(u)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
+    },
+    param: {
       pii: u
     }
   }
@@ -171,7 +177,9 @@ export async function remove_person(uid)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
+    },
+    param: {
       uid: uid
     }
   }
@@ -189,7 +197,9 @@ export async function remove_client(uid)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
+    },
+    param: {
       uid: uid
     }
   }
@@ -207,7 +217,9 @@ export async function remove_service(uid)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
+    },
+    param: {
       uid: uid
     }
   }
@@ -247,7 +259,9 @@ export async function remove_cap(service_id, cap_id)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license, 
+    },
+    param: {
       service_id: service_id,
       cap_id: cap_id
     }
@@ -288,6 +302,8 @@ export async function allow_caps(uid, caps)
   let data = {
     auth: {
       license: CONFIG.auth.license,
+    },
+    param: {
       uid: uid,
       caps: caps
     }
@@ -306,7 +322,9 @@ export async function revoke_caps(uid, caps)
   
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
+    },
+    param: {
       uid: uid,
       caps: caps
     }
@@ -325,7 +343,9 @@ export async function get_stats(type, args)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
+    },
+    param: {
       type: type,
       args: args
     },

@@ -35,14 +35,14 @@ export async function create_user()
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/2002",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "09111922"
+      phone_number: "0969334480"
     }
   }
 
@@ -54,10 +54,10 @@ export async function create_user()
       pii: u,
       //user_type: 'cofficer'
       //user_type: 'triage'
-      user_type: 'practitioner'
+      //user_type: 'practitioner'
       //user_type: 'informatics'
       //user_type: 'labtech'
-      //user_type: 'pharmacist'
+      user_type: 'pharmacist'
     }
   }
 
@@ -76,13 +76,13 @@ export async function remove_user()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "141714",
+      user_id: "766266",
       //user_type: "cofficer"
       //user_type: "triage"
-      user_type: "practitioner"
-      //user_type: "laboratory"
+      //user_type: "practitioner"
+      //user_type: "labtech"
       //user_type: "informatics"
-      //user_type: "pharmacist"
+      user_type: "pharmacist"
     }
   }
 
@@ -115,13 +115,13 @@ export async function assign_role()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "322487",
+      user_id: "038868",
       //user_type: "cofficer"
       //user_type: "triage"
-      user_type: "practitioner"
-      //user_type: "laboratory"
+      //user_type: "practitioner"
+      //user_type: "labtech"
       //user_type: "informatics"
-       //user_type: "pharmacist"
+      user_type: "pharmacist"
     }
 
     }
@@ -140,7 +140,7 @@ export async function revoke_role()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "141714",
+      user_id: "840146",
     }
   }
 

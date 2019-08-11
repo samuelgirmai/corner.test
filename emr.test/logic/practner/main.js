@@ -3,6 +3,7 @@ import inquirer from 'inquirer'
 import {
   signin,
   signout,
+  change_password,
   create_user,
   read_user,
   read_stats,
@@ -17,13 +18,13 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Practitioner Test App',
-    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
+    choices: ['signin', 'signout', 'change.password','create.user', 'read.user', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
   }
 ];
 
+var token = null;
 export async function practner_start()
 {
-  var token;
 
   let option = await inquirer.prompt(main_prompt);
   switch(option.main){
@@ -33,11 +34,14 @@ export async function practner_start()
     case 'signout':
       await signout(token);
       break;
+    case 'change.password':
+      await change_password(token);
+      break;
     case 'create.user':
       await create_user();
       break;
     case 'read.user':
-      await read_user(token);
+      await read_user();
       break;
     case 'create.precord':
       await create_precord(token);

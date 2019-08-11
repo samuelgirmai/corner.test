@@ -24,7 +24,7 @@ function _print(o, key)
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-export async function create_user(token)
+export async function create_user()
 {
   let ret;
 
@@ -60,17 +60,16 @@ export async function create_user(token)
 
 }
 
-export async function read_user(token)
+export async function read_user()
 {
   let ret, data;
 
   data = {
     auth: {
       license: CONFIG.auth.license,
-      //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "286803"
+      user_id: "498844"
     }
   }
 
@@ -79,19 +78,28 @@ export async function read_user(token)
   _print(ret, null);
 }
 
-export async function change_security()
+export async function change_passwd(token)
 {
   let ret;
 
-  let sec = {
-    username: "083403",
-    password: "12264627"
+  let security = {
+    username: "021362",
+    oldpassword: "t#M4o^K2",
+    password: "j@G3n)O2",
+  }
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
   }
 
   let data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      security: security
     }
   }
 
@@ -102,35 +110,40 @@ export async function change_security()
 
 export async function signin()
 {
-  let ret;
+  let data, ret;
  
-  let data = {
+  data = {
     auth: {
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "286803",
-      username: "178734",
-      password: "g&J2p)M1",
+      username: "021362",
+      password: "t#M4o^K2",
     }
   }
 
   ret = await API.run(data, '/app/emr/lab/user/access/write');
   
   _print(ret, 'token');
+
+  return ret.status == "ok"?ret.result.token:null;
 }
 
 export async function signout(token)
 {
-  let ret;
+  let data, ret;
 
-  let data = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
     auth: {
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "286803",
-      token: CONFIG.auth.token
+      token: token
     }
   }
 
@@ -141,9 +154,14 @@ export async function signout(token)
 
 export async function create_result(token)
 {
-  let ret;
+  let ret, result;
 
-  let result = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  result = {
     order: {
       catagory: 'default',
       type: {}
@@ -152,11 +170,12 @@ export async function create_result(token)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     }, 
     param: {
-      mrn: "191379",
-      rid: "930355",
+      mrn: "510226",
+      rid: "598096",
       result: result
     }
   }
@@ -171,9 +190,15 @@ export async function read_result(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+     //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       lid: "971354"

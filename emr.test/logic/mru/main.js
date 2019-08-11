@@ -9,7 +9,8 @@ import {
   read_patient,
   read_stats,
   renew_pcard,
-  print_pcard
+  print_pcard,
+  change_password
 } from './mru';
 
 const main_prompt = [
@@ -17,21 +18,24 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'auth test window',
-    choices: ['signin', 'signout', 'create.cofficer', 'read.cofficer', 'create.patient', 'read.patient', 'read.stats', 'renew.pcard', 'print.pcard', '<<back']
+    choices: ['signin', 'signout', 'change.passwd','create.cofficer', 'read.cofficer', 'create.patient', 'read.patient', 'read.stats', 'renew.pcard', 'print.pcard', '<<back']
   }
 ];
 
+var token = null;
 export async function mru_start()
 {
-  var token;
 
   let option = await inquirer.prompt(main_prompt);
   switch(option.main){
     case 'signin':
-      await signin();
+      token = await signin();
       break;
     case 'signout':
-      await signout();
+      await signout(token);
+      break;
+    case 'change.passwd':
+      await change_password(token);
       break;
     case 'create.cofficer':
       await create_cofficer();

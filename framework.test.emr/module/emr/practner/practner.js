@@ -1,6 +1,11 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
+export async function get_license()
+{
+  return CONFIG.auth.license
+}
+
 export async function create_user(arg)
 {
   let data, ret;
@@ -37,7 +42,7 @@ export async function get_user(arg)
 
   ret = await API.run(data, '/app/emr/practner/user/read');
 
-  return ret.status == "ok"?ret.result.med: null;
+  return ret.status == "ok"?ret.result.user: null;
 }
 
 export async function change_security(arg)
@@ -187,6 +192,7 @@ const PRT = {
   signin_practitioner:    signin,
   create_precord:         create_precord,
   get_precord:            get_precord,
+  get_license:            get_license
 }
 
 export default PRT;
