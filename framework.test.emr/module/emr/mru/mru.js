@@ -137,8 +137,9 @@ export async function change_security(arg)
       license: arg.license
     },
     param: {
-      token: arg.token,
-      password: arg.password
+      security: {
+        password: arg.password
+      }
     }
   }
 
@@ -177,6 +178,9 @@ export async function signout(arg)
   data = {
     auth: {
       license: arg.license,
+    },
+    {
+      token: arg.token
     }
   }
 

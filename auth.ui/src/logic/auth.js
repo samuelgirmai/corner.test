@@ -238,6 +238,10 @@ export async function list_caps()
   let data = {
     auth: {
       license: CONFIG.auth.license
+    },
+    param: {
+      service_id: null,
+      category: null
     }
   }
 
@@ -259,7 +263,7 @@ export async function remove_cap(service_id, cap_id)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license, 
+      license: CONFIG.auth.license
     },
     param: {
       service_id: service_id,
@@ -301,7 +305,7 @@ export async function allow_caps(uid, caps)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      license: CONFIG.auth.license
     },
     param: {
       uid: uid,
@@ -348,10 +352,7 @@ export async function get_stats(type, args)
     param: {
       type: type,
       args: args
-    },
-    /*param: {
-      type: "users"
-    }*/
+    }
   }
 
   ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/stats/read');
