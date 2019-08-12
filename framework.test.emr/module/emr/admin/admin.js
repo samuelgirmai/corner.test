@@ -9,7 +9,7 @@ export async function get_license()
 
 export async function get_userType()
 {
-  let user_types=["informatics", "practitioner", "pharmacist", "cofficer", "laboratory", "triage"];
+  let user_types=["informatics", "practitioner", "pharmacist", "cofficer", "labtech", "triage"];
 
   return   _.sample(user_types)
 }
