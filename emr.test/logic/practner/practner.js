@@ -118,7 +118,7 @@ export async function signin()
     }, 
     param: {
       username: "805118",
-      password: "y%E6l^E8",
+      password: "j@G3n)O2",
     }
   }
 
@@ -164,7 +164,7 @@ export async function create_precord(token)
   rec = {
     dialog: {
       chief_complaint: 'non stop headache',
-      visit_repeat: 'false',
+      visit_repeat: false,
       drug: ['111', '222'],
       symptom: 'test symptom',
       remark: 'test remark'
@@ -207,7 +207,7 @@ export async function read_precord(token)
     },
     param: {
       mrn: "510226",
-      rid: "831625"
+      rid: "630413"
     }
   }
 
@@ -227,7 +227,7 @@ export async function modify_precord(token)
 
   rec = {
     dialog: {
-      visit_repeat: 'true',
+      visit_repeat: true,
     }
   }
 
@@ -238,7 +238,7 @@ export async function modify_precord(token)
     },
     param: {
       mrn: "510226",
-      rid: "831625",
+      rid: "630413",
       rec: rec
     }
   }
@@ -263,7 +263,7 @@ export async function remove_precord(token)
     },
     param: {
       mrn: "510226",
-      rid: "831625"
+      rid: "630413"
     }
   }
   
