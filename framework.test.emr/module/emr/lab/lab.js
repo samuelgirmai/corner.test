@@ -1,6 +1,12 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
+export async function get_license()
+{
+  return CONFIG.auth.license
+}
+
+
 export async function create_user(arg)
 {
   let ret, data;
@@ -16,7 +22,7 @@ export async function create_user(arg)
 
   ret = await API.run(data, '/app/emr/lab/user/write');
 
-  return ret.status == "ok"? ret.result.user_id: null;
+  return ret.status == "ok"? ret.result.user.user_id: null;
 }
 
 export async function get_user(arg)
@@ -99,6 +105,8 @@ export async function create_result(arg)
 {
   let ret, data;
 
+  console.log(arg);
+
   let result = {
     
   }
@@ -108,8 +116,8 @@ export async function create_result(arg)
       license: arg.license,
     }, 
     param: {
-      mrn: arg.mrn,
-      rid: arg.rid,
+      mrn: arg.result.mrn,
+      rid: arg.result.rid,
       result: result
     }
   }
@@ -119,7 +127,7 @@ export async function create_result(arg)
   return ret.status == "ok"? ret.result.lid: null;
 }
 
-export async function read_result(arg)
+export async function get_result(arg)
 {
   let ret, data;
 
@@ -142,7 +150,8 @@ const LAB = {
   get_labratory:        get_user,
   signin_labratory:     signin,
   create_result:        create_result,
-  read_result:          read_result,
+  get_result:           get_result,
+  get_license: 	        get_license
 }
 
 export default LAB;

@@ -1,7 +1,13 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
-export async function create_user()
+export async function get_license()
+{
+  return CONFIG.auth.license
+}
+
+
+export async function create_user(arg)
 {
   let data, ret;
 
@@ -16,7 +22,9 @@ export async function create_user()
 
   ret = await API.run(data, '/app/emr/triage/user/write');
 
-  return ret.status == "ok"?ret.result.user_id: null;
+ console.log(ret)
+
+  return ret.status == "ok"?ret.result.user.user_id: null;
 }
 
 export async function get_user(arg)
@@ -160,7 +168,7 @@ export async function update_status(arg)
   return ret;
 }
 
-export async function read_assign(arg)
+export async function get_assign(arg)
 {
   let ret;
 
@@ -205,7 +213,8 @@ const TRI = {
   get_triage:        get_user,
   signin_triage:     signin,
   create_assign:     create_assign,
-  read_assign:       read_assign,
+  get_assign:        get_assign,
+  get_license:       get_license
 }
 export default TRI;
 

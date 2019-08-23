@@ -1,6 +1,11 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
+export async function get_license()
+{
+  return CONFIG.auth.license
+}
+
 export async function create_user(arg)
 {
   let ret, data;
@@ -16,7 +21,7 @@ export async function create_user(arg)
 
   ret = await API.run(data, '/app/emr/infotics/user/write');
 
-  return ret.status == "ok"?ret.result.user_id: null;
+  return ret.status == "ok"?ret.result.user.user_id: null;
 }
 
 export async function get_user(arg)
@@ -115,10 +120,12 @@ export async function create_idata(arg)
 
   ret = await API.run(data, '/app/emr/infotics/idata/write');
 
+  console.log(ret)
+
   return ret.status == "ok"?ret.result.iid:null;
 }
 
-export async function read_idata(arg)
+export async function get_idata(arg)
 {
   let ret, data;
 
@@ -141,7 +148,8 @@ const INF = {
   get_informatics:       get_user,
   signin_informatics:    signin,
   create_idata:          create_idata,
-  read_idata:            read_idata,
+  get_idata:             get_idata,
+  get_license:           get_license
 }
 
 export default INF;
