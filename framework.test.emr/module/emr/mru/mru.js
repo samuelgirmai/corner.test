@@ -206,7 +206,8 @@ export async function get_stats(arg)
 
   ret = await API.run(data, '/app/emr/mru/stats/read');
 
-  console.log("@get_stats: "+JSON.stringify(ret, 0, '  '));
+  //console.log("@get_stats: "+JSON.stringify(ret, 0, '  '));
+
   return ret.status == "ok"? ret.result.stats: null;
 }
 

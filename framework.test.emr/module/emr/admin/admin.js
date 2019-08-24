@@ -30,7 +30,7 @@ export async function create_user(arg)
 
   ret = await API.run(data, '/app/emr/admin/user/write');
 
-  console.log(ret);
+  //console.log(ret);
 
   return (ret.status === 'ok')? ret.result.user.user_id: null
 }
@@ -111,7 +111,7 @@ export async function get_role(arg)
 
   ret = await API.run(data, '/app/emr/admin/user/role/read');
 
-  console.log('Role: ', ret);
+  //console.log('Role: ', ret);
 
   return ret.status
 }

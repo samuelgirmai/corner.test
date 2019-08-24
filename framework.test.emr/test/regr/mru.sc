@@ -1,4 +1,4 @@
-import {Test} from '../../core/logic'
+import {Test, Print} from '../../core/logic'
 import MRU from '../../module/emr/mru/mru'
 
 let scenario = {
@@ -94,9 +94,7 @@ let scenario = {
   },
 }
 
-module.exports = (num) => {
-  for(let i = 0; i<num; i++){
-    Test(scenario);
-  }
+module.exports = async(num) => {
+  Test(scenario, num);
 }
 

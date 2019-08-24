@@ -104,8 +104,10 @@ export async function create_dispense(arg)
   if(!arg.result)
     return null;
 
-  let  dispense  = {
-  
+  let dispense  = {
+    info: {
+      instruction: "one per day"
+    }
   }
 
   data = {

@@ -21,6 +21,6 @@ let scenario = {
 }
 
 module.exports = async(num) => {
-  await Test(scenario);
+  await Test(scenario, num);
 }
 

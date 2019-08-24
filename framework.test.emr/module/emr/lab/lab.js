@@ -103,14 +103,15 @@ export async function signout(arg)
 
 export async function create_result(arg)
 {
-  let ret, data;
+  let result, data, ret;
 
-  console.log(arg);
-
-  let result = {
-    
+  result = {
+    order: {
+      catagory: 'default',
+      type: {}
+    }
   }
-
+console.log(arg)
   data = {
     auth: {
       license: arg.license,
@@ -124,6 +125,7 @@ export async function create_result(arg)
 
   ret = await API.run(data, '/app/emr/lab/result/write');
 
+  console.log('ret: ', ret)
   return ret.status == "ok"? ret.result.lid: null;
 }
 
