@@ -1,5 +1,5 @@
 import CONFIG from '../../config/config'
-import STREAM from '../../../../corner.backend/tools/stream'
+import STREAM from '../../../../tools/stream'
 
 var notif_init = async() => {
   await STREAM.connect(CONFIG.stream, "/app/emr/notif")
