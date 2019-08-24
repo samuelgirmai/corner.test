@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+import CONFIG from '../config/config'
 
 async function req(prop)
 {
@@ -33,11 +34,11 @@ async function req(prop)
   }
 }
 
-async function run(param, proxy_url, name)
+async function run(param, name)
 {
   let prop = {
     method: 'POST',
-    url: proxy_url+name,
+    url: CONFIG.proxy.url+name,
     data: param
   }
 
@@ -46,10 +47,9 @@ async function run(param, proxy_url, name)
   return ret;
 }
 
-const NET = {
-  req: req,
-  run: run
-};
+const API = {
+  run:  run
+}
 
-export default NET
+export default API;
 

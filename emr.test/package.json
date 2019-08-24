@@ -9,7 +9,8 @@
     "infotics": "babel-node ./logic/infotics/main.js",
     "admin": "babel-node ./logic/admin/main.js",
     "lab": "babel-node ./logic/lab/main.js",
-    "pharmacy": "babel-node ./logic/pharmacy/main.js"
+    "pharmacy": "babel-node ./logic/pharmacy/main.js",
+    "finance": "babel-node ./logic/finance/main.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {

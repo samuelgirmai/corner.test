@@ -1,4 +1,6 @@
-import API from '../../api/api_rest';
+import API from '../../tools/net';
+import STREAM from '../../tools/stream';
+
 import CONFIG from '../../config/config'
 
 function _print(o, key) 
@@ -22,6 +24,59 @@ function _print(o, key)
   }
 
   console.log(JSON.stringify(o, 0, '  '));
+}
+
+async function on_dorder(p)
+{
+  console.log(":::drug order notif:::"+JSON.stringify(p, 0, '  '));
+
+  mark_notif("388784", "delivered");
+}
+
+async function on_lorder(p)
+{
+  console.log(":::lab order notif:::"+JSON.stringify(p, 0, '  '));
+
+  mark_notif("749467", "delivered");
+}
+
+export async function mark_notif(nid, mark)
+{
+  let ret;
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      nid:  nid,
+      mark: mark
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/notif/mark');
+
+  _print(ret, null);
+}
+
+export async function subscribe_notification(token)
+{
+  await STREAM.connect(CONFIG.stream, '/app/emr/notif');
+
+  STREAM.join('/app/emr/notif', {id: CONFIG.auth.license});
+
+  let events = [
+    {
+      e_name: 'e_lorder',
+      cb: on_lorder
+    },
+    {
+      e_name: 'e_dorder',
+      cb: on_dorder
+    }
+  ]
+
+  STREAM.listen("/app/emr/notif", events);
 }
 
 export async function create_user(token)
@@ -161,7 +216,7 @@ export async function create_precord(token)
       license: CONFIG.auth.license,
     }, 
     param: {
-      mrn: "191379",
+      mrn: "943078",
       rec: rec
     }
   }

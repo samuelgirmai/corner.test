@@ -247,7 +247,6 @@ export async function list_caps()
 
   ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/caps/list');
 
-
   if(ret.status == "ok"){
     STORE.write('caps', ret.result.caps);
   }

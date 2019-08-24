@@ -1,4 +1,4 @@
-import API from '../../api/api_rest';
+import API from '../../tools/net';
 import CONFIG from '../../config/config'
 
 function _print(o, key) 

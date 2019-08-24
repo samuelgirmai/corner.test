@@ -1,6 +1,7 @@
 import inquirer from 'inquirer'
 
 import {
+  subscribe_notification,
   signin,
   signout,
   create_user,
@@ -17,7 +18,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Practitioner Test App',
-    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
+    choices: ['subscribe', 'signin', 'signout', 'create.user', 'read.user', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
   }
 ];
 
@@ -26,7 +27,11 @@ export async function practner_start()
   var token;
 
   let option = await inquirer.prompt(main_prompt);
+
   switch(option.main){
+    case 'subscribe':
+      await subscribe_notification();
+      break;
     case 'signin':
       token = await signin();
       break;
