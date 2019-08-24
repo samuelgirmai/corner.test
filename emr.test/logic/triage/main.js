@@ -3,10 +3,12 @@ import inquirer from 'inquirer'
 import {
   signin,
   signout,
+  change_passwd,
   create_user,
   read_user,
   read_assign,
   create_assign,
+  remove_assign,
   update_assign,
   update_status,
   read_stats
@@ -17,27 +19,30 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Triage test app',
-    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.assign', 'read.assign', 'update.status', 'update.assign', 'read.stats', '<<back']
+    choices: ['signin', 'signout', 'change.passwd','create.user', 'read.user', 'create.assign', 'read.assign', 'update.status', 'update.assign', 'remove.assign','read.stats', '<<back']
   }
 ];
 
+var token  = null;
 export async function triage_start()
 {
-  var token;
 
   let option = await inquirer.prompt(main_prompt);
   switch(option.main){
     case 'signin':
-      await signin();
+      token = await signin();
       break;
     case 'signout':
-      await signout();
+      await signout(token);
+      break;
+    case 'change.passwd':
+      await change_passwd(token);
       break;
     case 'create.user':
       await create_user();
       break;
     case 'read.user':
-      await read_user(token);
+      await read_user();
       break;
     case 'create.assign':
       await create_assign(token);
@@ -50,6 +55,9 @@ export async function triage_start()
       break;
     case 'update.status':
       await update_status(token);
+      break;
+    case 'remove.assign':
+      await remove_assign(token);
       break;
     case 'read.stats':
       await read_stats(token);

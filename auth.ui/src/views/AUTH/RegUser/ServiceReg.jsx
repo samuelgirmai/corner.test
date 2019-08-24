@@ -28,11 +28,11 @@ class ServiceReg extends React.Component{
     }
 
     onReg = async() => {
+      let host = this.sii.host;
       this.sii.host = this.sii.host+":"+this.sii.port;
 
       let r = await AUTH.create_service(this.sii);
-
-      //this.sii.host = "";
+      this.sii.host = host;//FIXME 
 
       if(r.status == "err"){
         alert(r.status);

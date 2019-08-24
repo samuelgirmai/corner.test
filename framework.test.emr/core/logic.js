@@ -22,7 +22,10 @@ async function Run(f, prog)
 
   ret =  await f.cb(arg);
 
-  console.log("return(%s)  = %s", f.name, JSON.stringify(ret, 0, '  '));
+  if(ret)
+    console.log("func (%s) status = \x1b[32m PASS \x1b[0m", f.name);
+  else
+    console.log("func (%s) status = \x1b[31m FAILED \x1b[0m", f.name);
 
   return ret;
 }

@@ -89,14 +89,14 @@ export async function create_user(token)
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/1919",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "09111123"
+      phone_number: "0916828191"
     }
   }
 
@@ -115,17 +115,16 @@ export async function create_user(token)
 
 }
 
-export async function read_user(token)
+export async function read_user()
 {
   let ret, data;
 
   data = {
     auth: {
       license: CONFIG.auth.license,
-      //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "229932"
+      user_id: "597572"
     }
   }
 
@@ -134,23 +133,32 @@ export async function read_user(token)
   _print(ret, null);
 }
 
-export async function change_security()
+export async function change_password(token)
 {
   let ret;
 
-  let sec = {
-    username: "607479",
-    password: "39262394"
+  let security = {
+    username: "805118",
+    oldpassword: "y%E6l^E8",
+    password: "j@G3n)O2",
+  }
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
   }
 
   let data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      security: security
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/user/security/write');
+  ret = await API.run(data, '/app/emr/practner/user/security/update');
 
   _print(ret, null);
 }
@@ -164,27 +172,32 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "229932",
-      username: "051977",
-      password: "38947885",
+      username: "805118",
+      password: "y%E6l^E8",
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/user/access/write');
   
   _print(ret, 'token');
+
+   return ret.status == "ok"?ret.result.token: null
 }
 
 export async function signout(token)
 {
-  let ret;
+  let data, ret;
 
-  let data = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
     auth: {
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "759572",
       token: token
     }
   }
@@ -196,9 +209,14 @@ export async function signout(token)
 
 export async function create_precord(token)
 {
-  let ret;
+  let rec, ret;
 
-  let rec = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  rec = {
     dialog: {
       chief_complaint: 'non stop headache',
       visit_repeat: 'false',
@@ -213,10 +231,15 @@ export async function create_precord(token)
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token,
     }, 
     param: {
+<<<<<<< HEAD
       mrn: "943078",
+=======
+      mrn: "510226",
+>>>>>>> integrate9.test
       rec: rec
     }
   }
@@ -231,13 +254,19 @@ export async function read_precord(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token,
     },
     param: {
-      mrn: "191379",
-      rid: "060459"
+      mrn: "510226",
+      rid: "831625"
     }
   }
 
@@ -250,6 +279,11 @@ export async function modify_precord(token)
 {
   let rec, ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   rec = {
     dialog: {
       visit_repeat: 'true',
@@ -258,11 +292,12 @@ export async function modify_precord(token)
 
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token,
     },
     param: {
-      mrn: "191379",
-      rid: "060459",
+      mrn: "510226",
+      rid: "831625",
       rec: rec
     }
   }
@@ -275,13 +310,19 @@ export async function remove_precord(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token,
     },
     param: {
-      mrn: "191379",
-      rid: "060459"
+      mrn: "510226",
+      rid: "831625"
     }
   }
   
@@ -294,9 +335,15 @@ export async function read_stats(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token,
     },
     param: {
       type: "visit_count",
@@ -305,8 +352,8 @@ export async function read_stats(token)
       //type: "lab_count"
       args: {
         type: "daily",
-        date: "19/07/2019",
-        did: "13"
+        date: "11/08/2019",
+        //did: "13"
         //nid: "51"
         //lid: "71"
       }
@@ -317,4 +364,3 @@ export async function read_stats(token)
 
   _print(ret, null);
 }
-    

@@ -3,6 +3,7 @@ import inquirer from 'inquirer'
 import {
   signin,
   signout,
+  change_passwd,
   create_user,
   read_user,
   create_result,
@@ -14,27 +15,31 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Laboratory Test App',
-    choices: ['signin', 'signout', 'create.user', 'read.user', 'create.result', 'read.result', '<<back']
+    choices: ['signin', 'signout', 'change.passwd', 'create.user', 'read.user', 'create.result', 'read.result', '<<back']
   }
 ];
 
+var token = null;
+
 export async function lab_start()
 {
-  var token;
 
   let option = await inquirer.prompt(main_prompt);
   switch(option.main){
     case 'signin':
-      await signin();
+      token = await signin();
       break;
     case 'signout':
-      await signout();
+      await signout(token);
+      break;
+    case 'change.passwd':
+      await change_passwd(token);
       break;
     case 'create.user':
       await create_user();
       break;
     case 'read.user':
-      await read_user(token);
+      await read_user();
       break;
     case 'create.result':
       await create_result(token);

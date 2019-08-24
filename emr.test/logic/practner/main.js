@@ -4,6 +4,7 @@ import {
   subscribe_notification,
   signin,
   signout,
+  change_password,
   create_user,
   read_user,
   read_stats,
@@ -22,9 +23,9 @@ const main_prompt = [
   }
 ];
 
+var token = null;
 export async function practner_start()
 {
-  var token;
 
   let option = await inquirer.prompt(main_prompt);
 
@@ -38,11 +39,14 @@ export async function practner_start()
     case 'signout':
       await signout(token);
       break;
+    case 'change.password':
+      await change_password(token);
+      break;
     case 'create.user':
       await create_user();
       break;
     case 'read.user':
-      await read_user(token);
+      await read_user();
       break;
     case 'create.precord':
       await create_precord(token);

@@ -34,14 +34,14 @@ export async function create_user()
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/2011",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0955555"
+      phone_number: "0901947655"
     }
   }
 
@@ -65,11 +65,10 @@ export async function read_user(token)
 
   data = {
     auth: {
-      //token: CONFIG.TOKEN   //FIXME token should be used
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "636539"
+      user_id: "497618"
     }
   }
 
@@ -78,23 +77,32 @@ export async function read_user(token)
   _print(ret, null);
 }
 
-export async function change_security()
+export async function change_passwd(token)
 {
   let ret;
 
-  let sec = {
-    username: "083403",
-    password: "12264627"
+  let security = {
+    username: "798434",
+    oldpassword: "d#I9c!O8",
+    password: "j@G3n)O2",
+  }
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
   }
 
   let data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      security: security
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/security/write');
+  ret = await API.run(data, '/app/emr/triage/user/security/update');
 
   _print(ret, null);
 }
@@ -108,28 +116,33 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "636539",
-      username: "336238",
-      password: "24820303",
+      username: "798434",
+      password: "j@G3n)O2",
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/user/access/write');
   
   _print(ret, 'token');
+
+   return ret.status == "ok"?ret.result.token:null
 }
 
 export async function signout(token)
 {
-  let ret;
+  let data,ret;
 
-  let data = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
     auth: {
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "636539",
-      token: CONFIG.auth.token
+      token: token
     }
   }
 
@@ -142,15 +155,21 @@ export async function create_assign(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
-      mrn: '191379',
+      mrn: '618268',
       status: 1,
       assign: {
-        catagory: 'BLUE',
+        catagory: 'Blue',
         dept_id: '133133'
       }
     }
@@ -165,15 +184,21 @@ export async function update_assign(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
-      tid: '116084',
+      tid: '875991',
       status: 2,
       assign: {
-        catagory: 'BLUE',
+        catagory: 'Blue',
         dept_id: '133133'
       }
     }
@@ -188,12 +213,18 @@ export async function update_status(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
-      tid: '116084',
+      tid: '797193',
       status: 2
     }
   }
@@ -205,14 +236,20 @@ export async function update_status(token)
 
 export async function read_assign(token)
 {
-  let ret;
+  let data, ret;
 
-  let data = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     }, 
     param: {
-      tid: '116084'
+      tid: '797193'
     }
   }
 
@@ -221,19 +258,49 @@ export async function read_assign(token)
   _print(ret, null);
 }
 
+export async function remove_assign(token)
+{
+  let data, ret;
+  
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+    auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    }, 
+    param: {
+      tid: '875991'
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/assign/delete');
+
+  _print(ret, null);
+}
+
 export async function read_stats(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       type: "queue_length",
       args: {
         type: "daily",
-        date: "21/07/2019"
+        date: "11/08/2019"
       }
     }
   }

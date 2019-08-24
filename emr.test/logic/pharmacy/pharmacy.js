@@ -24,7 +24,7 @@ function _print(o, key)
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-export async function create_user(token)
+export async function create_user()
 {
   let ret;
 
@@ -34,14 +34,14 @@ export async function create_user(token)
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
-    dob: "12/12/12",
+    dob: "12/12/2011",
     address: {
       region: "Tigray",
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "09111123"
+      phone_number: "0910897726"
     }
   }
 
@@ -60,17 +60,16 @@ export async function create_user(token)
 
 }
 
-export async function read_user(token)
+export async function read_user()
 {
   let ret, data;
 
   data = {
     auth: {
       license: CONFIG.auth.license,
-      //token: CONFIG.TOKEN  //FIXME use token
     },
     param: {
-      user_id: "141714"
+      user_id: "038868"
     }
   }
 
@@ -79,23 +78,32 @@ export async function read_user(token)
   _print(ret, null);
 }
 
-export async function change_security()
+export async function change_passwd(token)
 {
   let ret;
 
-  let sec = {
-    username: "607479",
-    password: "39262394"
+  let security = {
+    username: "923165",
+    oldpassword: "f%L0x$N1",
+    password: "j@G3n)O2",
+  }
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
   }
 
   let data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      security: security
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/security/write');
+  ret = await API.run(data, '/app/emr/pharmacy/user/security/update');
 
   _print(ret, null);
 }
@@ -109,28 +117,33 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "141714",
-      username: "820722",
-      password: "84538387",
+      username: "923165",
+      password: "f%L0x$N1",
     }
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/user/access/write');
   
   _print(ret, 'token');
+
+  return ret.status == "ok"?ret.result.token: null;
 }
 
 export async function signout(token)
 {
-  let ret;
+  let ret, data;
 
-  let data = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
     auth: {
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "821737",
-      token: CONFIG.auth.token
+      token: token
     }
   }
 
@@ -141,19 +154,27 @@ export async function signout(token)
 
 export async function create_dispense(token)
 {
-  let ret;
+  let dispense, ret;
 
-  let  dispense  = {
-  
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  dispense  = {
+    info: {
+      instruction: "one per day"
+    }
   }
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     }, 
     param: {
-      mrn: "191379",
-      rid: "087747",
+      mrn: "510226",
+      rid: "598096",
       dispense: dispense
     }
   }
@@ -168,12 +189,18 @@ export async function read_dispense(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+     //license: CONFIG.auth.license,
+     token: token 
     },
     param: {
-      did: "600235"
+      did: "210132"
     }
   }
 

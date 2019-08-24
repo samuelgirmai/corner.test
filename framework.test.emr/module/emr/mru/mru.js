@@ -18,7 +18,6 @@ export async function create_patient(arg)
       pii: arg.pii
     }
   }
-
   ret = await API.run(data, '/app/emr/mru/patient/write');
 
   //console.log("@create_patient: "+JSON.stringify(ret, 0, '  '));
@@ -43,7 +42,7 @@ export async function get_patient(arg)
 
   //console.log("@get_patient: "+JSON.stringify(ret, 0, '  '));
 
-  return ret
+  return ret.status == "ok"? ret.result.patient: null;
 }
 
 export async function renew_pcard(arg)
@@ -63,7 +62,7 @@ export async function renew_pcard(arg)
 
   //console.log("@renew_pcard: "+JSON.stringify(ret, 0, '  '));
 
-  return ret;
+  return ret.status == "ok"? ret.status: null;
 }
 
 export async function print_pcard(arg)
@@ -83,7 +82,7 @@ export async function print_pcard(arg)
 
   //console.log("@print_pcard: "+JSON.stringify(ret, 0, '  '));
 
-  return ret;
+  return ret.status == "ok"? ret.status: null;
 }
 
 export async function create_user(arg)
@@ -98,12 +97,12 @@ export async function create_user(arg)
       pii: arg.pii
     }
   }
-
+  
   ret = await API.run(data, '/app/emr/mru/user/write');
 
   //console.log("@create_user: "+JSON.stringify(ret, 0, '  '));
 
-  return ret;
+  return ret.status == "ok"? ret.result.user.user_id: null;
 }
 
 export async function get_user(arg)
@@ -126,7 +125,7 @@ export async function get_user(arg)
 
   //console.log("@get_user: "+JSON.stringify(ret, 0, '  '));
 
-  return ret.status == "ok"?ret.result:null;
+  return ret.status == "ok"? ret.result.user: null;
 }
 
 export async function change_security(arg)
@@ -148,7 +147,7 @@ export async function change_security(arg)
 
   //console.log("@change_security: "+JSON.stringify(ret, 0, '  '));
 
-  return ret;
+  return ret.status == "ok"? ret.status: null;
 }
 
 export async function signin(arg)
@@ -169,7 +168,7 @@ export async function signin(arg)
 
   //console.log("@signin: "+JSON.stringify(ret, 0, '  '));
 
-  return ret;
+  return ret.status == "ok"? ret.result.token: null;
 }
 
 export async function signout(arg)
@@ -189,7 +188,7 @@ export async function signout(arg)
 
   //console.log("@signout: "+JSON.stringify(ret, 0, '  '));
 
-  return ret;
+  return ret.status == "ok"? ret.status: null;
 }
 
 
@@ -211,11 +210,9 @@ export async function get_stats(arg)
 
   ret = await API.run(data, '/app/emr/mru/stats/read');
 
-  //console.log("@get_stats: "+JSON.stringify(ret, 0, '  '));
-
-  return ret;
+  console.log("@get_stats: "+JSON.stringify(ret, 0, '  '));
+  return ret.status == "ok"? ret.result.stats: null;
 }
-
 
 const MRU = {
   get_license:		get_license,
@@ -228,4 +225,3 @@ const MRU = {
 }
 
 export default MRU;
-

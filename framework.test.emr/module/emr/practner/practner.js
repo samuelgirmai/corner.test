@@ -1,6 +1,11 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
 
+export async function get_license()
+{
+  return CONFIG.auth.license
+}
+
 export async function create_user(arg)
 {
   let data, ret;
@@ -37,7 +42,7 @@ export async function get_user(arg)
 
   ret = await API.run(data, '/app/emr/practner/user/read');
 
-  return ret.status == "ok"?ret.result: null;
+  return ret.status == "ok"?ret.result.user: null;
 }
 
 export async function change_security(arg)
@@ -56,7 +61,7 @@ export async function change_security(arg)
 
   ret = await API.run(data, '/app/emr/practner/user/security/write');
 
-  return ret;
+  return ret.status == "ok"?ret.result.token: null;
 }
 
 export async function signin(arg)
@@ -73,9 +78,9 @@ export async function signin(arg)
     }
   }
 
-  ret = {}//await API.run(data, '/app/emr/practner/user/access/write');
+  ret = await API.run(data, '/app/emr/practner/user/access/write');
  
-  return ret; 
+  return ret.status == "ok"?ret.result.token: null;
 }
 
 export async function signout(arg)
@@ -94,7 +99,7 @@ export async function signout(arg)
 
   ret = await API.run(data, '/app/emr/practner/user/access/delete');
   
-  return ret;
+  return ret.status == "ok"?ret.status: null;
 }
 
 export async function create_precord(arg)
@@ -134,7 +139,7 @@ export async function create_precord(arg)
   return ret.status == "ok"?{rid: ret.result.rid, mrn: arg.mrn}: null
 }
 
-export async function read_precord(arg)
+export async function get_precord(arg)
 {
   let ret, data;
 
@@ -143,14 +148,14 @@ export async function read_precord(arg)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: arg.mrn,
-      rid: arg.rid
+      mrn: arg.result.mrn,
+      rid: arg.result.rid
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/patient/record/read');
 
-  return ret;
+  return ret.status == "ok"?ret.result.record: null
 }
 
 export async function read_stats(arg)
@@ -178,7 +183,7 @@ export async function read_stats(arg)
 
   ret = await API.run(data, '/app/emr/practner/stats/read');
 
-  return ret;
+  return ret.status == "ok"?ret.result.stats: null
 }
 
 const PRT = {
@@ -186,7 +191,8 @@ const PRT = {
   get_practitioner:       get_user,
   signin_practitioner:    signin,
   create_precord:         create_precord,
-  read_precord:           read_precord,
+  get_precord:            get_precord,
+  get_license:            get_license
 }
 
 export default PRT;

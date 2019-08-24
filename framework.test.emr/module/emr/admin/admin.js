@@ -9,7 +9,7 @@ export async function get_license()
 
 export async function get_userType()
 {
-  let user_types=["informatics", "practitioner", "pharmacist", "cofficer", "laboratory", "triage"];
+  let user_types=["informatics", "practitioner", "pharmacist", "cofficer", "labtech", "triage"];
 
   return   _.sample(user_types)
 }
@@ -47,7 +47,7 @@ export async function list_users(arg)
 
   ret = await API.run(data, '/app/emr/admin/user/list');
 
-  console.log(ret); 
+  return (ret.status === 'ok')? ret.result.users: null
 }
 
 export async function assign_role(arg)
@@ -70,8 +70,6 @@ export async function assign_role(arg)
 
   ret = await API.run(data, '/app/emr/admin/user/role/write');
 
-  console.log(ret)  
-  
   return (ret.status == 'err')? null: ret.result.user_id;
 }
 
@@ -90,7 +88,8 @@ export async function revoke_role(arg)
 
   ret = await API.run(data, '/app/emr/admin/user/role/delete');
 
-  console.log(ret);
+  //console.log(ret);
+  return (ret.status == 'err')? null: ret.result.user_id;
 }
 
 export async function get_role(arg)
@@ -129,7 +128,7 @@ export async function get_stats(arg)
 
   ret = await API.run(data, '/app/emr/admin/stats/read');
 
-  console.log(ret);
+  return (ret.status == 'err')? null: ret.result.user_id;
 }
   
 const ADMIN = {

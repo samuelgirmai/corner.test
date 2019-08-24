@@ -24,7 +24,7 @@ function _print(o, key)
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-export async function create_cofficer(token)
+export async function create_cofficer()
 {
   let ret;
 
@@ -41,7 +41,7 @@ export async function create_cofficer(token)
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0999998227"
+      phone_number: "0919333432"
     }
   }
 
@@ -60,16 +60,16 @@ export async function create_cofficer(token)
 
 }
 
-export async function read_cofficer(token)
+export async function read_cofficer()
 {
   let ret, data;
 
   data = {
     auth: {
-      token: CONFIG.auth.token
+      license: CONFIG.auth.license
     },
     param: {
-      user_id: "514982"
+      user_id: "212148"
     }
   }
 
@@ -78,23 +78,31 @@ export async function read_cofficer(token)
   _print(ret, null);
 }
 
-export async function change_security()
+export async function change_password(token)
 {
   let ret;
 
-  let sec = {
-    username: "083403",
-    password: "12264627"
+  let security = {
+    username: "859248",
+    oldpassword: "u%D6y@P1",
+    password: "j@G3n)O2",
+  }
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
   }
 
   let data = {
     auth: {
-      token: CONFIG.auth.token,
-      sec: sec
+      token: token
+    },
+    param: {
+      security: security
     }
   }
 
-  ret = await API.run(data, '/app/emr/mru/user/security/write');
+  ret = await API.run(data, '/app/emr/mru/user/security/update');
 
   _print(ret, null);
 }
@@ -108,28 +116,33 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "514982",
-      username: "583884",
-      password: "83625935",
+      username: "859248",
+      password: "j@G3n)O2",
     }
   }
 
   ret = await API.run(data, '/app/emr/mru/user/access/write');
   
   _print(ret, 'token');
+
+   return ret.status == "ok"?ret.result.token: null
 }
 
 export async function signout(token)
 {
-  let ret;
+  let data, ret;
 
-  let data = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
     auth: {
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "514982",
-      token: CONFIG.auth.token
+      token: "876042516422"
     }
   }
 
@@ -140,9 +153,14 @@ export async function signout(token)
 
 export async function create_patient(token)
 {
-  let ret;
+  let ret, u;
 
-  let u = {
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  u = {
     name: "Berhe",
     fname: "Belay",
     mname: "Zimam",
@@ -155,17 +173,17 @@ export async function create_patient(token)
       woreda: "Humera",
       kebele: "01",
       hous_no: "122",
-      phone_number: "0949191361"
+      phone_number: "0980191361"
 
     }
   }
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token,
     }, 
     param: {
-      token: token,
       pii: u
     }
   }
@@ -180,12 +198,18 @@ export async function read_patient(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token,
     },
     param: {
-      mrn: "228602"
+      mrn: "510226"
     }
   }
 
@@ -198,9 +222,14 @@ export async function renew_pcard(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
   data = {
      auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token,
       },
       param: {
         mrn: "191379"
@@ -216,12 +245,18 @@ export async function print_pcard(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      token: token,
+      //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "191379"
+      mrn: "510226"
     }
   }
 
@@ -234,9 +269,15 @@ export async function read_stats(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       type: "cards_status",
