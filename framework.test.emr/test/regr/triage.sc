@@ -1,19 +1,19 @@
 /*
- * Test scenario involving card officer, practitioner
+ * Lab Regression test scenario
  */
 import {Test} from '../../core/logic'
 import MRU from '../../module/emr/mru/mru.js'
-import PRT from '../../module/emr/practner/practner.js'
+import TRG from '../../module/emr/triage/triage.js'
 
 let scenario = {
   _start: {
-    name: "get_precord",
-    cb: PRT.get_precord,
+    name: "get_assign",
+    cb: TRG.get_assign,
     arg: [
       {
         type: "func",
         name: "result",
-        data: "create_precord"
+        data: "create_assign"
       },
       {
         type: "func",
@@ -22,14 +22,35 @@ let scenario = {
       },
     ]
   },
-  create_precord: {
-    name: "create_precord",
-    cb: PRT.create_precord,
+  create_assign: {
+    name: "create_assign",
+    cb: TRG.create_assign,
     arg: [
+      {
+        type: "func",
+        name: "license",
+        data: "get_license"
+      },
       {
         type: "func",
         name: "mrn",
         data: "create_patient"
+      },
+      {
+        type: "func",
+        name: "user",
+        data: "get_triage"
+      },
+    ]
+  },
+  get_triage: {
+    name: "get_triage",
+    cb: TRG.get_triage,
+    arg: [
+      {
+        type: "func",
+        name: "user_id",
+        data: "create_triage"
       },
       {
         type: "func",
@@ -54,25 +75,9 @@ let scenario = {
       },
     ]
   },
-  get_practitioner: {
-    name: "get_practitioner",
-    cb: PRT.get_practitioner,
-    arg: [
-      {
-        type: "func",
-        name: "user_id",
-        data: "create_practitioner"
-      },
-      {
-        type: "func",
-        name: "license",
-        data: "get_license"
-      },
-    ]
-  },
-  create_practitioner: {
-    name: "create_practitioner",
-    cb: PRT.create_practitioner,
+  create_triage: {
+    name: "create_triage",
+    cb: TRG.create_triage,
     arg: [
       {
         type: "var",
@@ -88,7 +93,7 @@ let scenario = {
   },
   get_license: {
     name: "get_license",
-    cb: PRT.get_license,
+    cb: TRG.get_license,
     arg: []
   }
 }

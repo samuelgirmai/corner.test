@@ -104,8 +104,10 @@ export async function create_dispense(arg)
   if(!arg.result)
     return null;
 
-  let  dispense  = {
-  
+  let dispense  = {
+    info: {
+      instruction: "one per day"
+    }
   }
 
   data = {
@@ -120,11 +122,13 @@ export async function create_dispense(arg)
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/dispense/write');
-  
+
+ console.log(ret)
+ 
   return ret.status = "ok"?ret.result.did: null;
 }
 
-export async function read_dispense(arg)
+export async function get_dispense(arg)
 {
   let ret, data;
 
@@ -141,8 +145,8 @@ export async function read_dispense(arg)
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/dispense/read');
-
-  return ret;
+  
+  return ret.status = "ok"?ret.result.dispense: null;
 }
 
 const PHM = {
@@ -151,7 +155,7 @@ const PHM = {
   get_pharmacist:       get_user,
   signin_pharmacist:    signin,
   create_dispense:      create_dispense,
-  get_dispense:         read_dispense,
+  get_dispense:         get_dispense,
 }
 
 export default PHM;

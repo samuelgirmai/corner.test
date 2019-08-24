@@ -42,8 +42,6 @@ let scenario = {
 }
 
 module.exports = (num) => {
-  for(let i = 0; i<num; i++){
-    Test(scenario);
-  }
+  Test(scenario, num);
 }
 
