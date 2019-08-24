@@ -27,7 +27,10 @@ export async function create_user(arg)
 export async function get_user(arg)
 {
   let ret, data;
-
+  
+  if(!arg.user_id)
+    return null
+ 
   data = {
     auth: {
       license: arg.license,
@@ -39,7 +42,7 @@ export async function get_user(arg)
 
   ret = await API.run(data, '/app/emr/infotics/user/read');
 
-  return ret;
+  return ret.status == 'ok'?ret.result.user: null;
 }
 
 export async function change_security(arg)
@@ -58,7 +61,7 @@ export async function change_security(arg)
 
   ret = await API.run(data, '/app/emr/infotics/user/security/write');
 
-  return ret
+  return ret.status == 'ok'? ret.status: null
 }
 
 export async function signin(arg)
@@ -70,7 +73,6 @@ export async function signin(arg)
       license: arg.license,
     }, 
     param: {
-      user_id: arg.user_id,
       username: arg.username,
       password: arg.password,
     }
@@ -78,7 +80,7 @@ export async function signin(arg)
 
   ret = await API.run(data, '/app/emr/infotics/user/access/write');
   
-  return ret;
+  return ret.status == 'ok'?ret.result.token: null;
 }
 
 export async function signout(arg)
@@ -90,14 +92,13 @@ export async function signout(arg)
       license: arg.license,
     },
     param: {
-      user_id: arg.user_id,
       token: arg.token
     }
   }
 
   ret = await API.run(data, '/app/emr/infotics/user/access/delete');
 
-  return ret;
+  return ret.status == 'ok'?ret.status: null;
 }
 
 export async function create_idata(arg)
@@ -128,6 +129,9 @@ export async function create_idata(arg)
 export async function get_idata(arg)
 {
   let ret, data;
+  
+  if(!arg.iid)
+    return null;
 
   data = {
    auth: {
@@ -141,7 +145,7 @@ export async function get_idata(arg)
 
   ret = await API.run(data, '/app/emr/infotics/idata/read');
 
-  return ret;
+  return ret.status == 'ok'? ret.status.result: null;
 }
 const INF = {
   create_informatics:    create_user,

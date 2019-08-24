@@ -60,7 +60,7 @@ export async function change_security(arg)
 
   ret = await API.run(data, '/app/emr/pharmacy/user/security/write');
 
-  return ret;
+  return ret.status == 'ok'?ret.status: null;
 }
 
 export async function signin(arg)
@@ -77,9 +77,9 @@ export async function signin(arg)
     }
   }
 
-  ret = {} //await API.run(data, '/app/emr/pharmacy/user/access/write');
+  ret = await API.run(data, '/app/emr/pharmacy/user/access/write');
   
-  return ret;
+  return ret.status == 'ok'?ret.result.token:null;
 }
 
 export async function signout(arg)
@@ -90,11 +90,14 @@ export async function signout(arg)
     auth: {
       license: arg.license,
     },
+    param: {
+      token: arg.token
+    }
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/user/access/delete');
 
-  return ret;
+  return ret.status == 'ok'?ret.status: null;
 }
 
 export async function create_dispense(arg)
@@ -123,8 +126,6 @@ export async function create_dispense(arg)
 
   ret = await API.run(data, '/app/emr/pharmacy/dispense/write');
 
- console.log(ret)
- 
   return ret.status = "ok"?ret.result.did: null;
 }
 

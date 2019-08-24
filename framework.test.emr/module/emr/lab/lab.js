@@ -105,13 +105,16 @@ export async function create_result(arg)
 {
   let result, data, ret;
 
+  if(!arg.result || !arg.result.mrn)
+    return null;
+
   result = {
     order: {
       catagory: 'default',
       type: {}
     }
   }
-console.log(arg)
+
   data = {
     auth: {
       license: arg.license,

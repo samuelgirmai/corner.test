@@ -179,7 +179,7 @@ export async function signout(arg)
     auth: {
       license: arg.license,
     },
-    {
+    param: {
       token: arg.token
     }
   }
