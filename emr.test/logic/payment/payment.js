@@ -61,7 +61,7 @@ export async function create_payment(token)
   _print(ret, null);
 }
 
-export async function get_price(token)
+export async function assert_payment(token)
 {
   let ret, data;
 
@@ -70,11 +70,12 @@ export async function get_price(token)
       license: CONFIG.auth.license,
     },
     param: {
+      mrn: "532839",
       items: items
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/items/price/read');
+  ret = await API.run(data, '/app/emr/payment/items/price/balance/assert');
 
   _print(ret, null);
 }

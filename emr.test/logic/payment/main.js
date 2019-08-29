@@ -1,7 +1,7 @@
 import inquirer from 'inquirer'
 
 import {
-  get_price,
+  assert_payment,
   create_payment
 } from './payment';
 
@@ -10,7 +10,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Payment Test App',
-    choices: ['get.price', 'create.payment', '<<back']
+    choices: ['assert.payment', 'create.payment', '<<back']
   }
 ];
 
@@ -21,8 +21,8 @@ export async function payment_start()
   let option = await inquirer.prompt(main_prompt);
 
   switch(option.main){
-    case 'get.price':
-      await get_price(token);
+    case 'assert.payment':
+      await assert_payment(token);
       break;
     case 'create.payment':
       await create_payment(token);
