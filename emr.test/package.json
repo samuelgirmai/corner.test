@@ -11,6 +11,7 @@
     "lab": "babel-node ./logic/lab/main.js",
     "pharmacy": "babel-node ./logic/pharmacy/main.js",
     "finance": "babel-node ./logic/finance/main.js",
+    "payment": "babel-node ./logic/payment/main.js",
     "notif": "babel-node ./logic/notif/notif.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",

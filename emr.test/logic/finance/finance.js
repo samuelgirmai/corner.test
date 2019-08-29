@@ -131,13 +131,13 @@ export async function create_order(token)
     },
     param: {
       mrn: "532839",
-      order: {
-        item_type: "lab",
-        item_id: "lab_id",
-        item_name: "wbc",
+      items: [{
+        type: "lab",
+        id: "lab_id",
+        name: "wbc",
         qty: 12,
         price: 124.00
-      }
+      }]
     }
   }
 
@@ -155,7 +155,7 @@ export async function get_order(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "532839"
+      order_id: "0762138137"
     }
   }
 
@@ -174,13 +174,13 @@ export async function modify_order(token)
     },
     param: {
       order_id: "0762138137",
-      order: {
-        item_type: "lab",
-        item_id: "lab_id",
-        item_name: "hemoglobin",
+      items: [{
+        type: "lab",
+        id: "lab_id",
+        name: "hemoglobin",
         qty: 1,
         price: 125.00
-      }
+      }]
     }
   }
 

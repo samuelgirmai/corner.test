@@ -24,12 +24,20 @@ import {
   pharmacy_start
 } from './pharmacy/main';
 
+import {
+  finance_start
+} from './finance/main';
+
+import {
+  payment_start
+} from './payment/main';
+
 const main_prompt = [
   {
     type: 'list',
     name: 'main',
     message: 'EMR Test application',
-    choices: ['MRU', 'Triage', 'Practitioner', 'Laboratory', 'Informatics', 'Pharmacy', 'Exit']
+    choices: ['MRU', 'Triage', 'Practitioner', 'Laboratory', 'Informatics', 'Pharmacy', 'Finance', 'Payment', 'Exit']
   }
 ];
 
@@ -56,6 +64,12 @@ async function _start()
       break;
     case 'Pharmacy':
       ret = await pharmacy_start();
+      break;
+    case 'Finance':
+      ret = await finance_start();
+      break;
+    case 'Payment':
+      ret = await payment_start();
       break;
     case 'Exit':
       process.exit();
