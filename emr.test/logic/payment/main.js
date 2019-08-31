@@ -2,7 +2,8 @@ import inquirer from 'inquirer'
 
 import {
   assert_payment,
-  create_payment
+  create_payment,
+  settle_account
 } from './payment';
 
 const main_prompt = [
@@ -10,7 +11,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Payment Test App',
-    choices: ['assert.payment', 'create.payment', '<<back']
+    choices: ['assert.payment', 'create.payment', 'settle.account', '<<back']
   }
 ];
 
@@ -26,6 +27,9 @@ export async function payment_start()
       break;
     case 'create.payment':
       await create_payment(token);
+      break;
+    case 'settle.account':
+      await settle_account(token);
       break;
     case '<<back':
       return;

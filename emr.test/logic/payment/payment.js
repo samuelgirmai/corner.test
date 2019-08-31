@@ -61,6 +61,24 @@ export async function create_payment(token)
   _print(ret, null);
 }
 
+export async function settle_account(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "532839"
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/payment/account/settlement/write');
+
+  _print(ret, null);
+}
+
 export async function assert_payment(token)
 {
   let ret, data;
