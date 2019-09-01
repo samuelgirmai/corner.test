@@ -1,5 +1,5 @@
 export const services = [
-{
+/*{
   "sii": {
     "name": "p.stream",
     "desc": "platform stream api micro service",
@@ -22,7 +22,7 @@ export const services = [
     }
   },
   "caps": []
-},
+},*/
 {
   "sii": {
     "name": "p.notif",

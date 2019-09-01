@@ -1,13 +1,16 @@
 import API from '../api/api_rest';
 import CONFIG from '../config/config'
-import {services} from '../config/s_data'
+import {services} from '../config/services';
 
 import _ from 'lodash';
 
-var index = 0;
-var service = null;
+var fs = require('fs');
 
-let PATH = '../../../../../corner.backend/'
+var service = null;
+var index = 0;
+
+let CAP_DIR = '../../../../../corner.backend/'
+let CONF_DIR = '../../corner.backend/'
 
 export async function get_license()
 {
@@ -21,22 +24,33 @@ export async function get_sii()
   return service? service.sii: null;
 }
 
-export function get_caps()
+function get_path(type)
 {
-  let sname, uri, r;
-  let spath = 'platform/'
+  let sname, path;
+  let subdir = 'platform/'
 
   if(!service || service.sii.name == 'p.stream.core')
-    return [];
-   
+    return null;
+
   sname = service.sii.name.split('.', 2);
 
   if(sname[0] === 'emr')
-    spath = 'services/emr/';
+    subdir = 'services/emr/';
 
-  uri =PATH + spath + sname[1]+'/caps';
- 
-  r = require(uri);
+  if(type == 'conf')
+    return CONF_DIR + subdir + sname[1];
+
+  return CAP_DIR + subdir + sname[1];
+}
+
+export function get_caps()
+{
+  let path, r;
+
+  if(!(path = get_path()))
+    return [];
+
+  r = require(path+'/caps');
   
   return r?r.caps:null;
 }
@@ -76,6 +90,8 @@ export async function list_service(arg)
   }
 
   ret = await API.run(data, '/platform/auth/users/services/list');
+
+  ret.result.user_id = arg.user_id;
 
   return ret.status == "ok"? ret.result: null;
 }
@@ -132,6 +148,38 @@ export async function allow_caps(arg)
   return ret.status == "ok"? arg.user_id: null;
 }
 
+/*update service's  license and user_id configuration wih in {SERVICE_PATH}/config/config*/
+export async function update_config(arg)
+{ 
+  let s = [], path, buf;
+
+  if(!arg)
+    return null;
+
+  let data  = JSON.parse(JSON.stringify(arg));
+
+  s =  _.filter(data.result.services, (o) => {
+    return (data.result.user_id === o.user_id)
+  });
+
+  if(!s.length)
+    return null;
+
+  path = get_path('conf');
+
+  if(path)
+  {
+    buf = fs.readFileSync(path+'/config/config.js', 'utf8')  
+    buf = buf.replace(/license: .*/gm, 'license: '+ '"' + s[0].license + '"' + ',');
+    buf =  buf.replace(/service_id: .*/gm, 'service_id: ' + '"' + data.result.user_id+ '"' +',');
+    fs.writeFileSync(path+'/config/config.js',buf, 'utf8');
+
+    console.log('[INFO]: Wating until nodemon restarts the server after confuig update.....')
+    await new Promise(done => setTimeout(done, 3000));
+  }
+  return true;
+}
+
 async function get_capId()
 {
   let r,  caps = [], cap_ids, data;
@@ -186,6 +234,7 @@ const AUTH = {
   export_caps:   	export_caps,
   get_caps: 		get_caps,
   get_capId:		get_capId,
+  update_config:        update_config
 }
 
 export default AUTH;

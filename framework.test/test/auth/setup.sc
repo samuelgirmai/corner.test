@@ -1,11 +1,22 @@
 /*
- * Auth client test scenario
+ * Auth-client service setup test scenario
  */
 import {Test} from '../../core/logic'
-import AUTH from '../../module/platform/auth/service'
+import AUTH from '../../module/platform/auth/setup'
 
 let scenario = {
   _start: {
+    name: "update_config",
+    cb: AUTH.update_config,
+    arg: [
+      {
+        type: "func",
+        name: "result",
+        data: "list_service"
+      }
+    ]
+  },
+  list_service: {
     name: "list_service",
     cb: AUTH.list_service,
     arg: [
