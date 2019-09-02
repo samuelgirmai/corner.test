@@ -2,9 +2,9 @@
  * Pharmacy Regression test scenario
  */
 import {Test} from '../../core/logic'
-import MRU from '../../module/emr/mru/mru.js'
-import PRT from '../../module/emr/practner/practner.js'
-import PHY from '../../module/emr/pharmacy/pharmacy.js'
+import MRU from '../../module/service/emr/mru/mru.js'
+import PRT from '../../module/service/emr/practner/practner.js'
+import PHY from '../../module/service/emr/pharmacy/pharmacy.js'
 
 let scenario = {
   _start: {

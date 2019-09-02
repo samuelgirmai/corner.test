@@ -3,9 +3,9 @@
  */
 
 import {Test} from '../core/logic'
-import PHM from '../module/emr/pharmacy/pharmacy.js'
-import MRU from '../module/emr/mru/mru.js'
-import PRT from '../module/emr/practner/practner.js'
+import PHM from '../module/service/emr/pharmacy/pharmacy.js'
+import MRU from '../module/service/emr/mru/mru.js'
+import PRT from '../module/service/emr/practner/practner.js'
 
 let scenario = {
   _start: {

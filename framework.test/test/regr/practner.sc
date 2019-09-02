@@ -2,8 +2,8 @@
  * Test scenario involving card officer, practitioner
  */
 import {Test} from '../../core/logic'
-import MRU from '../../module/emr/mru/mru.js'
-import PRT from '../../module/emr/practner/practner.js'
+import MRU from '../../module/service/emr/mru/mru.js'
+import PRT from '../../module/service/emr/practner/practner.js'
 
 let scenario = {
   _start: {

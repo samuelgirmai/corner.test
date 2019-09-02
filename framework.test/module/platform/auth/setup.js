@@ -153,7 +153,7 @@ export async function update_config(arg)
 { 
   let s = [], path, buf;
 
-  if(!arg)
+  if(!arg || !arg.result || !arg.result.services)
     return null;
 
   let data  = JSON.parse(JSON.stringify(arg));

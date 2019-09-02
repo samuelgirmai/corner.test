@@ -1,5 +1,5 @@
 import {Test, Print} from '../../core/logic'
-import MRU from '../../module/emr/mru/mru'
+import MRU from '../../module/service/emr/mru/mru'
 
 let scenario = {
   _start: {
