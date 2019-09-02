@@ -110,6 +110,9 @@ export const services = [
     "/platform/stream/close",
     "/app/emr/triage/stats/join",
     "/app/emr/triage/stats/exit",
+    "/app/emr/practner/opd/assert",
+    "/app/emr/mru/patient/lastVisit/update",
+    "/app/emr/notif/write"
   ]
 },
 {
@@ -194,6 +197,44 @@ export const services = [
     "/app/emr/mru/user/read",
     "/app/emr/mru/user/delete",
     "/app/emr/mru/user/update",
+    "/app/emr/practner/user/write",
+    "/app/emr/practner/user/read",
+    "/app/emr/practner/user/delete",
+    "/app/emr/practner/user/update",
+    "/app/emr/infotics/user/write",
+    "/app/emr/infotics/user/read",
+    "/app/emr/infotics/user/delete",
+    "/app/emr/infotics/user/update",
+    "/app/emr/lab/user/write",
+    "/app/emr/lab/user/delete",
+    "/app/emr/lab/user/update",
+    "/app/emr/lab/user/read",
+    "/app/emr/pharmacy/user/write",
+    "/app/emr/pharmacy/user/read",
+    "/app/emr/pharmacy/user/update",
+    "/app/emr/pharmacy/user/delete",
+    "/app/emr/finance/user/delete",
+    "/app/emr/finance/user/write",
+    "/app/emr/finance/user/read",
+    "/app/emr/finance/user/update",
+    "/app/emr/triage/user/update",
+    "/app/emr/triage/user/read",
+    "/app/emr/triage/user/write",
+    "/app/emr/triage/user/delete"
+  ]
+},
+{
+  "sii": {
+    "name": "emr.payment",
+    "desc": "EMR payment micro service",
+    "host": "127.0.0.1:26009",
+    "address": {
+      "phone_number": "0911167733",
+      "email": "emr.payment@bokri.xyz"
+    }
+  },
+  "caps": [
+    "/app/emr/finance",
   ]
 },
 ];

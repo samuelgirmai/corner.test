@@ -41,7 +41,7 @@ export async function create_user()
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0901947655"
+      phone_number: "0911947655"
     }
   }
 
@@ -68,7 +68,7 @@ export async function read_user(token)
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "497618"
+      user_id: "664035"
     }
   }
 
@@ -116,8 +116,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "798434",
-      password: "j@G3n)O2",
+      username: "698415",
+      password: "r^H8c%P3",
     }
   }
 
@@ -166,12 +166,9 @@ export async function create_assign(token)
       token: token
     },
     param: {
-      mrn: '618268',
-      status: 1,
-      assign: {
-        catagory: 'Blue',
-        dept_id: '133133'
-      }
+      mrn: '596788',
+      status: 'Blue',
+      opd_id: '283104'
     }
   }
 
@@ -197,10 +194,7 @@ export async function update_assign(token)
     param: {
       tid: '875991',
       status: 2,
-      assign: {
-        catagory: 'Blue',
-        dept_id: '133133'
-      }
+      opd_id: '133133'
     }
   }
 

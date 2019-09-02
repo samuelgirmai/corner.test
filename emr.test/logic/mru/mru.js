@@ -69,7 +69,7 @@ export async function read_cofficer()
       license: CONFIG.auth.license
     },
     param: {
-      user_id: "212148"
+      user_id: "980679"
     }
   }
 
@@ -83,8 +83,8 @@ export async function change_password(token)
   let ret;
 
   let security = {
-    username: "859248",
-    oldpassword: "u%D6y@P1",
+    username: "186693",
+    oldpassword: "i@D0n^B9",
     password: "j@G3n)O2",
   }
 
@@ -116,8 +116,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "859248",
-      password: "j@G3n)O2",
+      username: "186693",
+      password: "i@D0n^B9",
     }
   }
 
@@ -209,7 +209,7 @@ export async function read_patient(token)
       token: token,
     },
     param: {
-      mrn: "510226"
+      mrn: "596788"
     }
   }
 

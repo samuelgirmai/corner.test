@@ -124,7 +124,7 @@ export async function read_user()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "597572"
+      user_id: "041489"
     }
   }
 
@@ -235,11 +235,7 @@ export async function create_precord(token)
       token: token,
     }, 
     param: {
-<<<<<<< HEAD
-      mrn: "943078",
-=======
-      mrn: "510226",
->>>>>>> integrate9.test
+      mrn: "596788",
       rec: rec
     }
   }
@@ -364,3 +360,47 @@ export async function read_stats(token)
 
   _print(ret, null);
 }
+
+//////////////////// OPD Test
+export async function create_opd(token)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      dii: {
+        catagory: 'test',
+        name: 'pediatrics',
+        address: {
+          phone_number: '0911282828'
+        }
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/practner/opd/write');
+
+  _print(ret, null);
+}
+export async function get_opd(token)
+{
+  let ret, data;
+  
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      opd_id: '858908'
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/practner/opd/read');
+
+  _print(ret, null);
+}
+
+
