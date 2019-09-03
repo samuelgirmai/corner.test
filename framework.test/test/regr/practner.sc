@@ -1,26 +1,30 @@
-import {Test, Print} from '../../core/logic'
-import MRU from '../../module/emr/mru/mru'
+/*
+ * Test scenario involving card officer, practitioner
+ */
+import {Test} from '../../core/logic'
+import MRU from '../../module/service/emr/mru/mru.js'
+import PRT from '../../module/service/emr/practner/practner.js'
 
 let scenario = {
   _start: {
-    name: "get_stats",
-    cb: MRU.get_stats,
+    name: "get_precord",
+    cb: PRT.get_precord,
     arg: [
       {
         type: "func",
-        name: "blob",
-        data: "get_patient"
+        name: "result",
+        data: "create_precord"
       },
       {
         type: "func",
         name: "license",
         data: "get_license"
-      }
+      },
     ]
   },
-  get_patient: {
-    name: "get_patient",
-    cb: MRU.get_patient,
+  create_precord: {
+    name: "create_precord",
+    cb: PRT.create_precord,
     arg: [
       {
         type: "func",
@@ -31,7 +35,7 @@ let scenario = {
         type: "func",
         name: "license",
         data: "get_license"
-      }
+      },
     ]
   },
   create_patient: {
@@ -48,21 +52,16 @@ let scenario = {
         name: "license",
         data: "get_license"
       },
-      {
-        type: "func",
-        name: "user_id",
-        data: "get_cofficer"
-      },
     ]
   },
-  get_cofficer: {
-    name: "get_cofficer",
-    cb: MRU.get_cofficer,
+  get_practitioner: {
+    name: "get_practitioner",
+    cb: PRT.get_practitioner,
     arg: [
       {
         type: "func",
         name: "user_id",
-        data: "create_cofficer"
+        data: "create_practitioner"
       },
       {
         type: "func",
@@ -71,9 +70,9 @@ let scenario = {
       },
     ]
   },
-  create_cofficer: {
-    name: "create_cofficer",
-    cb: MRU.create_cofficer,
+  create_practitioner: {
+    name: "create_practitioner",
+    cb: PRT.create_practitioner,
     arg: [
       {
         type: "var",
@@ -89,9 +88,9 @@ let scenario = {
   },
   get_license: {
     name: "get_license",
-    cb: MRU.get_license,
+    cb: PRT.get_license,
     arg: []
-  },
+  }
 }
 
 module.exports = async(num) => {

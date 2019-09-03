@@ -1,14 +1,31 @@
 /*
- * Test scenario involving card officer, practitioner
+ * Pharmacy Regression test scenario
  */
 import {Test} from '../../core/logic'
-import MRU from '../../module/emr/mru/mru.js'
-import PRT from '../../module/emr/practner/practner.js'
+import MRU from '../../module/service/emr/mru/mru.js'
+import PRT from '../../module/service/emr/practner/practner.js'
+import PHY from '../../module/service/emr/pharmacy/pharmacy.js'
 
 let scenario = {
   _start: {
-    name: "get_precord",
-    cb: PRT.get_precord,
+    name: "get_dispense",
+    cb: PHY.get_dispense,
+    arg: [
+      {
+        type: "func",
+        name: "did",
+        data: "create_dispense"
+      },
+      {
+        type: "func",
+        name: "license",
+        data: "get_license"
+      },
+    ]
+  },
+  create_dispense: {
+    name: "create_dispense",
+    cb: PHY.create_dispense,
     arg: [
       {
         type: "func",
@@ -19,6 +36,11 @@ let scenario = {
         type: "func",
         name: "license",
         data: "get_license"
+      },
+      {
+        type: "func",
+        name: "user_id",
+        data: "get_pharmacist"
       },
     ]
   },
@@ -51,17 +73,17 @@ let scenario = {
         type: "func",
         name: "license",
         data: "get_license"
-      },
+      }
     ]
   },
-  get_practitioner: {
-    name: "get_practitioner",
-    cb: PRT.get_practitioner,
+  get_pharmacist: {
+    name: "get_pharmacist",
+    cb: PHY.get_pharmacist,
     arg: [
       {
         type: "func",
         name: "user_id",
-        data: "create_practitioner"
+        data: "create_pharmacist"
       },
       {
         type: "func",
@@ -70,9 +92,9 @@ let scenario = {
       },
     ]
   },
-  create_practitioner: {
-    name: "create_practitioner",
-    cb: PRT.create_practitioner,
+  create_pharmacist: {
+    name: "create_pharmacist",
+    cb: PHY.create_pharmacist,
     arg: [
       {
         type: "var",
@@ -88,7 +110,7 @@ let scenario = {
   },
   get_license: {
     name: "get_license",
-    cb: PRT.get_license,
+    cb: PHY.get_license,
     arg: []
   }
 }

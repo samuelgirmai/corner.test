@@ -2,9 +2,9 @@
  * Lab Regression test scenario
  */
 import {Test} from '../../core/logic'
-import MRU from '../../module/emr/mru/mru.js'
-import PRT from '../../module/emr/practner/practner.js'
-import LAB from '../../module/emr/lab/lab.js'
+import MRU from '../../module/service/emr/mru/mru.js'
+import PRT from '../../module/service/emr/practner/practner.js'
+import LAB from '../../module/service/emr/lab/lab.js'
 
 let scenario = {
   _start: {

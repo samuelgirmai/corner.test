@@ -2,8 +2,8 @@
  * Lab Regression test scenario
  */
 import {Test} from '../../core/logic'
-import MRU from '../../module/emr/mru/mru.js'
-import TRG from '../../module/emr/triage/triage.js'
+import MRU from '../../module/service/emr/mru/mru.js'
+import TRG from '../../module/service/emr/triage/triage.js'
 
 let scenario = {
   _start: {

@@ -1,4 +1,4 @@
-import NET from '../../net/api'
+import NET from '../../../net/api'
 import CONFIG from '../config/config'
 
 async function run(param, name)
