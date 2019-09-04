@@ -17,8 +17,8 @@ Scenarios
  - Test scenarios are in written in json form
  - syntax: 
 
-   OBJ_IDENTIFIR: {           NB: object identifier '_start' is a keyword that marks where exection starts 
-     name:  function name
+   FUNC_OBJ: {      NOTE: function object identifier '_start' is a keyword that marks where exection starts 
+     name:  a name given to this test action
      cb:    callback to execute
      arg:   list of arg objects
    },
@@ -26,7 +26,9 @@ Scenarios
   arg_obj: {
     type:  type of argument; can be 'func', 'var' or 'const'
     name:  a name given to attribute of the arg, which will be passed to cb.
-    data:  Varible, constant or a function (in this case will be executed recursively!)
+    data:  - If type is 'func' data points to another FUNC_OBJ to execute, to get the arg value.
+           - If type is 'const' data is the arg value.
+           - And if type is 'var' data is mockroo generated value
   }
 
 Modules
@@ -38,7 +40,7 @@ Modules
 Examples
 ---------
 
-E.g. scenario #1
+E.g. scenario
 
 - create card_officer,
 - sign card officer
