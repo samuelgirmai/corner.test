@@ -1,20 +1,20 @@
 /*
- * Pharmacy Regression test scenario
+ * Lab Regression test scenario
  */
-import {Test} from '../../core/logic'
-import MRU from '../../module/service/emr/mru/mru.js'
-import PRT from '../../module/service/emr/practner/practner.js'
-import PHY from '../../module/service/emr/pharmacy/pharmacy.js'
+import {Test} from '../../../core/logic'
+import MRU from '../../../module/service/emr/mru/mru.js'
+import PRT from '../../../module/service/emr/practner/practner.js'
+import LAB from '../../../module/service/emr/lab/lab.js'
 
 let scenario = {
   _start: {
-    name: "get_dispense",
-    cb: PHY.get_dispense,
+    name: "get_result",
+    cb: LAB.get_result,
     arg: [
       {
         type: "func",
-        name: "did",
-        data: "create_dispense"
+        name: "result",
+        data: "create_result"
       },
       {
         type: "func",
@@ -23,9 +23,9 @@ let scenario = {
       },
     ]
   },
-  create_dispense: {
-    name: "create_dispense",
-    cb: PHY.create_dispense,
+  create_result: {
+    name: "create_result",
+    cb: LAB.create_result,
     arg: [
       {
         type: "func",
@@ -36,11 +36,6 @@ let scenario = {
         type: "func",
         name: "license",
         data: "get_license"
-      },
-      {
-        type: "func",
-        name: "user_id",
-        data: "get_pharmacist"
       },
     ]
   },
@@ -73,17 +68,17 @@ let scenario = {
         type: "func",
         name: "license",
         data: "get_license"
-      }
+      },
     ]
   },
-  get_pharmacist: {
-    name: "get_pharmacist",
-    cb: PHY.get_pharmacist,
+  get_practitioner: {
+    name: "get_practitioner",
+    cb: PRT.get_practitioner,
     arg: [
       {
         type: "func",
         name: "user_id",
-        data: "create_pharmacist"
+        data: "create_practitioner"
       },
       {
         type: "func",
@@ -92,9 +87,9 @@ let scenario = {
       },
     ]
   },
-  create_pharmacist: {
-    name: "create_pharmacist",
-    cb: PHY.create_pharmacist,
+  create_practitioner: {
+    name: "create_practitioner",
+    cb: PRT.create_practitioner,
     arg: [
       {
         type: "var",
@@ -110,7 +105,7 @@ let scenario = {
   },
   get_license: {
     name: "get_license",
-    cb: PHY.get_license,
+    cb: PRT.get_license,
     arg: []
   }
 }

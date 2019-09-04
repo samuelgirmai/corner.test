@@ -5,7 +5,8 @@ import {
   signout,
   change_passwd,
   create_user,
-  read_user,
+  get_user,
+  list_users,
   create_result,
   read_result,
 } from './lab';
@@ -15,7 +16,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Laboratory Test App',
-    choices: ['signin', 'signout', 'change.passwd', 'create.user', 'read.user', 'create.result', 'read.result', '<<back']
+    choices: ['signin', 'signout', 'change.passwd', 'create.user', 'get.user', 'list.users', 'create.result', 'read.result', '<<back']
   }
 ];
 
@@ -38,8 +39,11 @@ export async function lab_start()
     case 'create.user':
       await create_user();
       break;
-    case 'read.user':
-      await read_user();
+    case 'get.user':
+      await get_user();
+      break;
+    case 'list.users':
+      await list_users();
       break;
     case 'create.result':
       await create_result(token);

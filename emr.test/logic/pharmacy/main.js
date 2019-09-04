@@ -5,7 +5,8 @@ import {
   signout,
   change_passwd,
   create_user,
-  read_user,
+  get_user,
+  list_users,
   read_dispense,
   create_dispense,
 } from './pharmacy';
@@ -15,7 +16,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Pharmacy Test App',
-    choices: ['signin', 'signout', 'change.passwd','create.user', 'read.user', 'create.dispense', 'read.dispense','<<back']
+    choices: ['signin', 'signout', 'change.passwd','create.user', 'get.user', 'list.users', 'create.dispense', 'read.dispense','<<back']
   }
 ];
 
@@ -38,8 +39,11 @@ export async function pharmacy_start()
     case 'create.user':
       await create_user();
       break;
-    case 'read.user':
-      await read_user();
+    case 'get.user':
+      await get_user();
+      break;
+    case 'list.users':
+      await list_users();
       break;
     case 'create.dispense':
       await create_dispense(token);

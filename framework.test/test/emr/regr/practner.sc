@@ -1,19 +1,19 @@
 /*
- * Lab Regression test scenario
+ * Test scenario involving card officer, practitioner
  */
-import {Test} from '../../core/logic'
-import MRU from '../../module/service/emr/mru/mru.js'
-import TRG from '../../module/service/emr/triage/triage.js'
+import {Test} from '../../../core/logic'
+import MRU from '../../../module/service/emr/mru/mru.js'
+import PRT from '../../../module/service/emr/practner/practner.js'
 
 let scenario = {
   _start: {
-    name: "get_assign",
-    cb: TRG.get_assign,
+    name: "get_precord",
+    cb: PRT.get_precord,
     arg: [
       {
         type: "func",
         name: "result",
-        data: "create_assign"
+        data: "create_precord"
       },
       {
         type: "func",
@@ -22,35 +22,14 @@ let scenario = {
       },
     ]
   },
-  create_assign: {
-    name: "create_assign",
-    cb: TRG.create_assign,
+  create_precord: {
+    name: "create_precord",
+    cb: PRT.create_precord,
     arg: [
-      {
-        type: "func",
-        name: "license",
-        data: "get_license"
-      },
       {
         type: "func",
         name: "mrn",
         data: "create_patient"
-      },
-      {
-        type: "func",
-        name: "user",
-        data: "get_triage"
-      },
-    ]
-  },
-  get_triage: {
-    name: "get_triage",
-    cb: TRG.get_triage,
-    arg: [
-      {
-        type: "func",
-        name: "user_id",
-        data: "create_triage"
       },
       {
         type: "func",
@@ -75,9 +54,25 @@ let scenario = {
       },
     ]
   },
-  create_triage: {
-    name: "create_triage",
-    cb: TRG.create_triage,
+  get_practitioner: {
+    name: "get_practitioner",
+    cb: PRT.get_practitioner,
+    arg: [
+      {
+        type: "func",
+        name: "user_id",
+        data: "create_practitioner"
+      },
+      {
+        type: "func",
+        name: "license",
+        data: "get_license"
+      },
+    ]
+  },
+  create_practitioner: {
+    name: "create_practitioner",
+    cb: PRT.create_practitioner,
     arg: [
       {
         type: "var",
@@ -93,7 +88,7 @@ let scenario = {
   },
   get_license: {
     name: "get_license",
-    cb: TRG.get_license,
+    cb: PRT.get_license,
     arg: []
   }
 }

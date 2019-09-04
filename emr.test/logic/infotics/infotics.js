@@ -59,7 +59,7 @@ export async function create_user()
   _print(ret, null);
 }
 
-export async function read_user()
+export async function get_user()
 {
   let ret, data;
 
@@ -73,6 +73,21 @@ export async function read_user()
   }
 
   ret = await API.run(data, '/app/emr/infotics/user/read');
+
+  _print(ret, null);
+}
+
+export async function list_users()
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/infotics/user/list');
 
   _print(ret, null);
 }

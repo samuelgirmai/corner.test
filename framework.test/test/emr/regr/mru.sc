@@ -1,47 +1,26 @@
-/*
- * Lab Regression test scenario
- */
-import {Test} from '../../core/logic'
-import MRU from '../../module/service/emr/mru/mru.js'
-import PRT from '../../module/service/emr/practner/practner.js'
-import LAB from '../../module/service/emr/lab/lab.js'
+import {Test, Print} from '../../../core/logic'
+import MRU from '../../../module/service/emr/mru/mru'
 
 let scenario = {
   _start: {
-    name: "get_result",
-    cb: LAB.get_result,
+    name: "get_stats",
+    cb: MRU.get_stats,
     arg: [
       {
         type: "func",
-        name: "result",
-        data: "create_result"
+        name: "blob",
+        data: "get_patient"
       },
       {
         type: "func",
         name: "license",
         data: "get_license"
-      },
+      }
     ]
   },
-  create_result: {
-    name: "create_result",
-    cb: LAB.create_result,
-    arg: [
-      {
-        type: "func",
-        name: "result",
-        data: "create_precord"
-      },
-      {
-        type: "func",
-        name: "license",
-        data: "get_license"
-      },
-    ]
-  },
-  create_precord: {
-    name: "create_precord",
-    cb: PRT.create_precord,
+  get_patient: {
+    name: "get_patient",
+    cb: MRU.get_patient,
     arg: [
       {
         type: "func",
@@ -52,7 +31,7 @@ let scenario = {
         type: "func",
         name: "license",
         data: "get_license"
-      },
+      }
     ]
   },
   create_patient: {
@@ -69,16 +48,21 @@ let scenario = {
         name: "license",
         data: "get_license"
       },
+      {
+        type: "func",
+        name: "user_id",
+        data: "get_cofficer"
+      },
     ]
   },
-  get_practitioner: {
-    name: "get_practitioner",
-    cb: PRT.get_practitioner,
+  get_cofficer: {
+    name: "get_cofficer",
+    cb: MRU.get_cofficer,
     arg: [
       {
         type: "func",
         name: "user_id",
-        data: "create_practitioner"
+        data: "create_cofficer"
       },
       {
         type: "func",
@@ -87,9 +71,9 @@ let scenario = {
       },
     ]
   },
-  create_practitioner: {
-    name: "create_practitioner",
-    cb: PRT.create_practitioner,
+  create_cofficer: {
+    name: "create_cofficer",
+    cb: MRU.create_cofficer,
     arg: [
       {
         type: "var",
@@ -105,9 +89,9 @@ let scenario = {
   },
   get_license: {
     name: "get_license",
-    cb: PRT.get_license,
+    cb: MRU.get_license,
     arg: []
-  }
+  },
 }
 
 module.exports = async(num) => {
