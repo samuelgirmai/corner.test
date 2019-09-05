@@ -1,8 +1,8 @@
 /*
  * Admin test scenario
  */
-import {Test} from '../../core/logic'
-import ADMIN from '../../module/service/emr/admin/admin'
+import {Test} from '../../../core/logic'
+import ADMIN from '../../../module/service/emr/admin/admin'
 
 let scenario = {
   _start: {

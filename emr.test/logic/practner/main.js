@@ -8,7 +8,8 @@ import {
   signout,
   change_password,
   create_user,
-  read_user,
+  get_user,
+  list_users,
   read_stats,
   read_precord,
   create_precord,
@@ -21,7 +22,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Practitioner Test App',
-    choices: ['create.opd', 'get.opd', 'subscribe', 'signin', 'signout', 'create.user', 'read.user', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
+    choices: ['create.opd', 'get.opd', 'subscribe', 'signin', 'signout', 'create.user', 'get.user', 'list.users', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
   }
 ];
 
@@ -47,8 +48,11 @@ export async function practner_start()
     case 'create.user':
       await create_user();
       break;
-    case 'read.user':
-      await read_user();
+    case 'get.user':
+      await get_user();
+      break;
+    case 'list.users':
+      await list_users();
       break;
     case 'create.precord':
       await create_precord(token);

@@ -60,7 +60,7 @@ export async function create_cofficer()
 
 }
 
-export async function read_cofficer()
+export async function get_cofficer()
 {
   let ret, data;
 
@@ -69,7 +69,7 @@ export async function read_cofficer()
       license: CONFIG.auth.license
     },
     param: {
-      user_id: "980679"
+      user_id: "172172"
     }
   }
 
@@ -77,6 +77,22 @@ export async function read_cofficer()
 
   _print(ret, null);
 }
+
+export async function list_cofficers()
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license
+    },
+  }
+
+  ret = await API.run(data, '/app/emr/mru/user/list');
+
+  _print(ret, null);
+}
+
 
 export async function change_password(token)
 {

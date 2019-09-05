@@ -59,7 +59,7 @@ export async function create_user()
   _print(ret, null);
 }
 
-export async function read_user(token)
+export async function get_user(token)
 {
   let ret, data;
 
@@ -73,6 +73,21 @@ export async function read_user(token)
   }
 
   ret = await API.run(data, '/app/emr/triage/user/read');
+
+  _print(ret, null);
+}
+
+export async function list_users(token)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/user/list');
 
   _print(ret, null);
 }

@@ -42,7 +42,7 @@ export async function create_user()
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0969334488"
+      phone_number: "0969334427"
     }
   }
 
@@ -54,10 +54,10 @@ export async function create_user()
       pii: u,
       //user_type: 'cofficer'
       //user_type: 'triage'
-      user_type: 'practitioner'
+      //user_type: 'practitioner'
       //user_type: 'informatics'
       //user_type: 'labtech'
-      //user_type: 'pharmacist'
+      user_type: 'pharmacist'
     }
   }
 
@@ -98,8 +98,11 @@ export async function list_users()
   data = {
     auth: {
       license: CONFIG.auth.license,
-    }
-  }
+    },
+   /*param: {
+     user_type: 'cofficer'
+   }*/
+  },
 
   ret = await API.run(data, '/app/emr/admin/user/list');
 
@@ -115,13 +118,13 @@ export async function assign_role()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "041489",
+      user_id: "684454",
       //user_type: "cofficer"
       //user_type: "triage"
-      user_type: "practitioner"
+      //user_type: "practitioner"
       //user_type: "labtech"
       //user_type: "informatics"
-      //user_type: "pharmacist"
+      user_type: "pharmacist"
     }
 
     }

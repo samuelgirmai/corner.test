@@ -1,24 +1,35 @@
 /*
- * Auth-client service setup test scenario
+ * Auth-client setup scenario
  */
 import {Test} from '../../core/logic'
-import AUTH from '../../module/platform/auth/setup'
+import CAP from '../../module/platform/auth/cap'
+import SRV from '../../module/platform/auth/service';
 
 let scenario = {
   _start: {
     name: "update_config",
-    cb: AUTH.update_config,
+    cb: SRV.update_config,
     arg: [
       {
         type: "func",
-        name: "result",
-        data: "list_service"
+        name: "service",
+        data: "get_service"
+      },
+      {
+        type: "func",
+        name: "conf",
+        data: "get_config"
+      },
+      {
+        type: "func",
+        name: "blob",              /*FIXME:*/
+        data: "next_srv"
       }
     ]
   },
-  list_service: {
-    name: "list_service",
-    cb: AUTH.list_service,
+  get_service: {
+    name: "get_service",
+    cb: SRV.get_service,
     arg: [
       {
         type: "func",
@@ -34,12 +45,17 @@ let scenario = {
   },
   export_caps: {
     name: "export_caps",
-    cb: AUTH.export_caps,
+    cb: CAP.export_caps,
     arg: [
       {
         type: "func",
         name: "license",
         data: "get_license"
+      },
+      {
+        type: "func",
+        name: "caps",
+        data: "get_expCaps"
       },
       {
         type: "func",
@@ -50,7 +66,7 @@ let scenario = {
   },
   allow_caps: {
     name: "allow_caps",
-    cb: AUTH.allow_caps,
+    cb: CAP.allow_caps,
     arg: [
       {
         type: "func",
@@ -71,7 +87,7 @@ let scenario = {
   },
   create_service: {
     name: "create_service",
-    cb: AUTH.create_service,
+    cb: SRV.create_service,
     arg: [
       {
         type: "func",
@@ -85,24 +101,57 @@ let scenario = {
       }
     ]
   },
-  get_caps: {
-    name: "get_caps",
-    cb: AUTH.get_caps,
-    arg: []
-  },
-  get_sii: {
-    name: "get_sii",
-    cb: AUTH.get_sii,
-    arg: [] 
-  },
-  get_license: {
-    name: "get_license",
-    cb: AUTH.get_license,
-    arg: []
+  get_config: {
+    name: "get_config",
+    cb: SRV.get_config,
+    arg: [
+      {
+        type: "func",
+        name: "sii",
+        data: "get_sii"
+      },
+    ]
   },
   get_capId: {
     name: "get_capId",
-    cb: AUTH.get_capId,
+    cb: CAP.get_capId,
+    arg: [
+      {
+        type: "func",
+        name: "caps",
+        data: "get_allowedCaps"
+      },
+    ]
+  },
+  get_expCaps: {
+    name: "get_expCaps",
+    cb: CAP.get_expCaps,
+    arg: [
+      {
+        type: "func",
+        name: "sii",
+        data: "get_sii"
+      }
+    ]
+  },
+  get_sii: {
+    name: "get_sii",
+    cb: SRV.get_sii,
+    arg: [] 
+  },
+  get_allowedCaps: {
+    name: "get_allowedCaps",
+    cb: SRV.get_allowedCaps,
+    arg: []
+  },
+  get_license: {
+    name: "get_license",
+    cb: SRV.get_license,
+    arg: []
+  },
+  next_srv: {
+    name: "next_srv",
+    cb: SRV.next_srv,
     arg: []
   }
 }
@@ -110,4 +159,3 @@ let scenario = {
 module.exports = async(num) => {
   Test(scenario, num);
 }
-
