@@ -31,9 +31,14 @@ let scenario = {
         data: "get_license"
       },
       {
-        type: "func",
-        name: "iid",
-        data: "get_informatics"
+        type: "const",
+        name: "type",
+        data: "drug"
+      },
+      {
+        type: "var",
+        name: "data",
+        data: "infotics/drug"
       }
     ]
   },

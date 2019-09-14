@@ -1,23 +1,25 @@
 [Corner Test Framework ]
 ========================
 
-- Mainly helps to perform functional and performance tests, by specifying a scenario  
-  using json format.
+- Mainly helps to perform functional and performance tests, by
+  specifying a scenario using json format.
 
 Usage 
 ------
 To run a test scenario:
   $ npm run test /path/<filename>.sc <number of loop>
 
-- The framework reports execution status (PASS/FAIL) of every functions and summary report
-  at the end of execution.
+- The framework reports execution status (PASS/FAIL) of every 
+  functions and summary report at the end of execution.
 
 Scenarios
 ---------
  - Test scenarios are in written in json form
  - syntax: 
 
-   FUNC_OBJ: {      NOTE: function object identifier '_start' is a keyword that marks where exection starts 
+   FUNC_OBJ: {
+     NOTE: function object identifier '_start' is a keyword that 
+           marks where exection starts 
      name:  a name given to this test action
      cb:    callback to execute
      arg:   list of arg objects
@@ -25,16 +27,21 @@ Scenarios
 
   arg_obj: {
     type:  type of argument; can be 'func', 'var' or 'const'
-    name:  a name given to attribute of the arg, which will be passed to cb.
-    data:  - If type is 'func' data points to another FUNC_OBJ to execute, to get the arg value.
-           - If type is 'const' data is the arg value.
-           - And if type is 'var' data is mockroo generated value
+    name:  a name given to attribute of the arg, which will be
+           passed to cb.
+    data:  
+      - If type is 'func' data points to another FUNC_OBJ to execute, 
+        to get the arg value.
+      - If type is 'const' data is the arg value.
+      - And if type is 'var' data is mockroo generated value
   }
 
 Modules
 ---------
- - Modules are implementations of functions those will be used to create different test scenarios.
- - Currently there are a couple of platform and service modules implemented. SEE ./modules/*
+ - Modules are implementations of functions those will be used 
+   to create different test scenarios.
+ - Currently there are a couple of platform and service modules
+   implemented. SEE ./modules/*
  
 
 Examples

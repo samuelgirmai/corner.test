@@ -8,7 +8,11 @@ async function Mockaroo(type)
     data: null
   }
 
-  return await NET.request(prop);
+  let ret = await NET.request(prop);
+
+  //console.log(JSON.stringify(ret, 0, '  '));
+
+  return ret;
 }
 
 export async function Data(type)

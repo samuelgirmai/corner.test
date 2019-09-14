@@ -101,21 +101,43 @@ export async function signout(arg)
   return ret.status == 'ok'?ret.status: null;
 }
 
-export async function create_idata(arg)
+export async function batch_create_idata(arg)
 {
   let ret, data;
 
-  let drug = {
-    name: 'paracetamol'
+  console.log(JSON.stringify(arg, 0, '  '));
+
+  data = {
+    auth: {
+      license: arg.license,
+    },
+    param: {
+      type: arg.type,
+      data: arg.data
+    }
   }
+
+  for(let i = 0; i<arg.data.length; i++){
+    data['param'].data = arg.data[i];
+    console.log(JSON.stringify(data, 0, '  '));
+    ret = await API.run(data, '/app/emr/infotics/idata/write');
+    console.log(ret);
+  }
+
+  return ret.status == "ok"?ret.result.iid:null;
+}
+
+export async function create_idata(arg)
+{
+  let ret, data;
 
   data = {
     auth: {
       license: arg.license,
     }, 
     param: {
-      type: 'drug',
-      data: drug
+      type: arg.type,
+      data: arg.data
     }
   }
 
@@ -151,6 +173,7 @@ const INF = {
   create_informatics:    create_user,
   get_informatics:       get_user,
   signin_informatics:    signin,
+  batch_create_idata:	 batch_create_idata,
   create_idata:          create_idata,
   get_idata:             get_idata,
   get_license:           get_license
