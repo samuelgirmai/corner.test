@@ -2,6 +2,7 @@ import inquirer from 'inquirer'
 
 import {
   create_opd,
+  create_exam,
   get_opd,
   subscribe_notification,
   signin,
@@ -22,7 +23,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Practitioner Test App',
-    choices: ['create.opd', 'get.opd', 'subscribe', 'signin', 'signout', 'create.user', 'get.user', 'list.users', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
+    choices: ['create.exam', 'create.opd', 'get.opd', 'subscribe', 'signin', 'signout', 'create.user', 'get.user', 'list.users', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
   }
 ];
 
@@ -74,6 +75,9 @@ export async function practner_start()
       break;
     case 'get.opd':
       await get_opd(token);
+      break;
+    case 'create.exam':
+      await create_exam(token);
       break;
     case '<<back':
       return;

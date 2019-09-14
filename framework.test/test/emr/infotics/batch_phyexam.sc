@@ -1,8 +1,8 @@
 /*
  * Informatics Regression test scenario
  */
-import {Test} from '../../core/logic'
-import INFO from '../../module/service/emr/infotics/infotics.js'
+import {Test} from '../../../core/logic'
+import INFO from '../../../module/service/emr/infotics/infotics.js'
 
 let scenario = {
   _start: {

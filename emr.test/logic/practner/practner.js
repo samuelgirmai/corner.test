@@ -188,8 +188,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "805118",
-      password: "j@G3n)O2",
+      username: "462431",
+      password: "h@A0c*B2",
     }
   }
 
@@ -223,6 +223,41 @@ export async function signout(token)
   _print(ret, null);
 }
 
+export async function create_exam(token)
+{
+  let rec, ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  let exam = {
+    repeat: false, 
+    chief_compliant: 'headache',
+    allergy: ["770397"],
+    vitalsign: ["865658"]
+  }
+
+  let data = {
+    auth: {
+      //license: CONFIG.auth.license,
+      token: token,
+
+    },
+    param: {
+      mrn: "027154",
+      rid: "894232",
+      exam: exam
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/practner/patient/record/exam/update');
+
+  _print(ret, null);
+
+}
+
 export async function create_precord(token)
 {
   let rec, ret;
@@ -233,7 +268,7 @@ export async function create_precord(token)
   }
 
   rec = {
-    dialog: {
+    /*dialog: {
       chief_complaint: 'non stop headache',
       visit_repeat: false,
       drug: ['111', '222'],
@@ -242,7 +277,7 @@ export async function create_precord(token)
     },
     lab: ['71', '24', '32', '40'],
     ncod: ['25', '51', '10', '21', '23'],
-    drug: ['13', '23', '43', '12']
+    drug: ['13', '23', '43', '12']*/
   }
 
   let data = {
@@ -251,7 +286,7 @@ export async function create_precord(token)
       token: token,
     }, 
     param: {
-      mrn: "596788",
+      mrn: "027154",
       rec: rec
     }
   }
