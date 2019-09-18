@@ -31,17 +31,12 @@ class RegService extends Component{
     
     
     let rows = [];
-
     this.state = {
       services: STORE.read('services', null),
       allow: null,
       revoke: null,
       reg: null
     }
-  }
-
-  componentDidMount(){
-    //this.setState({refresh: 1});
   }
 
   add = () => {

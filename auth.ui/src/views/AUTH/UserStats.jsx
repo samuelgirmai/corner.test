@@ -8,19 +8,41 @@ import CONFIG from 'config/config'
 import STREAM from 'stream/stream'
 import STORE from 'store/main'
 import AUTH from 'logic/auth'
+import _ from 'lodash'
 
 class UserStats extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      users_count: STORE.read('stats', 'users_count')
+      users_count: STORE.read('stats', 'users_count'),
+      offline: 0,
+      online: 0
     }
 
     STREAM.listen("/auth/stats", [{
       e_name: 'e_stats',
       cb: this.onStats
     }]);
+  }
+
+  componentDidMount(){
+    this.heartbeatMonitor();
+  }
+
+  getState = async() => {
+    let s = await AUTH.get_heartbeat();
+
+    if(s.status == "ok"){
+      this.setState({
+        offline: s.result.state.offline.length,
+        online: s.result.state.online.length + 1
+      });
+    }
+  }
+
+  heartbeatMonitor = () => {
+    setInterval(this.getState, 5000);
   }
 
   getStats = async(arg) => {
@@ -51,7 +73,7 @@ class UserStats extends Component {
    
       <div>
       <Row>
-        <Col md={4}>
+        <Col md={3}>
           <StatsCard
             bigIcon={<i className="fa fa-user-o"></i>}
             statsText="Persons"
@@ -60,7 +82,7 @@ class UserStats extends Component {
             statsIconText="Updated now"
           />
         </Col>
-        <Col md={4}>
+        <Col md={3}>
           <StatsCard
             bigIcon={<i className="fa fa-desktop"></i>}
             statsText="Clients"
@@ -69,11 +91,20 @@ class UserStats extends Component {
             statsIconText="Updated now"
           />
         </Col>
-        <Col md={4}>
+        <Col md={3}>
           <StatsCard
             bigIcon={<i className="fa fa-server"></i>}
             statsText="Services"
             statsValue={this.state.users_count.service.toString()}
+            statsIcon={<a onClick={() => this.getStats("service")}><i className="fa fa-refresh"></i></a>}
+            statsIconText="Updated now"
+          />
+        </Col>
+        <Col md={3}>
+          <StatsCard
+            bigIcon={<i className="fa fa-signal"></i>}
+            statsText="Online"
+            statsValue={this.state.online.toString()}
             statsIcon={<a onClick={() => this.getStats("service")}><i className="fa fa-refresh"></i></a>}
             statsIconText="Updated now"
           />
