@@ -1,0 +1,67 @@
+{
+  "config": {
+    "target": "http://127.0.0.1:22000",
+    "phases": [
+      {
+        "duration": 10,
+        "arrivalRate": 2,
+        "name": "Warm up"
+      }
+    ],
+    "processor": "../logic/emr.js"
+  },
+  "scenarios": [
+    {
+      "name": "MRU scenario",
+      "flow": [
+        {
+          "function": "get_auth"
+        },
+        {
+          "function": "get_pii"
+        },
+        {
+          "post": {
+            "url": "/app/emr/mru/patient/write",
+            "json": {
+              "auth": "{{ auth }}",
+              "param": "{{ param }}"
+            },
+            "capture": {
+              "json": "$.result.patient",
+              "as": "p"
+            }
+          }
+        },
+        {
+          "post": {
+            "url": "/app/emr/mru/patient/read",
+            "json": {
+              "auth": "{{ auth }}",
+              "param": {
+                "mrn": "{{ p.mrn }}"
+              }
+            }
+          }
+        },
+        {
+          "post": {
+            "url": "/app/emr/mru/patient/update",
+            "json": {
+              "auth": "{{ auth }}",
+              "param": { 
+                "user_id": "{{ p.user_id }}", 
+                "mrn": "{{ p.mrn }}", 
+                "pii": {
+                  "address": {
+                    "woreda":"kolfe"
+                   }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

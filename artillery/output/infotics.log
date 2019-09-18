@@ -1,0 +1,93 @@
+Started phase 0 (Warm up), duration: 20s @ 16:33:18(+0300) 2019-09-18
+Report @ 16:33:28(+0300) 2019-09-18
+Elapsed time: 10 seconds
+  Scenarios launched:  99
+  Scenarios completed: 19
+  Requests completed:  949
+  RPS sent: 104.47
+  Request latency:
+    min: 12.7
+    max: 1067.7
+    median: 387.9
+    p95: 776.7
+    p99: 1017.3
+  Codes:
+    200: 949
+
+Report @ 16:33:38(+0300) 2019-09-18
+Elapsed time: 20 seconds
+  Scenarios launched:  101
+  Scenarios completed: 19
+  Requests completed:  930
+  RPS sent: 101.1
+  Request latency:
+    min: 515.3
+    max: 2143.6
+    median: 1107.3
+    p95: 1697.7
+    p99: 1878.7
+  Codes:
+    200: 930
+
+Report @ 16:33:48(+0300) 2019-09-18
+Elapsed time: 30 seconds
+  Scenarios launched:  0
+  Scenarios completed: 23
+  Requests completed:  883
+  RPS sent: 86
+  Request latency:
+    min: 992
+    max: 2668.9
+    median: 1721.9
+    p95: 2379.5
+    p99: 2640.3
+  Codes:
+    200: 883
+
+Report @ 16:33:58(+0300) 2019-09-18
+Elapsed time: 40 seconds
+  Scenarios launched:  0
+  Scenarios completed: 56
+  Requests completed:  890
+  RPS sent: 83.73
+  Request latency:
+    min: 623.2
+    max: 2262.5
+    median: 1360.5
+    p95: 2006.6
+    p99: 2209.4
+  Codes:
+    200: 890
+
+Report @ 16:34:02(+0300) 2019-09-18
+Elapsed time: 44 seconds
+  Scenarios launched:  0
+  Scenarios completed: 83
+  Requests completed:  348
+  RPS sent: 67.77
+  Request latency:
+    min: 42.6
+    max: 1448.6
+    median: 755.8
+    p95: 1284.4
+    p99: 1384.9
+  Codes:
+    200: 348
+
+All virtual users finished
+Summary report @ 16:34:02(+0300) 2019-09-18
+  Scenarios launched:  200
+  Scenarios completed: 200
+  Requests completed:  4000
+  RPS sent: 91.14
+  Request latency:
+    min: 12.7
+    max: 2668.9
+    median: 1142.8
+    p95: 2104.3
+    p99: 2389.3
+  Scenario counts:
+    Informatics scenario: 200 (100%)
+  Codes:
+    200: 4000
+

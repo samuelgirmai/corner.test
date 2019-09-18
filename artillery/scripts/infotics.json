@@ -1,0 +1,56 @@
+{
+  "config": {
+    "target": "http://127.0.0.1:22000",
+    "phases": [
+      {
+        "duration": 20,
+        "arrivalRate": 10,
+        "name": "Warm up"
+      }
+    ],
+    "processor": "../logic/emr.js"
+  },
+  "scenarios": [
+    {
+      "name": "Informatics scenario",
+      "flow": [
+        {
+          "function": "get_auth"
+        },
+        {
+          "function": "get_idata"
+        },
+        {
+          "loop": [
+            {
+              "post": {
+                "url": "/app/emr/infotics/idata/write",
+                "json": {
+                  "auth": "{{ auth }}",
+                  "param": "{{ param }}"
+                },
+                "capture": {
+                  "json": "$.result.iid",
+                  "as": "iid"
+                }
+              }
+            },
+            {
+              "post": {
+                "url": "/app/emr/infotics/idata/read",
+                "json": { 
+                  "auth": "{{ auth }}",
+                  "param": {
+                    "iid": "{{ iid }}",
+                    "type": "{{param.type}}"
+                  }
+                }
+              }
+           }
+           ],
+           "count": "10"
+        }
+      ]
+    }
+  ]
+}
