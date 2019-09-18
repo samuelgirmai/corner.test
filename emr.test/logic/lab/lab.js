@@ -97,12 +97,6 @@ export async function change_passwd(token)
 {
   let ret;
 
-  let security = {
-    username: "021362",
-    oldpassword: "t#M4o^K2",
-    password: "j@G3n)O2",
-  }
-
   if(!token){
     console.log('   [!] not logged in?');
     return;
@@ -114,7 +108,9 @@ export async function change_passwd(token)
       token: token
     },
     param: {
-      security: security
+      username: "640142",
+      oldpassword: "toor",
+      newpassword: "j@G3n)O2"
     }
   }
 

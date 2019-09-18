@@ -14,6 +14,9 @@ async function init_data()
 {
   STORE.init();
 
+  //let s = await AUTH.get_heartbeat();
+  //alert(JSON.stringify(s, 0, '  '));
+
   await AUTH.list_caps();
   await AUTH.list_persons();
   await AUTH.list_clients();

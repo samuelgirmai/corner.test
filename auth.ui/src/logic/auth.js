@@ -231,6 +231,24 @@ export async function remove_service(uid)
   return ret;
 }
 
+export async function get_heartbeat()
+{
+  let ret;
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license
+    },
+    param: {}
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/services/state/read');
+
+  _print(ret, 'state');
+
+  return ret;
+}
+
 export async function list_caps()
 {
   let ret;
@@ -366,22 +384,23 @@ export async function get_stats(type, args)
 }
 
 const AUTH =  {
-  create_service: create_service,
-  create_client: create_client,
-  create_person: create_person,
-  remove_person: remove_person,
-  remove_client: remove_client,
-  remove_service: remove_service,
-  list_services: list_services,
-  list_clients: list_clients,
-  list_persons: list_persons,
-  list_caps: list_caps,
-  remove_cap: remove_cap,
-  list_maps: list_maps,
-  allow_caps: allow_caps,
-  revoke_caps: revoke_caps,
-  list_logs: list_logs,
-  get_stats: get_stats
+  create_service:	create_service,
+  create_client:	create_client,
+  create_person:	create_person,
+  remove_person:	remove_person,
+  remove_client:	remove_client,
+  remove_service:	remove_service,
+  get_heartbeat: 	get_heartbeat,
+  list_services:	list_services,
+  list_clients:		list_clients,
+  list_persons:		list_persons,
+  list_caps:		list_caps,
+  remove_cap:		remove_cap,
+  list_maps:		list_maps,
+  allow_caps:		allow_caps,
+  revoke_caps:		revoke_caps,
+  list_logs:		list_logs,
+  get_stats:		get_stats
 };
 
 export default AUTH;

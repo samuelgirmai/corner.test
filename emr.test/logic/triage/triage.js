@@ -96,12 +96,6 @@ export async function change_passwd(token)
 {
   let ret;
 
-  let security = {
-    username: "798434",
-    oldpassword: "d#I9c!O8",
-    password: "j@G3n)O2",
-  }
-
   if(!token){
     console.log('   [!] not logged in?');
     return;
@@ -113,7 +107,9 @@ export async function change_passwd(token)
       token: token
     },
     param: {
-      security: security
+      username: "640142",
+      oldpassword: "toor",
+      newpassword: "j@G3n)O2"
     }
   }
 
@@ -131,8 +127,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "698415",
-      password: "r^H8c%P3",
+      username: "640142",
+      password: "j@G3n)O2",
     }
   }
 
@@ -140,7 +136,7 @@ export async function signin()
   
   _print(ret, 'token');
 
-   return ret.status == "ok"?ret.result.token:null
+  return ret.status == "ok"?ret.result.token:null
 }
 
 export async function signout(token)
