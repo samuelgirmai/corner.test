@@ -76,7 +76,9 @@ export const services = [
     "/platform/auth/users/access",
     "/app/emr/mru/patient/assert",
     "/app/emr/infotics/idata/assert",
-    "/app/emr/infotics/idata/read"
+    "/app/emr/infotics/idata/read",
+    "/app/emr/notif/write",
+    "/app/emr/notif/read"
   ]
 },
 {
@@ -162,7 +164,9 @@ export const services = [
   "caps": [
     "/platform/auth/users/person",
     "/platform/auth/users/access",
-    "app/emr/mru/patient/assert"
+    "app/emr/mru/patient/assert",
+    "/app/emr/notif/write",
+    "/app/emr/notif/read"
   ]
 },
 {
@@ -178,7 +182,8 @@ export const services = [
   "caps": [
     "/platform/auth/users/person",
     "/platform/auth/users/access",
-    "app/emr/mru/patient/assert"
+    "app/emr/mru/patient/assert",
+    "/app/emr/notif/read"
   ]
 },
 {

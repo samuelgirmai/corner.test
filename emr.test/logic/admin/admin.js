@@ -42,7 +42,7 @@ export async function create_user()
       woreda: "Azebo",
       kebele: "11",
       hous_no: "122",
-      phone_number: "0969334427"
+      phone_number: "09"+Math.random().toString().slice(2,10)
     }
   }
 
@@ -54,10 +54,10 @@ export async function create_user()
       pii: u,
       //user_type: 'cofficer'
       //user_type: 'triage'
-      //user_type: 'practitioner'
+      user_type: 'practitioner'
       //user_type: 'informatics'
       //user_type: 'labtech'
-      user_type: 'pharmacist'
+      //user_type: 'pharmacist'
     }
   }
 
@@ -77,12 +77,12 @@ export async function remove_user()
     },
     param: {
       user_id: "766266",
-      //user_type: "cofficer"
+      user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
       //user_type: "labtech"
       //user_type: "informatics"
-      user_type: "pharmacist"
+      //user_type: "pharmacist"
     }
   }
 
@@ -118,13 +118,13 @@ export async function assign_role()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "684454",
+      user_id: "878532",
       //user_type: "cofficer"
       //user_type: "triage"
-      //user_type: "practitioner"
+      user_type: "practitioner"
       //user_type: "labtech"
       //user_type: "informatics"
-      user_type: "pharmacist"
+      //user_type: "pharmacist"
     }
 
     }

@@ -188,8 +188,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "462431",
-      password: "h@A0c*B2",
+      username: "878532",
+      password: "r#D2n&M5",
     }
   }
 
@@ -235,8 +235,8 @@ export async function create_exam(token)
   let exam = {
     repeat: false, 
     chief_compliant: 'headache',
-    allergy: ["770397"],
-    vitalsign: ["865658"]
+    allergy: [{id: "463503"}, {id: "565011"}],
+    vitalsign: [{id: "588447"}]
   }
 
   let data = {
@@ -246,13 +246,109 @@ export async function create_exam(token)
 
     },
     param: {
-      mrn: "027154",
-      rid: "894232",
+      mrn: "460278",
+      rid: "590477",
       exam: exam
     }
   }
 
   ret = await API.run(data, '/app/emr/practner/patient/record/exam/update');
+
+  _print(ret, null);
+
+}
+
+export async function create_order(token)
+{
+  let rec, ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+  
+  let order = {
+    lab: [{id: "365596"}, {id: "615852"}],
+  }
+  
+  let data = {
+    auth: {
+      //license: CONFIG.auth.license,
+      token: token,
+
+    },
+    param: {
+      mrn: "460278",
+      rid: "590477",
+      order: order
+    }
+  }
+  
+  ret = await API.run(data, '/app/emr/practner/patient/record/order/update');
+  
+  _print(ret, null);
+
+}
+export async function create_outcome(token)
+{
+  let rec, ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+  
+  let outcome = {
+    drug: [{id: "831215"}, {id: "152849"}],
+    referal: {id: "777279"}
+  }
+  
+  let data = {
+    auth: {
+      //license: CONFIG.auth.license,
+      token: token,
+
+    },
+    param: {
+      mrn: "460278",
+      rid: "590477",
+      outcome: outcome
+    }
+  }
+  
+  ret = await API.run(data, '/app/emr/practner/patient/record/outcome/update');
+  
+  _print(ret, null);
+
+}
+
+export async function create_diagnosis(token)
+{
+  let rec, ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  let diagnosis = {
+    ncod: [{id: "594220"}, {id: "572831"}],
+  }
+
+  let data = {
+    auth: {
+      //license: CONFIG.auth.license,
+      token: token,
+
+    },
+    param: {
+      mrn: "460278",
+      rid: "590477",
+      diagnosis: diagnosis
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/practner/patient/record/diagnosis/update');
 
   _print(ret, null);
 
@@ -286,7 +382,7 @@ export async function create_precord(token)
       token: token,
     }, 
     param: {
-      mrn: "027154",
+      mrn: "460278",
       rec: rec
     }
   }
@@ -312,8 +408,8 @@ export async function read_precord(token)
       token: token,
     },
     param: {
-      mrn: "510226",
-      rid: "630413"
+      mrn: "460278",
+      rid: "590477"
     }
   }
 
@@ -322,7 +418,7 @@ export async function read_precord(token)
   _print(ret, null);
 }
 
-export async function modify_precord(token)
+export async function read_outcome(token)
 {
   let rec, ret, data;
 
@@ -330,29 +426,46 @@ export async function modify_precord(token)
     console.log('   [!] not logged in?');
     return;
   }
-
-  rec = {
-    dialog: {
-      visit_repeat: true,
-    }
-  }
-
   data = {
    auth: {
       //license: CONFIG.auth.license,
       token: token,
     },
     param: {
-      mrn: "510226",
-      rid: "630413",
-      rec: rec
+      mrn: "460278",
+      rid: "590477",
     }
   }
   
-  ret = await API.run(data, '/app/emr/practner/patient/record/update');
+  ret = await API.run(data, '/app/emr/practner/patient/record/outcome/read');
   
   _print(ret, null);
 }
+
+export async function read_order(token)
+{ 
+  let rec, ret, data;
+  
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  } 
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token,
+    },
+    param: {
+      mrn: "460278",
+      rid: "590477",
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/practner/patient/record/order/read');
+
+  _print(ret, null);
+}
+
 export async function remove_precord(token)
 {
   let ret, data;
@@ -368,8 +481,8 @@ export async function remove_precord(token)
       token: token,
     },
     param: {
-      mrn: "510226",
-      rid: "630413"
+      mrn: "460278",
+      rid: "590477"
     }
   }
   

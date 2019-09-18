@@ -3,6 +3,11 @@ import inquirer from 'inquirer'
 import {
   create_opd,
   create_exam,
+  create_order,
+  create_diagnosis,
+  create_outcome,
+  read_outcome,
+  read_order,
   get_opd,
   subscribe_notification,
   signin,
@@ -23,7 +28,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Practitioner Test App',
-    choices: ['create.exam', 'create.opd', 'get.opd', 'subscribe', 'signin', 'signout', 'create.user', 'get.user', 'list.users', 'create.precord', 'read.precord', 'modify.precord','remove.precord','read.stats','<<back']
+    choices: ['signin', 'create.precord','create.exam', 'create.order', 'create.outcome','create.diagnosis', 'read.outcome','read.order','create.opd', 'get.opd', 'subscribe', 'signout', 'create.user', 'get.user', 'list.users', 'read.precord', 'remove.precord','read.stats','<<back']
   }
 ];
 
@@ -78,6 +83,21 @@ export async function practner_start()
       break;
     case 'create.exam':
       await create_exam(token);
+      break;
+    case 'create.order':
+      await create_order(token);
+      break;
+    case 'create.outcome':
+      await create_outcome(token);
+      break;
+    case 'create.diagnosis':
+      await create_diagnosis(token);
+      break;
+    case 'read.outcome':
+      await read_outcome(token);
+      break;
+    case 'read.order':
+      await read_order(token);
       break;
     case '<<back':
       return;
