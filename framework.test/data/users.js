@@ -7,7 +7,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {
-    "hous_no":  "122" ,
+    "house_number":  "122" ,
     "kebele":  "11" ,
     "phone_number":  "0911303030" ,
     "region":  "Tigray" ,
@@ -23,7 +23,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {
-    "hous_no":  "123" ,
+    "house_number":  "123" ,
     "kebele":  "13" ,
     "phone_number":  "0911313131" ,
     "region":  "Tigray" ,
@@ -39,7 +39,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {
-    "hous_no":  "124" ,
+    "house_number":  "124" ,
     "kebele":  "11" ,
     "phone_number":  "0911323232" ,
     "region":  "Tigray" ,
@@ -55,7 +55,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "F" ,
   "address": {
-    "hous_no":  "125" ,
+    "house_number":  "125" ,
     "kebele":  "10" ,
     "phone_number":  "0911333333" ,
     "region":  "Tigray" ,
@@ -71,7 +71,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "F" ,
   "address": {
-    "hous_no":  "126" ,
+    "house_number":  "126" ,
     "kebele":  "15" ,
     "phone_number":  "0911343434" ,
     "region":  "Tigray" ,
@@ -87,7 +87,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {
-    "hous_no":  "127" ,
+    "house_number":  "127" ,
     "kebele":  "11" ,
     "phone_number":  "0911353535" ,
     "region":  "Tigray" ,
@@ -103,7 +103,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {
-    "hous_no":  "110" ,
+    "house_number":  "110" ,
     "kebele":  "06" ,
     "phone_number":  "0911505050" ,
     "region":  "Tigray" ,
@@ -119,7 +119,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "F" ,
   "address": {  
-    "hous_no":  "111" ,
+    "house_number":  "111" ,
     "kebele":  "10" ,
     "phone_number":  "0911515151",
     "region":  "Tigray" ,
@@ -135,7 +135,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {  
-    "hous_no":  "111" ,
+    "house_number":  "111" ,
     "kebele":  "07" ,
     "phone_number":  "0911525252" ,
     "region":  "Tigray" ,
@@ -151,7 +151,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {  
-    "hous_no":  "112" ,
+    "house_number":  "112" ,
     "kebele":  "06" ,
     "phone_number":  "0911535353" ,
     "region":  "Tigray" ,
@@ -167,7 +167,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {  
-    "hous_no":  "113" ,
+    "house_number":  "113" ,
     "kebele":  "06" ,
     "phone_number":  "0911545454" ,
     "region":  "Tigray" ,
@@ -183,7 +183,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M",
   "address": {  
-    "hous_no":  "11" ,
+    "house_number":  "11" ,
     "kebele":  "10" ,
     "phone_number":  "0911565656" ,
     "region":  "Tigray" ,
@@ -199,7 +199,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "F" ,
   "address": {
-    "hous_no":  "10" ,
+    "house_number":  "10" ,
     "kebele":  "11" ,
     "phone_number":  "0911555555" ,
     "region":  "Tigray" ,
@@ -215,7 +215,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {
-    "hous_no":  "10" ,
+    "house_number":  "10" ,
     "kebele":  "10" ,
     "phone_number":  "0911575757" ,
     "region":  "Tigray" ,
@@ -231,7 +231,7 @@ export const users = [
   "dob":  "12/12/12" ,
   "gender":  "M" ,
   "address": {
-    "hous_no":  "09" ,
+    "house_number":  "09" ,
     "kebele":  "11" ,
     "phone_number":  "0911585858" ,
     "region":  "Tigray" ,

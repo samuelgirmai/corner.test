@@ -24,7 +24,7 @@ function get_pii(context, ee, done)
         zone: "Debub",
         woreda: "Azebo",
         kebele: "11",
-        hous_no: "122",
+        house_number: "122",
         phone_number: "09"+Math.random().toString().slice(2,10)
       }
     }

@@ -95,7 +95,7 @@ export async function create_user(token)
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
-      hous_no: "122",
+      house_number: "122",
       phone_number: "0916828191"
     }
   }
@@ -124,7 +124,7 @@ export async function get_user()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "443778"
+      user_id: "427042"
     }
   }
 
@@ -184,7 +184,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "443778",
+      username: "427042",
       password: "toor",
     }
   }
@@ -243,7 +243,7 @@ export async function create_exam(token)
     },
     param: {
       mrn: "601515",
-      rid: "539109",
+      rid: "051264",
       exam: exam
     }
   }
@@ -306,7 +306,7 @@ export async function create_outcome(token)
 
     },
     param: {
-      mrn: "601515",
+      mrn: "517041",
       rid: "539109",
       outcome: outcome
     }
@@ -338,7 +338,7 @@ export async function create_diagnosis(token)
 
     },
     param: {
-      mrn: "601515",
+      mrn: "517041",
       rid: "539109",
       diagnosis: diagnosis
     }
@@ -365,7 +365,7 @@ export async function create_precord(token)
       token: token,
     }, 
     param: {
-      mrn: "601515",
+      mrn: "517041",
     }
   }
 

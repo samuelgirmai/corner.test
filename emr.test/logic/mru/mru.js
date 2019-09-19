@@ -40,7 +40,7 @@ export async function create_cofficer()
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
-      hous_no: "122",
+      house_number: "122",
       phone_number: "0919333432"
     }
   }
@@ -129,7 +129,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "737064",
+      username: "524676",
       password: "toor",
     }
   }
@@ -185,7 +185,7 @@ export async function create_patient(token)
       zone: "Mirab",
       woreda: "Humera",
       kebele: "01",
-      hous_no: "122",
+      house_number: "122",
       phone_number: "0980191361"
 
     }

@@ -40,7 +40,7 @@ export async function create_user()
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
-      hous_no: "122",
+      house_number: "122",
       phone_number: "0911947655"
     }
   }

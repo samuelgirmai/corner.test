@@ -41,7 +41,7 @@ export async function create_user()
       zone: "Debub",
       woreda: "Azebo",
       kebele: "11",
-      hous_no: "122",
+      house_number: "122",
       phone_number: "09"+Math.random().toString().slice(2,10)
     }
   }
@@ -52,9 +52,9 @@ export async function create_user()
     }, 
     param: {
       pii: u,
-      //user_type: 'cofficer'
+      user_type: 'cofficer'
       //user_type: 'triage'
-      user_type: 'practitioner'
+      //user_type: 'practitioner'
       //user_type: 'informatics'
       //user_type: 'labtech'
       //user_type: 'pharmacist'
@@ -118,10 +118,10 @@ export async function assign_role()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "878532",
-      //user_type: "cofficer"
+      user_id: "524676",
+      user_type: "cofficer"
       //user_type: "triage"
-      user_type: "practitioner"
+      //user_type: "practitioner"
       //user_type: "labtech"
       //user_type: "informatics"
       //user_type: "pharmacist"

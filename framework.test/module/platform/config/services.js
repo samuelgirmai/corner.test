@@ -62,6 +62,21 @@ export const services = [
   ]
 },
 {
+  "sii": {
+    "name": "emr.infotics",
+    "desc": "Informatics micro service",
+    "host": "127.0.0.1:26004",
+    "address": {
+      "phone_number": "0911133133",
+      "email": "emr.infotics@bokri.xyz"
+    }
+  },
+  "caps": [
+    "/platform/auth/users/person",
+    "/platform/auth/users/access"
+  ]
+},
+{
  "sii": {
     "name": "emr.practner",
     "desc": "Practitioner micro service",
@@ -79,21 +94,6 @@ export const services = [
     "/app/emr/infotics/idata/read",
     "/app/emr/notif/write",
     "/app/emr/notif/read"
-  ]
-},
-{
-  "sii": {
-    "name": "emr.infotics",
-    "desc": "Informatics micro service",
-    "host": "127.0.0.1:26004",
-    "address": {
-      "phone_number": "0911133133",
-      "email": "emr.infotics@bokri.xyz"
-    }
-  },
-  "caps": [
-    "/platform/auth/users/person",
-    "/platform/auth/users/access"
   ]
 },
 {
@@ -190,7 +190,7 @@ export const services = [
   "sii": {
     "name": "emr.admin",
     "desc": "Admin micro service",
-    "host": "127.0.0.1:22005",
+    "host": "127.0.0.1:26010",
     "address": {
       "phone_number": "0911151515",
       "email": "emr.admin@bokri.xyz"

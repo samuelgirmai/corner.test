@@ -36,7 +36,7 @@ class PersonReg extends React.Component{
             region: "tigray",
             zone: "",
             woreda: "",
-            hous_no: "001",
+            house_number: "001",
             kebele: "",
             phone_number: []
           }
