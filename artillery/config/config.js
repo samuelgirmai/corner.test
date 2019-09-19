@@ -1,6 +1,6 @@
 module.exports  = {
  auth: {
-    license: "510115088897"
+    license: "698995860267"
   },
   proxy: {
     url: "http://127.0.0.1:22000",

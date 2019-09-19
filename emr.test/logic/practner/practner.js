@@ -124,7 +124,7 @@ export async function get_user()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "041489"
+      user_id: "443778"
     }
   }
 
@@ -184,8 +184,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "878532",
-      password: "r#D2n&M5",
+      username: "443778",
+      password: "toor",
     }
   }
 
@@ -231,8 +231,8 @@ export async function create_exam(token)
   let exam = {
     repeat: false, 
     chief_compliant: 'headache',
-    allergy: [{id: "463503"}, {id: "565011"}],
-    vitalsign: [{id: "588447"}]
+    allergy: [{id: "261294"}, {id: "720952"}],
+   // vitalsign: [{id: "588447"}]
   }
 
   let data = {
@@ -242,8 +242,8 @@ export async function create_exam(token)
 
     },
     param: {
-      mrn: "460278",
-      rid: "590477",
+      mrn: "601515",
+      rid: "539109",
       exam: exam
     }
   }
@@ -274,8 +274,8 @@ export async function create_order(token)
 
     },
     param: {
-      mrn: "460278",
-      rid: "590477",
+      mrn: "601515",
+      rid: "539109",
       order: order
     }
   }
@@ -306,8 +306,8 @@ export async function create_outcome(token)
 
     },
     param: {
-      mrn: "460278",
-      rid: "590477",
+      mrn: "601515",
+      rid: "539109",
       outcome: outcome
     }
   }
@@ -338,8 +338,8 @@ export async function create_diagnosis(token)
 
     },
     param: {
-      mrn: "460278",
-      rid: "590477",
+      mrn: "601515",
+      rid: "539109",
       diagnosis: diagnosis
     }
   }
@@ -359,27 +359,13 @@ export async function create_precord(token)
     return;
   }
 
-  rec = {
-    /*dialog: {
-      chief_complaint: 'non stop headache',
-      visit_repeat: false,
-      drug: ['111', '222'],
-      symptom: 'test symptom',
-      remark: 'test remark'
-    },
-    lab: ['71', '24', '32', '40'],
-    ncod: ['25', '51', '10', '21', '23'],
-    drug: ['13', '23', '43', '12']*/
-  }
-
   let data = {
     auth: {
       //license: CONFIG.auth.license,
       token: token,
     }, 
     param: {
-      mrn: "460278",
-      rec: rec
+      mrn: "601515",
     }
   }
 
@@ -404,8 +390,8 @@ export async function read_precord(token)
       token: token,
     },
     param: {
-      mrn: "460278",
-      rid: "590477"
+      mrn: "601515",
+      rid: "539109"
     }
   }
 
@@ -429,7 +415,7 @@ export async function read_outcome(token)
     },
     param: {
       mrn: "460278",
-      rid: "590477",
+      rid: "539109",
     }
   }
   
