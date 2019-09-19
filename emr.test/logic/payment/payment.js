@@ -29,17 +29,13 @@ function _print(o, key)
 var items = [
   {
     type: "lab",
-    id: "121212",
-    name: "wbc",
-    qty: 12,
-    price: 124.00
+    id: "719803",
+    qty: 12
   },
   {
     type: "lab",
-    id: "343434",
-    name: "hemoglobin",
-    qty: 5,
-    price: 324.50
+    id: "654199",
+    qty: 4
   }]
 
 export async function create_payment(token)
