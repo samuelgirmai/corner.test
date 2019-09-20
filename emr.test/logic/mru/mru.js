@@ -41,7 +41,7 @@ export async function create_cofficer()
       woreda: "Azebo",
       kebele: "11",
       house_number: "122",
-      phone_number: "0919333432"
+      phone_number: "09"+Math.random().toString().slice(2,10)
     }
   }
 

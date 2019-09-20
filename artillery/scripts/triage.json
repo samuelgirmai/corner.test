@@ -3,9 +3,20 @@
     "target": "http://127.0.0.1:22000",
     "phases": [
       {
-        "duration": 2,
-        "arrivalRate": 1,
+        "duration": 10,
+        "arrivalRate": 4,
         "name": "Warm up"
+      },
+      {
+        "duration": 10,
+        "arrivalRate": 20,
+        "rampTo": 50,
+        "name": "Incremental"
+      },
+      {
+        "duration": 10,
+        "arrivalRate": 70,
+        "name": "Sustained max load"
       }
     ],
     "processor": "../logic/emr.js"

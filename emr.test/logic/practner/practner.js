@@ -96,7 +96,7 @@ export async function create_user(token)
       woreda: "Azebo",
       kebele: "11",
       house_number: "122",
-      phone_number: "0916828191"
+      phone_number: "09"+Math.random().toString().slice(2,10)
     }
   }
 
