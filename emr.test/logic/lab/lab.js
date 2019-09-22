@@ -128,8 +128,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "021362",
-      password: "t#M4o^K2",
+      username: "015795",
+      password: "toor",
     }
   }
 
@@ -172,12 +172,16 @@ export async function create_result(token)
     return;
   }
 
-  result = {
-    order: {
-      catagory: 'default',
-      type: {}
-    } 
-  }
+  result = [
+    {
+      id: '312141',
+      result: '200 mg/dL' //FIXME: needs a syntax
+    },
+    {
+      id: '565590',
+      result: '13.5 g/dL' //FIXME: needs a syntax
+    }
+  ]
 
   let data = {
     auth: {
@@ -185,8 +189,8 @@ export async function create_result(token)
       token: token
     }, 
     param: {
-      mrn: "510226",
-      rid: "598096",
+      mrn: "617644",
+      rid: "407339",
       result: result
     }
   }

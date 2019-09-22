@@ -41,6 +41,23 @@ export const services = [
   ]
 },
 {
+  "sii": {
+    "name": "emr.notif",
+    "desc": "EMR notif micro service",
+    "host": "127.0.0.1:26008",
+    "address": {
+      "phone_number": "0911161616",
+      "email": "emr.notif@bokri.xyz"
+    }
+  },
+  "caps": [
+    "/platform/stream/open",
+    "/platform/stream/close",
+    "/app/emr/notif/join",
+    "/app/emr/notif/exit",
+  ]
+},
+{
  "sii": {
     "name": "emr.mru",
     "desc": "MRU micro service",
@@ -121,23 +138,6 @@ export const services = [
 },
 {
   "sii": {
-    "name": "emr.notif",
-    "desc": "EMR notif micro service",
-    "host": "127.0.0.1:26008",
-    "address": {
-      "phone_number": "0911161616",
-      "email": "emr.notif@bokri.xyz"
-    }
-  },
-  "caps": [
-    "/platform/stream/open",
-    "/platform/stream/close",
-    "/app/emr/notif/join",
-    "/app/emr/notif/exit",
-  ]
-},
-{
-  "sii": {
     "name": "emr.finance",
     "desc": "EMR finance micro service",
     "host": "127.0.0.1:26007",
@@ -164,7 +164,8 @@ export const services = [
   "caps": [
     "/platform/auth/users/person",
     "/platform/auth/users/access",
-    "app/emr/mru/patient/assert",
+    "/app/emr/mru/patient/assert",
+    "/app/emr/practner/patient/record/order/read",
     "/app/emr/notif/write",
     "/app/emr/notif/read"
   ]

@@ -108,12 +108,16 @@ export async function create_result(arg)
   if(!arg.result || !arg.result.mrn)
     return null;
 
-  result = {
-    order: {
-      catagory: 'default',
-      type: {}
+  result = [
+    {
+      id: '250711',
+      result: '200 mg/dL' //FIXME: needs a syntax
+    },
+    {
+      id: '340191',
+      result: '13.5 g/dL' //FIXME: needs a syntax
     }
-  }
+  ]
 
   data = {
     auth: {

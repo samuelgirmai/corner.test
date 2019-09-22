@@ -111,19 +111,6 @@ export async function create_precord(arg)
   if(!arg.mrn)
     return null;
 
-  /*rec = {
-    dialog: {
-      chief_complaint: 'non stop headache',
-      visit_repeat: false,
-      drug: ['111', '222'],
-      symptom: 'test symptom',
-      remark: 'test remark'
-    },
-    lab: ['71', '24', '32', '40'],
-    ncod: ['25', '51', '10', '21', '23'],
-    drug: ['13', '23', '43', '12']
-  }*/
-
   data = {
     auth: {
       license: arg.license,
@@ -136,6 +123,32 @@ export async function create_precord(arg)
   ret = await API.run(data, '/app/emr/practner/patient/record/write');
 
   return ret.status == "ok"?{rid: ret.result.rid, mrn: arg.mrn}: null
+}
+
+export async function create_exam(arg)
+{
+  let rec, ret, data, exam;
+
+  exam = {
+    repeat: false,
+    chief_compliant: 'headache',
+    allergy: [{id: "261294"}, {id: "720952"}],
+  }
+
+  data = {
+    auth: {
+      license: arg.license,
+    },
+    param: {
+      mrn: arg.mrn,
+      rid: arg.rid,
+      exam: exam
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/practner/patient/record/exam/update');
+
+  return ret.status == "ok"?true: false
 }
 
 export async function get_precord(arg)
