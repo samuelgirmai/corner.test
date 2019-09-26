@@ -11,6 +11,7 @@ import {
   create_assign,
   remove_assign,
   update_assign,
+  list_assign,
   update_status,
   read_stats
 } from './triage';
@@ -20,7 +21,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Triage test app',
-    choices: ['signin', 'signout', 'change.passwd','create.user', 'get.user', 'list_users', 'create.assign', 'read.assign', 'update.status', 'update.assign', 'remove.assign','read.stats', '<<back']
+    choices: ['signin', 'signout', 'change.passwd','create.user', 'get.user', 'list_users', 'create.assign', 'read.assign', 'update.status', 'update.assign', 'remove.assign','list.assign', 'read.stats', '<<back']
   }
 ];
 
@@ -62,6 +63,9 @@ export async function triage_start()
       break;
     case 'remove.assign':
       await remove_assign(token);
+      break;
+    case 'list.assign':
+      await list_assign(token);
       break;
     case 'read.stats':
       await read_stats(token);

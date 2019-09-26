@@ -184,7 +184,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "427042",
+      username: "458010",
       password: "toor",
     }
   }
@@ -520,6 +520,7 @@ export async function create_opd(token)
       dii: {
         catagory: 'test',
         name: 'pediatrics',
+        client_license: '119891158644',
         address: {
           phone_number: '0911282828'
         }

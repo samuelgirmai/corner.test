@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "NHP shell client",
   "scripts": {
-    "search": "babel-node ./app.js"
+    "mru": "babel-node ./mru.js",
+    "triage": "babel-node ./triage.js"
   },
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {
