@@ -107,6 +107,7 @@ export const services = [
     "/platform/auth/users/person",
     "/platform/auth/users/access",
     "/app/emr/mru/patient/assert",
+    "/app/emr/mru/patient/read",
     "/app/emr/infotics/idata/assert",
     "/app/emr/infotics/idata/read",
     "/app/emr/notif/write",
@@ -127,13 +128,18 @@ export const services = [
     "/platform/auth/users/person",
     "/platform/auth/users/access",
     "/app/emr/mru/patient/assert",
+    "/app/emr/mru/patient/read",
     "/platform/stream/open",
     "/platform/stream/close",
     "/app/emr/triage/stats/join",
     "/app/emr/triage/stats/exit",
     "/app/emr/practner/opd/assert",
+    "/app/emr/practner/opd/read",
     "/app/emr/mru/patient/lastVisit/update",
-    "/app/emr/notif/write"
+    "/app/emr/notif/write",
+    "/app/emr/notif/read",
+    "/app/emr/triage/search/join",
+    "/app/emr/triage/search/exit"
   ]
 },
 {

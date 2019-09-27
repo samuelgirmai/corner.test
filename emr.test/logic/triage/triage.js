@@ -127,8 +127,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "640142",
-      password: "j@G3n)O2",
+      username: "897655",
+      password: "toor",
     }
   }
 
@@ -177,9 +177,9 @@ export async function create_assign(token)
       token: token
     },
     param: {
-      mrn: '596788',
+      mrn: '767028',
       status: 'Blue',
-      opd_id: '283104'
+      opd_id: '038689'
     }
   }
 
@@ -229,7 +229,7 @@ export async function update_status(token)
       token: token
     },
     param: {
-      tid: '797193',
+      tid: '763601',
       status: 2
     }
   }
@@ -283,6 +283,21 @@ export async function remove_assign(token)
   }
 
   ret = await API.run(data, '/app/emr/triage/assign/delete');
+
+  _print(ret, null);
+}
+
+export async function list_assign(token)
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/triage/assign/list');
 
   _print(ret, null);
 }

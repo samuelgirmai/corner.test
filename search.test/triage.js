@@ -9,9 +9,9 @@ stdin.setEncoding('utf-8');
 var needle = "";
 
 var test_init = async() => {
-  await STREAM.connect(CONFIG.stream, "/app/emr/mru/search")
+  await STREAM.connect(CONFIG.stream, "/app/emr/triage/search")
 
-  STREAM.join("/app/emr/mru/search", {
+  STREAM.join("/app/emr/triage/search", {
     id: CONFIG.auth.license
   });
 
@@ -22,7 +22,7 @@ var test_init = async() => {
     }
   ]
 
-  STREAM.listen("/app/emr/mru/search", events);
+  STREAM.listen("/app/emr/triage/search", events);
 }
 
 
@@ -40,10 +40,10 @@ stdin.on("data", function(key) {
 
   let p = {
     from: CONFIG.auth.license,
-    to: "481928532028",
+    to: "474717749188",
     e_name: "e_search",
     data: {
-      type: "patient",
+      type: "assign",
       args: {
         type: "name",
         needle: needle
@@ -51,7 +51,7 @@ stdin.on("data", function(key) {
     }
   }
 
-  STREAM.send("/app/emr/mru/search", p);
+  STREAM.send("/app/emr/triage/search", p);
 });
 
 function on_search(p)
