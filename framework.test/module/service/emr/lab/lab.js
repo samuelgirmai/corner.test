@@ -1,5 +1,6 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
+import _ from 'lodash';
 
 export async function get_license()
 {
@@ -154,13 +155,30 @@ export async function get_result(arg)
   return ret;
 }
 
+export async function get_items(arg)
+{
+  let items  = _.map(arg.result.order.lab, (o) => {
+    return {
+      type: 'lab',
+      id: o.id,
+      qty: 2
+    }
+  });
+ 
+  console.log(items);
+
+  return items.length?{items: items, mrn: arg.result.mrn} :null;
+}
+
+
 const LAB = {
   create_labratory:     create_user,
   get_labratory:        get_user,
   signin_labratory:     signin,
   create_result:        create_result,
   get_result:           get_result,
-  get_license: 	        get_license
+  get_license: 	        get_license,
+  get_items:            get_items
 }
 
 export default LAB;

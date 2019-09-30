@@ -154,7 +154,8 @@ export const services = [
   },
   "caps": [
     "/platform/auth/users/person",
-    "/platform/auth/users/access"
+    "/platform/auth/users/access",
+    "/app/emr/mru/patient/assert"
   ]
 },
 {
