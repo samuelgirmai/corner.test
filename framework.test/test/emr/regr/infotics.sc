@@ -11,7 +11,7 @@ let scenario = {
     arg: [
       {
         type: "func",
-        name: "result",
+        name: "iid",
         data: "create_idata"
       },
       {

@@ -4,6 +4,7 @@
 import {Test} from '../../../core/logic'
 import MRU from '../../../module/service/emr/mru/mru.js'
 import TRG from '../../../module/service/emr/triage/triage.js'
+import PRT from '../../../module/service/emr/practner/practner.js'
 
 let scenario = {
   _start: {
@@ -35,6 +36,11 @@ let scenario = {
         type: "func",
         name: "mrn",
         data: "create_patient"
+      },
+      {
+        type: "func",
+        name: "opd_id",
+        data: "create_opd"   /* used to create valid input data?*/
       },
       {
         type: "func",
@@ -73,6 +79,17 @@ let scenario = {
         name: "license",
         data: "get_license"
       },
+    ]
+  },
+  create_opd: {
+    name: "create_opd",
+    cb: PRT.create_opd,
+    arg: [
+      {
+        type: "func",
+        name: "license",
+        data: "get_license"
+      }
     ]
   },
   create_triage: {

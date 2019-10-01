@@ -145,7 +145,7 @@ export async function create_order(arg)
   ret = await API.run(data, '/app/emr/practner/patient/record/order/update');
 
   console.log(ret);
-  return ret.status == "ok"?{rid: arg.result.rid, mrn: arg.result.mrn}: null
+  return ret.status == "ok"?{rid: arg.result.rid, mrn: arg.result.mrn, order: data.param.order.lab}: null
 }
 
 export async function create_outcome(arg)

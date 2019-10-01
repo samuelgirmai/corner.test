@@ -152,6 +152,7 @@ export async function get_idata(arg)
 {
   let ret, data;
   
+console.log(arg)
   if(!arg.iid)
     return null;
 
@@ -167,7 +168,7 @@ export async function get_idata(arg)
 
   ret = await API.run(data, '/app/emr/infotics/idata/read');
 
-  return ret.status == 'ok'? ret.status.result: null;
+  return ret.status == 'ok'? ret.result.idata: null;
 }
 const INF = {
   create_informatics:    create_user,
