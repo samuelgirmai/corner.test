@@ -68,7 +68,7 @@ export async function get_user()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "770175"
+      user_id: "886264"
     }
   }
 
@@ -97,7 +97,7 @@ export async function change_passwd(token)
   let ret;
 
   let security = {
-    username: "764636",
+    username: "886264",
     oldpassword: "k$H2t#N0",
     password: "j@G3n)O2",
   }
@@ -131,8 +131,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "764636",
-      password: "k$H2t#N0",
+      username: "886264",
+      password: "toor",
     }
   }
 
@@ -217,6 +217,30 @@ export async function read_idata(token)
   }
 
   ret = await API.run(data, '/app/emr/infotics/idata/read');
+
+  _print(ret, null);
+}
+
+export async function list_idata(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+    auth: {
+      //license: CONFIG.auth.license, 
+     token: token
+    },
+    param: {
+      type: 'drug'
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/infotics/idata/list');
 
   _print(ret, null);
 }

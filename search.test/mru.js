@@ -40,13 +40,34 @@ stdin.on("data", function(key) {
 
   let p = {
     from: CONFIG.auth.license,
-    to: "006344829026",
+    to: "913278492930",
     e_name: "e_search",
     data: {
       type: "patient",
       args: {
         type: "name",
-        needle: needle
+        needle: needle,
+        filters: [
+          /*{
+            name: "age",
+            arg: {
+              type: "gt",
+              val: 40
+            }
+          },*/
+          {
+            name: "status",
+            arg: {
+              val: "active",
+            }
+          },
+          {
+            name: "gender",
+            arg: {
+              val: "F"
+            }
+          }
+        ]
       }
     }
   }

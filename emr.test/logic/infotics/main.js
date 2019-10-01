@@ -9,6 +9,7 @@ import {
   list_users,
   read_idata,
   create_idata,
+  list_idata
 } from './infotics';
 
 const main_prompt = [
@@ -16,7 +17,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'informatics test app',
-    choices: ['signin', 'signout', 'change.passwd', 'create.user', 'get.user', 'list.users','create.idata', 'read.idata', '<<back']
+    choices: ['signin', 'signout', 'change.passwd', 'create.user', 'get.user', 'list.users','create.idata', 'read.idata', 'list.idata', '<<back']
   }
 ];
 
@@ -50,10 +51,14 @@ export async function infotics_start()
     case 'read.idata':
       await read_idata(token);
       break;
+    case 'list.idata':
+      await list_idata(token);
+      break;
     case '<<back':
       return;
   }
-   infotics_start();
+
+  infotics_start();
 }
 infotics_start();
 
