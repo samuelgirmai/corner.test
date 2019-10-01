@@ -137,7 +137,7 @@ export async function create_idata(arg)
     }, 
     param: {
       type: arg.type,
-      data: arg.data
+      data: arg.data[0]
     }
   }
 

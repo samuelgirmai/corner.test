@@ -113,16 +113,13 @@ export async function create_assign(arg)
     },
     param: {
       mrn: arg.mrn,
-      status: 1,
-      assign: {
-        catagory: 'BLUE',
-        dept_id: '133133'
-      }
+      status: 'Blue',
+      opd_id: arg.opd_id
     }
   }
 
   ret = await API.run(data, '/app/emr/triage/assign/write');
-
+console.log(ret)
   return ret.status == "ok"?ret.result.tid: null;
 }
 

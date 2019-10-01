@@ -1,6 +1,6 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
-
+import _ from 'lodash'
 export async function get_license()
 {
   return CONFIG.auth.license
@@ -150,6 +150,21 @@ export async function get_dispense(arg)
   return ret.status = "ok"?ret.result.dispense: null;
 }
 
+export async function get_items(arg)
+{
+  let items  = _.map(arg.result.outcome.drug, (o) => {
+    return {
+      type: 'drug',
+      id: o.id,
+      qty: 2
+    }
+  });
+
+  console.log(items, arg);
+
+  return items.length?{items: items, mrn: arg.result.mrn} :null;
+}
+
 const PHM = {
   get_license:          get_license,
   create_pharmacist:    create_user,
@@ -157,6 +172,7 @@ const PHM = {
   signin_pharmacist:    signin,
   create_dispense:      create_dispense,
   get_dispense:         get_dispense,
+  get_items:            get_items
 }
 
 export default PHM;

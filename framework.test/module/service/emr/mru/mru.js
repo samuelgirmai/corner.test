@@ -65,26 +65,6 @@ export async function renew_pcard(arg)
   return ret.status == "ok"? ret.status: null;
 }
 
-export async function print_pcard(arg)
-{
-  let data, ret;
-
-  data = {
-    auth: {
-      license: arg.license,
-    },
-    param: {
-      card_id: arg.card_id
-    }
-  }
-
-  ret = await API.run(data, '/app/emr/mru/patient/card/print');
-
-  //console.log("@print_pcard: "+JSON.stringify(ret, 0, '  '));
-
-  return ret.status == "ok"? ret.status: null;
-}
-
 export async function create_user(arg)
 {
   let data, ret;
@@ -191,6 +171,25 @@ export async function signout(arg)
   return ret.status == "ok"? ret.status: null;
 }
 
+export async function print_pcard(arg)
+{
+  let data, ret;
+
+  data = {
+    auth: {
+      license: arg.license,
+    },
+    param: {
+      mrn: arg.patient.mrn
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/mru/patient/card/print');
+
+
+  return ret.status == "ok"? arg.patient.mrn: null;
+}
+
 
 export async function get_stats(arg)
 {
@@ -222,6 +221,7 @@ const MRU = {
   signin_cofficer:      signin,
   create_patient:	create_patient,
   get_patient:		get_patient,
+  print_pcard:          print_pcard,
   get_stats:		get_stats
 }
 
