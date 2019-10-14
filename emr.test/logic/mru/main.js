@@ -39,7 +39,7 @@ export async function mru_start()
       await change_password(token);
       break;
     case 'create.cofficer':
-      await create_cofficer();
+      await create_cofficer(token);
       break;
     case 'get.cofficer':
       await get_cofficer(token);

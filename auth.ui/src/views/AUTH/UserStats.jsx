@@ -39,6 +39,11 @@ class UserStats extends Component {
         online: s.result.state.online.length + 1
       });
     }
+    else {
+      this.setState({
+        online: 0
+      });
+    }
   }
 
   heartbeatMonitor = () => {

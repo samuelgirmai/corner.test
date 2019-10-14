@@ -184,7 +184,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "458010",
+      username: "523410",
       password: "toor",
     }
   }
@@ -295,8 +295,9 @@ export async function create_outcome(token)
   }
   
   let outcome = {
-    drug: [{id: "831215"}, {id: "152849"}],
-    referal: {id: "777279"}
+    /*drug: [{id: "831215"}, {id: "152849"}],
+    referal: {id: "777279"},*/
+    appointment: "17/12/2019"
   }
   
   let data = {
@@ -306,8 +307,8 @@ export async function create_outcome(token)
 
     },
     param: {
-      mrn: "517041",
-      rid: "539109",
+      mrn: "398641",
+      rid: "699013",
       outcome: outcome
     }
   }
@@ -365,7 +366,7 @@ export async function create_precord(token)
       token: token,
     }, 
     param: {
-      mrn: "517041",
+      mrn: "398641",
     }
   }
 

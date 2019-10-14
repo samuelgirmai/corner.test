@@ -129,7 +129,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "524676",
+      username: "513747",
       password: "toor",
     }
   }
@@ -155,7 +155,7 @@ export async function signout(token)
       license: CONFIG.auth.license,
     },
     param: {
-      token: "876042516422"
+      token: token
     }
   }
 

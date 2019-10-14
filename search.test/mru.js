@@ -55,7 +55,7 @@ stdin.on("data", function(key) {
               val: 40
             }
           },*/
-          {
+          /*{
             name: "status",
             arg: {
               val: "active",
@@ -65,6 +65,12 @@ stdin.on("data", function(key) {
             name: "gender",
             arg: {
               val: "F"
+            },
+          },*/
+          {
+            name: "appointment",
+            arg: {
+              val: "17/12/2019"
             }
           }
         ]

@@ -56,6 +56,8 @@ export async function create_service(arg)
   }
 
   ret = await API.run(data, '/platform/auth/users/service/write');
+
+  console.log(JSON.stringify(ret, 0, '  '));
    
   return ret.status == "ok"? ret.result.user_id: null;
 }

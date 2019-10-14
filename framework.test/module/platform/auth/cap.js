@@ -65,6 +65,8 @@ export async function export_caps(arg)
 
   ret =  await API.run(data, '/platform/auth/caps/export');
 
+  console.log(JSON.stringify(ret, 0, '  '));
+
   return ret.status == "ok"? arg.user_id: null;
 }
 
