@@ -1,6 +1,6 @@
 'use strict';
 
-var c = require('../config/config');
+var c = require('../../../config/config');
 
 function get_auth(context, ee, done) 
 {
