@@ -19,17 +19,17 @@
         "name": "Sustained max load"
       }
     ],
-    "processor": "../logic/emr.js"
+    "processor": "../data/emr.js"
   },
   "scenarios": [
     {
-      "name": "Practitioner scenario",
+      "name": "Pharmacy scenario",
       "flow": [
         {
           "function": "get_auth"
         },
         {
-          "function": "get_exam"
+          "function": "get_dispense"
         },
         {
           "function": "get_pii"
@@ -48,47 +48,50 @@
           }
         },
         {
+          "post": {
+            "url": "/app/emr/practner/patient/record/write",
+            "json": {
+              "auth": "{{ auth }}",
+              "param": { "mrn": "{{ mrn}}" }
+            },
+            "capture": {
+              "json": "$.result.rid",
+              "as": "rid"
+            }
+          }
+        },
+        {
           "loop": [
             {
               "post": {
-                "url": "/app/emr/practner/patient/record/write",
-                "json": {
-                  "auth": "{{ auth }}",
-                   "param": { "mrn": "{{ mrn}}" }
-                },
-                "capture": {
-                  "json": "$.result.rid",
-                  "as": "rid"
-                }
-              }
-            },
-            {
-              "post": {
-                "url": "/app/emr/practner/patient/record/exam/update",
+                "url": "/app/emr/pharmacy/dispense/write",
                 "json": {
                   "auth": "{{ auth }}",
                   "param": {
                     "mrn": "{{ mrn }}",
                     "rid": "{{ rid }}",
-                    "exam": "{{ exam }}"
+                    "dispense": "{{ dispense }}"
                   }
+                },
+                "capture": {
+                  "json": "$.result.did",
+                  "as": "did"
                 }
               }
             },
             {
               "post": {
-              "url": "/app/emr/practner/patient/record/exam/read",
+                "url": "/app/emr/pharmacy/dispense/read",
                 "json": {
                   "auth": "{{ auth }}",
                   "param": { 
-                    "mrn": "{{ mrn}}",
-                    "rid": "{{ rid}}" 
+                    "did": "{{ did}}" 
                   }
                 }
              }
           }
           ],
-          "count": "2"
+          "count": "100"
         }
       ]
     }

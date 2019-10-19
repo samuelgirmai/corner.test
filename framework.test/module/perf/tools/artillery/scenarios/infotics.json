@@ -19,7 +19,7 @@
         "name": "Sustained max load"
       }
     ],
-    "processor": "../logic/emr.js"
+    "processor": "../data/emr.js"
   },
   "scenarios": [
     {
