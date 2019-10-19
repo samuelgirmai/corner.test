@@ -33,22 +33,22 @@ export async function modify_state()
       {
         name: "corner",
         uservices: [
-          {
-            name: "muxer",
-            state: "start"
-          },
-          {
-            name: "auth",
-            state: "start"
-          },
-          {
-            name: "notif",
-            state: "start"
-          },
-          {
-            name: "stream",
-            state: "start"
-          }
+           {
+             name: "muxer",
+             state: "start"
+           },
+           {
+             name: "auth",
+             state: "start"
+           },
+           {
+             name: "notif",
+             state: "start"
+           },
+           {
+             name: "stream",
+             state: "start"
+           }
         ]
       },
       {
@@ -59,7 +59,23 @@ export async function modify_state()
             state: "start"
           },
           {
-            name: "practner",
+            name: "infotics",
+            state: "start"
+          },
+          {
+            name: "notif",
+            state: "start"
+          },
+          {
+            name: "pharmacy",
+            state: "start"
+          },
+          {
+            name: "finance",
+            state: "start"
+          },
+          {
+            name: "lab",
             state: "start"
           },
           {
@@ -67,7 +83,19 @@ export async function modify_state()
             state: "start"
           },
           {
-            name: "infotics",
+            name: "payment",
+            state: "start"
+          },
+          {
+            name: "practner",
+            state: "start"
+          },
+          {
+            name: "triage",
+            state: "start"
+          },
+          {
+            name: "storeSimulator",
             state: "start"
           }
         ]
