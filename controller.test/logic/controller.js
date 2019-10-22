@@ -69,6 +69,30 @@ export async function modify_state()
           {
             name: "infotics",
             state: "start"
+          },
+          {
+            name: "lab",
+            state: "start"
+          },
+          {
+            name: "triage",
+            state: "start"
+          },
+          {
+            name: "pharmacy",
+            state: "start"
+          },
+          {
+            name: "finance",
+            state: "start"
+          },
+          {
+            name: "payment",
+            state: "start"
+          },
+          {
+            name: "notif",
+            state: "start"
           }
         ]
       }

@@ -289,17 +289,27 @@ export async function remove_assign(token)
 
 export async function list_assign(token)
 {
-  let ret, data;
+  let ret, data, pagin = {};
 
   data = {
     auth: {
       license: CONFIG.auth.license,
-    }
+    },
+    param: {}
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/list');
-
-  _print(ret, null);
+  for(let i = 1; i < 10; i++){
+    pagin = {
+      page_num: i,
+      size: 3,
+      order_by: 'asc'
+    }
+    data.param.pagin = pagin;
+    ret = await API.run(data, '/app/emr/triage/assign/list');
+    _print(ret, null);
+    if(ret.status !== 'err')
+      console.log("######################### PAGE ",i, "##########################")
+  }
 }
 
 export async function read_stats(token)

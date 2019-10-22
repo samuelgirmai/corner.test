@@ -1,6 +1,6 @@
 module.exports  = {
  auth: {
-    license: "114728379859"   /*could be emr or auth client license depending on perf scenatio applied*/
+    license: "967014023741"   /*could be emr or auth client license depending on perf scenatio applied*/
   },
   proxy: {
     url: "http://127.0.0.1:22000",

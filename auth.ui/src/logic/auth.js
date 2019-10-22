@@ -157,7 +157,13 @@ export async function list_persons()
   let data = {
     auth: {
       license: CONFIG.auth.license
-    }
+    },
+    /*param: {
+      pagin: {
+        page_num: 1,
+        size: 20,
+      }
+    }*/
   }
 
   ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/persons/list');
@@ -258,8 +264,13 @@ export async function list_caps()
       license: CONFIG.auth.license
     },
     param: {
-      service_id: null,
-      category: null
+      sid: null,
+      catagory: null,
+      /*pagin: {
+        page_num: 1,
+        size: 20,
+        order_by: 'asc'
+      }*/
     }
   }
 
