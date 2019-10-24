@@ -80,7 +80,7 @@ export async function modify_state()
           },
           {
             name: "mru",
-            state: "stop"
+            state: "start"
           },
           {
             name: "payment",
