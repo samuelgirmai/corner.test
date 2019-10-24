@@ -34,7 +34,7 @@ export function get_config(arg)
   if(sname[0] === 'emr')
     subdir = 'services/emr/';
 
-  conf = CONF_DIR + subdir + sname[1]+'/config/config.js'
+  conf = CONF_DIR + subdir + sname[1]+'/config/config.json'
   
   return conf;
 }
@@ -102,10 +102,14 @@ export async function update_config(arg)
 
   if(fs.existsSync(arg.conf))
   {
-    buf = fs.readFileSync(arg.conf, 'utf8')  
-    buf = buf.replace(/license: .*/gm, 'license: '+ '"' + arg.service.license + '"' + ',');
-    buf =  buf.replace(/service_id: .*/gm, 'service_id: ' + '"' + arg.service.user_id+ '"' +',');
-    fs.writeFileSync(arg.conf ,buf, 'utf8');
+    buf = JSON.parse(fs.readFileSync(arg.conf, 'utf8'));
+
+    if(buf.auth){
+      buf.auth.license = arg.service.license;
+      buf.auth.service_id = arg.service.user_id;
+    }
+
+    fs.writeFileSync(arg.conf, JSON.stringify(buf, 0, '  '), 'utf8');
 
     console.log('[INFO]: Waiting until nodemon restarts the server.....')
     await new Promise(done => setTimeout(done, 3000));

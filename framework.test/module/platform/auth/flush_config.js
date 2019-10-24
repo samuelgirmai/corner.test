@@ -12,10 +12,10 @@ export function get_config_path(arg)
   sname = arg.name.split('.', 2);
 
   if(sname[0] === 'emr'){
-    return '../../corner.backend/services/emr/'+sname[1]+'/config/config.js';
+    return '../../corner.backend/services/emr/'+sname[1]+'/config/config.json';
   }
   else {
-    return '../../corner.backend/platform/'+sname[0]+'/config/config.js';
+    return '../../corner.backend/platform/'+sname[0]+'/config/config.json';
   }
 }
 
@@ -58,10 +58,21 @@ export async function update_config(arg)
 
     if(fs.existsSync(conf))
     {
-      buf = fs.readFileSync(conf, 'utf8');
-      buf = buf.replace(/license: .*/gm, 'license: '+ '"' + s[i].license + '"' + ',');
-      buf =  buf.replace(/service_id: .*/gm, 'service_id: ' + '"' + s[i].user_id+ '"' +',');
-      fs.writeFileSync(conf ,buf, 'utf8');
+
+      buf = JSON.parse(fs.readFileSync(conf, 'utf8'));
+
+      if(buf.auth){      
+        buf.auth.license = s[i].license;
+        buf.auth.service_id = s[i].user_id;
+      }
+
+      if(buf.fs){
+        buf.fs.host = "0.0.0.0";
+      }
+ 
+      //console.log(JSON.stringify(buf, 0, '  '));
+
+      fs.writeFileSync(conf, JSON.stringify(buf, 0, '  '), 'utf8');
     }
   }
 

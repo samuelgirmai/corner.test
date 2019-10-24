@@ -80,7 +80,7 @@ export async function modify_state()
           },
           {
             name: "mru",
-            state: "start"
+            state: "stop"
           },
           {
             name: "payment",
@@ -102,6 +102,21 @@ export async function modify_state()
       }
     ]
   }
+
+  /*let param = {
+    services: [
+      {
+        name: "filesystem",
+        uservices: [
+           {
+             name: "tools",
+             state: "mkfs"
+           }
+         ]
+      }
+    ]
+  }*/
+
 
   /*
    * TODO: change CONFIG.master.url to network address
