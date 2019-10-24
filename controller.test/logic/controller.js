@@ -33,22 +33,22 @@ export async function modify_state()
       {
         name: "corner",
         uservices: [
-          {
-            name: "muxer",
-            state: "start"
-          },
-          {
-            name: "auth",
-            state: "start"
-          },
-          {
-            name: "notif",
-            state: "start"
-          },
-          {
-            name: "stream",
-            state: "start"
-          }
+           {
+             name: "muxer",
+             state: "start"
+           },
+           {
+             name: "auth",
+             state: "start"
+           },
+           {
+             name: "notif",
+             state: "start"
+           },
+           {
+             name: "stream",
+             state: "start"
+           }
         ]
       },
       {
@@ -59,23 +59,11 @@ export async function modify_state()
             state: "start"
           },
           {
-            name: "practner",
-            state: "start"
-          },
-          {
-            name: "mru",
-            state: "start"
-          },
-          {
             name: "infotics",
             state: "start"
           },
           {
-            name: "lab",
-            state: "start"
-          },
-          {
-            name: "triage",
+            name: "notif",
             state: "start"
           },
           {
@@ -87,17 +75,48 @@ export async function modify_state()
             state: "start"
           },
           {
+            name: "lab",
+            state: "start"
+          },
+          {
+            name: "mru",
+            state: "start"
+          },
+          {
             name: "payment",
             state: "start"
           },
           {
-            name: "notif",
+            name: "practner",
+            state: "start"
+          },
+          {
+            name: "triage",
+            state: "start"
+          },
+          {
+            name: "storeSimulator",
             state: "start"
           }
         ]
       }
     ]
   }
+
+  /*let param = {
+    services: [
+      {
+        name: "filesystem",
+        uservices: [
+           {
+             name: "tools",
+             state: "mkfs"
+           }
+         ]
+      }
+    ]
+  }*/
+
 
   /*
    * TODO: change CONFIG.master.url to network address
