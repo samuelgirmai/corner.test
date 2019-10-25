@@ -298,7 +298,7 @@ export async function list_assign(token)
     param: {}
   }
 
-  for(let i = 1; i < 10; i++){
+  for(let i = 1; i < 5; i++){
     pagin = {
       page_num: i,
       size: 3,
