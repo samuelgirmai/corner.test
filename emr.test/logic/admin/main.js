@@ -7,7 +7,8 @@ import {
   assign_role,
   revoke_role,
   get_role,
-  get_stats
+  get_stats,
+  signin
 } from './admin';
 
 const main_prompt = [
@@ -15,7 +16,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'admin test window',
-    choices: ['create.user', 'remove.user', 'list.users', 'assign.role', 'revoke.role', 'get.role', 'get.stats', '<<back']
+    choices: ['signin', 'create.user', 'remove.user', 'list.users', 'assign.role', 'revoke.role', 'get.role', 'get.stats', '<<back']
   }
 ];
 
@@ -45,6 +46,9 @@ export async function admin_start()
       break;
     case 'get.stats':
       await get_stats();;
+      break;
+    case 'signin':
+      await signin();;
       break;
     case '<<back':
       return;

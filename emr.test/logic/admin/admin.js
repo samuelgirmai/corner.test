@@ -99,9 +99,10 @@ export async function list_users()
     auth: {
       license: CONFIG.auth.license,
     },
-   /*param: {
-     user_type: 'cofficer'
-   }*/
+   param: {
+     //user_type: 'cofficer',
+     pagin: {page_num: 1, size: 1, order_by: 'asc'}
+   }
   },
 
   ret = await API.run(data, '/app/emr/admin/user/list');
@@ -168,6 +169,28 @@ export async function get_role()
 
   _print(ret, null);
 }
+
+export async function signin()
+{
+  let ret;
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      username: "544860",
+      password: "toor",
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/admin/access/write');
+
+  _print(ret, 'token');
+
+   return ret.status == "ok"?ret.result.token: null
+}
+
 
 export async function get_stats()
 {
