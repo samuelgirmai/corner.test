@@ -300,9 +300,9 @@ export async function list_assign(token)
 
   for(let i = 1; i < 5; i++){
     pagin = {
-      page_num: i,
+      page: i,
       size: 3,
-      order_by: 'asc'
+      order_type: 'asc'
     }
     data.param.pagin = pagin;
     ret = await API.run(data, '/app/emr/triage/assign/list');

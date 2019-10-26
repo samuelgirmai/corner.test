@@ -160,7 +160,7 @@ export async function list_persons()
     },
     /*param: {
       pagin: {
-        page_num: 1,
+        page: 1,
         size: 20,
       }
     }*/
@@ -267,9 +267,9 @@ export async function list_caps()
       sid: null,
       catagory: null,
       /*pagin: {
-        page_num: 1,
+        page: 1,
         size: 20,
-        order_by: 'asc'
+        order_type: 'asc'
       }*/
     }
   }

@@ -101,7 +101,7 @@ export async function list_users()
     },
    param: {
      //user_type: 'cofficer',
-     pagin: {page_num: 1, size: 1, order_by: 'asc'}
+     pagin: {page: 1, size: 1, order_type: 'asc'}
    }
   },
 

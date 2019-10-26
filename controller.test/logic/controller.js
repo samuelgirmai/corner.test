@@ -28,7 +28,7 @@ export async function modify_state()
 {
   let ret;
  
-  /*let param = {
+  let param = {
     services: [
       {
         name: "corner",
@@ -101,21 +101,21 @@ export async function modify_state()
         ]
       }
     ]
-  }*/
+  }
 
-  let param = {
+  /*let param = {
     services: [
       {
         name: "filesystem",
         uservices: [
            {
              name: "tools",
-             state: "mkidx"
+             state: "mkfs"
            }
          ]
       }
     ]
-  }
+  }*/
 
 
   /*
