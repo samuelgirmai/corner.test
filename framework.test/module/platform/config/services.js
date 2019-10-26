@@ -208,6 +208,8 @@ export const services = [
     "/platform/auth/caps/list",
     "/platform/auth/caps/allow",
     "/platform/auth/caps/revoke",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
     "/app/emr/mru/user/write",
     "/app/emr/mru/user/read",
     "/app/emr/mru/user/delete",
