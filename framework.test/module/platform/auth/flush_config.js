@@ -11,12 +11,12 @@ export function get_config_path(arg)
     return 'ignore';
 
   sname = arg.name.split('.', 2);
-
+  console.log(sname)
   if(sname[0] === 'emr'){
     return '../../corner.backend/services/emr/'+sname[1]+'/config/config.json';
   }
   else {
-    return '../../corner.backend/platform/'+sname[0]+'/config/config.json';
+    return '../../corner.backend/platform/'+(sname[1]?sname[1]: sname[0])+'/config/config.json';
   }
 }
 
@@ -27,7 +27,7 @@ export async function get_services()
   data = {
     auth: {
       /*license of auth client*/
-      license: "508026275640"
+      license: "829710799429"
     },
   }
 
@@ -74,6 +74,9 @@ export async function update_license(arg)
 
       fs.writeFileSync(conf, JSON.stringify(buf, 0, '  '), 'utf8');
     }
+    else if(conf === 'ignore'){
+      continue;
+    }
     else {
       console.log("file not found (%s)", conf);
       return false;
@@ -103,7 +106,7 @@ export async function update_address(arg)
       if(buf.api && conf[i].api){
         let data = {
           auth: {
-            license: "504444849848" /*license of auth.ui*/
+            license: "829710799429" /*license of auth.ui*/
           }, 
           param: {
             service_id: buf.auth.service_id,
