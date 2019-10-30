@@ -129,7 +129,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "513747",
+      username: "455971",
       password: "toor",
     }
   }
@@ -186,8 +186,7 @@ export async function create_patient(token)
       woreda: "Humera",
       kebele: "01",
       house_number: "122",
-      phone_number: "0980191361"
-
+      phone_number: "09"+Math.random().toString().slice(2,10)
     }
   }
 

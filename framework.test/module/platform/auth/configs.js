@@ -1,5 +1,5 @@
 const configs = {
-  home: "/home/samuel/current_tasks/personal/bokri/corner.backend",
+  home: "/home/yared/Desktop//personal/current/corner.backend",
   conf: [
     /*{
       file: "/config/config.json",
