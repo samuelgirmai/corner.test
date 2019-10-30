@@ -230,6 +230,32 @@ export async function read_patient(token)
   _print(ret, null);
 }
 
+export async function list_appointments(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token,
+    },
+    param: {
+      appointment: {
+        date: "30/10/2019"
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/mru/patient/appointment/list');
+
+  _print(ret, null);
+}
+
 export async function renew_pcard(token)
 {
   let ret, data;

@@ -11,6 +11,7 @@ import {
   read_stats,
   renew_pcard,
   print_pcard,
+  list_appointments,
   change_password
 } from './mru';
 
@@ -19,7 +20,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'auth test window',
-    choices: ['signin', 'signout', 'change.passwd','create.cofficer', 'get.cofficer', 'list.cofficers','create.patient', 'read.patient', 'read.stats', 'renew.pcard', 'print.pcard', '<<back']
+    choices: ['signin', 'signout', 'change.passwd','create.cofficer', 'get.cofficer', 'list.cofficers','create.patient', 'read.patient', 'list.appointments', 'read.stats', 'renew.pcard', 'print.pcard', '<<back']
   }
 ];
 
@@ -61,6 +62,9 @@ export async function mru_start()
       break;
     case 'print.pcard':
       await print_pcard(token);
+      break;
+    case 'list.appointments':
+      await list_appointments(token);
       break;
     case '<<back':
       return;
