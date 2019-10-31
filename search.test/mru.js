@@ -56,6 +56,14 @@ var set_filter = async () => {
           val: "17/12/2019"
         }
       }*/
+      {
+        name: "recent",
+        arg: {
+          type: "hours",
+          val: 12
+        }
+      }
+
   ]
 
   let data = {
@@ -98,7 +106,7 @@ console.log("ID: ", search_id)
     e_name: "e_search",
     data: {
       type: "patient",
-      //search_id: search_id,
+      search_id: search_id,
       args: {
         type: "name",
         needle: needle,
@@ -109,32 +117,32 @@ console.log("ID: ", search_id)
               type: "gt",
               val: 40
             }
-          },*/
-          /*{
+          },
+          {
             name: "status",
             arg: {
               val: "active",
             }
-          },*/
+          },
           {
             name: "gender",
             arg: {
               val: "M"
             },
           },
-          /*{
+          {
             name: "appointment",
             arg: {
               val: "17/12/2019"
             }
-          }*/
+          }
           {
             name: "recent",
             arg: {
               type: "hours",
               val: 5
             }
-          }
+          }*/
         ]
       }
     }
