@@ -129,7 +129,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "513747",
+      username: "455971",
       password: "toor",
     }
   }
@@ -186,8 +186,7 @@ export async function create_patient(token)
       woreda: "Humera",
       kebele: "01",
       house_number: "122",
-      phone_number: "0980191361"
-
+      phone_number: "09"+Math.random().toString().slice(2,10)
     }
   }
 
@@ -227,6 +226,32 @@ export async function read_patient(token)
   }
 
   ret = await API.run(data, '/app/emr/mru/patient/read');
+
+  _print(ret, null);
+}
+
+export async function list_appointments(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token,
+    },
+    param: {
+      appointment: {
+        date: "30/10/2019"
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/mru/patient/appointment/list');
 
   _print(ret, null);
 }
