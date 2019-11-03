@@ -1,7 +1,8 @@
 import inquirer from 'inquirer'
 
 import {
-  modify_state,
+  install,
+  start,
   get_info
 } from './controller';
 
@@ -10,18 +11,20 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'controller test window',
-    choices: ['modify_state', 'get_info', '<<back']
+    choices: ['get_info', 'install', 'start',  '<<back']
   }
 ];
 
 export async function controller_start()
 {
-
   let option = await inquirer.prompt(main_prompt);
 
   switch(option.main){
-    case 'modify_state':
-      await modify_state();
+    case 'install':
+      await install();
+      break;
+    case 'start':
+      await start();
       break;
     case 'get_info':
       await get_info();

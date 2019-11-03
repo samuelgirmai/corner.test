@@ -158,12 +158,12 @@ export async function list_persons()
     auth: {
       license: CONFIG.auth.license
     },
-    /*param: {
+    param: {
       pagin: {
         page: 1,
         size: 20,
       }
-    }*/
+    }
   }
 
   ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/persons/list');

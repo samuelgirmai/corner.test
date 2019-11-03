@@ -1,12 +1,12 @@
 const config = {
  auth: {
-    license: "388366788616"
+    license: "167505904135"
   },
   proxy: {
-    url: "http://127.0.0.1:22000",
+    url: "http://0.0.0.0:22000"
   },
   stream: {
-    url: "http://127.0.0.1:22003"
+    url: "http://0.0.0.0:22003"
   }
 };
 

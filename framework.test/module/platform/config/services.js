@@ -42,12 +42,12 @@ export const services = [
 },
 {
   "sii": {
-    "name": "emr.notif",
+    "name": "notif",
     "desc": "EMR notif micro service",
     "host": "127.0.0.1:26008",
     "address": {
       "phone_number": "0911161616",
-      "email": "emr.notif@bokri.xyz"
+      "email": "notif@bokri.xyz"
     }
   },
   "caps": [
@@ -59,12 +59,12 @@ export const services = [
 },
 {
  "sii": {
-    "name": "emr.mru",
+    "name": "mru",
     "desc": "MRU micro service",
     "host": "127.0.0.1:26001",
     "address": {
       "phone_number": "0911101010",
-      "email": "emr.mru@bokri.xyz"
+      "email": "mru@bokri.xyz"
     }
   },
   "caps": [
@@ -80,12 +80,12 @@ export const services = [
 },
 {
   "sii": {
-    "name": "emr.infotics",
+    "name": "infotics",
     "desc": "Informatics micro service",
     "host": "127.0.0.1:26004",
     "address": {
       "phone_number": "0911133133",
-      "email": "emr.infotics@bokri.xyz"
+      "email": "infotics@bokri.xyz"
     }
   },
   "caps": [
@@ -95,12 +95,12 @@ export const services = [
 },
 {
  "sii": {
-    "name": "emr.practner",
+    "name": "practner",
     "desc": "Practitioner micro service",
     "host": "127.0.0.1:26003",
     "address": {
       "phone_number": "0911121212",
-      "email": "emr.practner@bokri.xyz"
+      "email": "practner@bokri.xyz"
     }
   },
   "caps": [
@@ -116,12 +116,12 @@ export const services = [
 },
 {
   "sii": { 
-    "name": "emr.triage",
+    "name": "triage",
     "desc": "Triage micro service",
     "host": "127.0.0.1:26002",
     "address": {
       "phone_number": "0911141414",
-      "email": "emr.triage@bokri.xyz"
+      "email": "triage@bokri.xyz"
     }
   },
   "caps": [
@@ -144,12 +144,12 @@ export const services = [
 },
 {
   "sii": {
-    "name": "emr.finance",
+    "name": "finance",
     "desc": "EMR finance micro service",
     "host": "127.0.0.1:26007",
     "address": {
       "phone_number": "0911161617",
-      "email": "emr.finance@bokri.xyz"
+      "email": "finance@bokri.xyz"
     }
   },
   "caps": [
@@ -160,12 +160,12 @@ export const services = [
 },
 {
   "sii": {
-    "name": "emr.lab",
+    "name": "lab",
     "desc": "EMR lab micro service",
     "host": "127.0.0.1:26005",
     "address": {
       "phone_number": "0911161677",
-      "email": "emr.stats@bokri.xyz"
+      "email": "lab@bokri.xyz"
     }
   },
   "caps": [
@@ -179,12 +179,12 @@ export const services = [
 },
 {
   "sii": {
-    "name": "emr.pharmacy",
+    "name": "pharmacy",
     "desc": "EMR pharmacy micro service",
     "host": "127.0.0.1:26006",
     "address": {
       "phone_number": "0911161688",
-      "email": "emr.pharmacy@bokri.xyz"
+      "email": "pharmacy@bokri.xyz"
     }
   },
   "caps": [
@@ -196,12 +196,12 @@ export const services = [
 },
 {
   "sii": {
-    "name": "emr.admin",
+    "name": "admin",
     "desc": "Admin micro service",
     "host": "127.0.0.1:26010",
     "address": {
       "phone_number": "0911151515",
-      "email": "emr.admin@bokri.xyz"
+      "email": "admin@bokri.xyz"
     }
   },
   "caps": [
@@ -248,12 +248,12 @@ export const services = [
 },
 {
   "sii": {
-    "name": "emr.payment",
+    "name": "payment",
     "desc": "EMR payment micro service",
     "host": "127.0.0.1:26009",
     "address": {
       "phone_number": "0911167733",
-      "email": "emr.payment@bokri.xyz"
+      "email": "payment@bokri.xyz"
     }
   },
   "caps": [
