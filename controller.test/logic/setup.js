@@ -1,6 +1,6 @@
 let filesystem = {
-  name: "rethinkdb",
-  port: 28015,
+  name: "mongodb",
+  port: 27017,
   host: "0.0.0.0"
 }
 

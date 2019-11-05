@@ -49,7 +49,7 @@ export async function install()
   let param = {service: null};
   let root_license;
 
-  //await setup_service(require('./setup').filesystem, null);
+  // await setup_service(require('./setup').filesystem, null);
   await setup_service(require('./setup').muxer, null);
 
   /*
