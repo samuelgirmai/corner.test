@@ -1,19 +1,24 @@
+/*
+ * filesystem SoT
+ */
 let filesystem = {
   name: "rethinkdb",
   port: 28015,
   host: "0.0.0.0"
 }
 
+/*
+ * muxer SoT
+ */
 let muxer = {
   port: 22000,
   bind: "0.0.0.0",
   addr: "0.0.0.0"
 }
 
-let proxy = {
-  url: "http://"+muxer.addr+":"+muxer.port
-}
-
+/*
+ * auth service SoT
+ */
 let auth = {
   sii: {
     name: "corner.auth",
@@ -56,10 +61,9 @@ let auth = {
 };
 auth.sii.host = auth.api.addr+":"+auth.api.port;
 
-let assert = {
-  url: "http://"+auth.api.addr+":"+auth.api.port
-}
-
+/*
+ * streaming service SoT
+ */
 let corner_stream = {
   sii: {
     name: "corner.stream",
@@ -83,10 +87,10 @@ let corner_stream = {
   caps: []
 }
 corner_stream.sii.host = corner_stream.api.addr+":"+corner_stream.api.port;
-let stream = {
-  url: "http://"+corner_stream.stream.addr+":"+corner_stream.stream.port
-}
 
+/*
+ * notif service SoT
+ */
 let corner_notif = {
   sii: {
     name: "corner.notif",
@@ -111,6 +115,9 @@ let corner_notif = {
 }
 corner_notif.sii.host = corner_notif.api.addr+":"+corner_notif.api.port;
 
+/*
+ * EMR services SoT
+ */
 let mru = {
   sii: {
     name: "emr.mru",
@@ -462,6 +469,25 @@ let storeSimulator = {
   ]
 }
 storeSimulator.sii.host = storeSimulator.api.addr+":"+storeSimulator.api.port;
+
+
+/*
+ * NOTICE: don't put any const here; it is
+ * only constructed interms of the data defined
+ * above this comment
+ */
+
+let proxy = {
+  url: "http://"+muxer.addr+":"+muxer.port
+}
+
+let assert = {
+  url: "http://"+auth.api.addr+":"+auth.api.port
+}
+
+let stream = {
+  url: "http://"+corner_stream.stream.addr+":"+corner_stream.stream.port
+}
 
 module.exports = {
   filesystem: {
