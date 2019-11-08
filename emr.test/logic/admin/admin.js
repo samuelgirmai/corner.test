@@ -30,18 +30,18 @@ export async function create_user()
   let ret;
 
   let u = {
-    name: "Solomon",
-    fname: "Leul",
-    mname: "Zemzem",
-    mfname: "Gidey",
-    gender: "M",
-    dob: "12/12/2002",
+    name: "Beriha",
+    fname: "Jawar",
+    mname: "Fana",
+    mfname: "Salsawi",
+    gender: "F",
+    dob: "12/12/2000",
     address: {
       region: "Tigray",
-      zone: "Debub",
-      woreda: "Azebo",
-      kebele: "11",
-      house_number: "122",
+      zone: "Mekelle",
+      woreda: "Hadinet",
+      kebele: "16",
+      house_number: "32",
       phone_number: "09"+Math.random().toString().slice(2,10)
     }
   }
@@ -52,10 +52,10 @@ export async function create_user()
     }, 
     param: {
       pii: u,
-      user_type: 'cofficer'
+      //user_type: 'cofficer'
       //user_type: 'triage'
       //user_type: 'practitioner'
-      //user_type: 'informatics'
+      user_type: 'informatics'
       //user_type: 'labtech'
       //user_type: 'pharmacist'
     }

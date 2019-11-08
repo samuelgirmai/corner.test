@@ -1,24 +1,81 @@
+import fs from 'fs'
 import API from '../tools/net';
 import CONFIG from '../config/config'
+
+var root_license = null;
+
+async function read_license()
+{
+  if(!fs.existsSync(__dirname+"/root/client.lic")){
+    return 0;
+  }
+
+  return JSON.parse(fs.readFileSync(__dirname+"/root/client.lic", 'utf8'));
+}
+
+async function write_license(license)
+{
+  if(!fs.existsSync(__dirname+"/root/client.lic")){
+    return 0;
+  }
+
+  fs.writeFileSync(__dirname+"/root/client.lic", JSON.stringify(license, 0, '  '), 'utf8');
+
+  return 1;
+}
 
 function _print(o, key) 
 {
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-async function setup_service(setup, license)
+async function configure_service(cnf)
 {
   let r;
   let param = {service: null};
 
-  param.service = setup;
+  param.service = cnf;
 
-  if(license){
-    param.service["license"] = license
+  _print(
+    r = await API.run(CONFIG.master.url, param, '/platform/controller/config/update'),
+    null
+  );
+
+  return r;
+}
+
+async function install_service(cnf)
+{
+  let r;
+  let param = {service: null};
+
+  param.service = cnf;
+
+  if(root_license){
+    param.service["license"] = root_license;
   }
 
   _print(
     r = await API.run(CONFIG.master.url, param, '/platform/controller/setup/update'),
+    null
+  );
+
+  return r;
+}
+
+async function allow_service(cnf)
+{
+  let r;
+  let param = {service: null};
+
+  param.service = cnf;
+
+  if(root_license){
+    param.service["license"] = root_license;
+  }
+
+  _print(
+    r = await API.run(CONFIG.master.url, param, '/platform/controller/caps/allow'),
     null
   );
 
@@ -43,42 +100,112 @@ async function start_service(name)
   return r;
 }
 
+async function reboot()
+{
+  let r;
+  let param = {};
+
+  _print(
+    r = await API.run(CONFIG.master.url, param, '/platform/controller/reboot'),
+    null
+  );
+
+  return r;
+}
+
+export async function configure()
+{
+  await configure_service(require('./setup').filesystem);
+  await configure_service(require('./setup').muxer);
+  await configure_service(require('./setup').auth);
+  await configure_service(require('./setup').stream);
+  await configure_service(require('./setup').corner_notif);
+  await configure_service(require('./setup').mru);
+  await configure_service(require('./setup').triage);
+  await configure_service(require('./setup').practner);
+  await configure_service(require('./setup').infotics);
+  await configure_service(require('./setup').lab);
+  await configure_service(require('./setup').pharmacy);
+  await configure_service(require('./setup').finance);
+  await configure_service(require('./setup').payment);
+  await configure_service(require('./setup').admin);
+  await configure_service(require('./setup').emr_notif);
+  await configure_service(require('./setup').storeSimulator);
+
+  await reboot();
+}
+
+export async function mkfs()
+{
+  await install_service(require('./setup').filesystem, null);
+
+  await reboot();
+}
+
 export async function install()
 {
   var r;
+
   let param = {service: null};
-  let root_license;
 
-  //await setup_service(require('./setup').filesystem, null);
-  await setup_service(require('./setup').muxer, null);
+  await install_service(require('./setup').muxer, null);
 
-  /*
-   * return the license of the root client
-   */
-  r = await setup_service(require('./setup').auth, null);
+  r = await install_service(require('./setup').auth, null);
 
   await start_service("corner.muxer");
   await start_service("corner.auth");
 
   root_license = r.result.client.license;
 
-  await setup_service(require('./setup').stream, root_license);
-  await setup_service(require('./setup').corner_notif, root_license);
-  await setup_service(require('./setup').mru, root_license);
-  await setup_service(require('./setup').triage, root_license);
-  await setup_service(require('./setup').practner, root_license);
-  await setup_service(require('./setup').infotics, root_license);
-  await setup_service(require('./setup').lab, root_license);
-  await setup_service(require('./setup').pharmacy, root_license);
-  await setup_service(require('./setup').finance, root_license);
-  await setup_service(require('./setup').payment, root_license);
-  await setup_service(require('./setup').admin, root_license);
-  await setup_service(require('./setup').emr_notif, root_license);
-  await setup_service(require('./setup').storeSimulator, root_license);
+  await install_service(require('./setup').stream);
+  await install_service(require('./setup').corner_notif);
+  await install_service(require('./setup').mru);
+  await install_service(require('./setup').triage);
+  await install_service(require('./setup').practner);
+  await install_service(require('./setup').infotics);
+  await install_service(require('./setup').lab);
+  await install_service(require('./setup').pharmacy);
+  await install_service(require('./setup').finance);
+  await install_service(require('./setup').payment);
+  await install_service(require('./setup').admin);
+  await install_service(require('./setup').emr_notif);
+  await install_service(require('./setup').storeSimulator);
+
+  await write_license(r.result.client);
+
+  await reboot();
+}
+
+export async function allow()
+{
+  root_license = (await read_license()).license;
+
+  await start_service("corner.muxer");
+  await start_service("corner.auth");
+
+  await allow_service(require('./setup').auth);
+  await allow_service(require('./setup').stream);
+  await allow_service(require('./setup').corner_notif);
+  await allow_service(require('./setup').mru);
+  await allow_service(require('./setup').triage);
+  await allow_service(require('./setup').practner);
+  await allow_service(require('./setup').infotics);
+  await allow_service(require('./setup').lab);
+  await allow_service(require('./setup').pharmacy);
+  await allow_service(require('./setup').finance);
+  await allow_service(require('./setup').payment);
+  await allow_service(require('./setup').admin);
+  await allow_service(require('./setup').emr_notif);
+  await allow_service(require('./setup').storeSimulator);
+
+  await reboot();
 }
 
 export async function start()
 {
+  //highly probable that the fs is going to be
+  //started by the storage technology
+
   await start_service("corner.muxer");
   await start_service("corner.auth");
   await start_service("corner.stream");
@@ -86,6 +213,7 @@ export async function start()
 
   await start_service("emr.mru");
   await start_service("emr.triage");
+  await start_service("emr.practner");
   await start_service("emr.infotics");
   await start_service("emr.lab");
   await start_service("emr.pharmacy");

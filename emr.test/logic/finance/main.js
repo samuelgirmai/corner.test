@@ -3,8 +3,12 @@ import inquirer from 'inquirer'
 import {
   create_account,
   get_account,
+  set_account_scheme,
   remove_account,
   create_transaction,
+  create_scheme,
+  list_schemes,
+  remove_scheme,
   get_balance,
   create_order,
   get_order,
@@ -22,7 +26,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Finance Test App',
-    choices: ['create.account', 'get.account', 'remove.account', 'create.transaction', 'get.balance', 'create.order', 'get.order', 'modify.order', 'remove.order','create.invoice', 'get.invoice', 'remove.invoice', 'create.receipt', 'get.receipt', '<<back']
+    choices: ['create.account', 'get.account', 'remove.account', 'set.scheme', 'create.transaction', 'get.balance', 'create.scheme', 'list.schemes', 'remove.scheme', 'create.order', 'get.order', 'modify.order', 'remove.order','create.invoice', 'get.invoice', 'remove.invoice', 'create.receipt', 'get.receipt', '<<back']
   }
 ];
 
@@ -39,8 +43,20 @@ export async function finance_start()
     case 'get.account':
       await get_account(token);
       break;
+    case 'set.scheme':
+      await set_account_scheme(token);
+      break;
     case 'remove.account':
       await remove_account(token);
+      break;
+    case 'create.scheme':
+      await create_scheme(token);
+      break;
+    case 'list.schemes':
+      await list_schemes(token);
+      break;
+    case 'remove.scheme':
+      await remove_scheme(token);
       break;
     case 'create.transaction':
       await create_transaction(token);

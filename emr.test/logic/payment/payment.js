@@ -28,14 +28,9 @@ function _print(o, key)
 
 var items = [
   {
-    type: "lab",
-    id: "719803",
-    qty: 12
-  },
-  {
-    type: "lab",
-    id: "654199",
-    qty: 4
+    type: "drug",
+    id: "047077",
+    qty: 120
   }]
 
 export async function create_payment(token)
@@ -47,7 +42,7 @@ export async function create_payment(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "532839",
+      mrn: "336163",
       items: items
     }
   }
@@ -66,7 +61,7 @@ export async function settle_account(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "532839"
+      mrn: "336163"
     }
   }
 
@@ -84,12 +79,29 @@ export async function assert_payment(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "532839",
+      mrn: "336163",
       items: items
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/items/price/balance/assert');
+  ret = await API.run(data, '/app/emr/payment/items/price/assert');
+
+  _print(ret, null);
+}
+
+export async function list_drivers(token)
+{
+  console.log("drivers");
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {}
+  }
+
+  ret = await API.run(data, '/app/emr/payment/drivers/list');
 
   _print(ret, null);
 }

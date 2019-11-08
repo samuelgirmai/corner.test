@@ -35,7 +35,7 @@ export async function create_account(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "532839"
+      mrn: "336163"
     }
   }
 
@@ -62,6 +62,25 @@ export async function get_account(token)
   _print(ret, null);
 }
 
+export async function set_account_scheme(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "336163",
+      scheme_id: "512995900"
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/account/scheme/write');
+
+  _print(ret, null);
+}
+
 export async function remove_account(token)
 {
   let ret, data;
@@ -80,6 +99,59 @@ export async function remove_account(token)
   _print(ret, null);
 }
 
+export async function create_scheme(token)
+{
+  let ret, data;
+  
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      name: "woreda",
+      desc: "woreda financed health insurance"
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/insurance/scheme/write');
+
+  _print(ret, null);
+}
+
+export async function list_schemes(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {}
+  }
+
+  ret = await API.run(data, '/app/emr/finance/insurance/scheme/list');
+
+  _print(ret, null);
+}
+
+export async function remove_schemes(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      scheme_id: "xxx"
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/insurance/scheme/delete');
+
+  _print(ret, null);
+}
+
 export async function create_transaction(token)
 {
   let ret, data;
@@ -89,7 +161,7 @@ export async function create_transaction(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "532839",
+      mrn: "336163",
       transaction: {
         type: "deposit",
         reason: "",

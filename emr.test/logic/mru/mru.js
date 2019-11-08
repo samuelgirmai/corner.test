@@ -129,7 +129,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "455971",
+      username: "022342",
       password: "toor",
     }
   }
@@ -221,7 +221,7 @@ export async function read_patient(token)
       token: token,
     },
     param: {
-      mrn: "596788"
+      mrn: "336163"
     }
   }
 

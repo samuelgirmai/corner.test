@@ -36,7 +36,23 @@ let auth = {
     port: 22001,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/heartbeat",
+    "/platform/notif/heartbeat",
+    "/platform/stream/heartbeat",
+    "/app/emr/admin/heartbeat",
+    "/app/emr/infotics/heartbeat",
+    "/app/emr/notif/heartbeat",
+    "/app/emr/pharmacy/heartbeat",
+    "/app/emr/store/heartbeat",
+    "/app/emr/finance/heartbeat",
+    "/app/emr/payment/heartbeat",
+    "/app/emr/lab/heartbeat",
+    "/app/emr/mru/heartbeat",
+    "/app/emr/practner/heartbeat",
+    "/app/emr/triage/heartbeat"
+  ]
 };
 auth.sii.host = auth.api.addr+":"+auth.api.port;
 
@@ -63,7 +79,8 @@ let corner_stream = {
     port: 22003,
     bind: "0.0.0.0",
     addr: "0.0.0.0"
-  }
+  },
+  caps: []
 }
 corner_stream.sii.host = corner_stream.api.addr+":"+corner_stream.api.port;
 let stream = {
@@ -84,7 +101,13 @@ let corner_notif = {
     port: 22004,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/stream/open",
+    "/platform/stream/close",
+    "/platform/notif/join",
+    "/platform/notif/exit",
+  ]
 }
 corner_notif.sii.host = corner_notif.api.addr+":"+corner_notif.api.port;
 
@@ -102,7 +125,21 @@ let mru = {
     port: 26001,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/users/person/write",
+    "/platform/auth/users/person/update",
+    "/platform/auth/users/person/delete",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
+    "/platform/auth/users/person/security/update",
+    "/platform/stream/open",
+    "/platform/stream/close",
+    "/app/emr/mru/stats/join",
+    "/app/emr/mru/stats/exit",
+    "/app/emr/mru/search/join",
+    "/app/emr/mru/search/exit",
+  ]
 }
 mru.sii.host = mru.api.addr+":"+mru.api.port;
 
@@ -120,7 +157,28 @@ let triage = {
     port: 26002,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/users/person/write",
+    "/platform/auth/users/person/update",
+    "/platform/auth/users/person/delete",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
+    "/platform/auth/users/person/security/update",
+    "/app/emr/mru/patient/assert",
+    "/app/emr/mru/patient/read",
+    "/platform/stream/open",
+    "/platform/stream/close",
+    "/app/emr/triage/stats/join",
+    "/app/emr/triage/stats/exit",
+    "/app/emr/practner/opd/assert",
+    "/app/emr/practner/opd/read",
+    "/app/emr/mru/patient/lastVisit/update",
+    "/app/emr/notif/write",
+    "/app/emr/notif/read",
+    "/app/emr/triage/search/join",
+    "/app/emr/triage/search/exit"
+  ]
 }
 triage.sii.host = triage.api.addr+":"+triage.api.port;
 
@@ -138,7 +196,23 @@ let practner = {
     port: 26003,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/users/person/write",
+    "/platform/auth/users/person/update",
+    "/platform/auth/users/person/delete",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
+    "/platform/auth/users/person/security/update",
+    "/app/emr/mru/patient/assert",
+    "/app/emr/mru/patient/read",
+    "/app/emr/infotics/idata/assert",
+    "/app/emr/infotics/idata/read",
+    "/app/emr/notif/write",
+    "/app/emr/notif/read",
+    "/app/emr/mru/patient/appointment/update",
+
+  ]
 }
 practner.sii.host = practner.api.addr+":"+practner.api.port;
 
@@ -156,7 +230,15 @@ let infotics = {
     port: 26004,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/users/person/write",
+    "/platform/auth/users/person/update",
+    "/platform/auth/users/person/delete",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
+    "/platform/auth/users/person/security/update",
+  ]
 }
 infotics.sii.host = infotics.api.addr+":"+infotics.api.port;
 
@@ -174,7 +256,19 @@ let lab = {
     port: 26005,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/users/person/write",
+    "/platform/auth/users/person/update",
+    "/platform/auth/users/person/delete",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
+    "/platform/auth/users/person/security/update",
+    "/app/emr/mru/patient/assert",
+    "/app/emr/practner/patient/record/order/read",
+    "/app/emr/notif/write",
+    "/app/emr/notif/read"
+  ]
 }
 lab.sii.host = lab.api.addr+":"+lab.api.port;
 
@@ -192,7 +286,17 @@ let pharmacy = {
     port: 26006,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/users/person/write",
+    "/platform/auth/users/person/update",
+    "/platform/auth/users/person/delete",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
+    "/platform/auth/users/person/security/update",
+    "app/emr/mru/patient/assert",
+    "/app/emr/notif/read"
+  ]
 }
 pharmacy.sii.host = pharmacy.api.addr+":"+pharmacy.api.port;
 
@@ -210,7 +314,17 @@ let finance = {
     port: 26007,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/users/person/write",
+    "/platform/auth/users/person/update",
+    "/platform/auth/users/person/delete",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
+    "/platform/auth/users/person/security/update",
+    "/app/emr/store/items/price/read",
+    "/app/emr/mru/patient/assert"
+  ]
 }
 finance.sii.host = finance.api.addr+":"+finance.api.port;
 
@@ -228,7 +342,16 @@ let payment = {
     port: 26008,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    '/app/emr/finance/account/read',
+    '/app/emr/store/items/price/read',
+    '/app/emr/finance/account/balance/read',
+    '/app/emr/finance/order/write',
+    '/app/emr/finance/invoice/write',
+    '/app/emr/finance/account/transaction/write',
+    '/app/emr/finance/receipt/write'
+  ]
 }
 payment.sii.host = payment.api.addr+":"+payment.api.port;
 
@@ -246,7 +369,52 @@ let admin = {
     port: 27001,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/auth/users/person/write",
+    "/platform/auth/users/person/update",
+    "/platform/auth/users/person/delete",
+    "/platform/auth/users/access/write",
+    "/platform/auth/users/access/delete",
+    "/platform/auth/users/person/security/update",
+    "/platform/auth/caps/list",
+    "/platform/auth/caps/allow",
+    "/platform/auth/caps/revoke",
+    "/app/emr/mru/user/write",
+    "/app/emr/mru/user/read",
+    "/app/emr/mru/user/delete",
+    "/app/emr/mru/user/update",
+    "/app/emr/mru/user/list",
+    "/app/emr/practner/user/write",
+    "/app/emr/practner/user/read",
+    "/app/emr/practner/user/delete",
+    "/app/emr/practner/user/update",
+    "/app/emr/infotics/user/write",
+    "/app/emr/infotics/user/read",
+    "/app/emr/infotics/user/list",
+    "/app/emr/infotics/user/delete",
+    "/app/emr/infotics/user/update",
+    "/app/emr/lab/user/write",
+    "/app/emr/lab/user/delete",
+    "/app/emr/lab/user/update",
+    "/app/emr/lab/user/read",
+    "/app/emr/lab/user/list",
+    "/app/emr/pharmacy/user/write",
+    "/app/emr/pharmacy/user/read",
+    "/app/emr/pharmacy/user/update",
+    "/app/emr/pharmacy/user/delete",
+    "/app/emr/pharmacy/user/list",
+    "/app/emr/finance/user/delete",
+    "/app/emr/finance/user/write",
+    "/app/emr/finance/user/read",
+    "/app/emr/finance/user/update",
+    "/app/emr/finance/user/list",
+    "/app/emr/triage/user/update",
+    "/app/emr/triage/user/read",
+    "/app/emr/triage/user/write",
+    "/app/emr/triage/user/delete",
+    "/app/emr/triage/user/list"
+  ]
 }
 admin.sii.host = admin.api.addr+":"+admin.api.port;
 
@@ -264,7 +432,13 @@ let emr_notif = {
     port: 27002,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/platform/stream/open",
+    "/platform/stream/close",
+    "/app/emr/notif/join",
+    "/app/emr/notif/exit",
+  ]
 }
 emr_notif.sii.host = emr_notif.api.addr+":"+emr_notif.api.port;
 
@@ -282,7 +456,10 @@ let storeSimulator = {
     port: 27003,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
-  }
+  },
+  caps: [
+    "/app/emr/infotics/idata/read",
+  ]
 }
 storeSimulator.sii.host = storeSimulator.api.addr+":"+storeSimulator.api.port;
 
@@ -309,7 +486,8 @@ module.exports = {
       stream: stream,
       api: auth.api,
       name: auth.sii.name,
-    }
+    },
+    caps: auth.caps
   },
   stream: {
     name: "corner.stream",
@@ -320,7 +498,8 @@ module.exports = {
       api: corner_stream.api,
       stream: corner_stream.stream,
       name: corner_stream.sii.name
-    }
+    },
+    caps: corner_stream.caps
   },
   corner_notif: {
     name: "corner.notif",
@@ -330,7 +509,8 @@ module.exports = {
       stream: stream,
       api: corner_notif.api,
       name: corner_notif.sii.name
-    }
+    },
+    caps: corner_notif.caps
   },
   mru: {
     name: "emr.mru",
@@ -340,7 +520,8 @@ module.exports = {
       stream: stream,
       api: mru.api,
       name: mru.sii.name
-    }
+    },
+    caps: mru.caps
   },
   triage: {
     name: "emr.triage",
@@ -350,7 +531,8 @@ module.exports = {
       stream: stream,
       api: triage.api,
       name: triage.sii.name
-    }
+    },
+    caps: triage.caps
   },
   practner: {
     name: "emr.practner",
@@ -359,7 +541,8 @@ module.exports = {
       proxy: proxy,
       api: practner.api,
       name: practner.sii.name
-    }
+    },
+    caps: practner.caps
   },
   infotics: {
     name: "emr.infotics",
@@ -368,7 +551,8 @@ module.exports = {
       proxy: proxy,
       api: infotics.api,
       name: infotics.sii.name
-    }
+    },
+    caps: infotics.caps
   },
   lab: {
     name: "emr.lab",
@@ -377,7 +561,8 @@ module.exports = {
       proxy: proxy,
       api: lab.api,
       name: lab.sii.name
-    }
+    },
+    caps: lab.caps
   },
   pharmacy: {
     name: "emr.pharmacy",
@@ -386,7 +571,8 @@ module.exports = {
       proxy: proxy,
       api: pharmacy.api,
       name: pharmacy.sii.name
-    }
+    },
+    caps: pharmacy.caps
   },
   finance: {
     name: "emr.finance",
@@ -395,7 +581,8 @@ module.exports = {
       proxy: proxy,
       api: finance.api,
       name: finance.sii.name
-    }
+    },
+    caps: finance.caps
   },
   payment: {
     name: "emr.payment",
@@ -404,7 +591,8 @@ module.exports = {
       proxy: proxy,
       api: payment.api,
       name: payment.sii.name
-    }
+    },
+    caps: payment.caps
   },
   admin: {
     name: "emr.admin",
@@ -413,7 +601,8 @@ module.exports = {
       proxy: proxy,
       api: admin.api,
       name: admin.sii.name
-    }
+    },
+    caps: admin.caps
   },
   emr_notif: {
     name: "emr.notif",
@@ -423,7 +612,8 @@ module.exports = {
       api: emr_notif.api,
       stream: stream,
       name: emr_notif.sii.name
-    }
+    },
+    caps: emr_notif.caps
   },
   storeSimulator: {
     name: "emr.storeSimulator",
@@ -432,7 +622,8 @@ module.exports = {
       proxy: proxy,
       api: storeSimulator.api,
       name: storeSimulator.sii.name
-    }
+    },
+    caps: storeSimulator.caps
   }
 }
 
