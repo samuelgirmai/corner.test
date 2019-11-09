@@ -7,7 +7,8 @@ let cols = [
     'dob',
     'kebele',
     'phone_number',
-    'woreda'
+    'woreda',
+    'date'
 ]
 
 class Patient {
