@@ -61,7 +61,6 @@ function dateto_timestamp(date){
 reader.on('close', function(){
   // fs.writeFileSync('exported.json',JSON.stringify(data_set, null, 2));
   // console.log(`Total parsed data ${data_set.length}`);
-  // loader(data_set);
-  console.log(data_set[0]);
+  loader(data_set);
 });
 

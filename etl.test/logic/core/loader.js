@@ -10,7 +10,8 @@ async function create_patient(pati)
     },
     param: {
        pii: pati.pii,
-       mrn: pati.mrn 
+       mrn: pati.mrn,
+       date: pati.date 
     }
   }
 
