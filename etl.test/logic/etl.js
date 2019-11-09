@@ -4,8 +4,6 @@ const readline = require('readline');
 const MODEL  = require('./core/model');
 const loader = require('./core/core');
 
-
-
 let data_set = [];
 
 let rstream = fs.createReadStream('./data/exported.csv');
@@ -28,7 +26,7 @@ reader.on('line', async function (data) {
     if(p.pii.hasOwnProperty(field)){
       
       if(field == 'dob'){
-        p.pii[field] = formatDate(val);
+        p.pii[field] = format_date(val);
       }else{
         p.pii[field] = val;
       }
@@ -40,24 +38,30 @@ reader.on('line', async function (data) {
       }else{
         p[field] = val;
       }
-    }else{
-      p[field] = val
+    }else if(field == 'date'){
+      p[field] = dateto_timestamp(val);
     }
   });
 
   data_set.push(p);
 });
 
-function formatDate(date){
+function format_date(date){
   let d = date.split(' ')[0].split('-');
 
   return `${d[2]}/${d[1]}/${d[0]}`;
 }
 
+function dateto_timestamp(date){
+  
+  return new Date(date).getTime();
+}
+
 
 reader.on('close', function(){
   // fs.writeFileSync('exported.json',JSON.stringify(data_set, null, 2));
-  console.log(`Total parsed data ${data_set.length}`);
-  loader(data_set.slice(0,4180));
+  // console.log(`Total parsed data ${data_set.length}`);
+  // loader(data_set);
+  console.log(data_set[0]);
 });
 
