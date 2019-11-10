@@ -1,5 +1,6 @@
 import API from '../../api/api_rest';
 import CONFIG from '../../config/config'
+var fs = require('fs');
 
 export async function get_license()
 {
@@ -152,7 +153,6 @@ export async function get_idata(arg)
 {
   let ret, data;
   
-console.log(arg)
   if(!arg.iid)
     return null;
 
@@ -170,6 +170,14 @@ console.log(arg)
 
   return ret.status == 'ok'? ret.result.idata: null;
 }
+
+export function load_idata()
+{
+  let data = JSON.parse(fs.readFileSync(__dirname + '/drug_etl.json', 'utf8'));
+  
+  return data;
+}
+
 const INF = {
   create_informatics:    create_user,
   get_informatics:       get_user,
@@ -177,7 +185,8 @@ const INF = {
   batch_create_idata:	 batch_create_idata,
   create_idata:          create_idata,
   get_idata:             get_idata,
-  get_license:           get_license
+  get_license:           get_license,
+  load_idata:            load_idata
 }
 
 export default INF;
