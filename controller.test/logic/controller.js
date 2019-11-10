@@ -149,7 +149,6 @@ export async function install()
   let param = {service: null};
 
   await install_service(require('./setup').muxer, null);
-
   r = await install_service(require('./setup').auth, null);
 
   await start_service("corner.muxer", "config");
