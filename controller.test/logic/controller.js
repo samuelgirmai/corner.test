@@ -82,14 +82,14 @@ async function allow_service(cnf)
   return r;
 }
 
-async function start_service(name)
+async function start_service(name, state)
 {
   let r;
   let param = {service: null};
 
   param.service = {
     name: name,
-    state: "start"
+    state: state
   }
 
   _print(
@@ -152,8 +152,8 @@ export async function install()
 
   r = await install_service(require('./setup').auth, null);
 
-  await start_service("corner.muxer");
-  await start_service("corner.auth");
+  await start_service("corner.muxer", "config");
+  await start_service("corner.auth", "config");
 
   root_license = r.result.client.license;
 
@@ -180,8 +180,8 @@ export async function allow()
 {
   root_license = (await read_license()).license;
 
-  await start_service("corner.muxer");
-  await start_service("corner.auth");
+  await start_service("corner.muxer", "config");
+  await start_service("corner.auth", "config");
 
   await allow_service(require('./setup').auth);
   await allow_service(require('./setup').stream);
@@ -206,22 +206,22 @@ export async function start()
   //highly probable that the fs is going to be
   //started by the storage technology
 
-  await start_service("corner.muxer");
-  await start_service("corner.auth");
-  await start_service("corner.stream");
-  await start_service("corner.notif");
+  await start_service("corner.muxer", "start");
+  await start_service("corner.auth", "start");
+  await start_service("corner.stream", "start");
+  await start_service("corner.notif", "start");
 
-  await start_service("emr.mru");
-  await start_service("emr.triage");
-  await start_service("emr.practner");
-  await start_service("emr.infotics");
-  await start_service("emr.lab");
-  await start_service("emr.pharmacy");
-  await start_service("emr.finance");
-  await start_service("emr.payment");
-  await start_service("emr.admin");
-  await start_service("emr.notif");
-  await start_service("emr.storeSimulator");
+  await start_service("emr.mru", "start");
+  await start_service("emr.triage", "start");
+  await start_service("emr.practner", "start");
+  await start_service("emr.infotics", "start");
+  await start_service("emr.lab", "start");
+  await start_service("emr.pharmacy", "start");
+  await start_service("emr.finance", "start");
+  await start_service("emr.payment", "start");
+  await start_service("emr.admin", "start");
+  await start_service("emr.notif", "start");
+  await start_service("emr.storeSimulator", "start");
 }
 
 export async function get_info()

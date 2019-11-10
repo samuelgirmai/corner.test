@@ -472,25 +472,22 @@ storeSimulator.sii.host = storeSimulator.api.addr+":"+storeSimulator.api.port;
 
 
 /*
- * EXPOSED services
- */
-let proxy = {
-  url: "http://192.168.99.108"+":"+muxer.port
-}
-
-let assert = {
-  url: "http://192.168.99.108"+":"+auth.api.port
-}
-
-let stream = {
-  url: "http://192.168.99.108"+":"+corner_stream.stream.port
-}
-
-/*
  * NOTICE: don't put any const here; it is
  * only constructed interms of the data defined
  * above this comment
  */
+
+let proxy = {
+  url: "http://"+muxer.addr+":"+muxer.port
+}
+
+let assert = {
+  url: "http://"+auth.api.addr+":"+auth.api.port
+}
+
+let stream = {
+  url: "http://"+corner_stream.stream.addr+":"+corner_stream.stream.port
+}
 
 module.exports = {
   filesystem: {
