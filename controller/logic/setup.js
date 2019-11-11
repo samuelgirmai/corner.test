@@ -4,7 +4,7 @@
 let filesystem = {
   name: "rethinkdb",
   port: 28015,
-  host: "0.0.0.0"
+  host: "192.168.99.112"
 }
 
 /*
