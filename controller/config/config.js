@@ -1,6 +1,6 @@
 const config = {
   master: {
-    url: "http://192.168.99.108:21000"
+    url: "http://127.0.0.1:21000"
   },
 };
 export default config;
