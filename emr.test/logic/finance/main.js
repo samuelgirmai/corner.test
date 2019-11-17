@@ -1,6 +1,11 @@
 import inquirer from 'inquirer'
 
 import {
+  signin,
+  signout,
+  create_cashier,
+  get_cashier,
+  list_cashiers,
   create_account,
   get_account,
   set_account_scheme,
@@ -26,17 +31,35 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Finance Test App',
-    choices: ['create.account', 'get.account', 'remove.account', 'set.scheme', 'create.transaction', 'get.balance', 'create.scheme', 'list.schemes', 'remove.scheme', 'create.order', 'get.order', 'modify.order', 'remove.order','create.invoice', 'get.invoice', 'remove.invoice', 'create.receipt', 'get.receipt', '<<back']
+    choices: ['signin', 'signout', 'change.passwd', 'create.cashier', 'get.cashier', 'list.cashiers', 'create.account', 'get.account', 'remove.account', 'set.scheme', 'create.transaction', 'get.balance', 'create.scheme', 'list.schemes', 'remove.scheme', 'create.order', 'get.order', 'modify.order', 'remove.order','create.invoice', 'get.invoice', 'remove.invoice', 'create.receipt', 'get.receipt', '<<back']
   }
 ];
 
+var token = null;
+
 export async function finance_start()
 {
-  var token;
-
   let option = await inquirer.prompt(main_prompt);
 
   switch(option.main){
+    case 'signin':
+      token = await signin();
+      break;
+    case 'signout':
+      await signout(token);
+      break;
+    case 'change.passwd':
+      await change_password(token);
+      break;
+    case 'create.cashier':
+      await create_cashier(token);
+      break;
+    case 'get.cashier':
+      await get_cashier(token);
+      break;
+    case 'list.cashiers':
+      await list_cashiers(token);
+      break;
     case 'create.account':
       await create_account(token);
       break;

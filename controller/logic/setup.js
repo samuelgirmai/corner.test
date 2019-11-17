@@ -166,9 +166,9 @@ let triage = {
     addr: "0.0.0.0",
   },
   caps: [
-    /*"/platform/auth/users/person/write",
+    "/platform/auth/users/person/write",
     "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",*/
+    "/platform/auth/users/person/delete",
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
@@ -205,9 +205,9 @@ let practner = {
     addr: "0.0.0.0",
   },
   caps: [
-    /*"/platform/auth/users/person/write",
+    "/platform/auth/users/person/write",
     "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",*/
+    "/platform/auth/users/person/delete",
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
@@ -239,9 +239,9 @@ let infotics = {
     addr: "0.0.0.0",
   },
   caps: [
-    /*"/platform/auth/users/person/write",
+    "/platform/auth/users/person/write",
     "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",*/
+    "/platform/auth/users/person/delete",
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
