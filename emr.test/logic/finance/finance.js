@@ -26,13 +26,158 @@ function _print(o, key)
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-export async function create_account(token)
+export async function create_cashier()
+{
+  let ret;
+
+  let u = {
+    name: "Beriha",
+    fname: "Araari",
+    mname: "Zimam",
+    mfname: "Ayyantu",
+    gender: "M",
+    dob: "12/12/1999",
+    address: {
+      region: "Tigray",
+      zone: "Mierab",
+      woreda: "Sheraro",
+      kebele: "02",
+      house_number: "13",
+      phone_number: "09"+Math.random().toString().slice(2,10)
+    }
+  }
+
+  let data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      pii: u
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/user/write');
+
+  _print(ret, null);
+
+}
+
+export async function get_cashier()
 {
   let ret, data;
 
   data = {
-   auth: {
+    auth: {
+      license: CONFIG.auth.license
+    },
+    param: {
+      user_id: "172172"
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/user/read');
+
+  _print(ret, null);
+}
+
+export async function list_cashiers()
+{
+  let ret, data;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license
+    },
+  }
+
+  ret = await API.run(data, '/app/emr/finance/user/list');
+
+  _print(ret, null);
+}
+
+export async function change_password(token)
+{
+  let ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  let data = {
+    auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      username: "640142",
+      oldpassword: "toor",
+      newpassword: "j@G3n)O2"
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/user/security/update');
+
+  _print(ret, null);
+}
+
+export async function signin()
+{
+  let ret;
+
+  let data = {
+    auth: {
       license: CONFIG.auth.license,
+    },
+    param: {
+      username: "022342",
+      password: "toor",
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/user/access/write');
+
+  _print(ret, 'token');
+
+   return ret.status == "ok"?ret.result.token: null
+}
+
+export async function signout(token)
+{
+  let data, ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      token: token
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/user/access/delete');
+
+  _print(ret, null);
+}
+
+export async function create_account(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       mrn: "336163"
@@ -48,9 +193,15 @@ export async function get_account(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       mrn: "532839"
@@ -66,9 +217,15 @@ export async function set_account_scheme(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       mrn: "336163",
@@ -85,9 +242,15 @@ export async function remove_account(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       mrn: "532839"
@@ -102,10 +265,16 @@ export async function remove_account(token)
 export async function create_scheme(token)
 {
   let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
   
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       name: "woreda",
@@ -122,9 +291,15 @@ export async function list_schemes(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {}
   }
@@ -138,9 +313,15 @@ export async function remove_schemes(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token
     },
     param: {
       scheme_id: "xxx"
@@ -156,9 +337,15 @@ export async function create_transaction(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       mrn: "336163",
@@ -179,9 +366,15 @@ export async function get_balance(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       mrn: "532839"
@@ -197,9 +390,15 @@ export async function create_order(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       mrn: "532839",
@@ -222,9 +421,15 @@ export async function get_order(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       order_id: "0762138137"
@@ -240,9 +445,15 @@ export async function modify_order(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       order_id: "0762138137",
@@ -265,9 +476,15 @@ export async function remove_order(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       order_id: "0762138137"
@@ -283,9 +500,15 @@ export async function create_invoice(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
       mrn: "532839"
@@ -301,9 +524,15 @@ export async function get_invoice(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
      invoice_id: "0824095058"
@@ -319,9 +548,15 @@ export async function remove_invoice(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
      invoice_id: "0824095058"
@@ -337,9 +572,15 @@ export async function create_receipt(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
      invoice_id: "0824095058"
@@ -355,9 +596,15 @@ export async function get_receipt(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
    auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
      receipt_id: "0434679429"
