@@ -2,9 +2,18 @@
  * filesystem SoT
  */
 let filesystem = {
-  name: "rethinkdb",
-  port: 28015,
-  host: "192.168.99.112"
+  name: "mongodb",
+  port: 27017,
+  host: "0.0.0.0"
+}
+
+/*
+ * in mempry fs config
+*/
+let cachefs = {
+  name: "redis",
+  port: 6379,
+  host: "0.0.0.0"
 }
 
 /*
@@ -493,7 +502,8 @@ module.exports = {
   filesystem: {
     name: "corner.fs",
     conf: {
-      fs: filesystem
+      fs: filesystem,
+      cachefs: cachefs
     }
   },
   muxer: {
