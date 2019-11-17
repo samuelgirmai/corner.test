@@ -13,7 +13,7 @@ let filesystem = {
 let cachefs = {
   name: "redis",
   port: 6379,
-  host: "0.0.0.0"
+  host: "192.168.99.114" /*internal network*/
 }
 
 /*
