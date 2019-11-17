@@ -8,6 +8,15 @@ let filesystem = {
 }
 
 /*
+ * in mempry fs config
+*/
+let cachefs = {
+  name: "redis",
+  port: 6379,
+  host: "0.0.0.0"
+}
+
+/*
  * muxer SoT
  */
 let muxer = {
@@ -493,7 +502,8 @@ module.exports = {
   filesystem: {
     name: "corner.fs",
     conf: {
-      fs: filesystem
+      fs: filesystem,
+      cachefs: cachefs
     }
   },
   muxer: {
