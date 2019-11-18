@@ -9,11 +9,12 @@ let filesystem = {
 
 /*
  * in mempry fs config
+ * FIXME: decouple filesystem and cache
 */
 let cachefs = {
   name: "redis",
   port: 6379,
-  host: "192.168.99.114" /*internal network*/
+  host: "0.0.0.0" /*internal network*/
 }
 
 /*
