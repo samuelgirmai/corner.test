@@ -568,6 +568,28 @@ export async function remove_invoice(token)
   _print(ret, null);
 }
 
+export async function list_invoice(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {}
+  }
+
+  ret = await API.run(data, '/app/emr/finance/invoice/list');
+
+  _print(ret, null);
+}
+
 export async function create_receipt(token)
 {
   let ret, data;
@@ -612,6 +634,28 @@ export async function get_receipt(token)
   }
 
   ret = await API.run(data, '/app/emr/finance/receipt/read');
+
+  _print(ret, null);
+}
+
+export async function list_receipt(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {}
+  }
+
+  ret = await API.run(data, '/app/emr/finance/receipt/list');
 
   _print(ret, null);
 }

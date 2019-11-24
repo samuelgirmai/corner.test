@@ -22,8 +22,10 @@ import {
   create_invoice,
   get_invoice,
   remove_invoice,
+  list_invoice,
   create_receipt,
-  get_receipt
+  get_receipt,
+  list_receipt
 } from './finance';
 
 const main_prompt = [
@@ -31,7 +33,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Finance Test App',
-    choices: ['signin', 'signout', 'change.passwd', 'create.cashier', 'get.cashier', 'list.cashiers', 'create.account', 'get.account', 'remove.account', 'set.scheme', 'create.transaction', 'get.balance', 'create.scheme', 'list.schemes', 'remove.scheme', 'create.order', 'get.order', 'modify.order', 'remove.order','create.invoice', 'get.invoice', 'remove.invoice', 'create.receipt', 'get.receipt', '<<back']
+    choices: ['signin', 'signout', 'change.passwd', 'create.cashier', 'get.cashier', 'list.cashiers', 'create.account', 'get.account', 'remove.account', 'set.scheme', 'create.transaction', 'get.balance', 'create.scheme', 'list.schemes', 'remove.scheme', 'create.order', 'get.order', 'modify.order', 'remove.order','create.invoice', 'get.invoice', 'remove.invoice', 'list.invoice', 'create.receipt', 'get.receipt', 'list.receipt', '<<back']
   }
 ];
 
@@ -105,11 +107,17 @@ export async function finance_start()
     case 'get.invoice':
       await get_invoice(token);
       break;
+    case 'list.invoice':
+      await list_invoice(token);
+      break;
     case 'create.receipt':
       await create_receipt(token);
       break;
     case 'get.receipt':
       await get_receipt(token);
+      break;
+    case 'list.receipt':
+      await list_receipt(token);
       break;
     case '<<back':
       return;
