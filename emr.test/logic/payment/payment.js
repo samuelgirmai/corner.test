@@ -33,7 +33,9 @@ var items = [
     qty: 120
   }]
 
-export async function create_payment(token)
+var invoice_id = "09099829389";
+
+export async function create_order(token)
 {
   let ret, data;
 
@@ -47,7 +49,28 @@ export async function create_payment(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/write');
+  ret = await API.run(data, '/app/emr/payment/order/write');
+
+  //invoice_id = ret.result.invoice.invoice_id;
+
+  _print(ret, null);
+}
+
+export async function create_payment(token)
+{
+  let ret, data;
+
+  data = {
+   auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "336163",
+      invoice_id: invoice_id
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/payment/payment/write');
 
   _print(ret, null);
 }
@@ -91,7 +114,6 @@ export async function assert_payment(token)
 
 export async function list_drivers(token)
 {
-  console.log("drivers");
   let ret, data;
 
   data = {
