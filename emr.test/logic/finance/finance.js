@@ -130,7 +130,7 @@ export async function signin()
       license: CONFIG.auth.license,
     },
     param: {
-      username: "022342",
+      username: "256108",
       password: "toor",
     }
   }
@@ -180,7 +180,7 @@ export async function create_account(token)
       token: token
     },
     param: {
-      mrn: "336163"
+      mrn: "093540"
     }
   }
 
@@ -204,7 +204,7 @@ export async function get_account(token)
       token: token
     },
     param: {
-      mrn: "532839"
+      mrn: "213318"
     }
   }
 
@@ -228,8 +228,8 @@ export async function set_account_scheme(token)
       token: token
     },
     param: {
-      mrn: "336163",
-      scheme_id: "512995900"
+      mrn: "093540",
+      scheme_id: "559682928"
     }
   }
 
@@ -253,7 +253,7 @@ export async function remove_account(token)
       token: token
     },
     param: {
-      mrn: "532839"
+      mrn: "213318"
     }
   }
 
@@ -348,7 +348,7 @@ export async function create_transaction(token)
       token: token
     },
     param: {
-      mrn: "336163",
+      mrn: "093540",
       transaction: {
         type: "deposit",
         reason: "",
@@ -377,7 +377,7 @@ export async function get_balance(token)
       token: token
     },
     param: {
-      mrn: "532839"
+      mrn: "093540"
     }
   }
 
@@ -401,10 +401,10 @@ export async function create_order(token)
       token: token
     },
     param: {
-      mrn: "532839",
+      mrn: "213318",
       items: [{
         type: "lab",
-        id: "lab_id",
+        id: "764620",
         name: "wbc",
         qty: 12,
         price: 124.00
@@ -511,7 +511,8 @@ export async function create_invoice(token)
       token: token
     },
     param: {
-      mrn: "532839"
+      mrn: "213318",
+      order_id: "8129419159"
     }
   }
 
@@ -605,7 +606,7 @@ export async function create_receipt(token)
       token: token
     },
     param: {
-     invoice_id: "0824095058"
+     invoice_id: "6217092097"
     }
   }
 
