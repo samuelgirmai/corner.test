@@ -25,7 +25,9 @@ import {
   list_invoice,
   create_receipt,
   get_receipt,
-  list_receipt
+  list_receipt,
+  create_deposit,
+  create_withdraw,
 } from './finance';
 
 const main_prompt = [
@@ -33,7 +35,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Finance Test App',
-    choices: ['signin', 'signout', 'change.passwd', 'create.cashier', 'get.cashier', 'list.cashiers', 'create.account', 'get.account', 'remove.account', 'set.scheme', 'create.transaction', 'get.balance', 'create.scheme', 'list.schemes', 'remove.scheme', 'create.order', 'get.order', 'modify.order', 'remove.order','create.invoice', 'get.invoice', 'remove.invoice', 'list.invoice', 'create.receipt', 'get.receipt', 'list.receipt', '<<back']
+    choices: ['signin', 'signout', 'change.passwd', 'create.cashier', 'get.cashier', 'list.cashiers', 'create.account', 'get.account', 'remove.account', 'set.scheme', 'create.transaction', 'get.balance', 'create.scheme', 'list.schemes', 'remove.scheme', 'create.order', 'get.order', 'modify.order', 'remove.order','create.invoice', 'get.invoice', 'remove.invoice', 'list.invoice', 'create.receipt', 'get.receipt', 'list.receipt', 'deposit','withdraw', '<<back']
   }
 ];
 
@@ -119,6 +121,12 @@ export async function finance_start()
     case 'list.receipt':
       await list_receipt(token);
       break;
+    case 'deposit':
+      await create_deposit(token);
+      break;
+    case 'withdraw':
+     await create_withdraw(token);
+     break;
     case '<<back':
       return;
   }

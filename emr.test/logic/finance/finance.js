@@ -361,6 +361,62 @@ export async function create_transaction(token)
 
   _print(ret, null);
 }
+export async function create_deposit(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      mrn: "093540",
+      transaction: {
+        reason: "",
+        amount: 3287.01
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/account/transaction/deposit/write');
+
+  _print(ret, null);
+}
+export async function create_withdraw(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      mrn: "093540",
+      transaction: {
+        reason: "",
+        amount: 320.01
+      }
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/finance/account/transaction/withdraw/write');
+
+  _print(ret, null);
+}
+
+
 
 export async function get_balance(token)
 {
@@ -606,7 +662,7 @@ export async function create_receipt(token)
       token: token
     },
     param: {
-     invoice_id: "6217092097"
+     invoice_id: "1659344996"
     }
   }
 
