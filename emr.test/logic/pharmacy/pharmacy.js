@@ -129,8 +129,8 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "923165",
-      password: "f%L0x$N1",
+      username: "293273",
+      password: "toor",
     }
   }
 
@@ -217,6 +217,158 @@ export async function read_dispense(token)
   }
 
   ret = await API.run(data, '/app/emr/pharmacy/dispense/read');
+
+  _print(ret, null);
+}
+
+export async function list_invoice(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+  }
+
+  ret = await API.run(data, '/app/emr/pharmacy/invoice/list');
+
+  _print(ret, null);
+}
+
+export async function list_receipt(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+  }
+
+  ret = await API.run(data, '/app/emr/pharmacy/receipt/list');
+
+  _print(ret, null);
+}
+
+export async function create_order(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+  
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: '093540',
+      items: [
+       {
+         type: "drug",
+         id: "881842",
+         qty: 2
+       }]
+     }
+  }
+  
+  ret = await API.run(data, '/app/emr/pharmacy/order/write');
+  
+  _print(ret, null);
+}
+
+export async function create_payment(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: '093540',
+      invoice_id: '2465020031'
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/pharmacy/payment/write');
+
+  _print(ret, null);
+}
+
+export async function settle_account(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "093540"
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/pharmacy/account/settlement/write');
+
+  _print(ret, null);
+}
+
+export async function assert_payment(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "093540",
+      items: [
+        {
+          type: 'drug',
+          id: '881842',
+          qty: 1
+        }
+      ]
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/pharmacy/items/price/assert');
 
   _print(ret, null);
 }

@@ -129,7 +129,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "022342",
+      username: "498706",
       password: "toor",
     }
   }
@@ -299,6 +299,157 @@ export async function print_pcard(token)
   }
 
   ret = await API.run(data, '/app/emr/mru/patient/card/print');
+
+  _print(ret, null);
+}
+
+export async function list_invoice(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+  }
+
+  ret = await API.run(data, '/app/emr/mru/invoice/list');
+
+  _print(ret, null);
+}
+
+export async function list_receipt(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+  }
+
+  ret = await API.run(data, '/app/emr/mru/receipt/list');
+
+  _print(ret, null);
+}
+
+export async function create_order(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "093540",
+      items: [
+        {
+          type: 'card',
+          qty: 1
+        }
+      ]
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/mru/order/write');
+
+  _print(ret, null);
+}
+
+export async function create_payment(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "093540",
+      invoice_id: '7831321232'
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/mru/payment/write');
+
+  _print(ret, null);
+}
+
+export async function settle_account(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "093540"
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/mru/account/settlement/write');
+
+  _print(ret, null);
+}
+
+export async function assert_payment(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: "093540",
+      items: [
+        {
+          type: 'card',
+          qty: 1
+        }
+      ]
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/mru/items/price/assert');
 
   _print(ret, null);
 }

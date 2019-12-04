@@ -156,6 +156,12 @@ let mru = {
     "/app/emr/mru/stats/exit",
     "/app/emr/mru/search/join",
     "/app/emr/mru/search/exit",
+    "/app/emr/finance/invoice/list",
+    "/app/emr/finance/receipt/list",
+    "/app/emr/payment/order/write",
+    "/app/emr/payment/payment/write",
+    "/app/emr/payment/items/price/assert",
+    "/app/emr/payment/account/settlement/write"
   ]
 }
 mru.sii.host = mru.api.addr+":"+mru.api.port;
@@ -284,7 +290,13 @@ let lab = {
     "/app/emr/mru/patient/assert",
     "/app/emr/practner/patient/record/order/read",
     "/app/emr/notif/write",
-    "/app/emr/notif/read"
+    "/app/emr/notif/read",
+    "/app/emr/finance/invoice/list",
+    "/app/emr/finance/receipt/list",
+    "/app/emr/payment/order/write",
+    "/app/emr/payment/payment/write",
+    "/app/emr/payment/items/price/assert",
+    "/app/emr/payment/account/settlement/write"
   ]
 }
 lab.sii.host = lab.api.addr+":"+lab.api.port;
@@ -312,7 +324,13 @@ let pharmacy = {
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
     "app/emr/mru/patient/assert",
-    "/app/emr/notif/read"
+    "/app/emr/notif/read",
+    "/app/emr/finance/invoice/list",
+    "/app/emr/finance/receipt/list",
+    "/app/emr/payment/order/write",
+    "/app/emr/payment/payment/write",
+    "/app/emr/payment/items/price/assert",
+    "/app/emr/payment/account/settlement/write"
   ]
 }
 pharmacy.sii.host = pharmacy.api.addr+":"+pharmacy.api.port;

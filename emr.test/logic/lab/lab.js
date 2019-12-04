@@ -128,7 +128,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "015795",
+      username: "352937",
       password: "toor",
     }
   }
@@ -224,3 +224,155 @@ export async function read_result(token)
 
   _print(ret, null);
 }
+
+export async function list_invoice(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+  }
+
+  ret = await API.run(data, '/app/emr/lab/invoice/list');
+
+  _print(ret, null);
+}
+
+export async function list_receipt(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+  }
+
+  ret = await API.run(data, '/app/emr/lab/receipt/list');
+
+  _print(ret, null);
+}
+
+export async function create_order(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+  
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: '093540',
+      items: [
+       {
+         type: "lab",
+         id: "247365",
+         qty: 120
+       }]
+     }
+  }
+  
+  ret = await API.run(data, '/app/emr/lab/order/write');
+  
+  _print(ret, null);
+}
+
+export async function create_payment(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: '093540',
+      invoice_id: '4648513860'
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/lab/payment/write');
+
+  _print(ret, null);
+}
+
+export async function settle_account(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: '093540',
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/lab/account/settlement/write');
+
+  _print(ret, null);
+}
+
+export async function assert_payment(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+    param: {
+      mrn: '093540',
+      items: [
+       { 
+         type: "lab",
+         id: "247365",
+         qty: 120
+       }]
+    }
+  }
+
+  ret = await API.run(data, '/app/emr/lab/items/price/assert');
+
+  _print(ret, null);
+}
+

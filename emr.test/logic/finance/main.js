@@ -112,6 +112,9 @@ export async function finance_start()
     case 'list.invoice':
       await list_invoice(token);
       break;
+    case 'remove.invoice':
+      await remove_invoice(token);
+      break;
     case 'create.receipt':
       await create_receipt(token);
       break;

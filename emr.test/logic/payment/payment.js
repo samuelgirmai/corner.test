@@ -28,12 +28,12 @@ function _print(o, key)
 
 var items = [
   {
-    type: "drug",
-    id: "047077",
+    type: "lab",
+    id: "247365",
     qty: 120
   }]
 
-var invoice_id = "09099829389";
+var invoice_id = "2959825501";
 
 export async function create_order(token)
 {
@@ -44,7 +44,7 @@ export async function create_order(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "336163",
+      mrn: "093540",
       items: items
     }
   }
@@ -65,7 +65,7 @@ export async function create_payment(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "336163",
+      mrn: "093540",
       invoice_id: invoice_id
     }
   }
@@ -84,7 +84,7 @@ export async function settle_account(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "336163"
+      mrn: "093540"
     }
   }
 
@@ -102,7 +102,7 @@ export async function assert_payment(token)
       license: CONFIG.auth.license,
     },
     param: {
-      mrn: "336163",
+      mrn: "093540",
       items: items
     }
   }

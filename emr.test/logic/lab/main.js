@@ -9,6 +9,12 @@ import {
   list_users,
   create_result,
   read_result,
+  list_invoice,
+  list_receipt,
+  create_order,
+  create_payment,
+  settle_account,
+  assert_payment
 } from './lab';
 
 const main_prompt = [
@@ -16,7 +22,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Laboratory Test App',
-    choices: ['signin', 'signout', 'change.passwd', 'create.user', 'get.user', 'list.users', 'create.result', 'read.result', '<<back']
+    choices: ['signin', 'signout', 'change.passwd', 'create.user', 'get.user', 'list.users', 'create.result', 'read.result', 'list.invoice','list.receipt', 'create.order', 'create.payment', 'settle.account', 'assert.payment','<<back']
   }
 ];
 
@@ -50,6 +56,24 @@ export async function lab_start()
       break;
     case 'read.result':
       await read_result(token);
+      break;
+    case 'list.invoice':
+      await list_invoice(token);
+      break;
+    case 'list.receipt':
+      await list_receipt(token);
+      break;
+    case 'create.order':
+      await create_order(token);
+      break;
+    case 'create.payment':
+      await create_payment(token);
+      break;
+    case 'settle.account':
+      await settle_account(token);
+      break;
+    case 'assert.payment':
+      await assert_payment(token);
       break;
     case '<<back':
       return;

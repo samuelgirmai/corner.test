@@ -388,6 +388,7 @@ export async function create_deposit(token)
 
   _print(ret, null);
 }
+
 export async function create_withdraw(token)
 {
   let ret, data;
@@ -568,7 +569,8 @@ export async function create_invoice(token)
     },
     param: {
       mrn: "213318",
-      order_id: "8129419159"
+      order_id: "6981822346",
+      service_type: "mru"
     }
   }
 
@@ -592,7 +594,7 @@ export async function get_invoice(token)
       token: token
     },
     param: {
-     invoice_id: "0824095058"
+     invoice_id: "6436230277"
     }
   }
 
@@ -616,7 +618,7 @@ export async function remove_invoice(token)
       token: token
     },
     param: {
-     invoice_id: "0824095058"
+     invoice_id: "4296329083"
     }
   }
 
@@ -662,7 +664,7 @@ export async function create_receipt(token)
       token: token
     },
     param: {
-     invoice_id: "1659344996"
+     invoice_id: "6436230277"
     }
   }
 
@@ -686,7 +688,7 @@ export async function get_receipt(token)
       token: token
     },
     param: {
-     receipt_id: "0434679429"
+     receipt_id: "3733323113"
     }
   }
 

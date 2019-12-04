@@ -55,9 +55,9 @@ export async function create_user()
       //user_type: 'cofficer'
       //user_type: 'triage'
       //user_type: 'practitioner'
-      user_type: 'informatics'
+      //user_type: 'informatics'
       //user_type: 'labtech'
-      //user_type: 'pharmacist'
+      user_type: 'pharmacist'
     }
   }
 
@@ -119,13 +119,13 @@ export async function assign_role()
       license: CONFIG.auth.license,
     }, 
     param: {
-      user_id: "524676",
-      user_type: "cofficer"
+      user_id: "293273",
+      //user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
       //user_type: "labtech"
       //user_type: "informatics"
-      //user_type: "pharmacist"
+      user_type: "pharmacist"
     }
 
     }
