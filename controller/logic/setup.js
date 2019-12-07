@@ -385,7 +385,8 @@ let payment = {
     '/app/emr/finance/order/write',
     '/app/emr/finance/invoice/write',
     '/app/emr/finance/account/transaction/write',
-    '/app/emr/finance/receipt/write'
+    '/app/emr/finance/receipt/write',
+    '/app/emr/finance/insurance/scheme/write'
   ]
 }
 payment.sii.host = payment.api.addr+":"+payment.api.port;
