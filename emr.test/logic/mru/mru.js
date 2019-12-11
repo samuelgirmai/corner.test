@@ -1,5 +1,6 @@
 import API from '../../tools/net';
 import CONFIG from '../../config/config'
+import moment from 'moment';
 
 function _print(o, key) 
 {
@@ -303,6 +304,47 @@ export async function print_pcard(token)
   _print(ret, null);
 }
 
+export async function list_unassigned(token)
+{
+  let data = {
+    auth: {
+      token: token,
+      //license: CONFIG.auth.license,
+    },
+  }
+
+  //read paid lists
+  let r = await API.run(data, '/app/emr/mru/receipt/list');
+
+  if(r.status === 'err'){
+    _print(r, null)
+    return r;
+  }
+
+  //filter Today's receipts
+  r = r.result.receipts.filter(item => moment().isSame(moment(item.date*1000), 'day'))
+  
+  _print(r, null)
+
+  if(!r.length)
+    return 0;
+
+  //list assign
+  let a = await API.run(data, '/app/emr/triage/assign/list');
+
+  if(a.status === 'err'){
+    _print(a, null)
+    return a;
+  }
+  // filter assigned MRN list
+  a = a.result.assign.filter(i => i.status).map(i => i.mrn);
+
+  //>>>> filter paid unassigned MRN
+  let unassigned = r.filter(i =>  !r.includes(a)).map(i => i.mrn);
+
+  _print(unassigned, null); //list of paid unassigned MRN. patients info can be fetched from local store!!!
+}   
+    
 export async function list_invoice(token)
 {
   let ret, data;
@@ -360,7 +402,7 @@ export async function create_order(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "093540",
+      mrn: "641067",
       items: [
         {
           type: 'card',
@@ -390,8 +432,8 @@ export async function create_payment(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "093540",
-      invoice_id: '7831321232'
+      mrn: "641067",
+      invoice_id: '2995452144'
     }
   }
 
@@ -415,7 +457,7 @@ export async function settle_account(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "093540"
+      mrn: "641067"
     }
   }
 
@@ -439,7 +481,7 @@ export async function assert_payment(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "093540",
+      mrn: "641067",
       items: [
         {
           type: 'card',

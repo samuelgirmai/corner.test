@@ -15,6 +15,7 @@ import {
   change_password,
   list_invoice,
   list_receipt,
+  list_unassigned,
   create_order,
   create_payment,
   settle_account,
@@ -26,7 +27,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'auth test window',
-    choices: ['signin', 'signout', 'change.passwd','create.cofficer', 'get.cofficer', 'list.cofficers','create.patient', 'read.patient', 'list.appointments', 'read.stats', 'renew.pcard', 'print.pcard', 'list.invoice','list.receipt','create.order', 'create.payment', 'settle.account', 'assert.payment','<<back']
+    choices: ['signin', 'signout', 'change.passwd','create.cofficer', 'get.cofficer', 'list.cofficers','create.patient', 'read.patient', 'list.appointments', 'read.stats', 'renew.pcard', 'print.pcard', 'list.invoice','list.receipt','list.unassigned','create.order', 'create.payment', 'settle.account', 'assert.payment','<<back']
   }
 ];
 
@@ -89,6 +90,9 @@ export async function mru_start()
       break;
     case 'assert.payment':
       await assert_payment(token);
+      break;
+    case 'list.unassigned':
+      await list_unassigned(token);
       break;
     case '<<back':
       return;
