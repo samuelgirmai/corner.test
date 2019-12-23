@@ -1,6 +1,7 @@
 {
     "name": "light-bootstrap-dashboard-pro-react",
     "version": "1.0.0",
+    "homepage": "./",
     "private": true,
     "dependencies": {
         "chartist": "^0.10.1",
