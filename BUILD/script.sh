@@ -63,11 +63,21 @@ mrproper()
   printf "\n\x1b[32mremoved everything\n\x1b[0m"
 }
 
+_stop()
+{
+  printf "\n\x1b[32mstopping container(s)...\n\x1b[0m"
+
+  docker-machine ssh $MACHINE_FE docker container kill corner.fe
+  docker-machine ssh $MACHINE_FE docker container rm corner.fe
+
+  printf "\n\x1b[32mstopped container(s)\n\x1b[0m"
+}
+
 run()
 {
   printf "\n\x1b[32mrunning corner on machines...\n\x1b[0m"
 
-  docker-machine ssh $MACHINE_FE docker run --name corner.fe --hostname host.fe -v corner.fe:/corner.fe -p 3010:3000 -p 3011:3001 -d bokri/corner.fe:latest
+  docker-machine ssh $MACHINE_FE docker run --name corner.fe --hostname host.fe -v corner.fe:/corner.fe -p 3010:3000 -p 3011:3001 -d --restart unless-stopped bokri/corner.fe:latest
 
   printf "\n\x1b[32mrun\n\x1b[0m"
 }
@@ -82,12 +92,12 @@ elif [ "$1" = "volume" ]; then
   volume
 elif [ "$1" = "run" ]; then
   run
-elif [ "$1" = "clean" ]; then
-  clean
+elif [ "$1" = "stop" ]; then
+  _stop
 elif [ "$1" = "mrproper" ]; then
   mrproper
 else
-  printf "\n\x1b[31m$>$0 [build|deploy|volume|run|clean|mrproper]\n\n\x1b[0m"
+  printf "\n\x1b[31m$>$0 [build|deploy|volume|run|stop|mrproper]\n\n\x1b[0m"
   exit
 fi
 
