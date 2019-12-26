@@ -17,9 +17,6 @@ mru_compile()
 
   mv build $BUILD_DIR/builds/public/mru
 
-  #back to BUILD directory
-  cd $BUILD_PATH
-
   printf "\n\x1b[32mbuilt mru fe...\n\x1b[0m"
 }
 

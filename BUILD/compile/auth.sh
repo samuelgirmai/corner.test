@@ -18,9 +18,6 @@ auth_compile()
 
   mv build $BUILD_DIR/builds/public/auth
 
-  #back to BUILD directory
-  cd $BUILD_PATH
-
   printf "\n\x1b[32mbuilt auth fe...\n\x1b[0m"
 }
 

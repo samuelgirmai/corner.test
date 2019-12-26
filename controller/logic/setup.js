@@ -2,9 +2,10 @@
  * filesystem SoT
  */
 let filesystem = {
-  name: "mongodb",
-  port: 27017,
-  host: "192.168.99.112"/*internal network*/
+  name: "rethinkdb",
+  port: 28015,
+  host: "192.168.99.112"
+  //host: "0.0.0.0"
 }
 
 /*
@@ -142,6 +143,9 @@ let mru = {
     port: 26001,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
+  },
+  mrn: {
+    start: 300000
   },
   caps: [
     "/platform/auth/users/person/write",
@@ -575,7 +579,8 @@ module.exports = {
       proxy: proxy,
       stream: stream,
       api: mru.api,
-      name: mru.sii.name
+      name: mru.sii.name,
+      mrn: mru.mrn
     },
     caps: mru.caps
   },
