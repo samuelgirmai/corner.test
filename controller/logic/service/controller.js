@@ -1,28 +1,13 @@
 import fs from 'fs'
-import API from '../tools/net';
-import CONFIG from '../config/config'
+import API from '../../tools/net';
+import CONFIG from './config/config'
+
+import {
+  read_license,
+  write_license
+} from '../tools'
 
 var root_license = null;
-
-async function read_license()
-{
-  if(!fs.existsSync(__dirname+"/root/client.lic")){
-    return 0;
-  }
-
-  return JSON.parse(fs.readFileSync(__dirname+"/root/client.lic", 'utf8'));
-}
-
-async function write_license(license)
-{
-  if(!fs.existsSync(__dirname+"/root/client.lic")){
-    return 0;
-  }
-
-  fs.writeFileSync(__dirname+"/root/client.lic", JSON.stringify(license, 0, '  '), 'utf8');
-
-  return 1;
-}
 
 function _print(o, key) 
 {
@@ -156,6 +141,7 @@ export async function install()
 
   root_license = r.result.client.license;
 
+
   await install_service(require('./setup').stream);
   await install_service(require('./setup').corner_notif);
   await install_service(require('./setup').mru);
@@ -170,14 +156,24 @@ export async function install()
   await install_service(require('./setup').emr_notif);
   await install_service(require('./setup').storeSimulator);
 
-  await write_license(r.result.client);
+  var root = {
+    name: "root",
+    user_id: r.result.client.user_id,
+    license: r.result.client.license
+  }
+
+  await write_license(root);
 
   await reboot();
+
+  return true
 }
 
 export async function allow()
 {
-  root_license = (await read_license()).license;
+  root_license = (await read_license("root")).license;
+
+  console.log("::::"+root_license);
 
   await start_service("corner.muxer", "config");
   await start_service("corner.auth", "config");
@@ -198,6 +194,8 @@ export async function allow()
   await allow_service(require('./setup').storeSimulator);
 
   await reboot();
+
+  return true
 }
 
 export async function start()

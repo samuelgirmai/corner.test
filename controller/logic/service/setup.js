@@ -1,10 +1,13 @@
+import {
+  uris2caps
+} from '../fcaps'
 /*
  * filesystem SoT
  */
 let filesystem = {
   name: "rethinkdb",
   port: 28015,
-  host: "192.168.99.112"
+  host: "0.0.0.0"
   //host: "0.0.0.0"
 }
 
@@ -95,7 +98,7 @@ let corner_stream = {
     bind: "0.0.0.0",
     addr: "0.0.0.0"
   },
-  caps: []
+  caps: uris2caps([])
 }
 corner_stream.sii.host = corner_stream.api.addr+":"+corner_stream.api.port;
 
@@ -238,7 +241,6 @@ let practner = {
     "/app/emr/notif/write",
     "/app/emr/notif/read",
     "/app/emr/mru/patient/appointment/update",
-
   ]
 }
 practner.sii.host = practner.api.addr+":"+practner.api.port;
@@ -327,7 +329,7 @@ let pharmacy = {
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
-    "app/emr/mru/patient/assert",
+    "/app/emr/mru/patient/assert",
     "/app/emr/notif/read",
     "/app/emr/finance/invoice/list",
     "/app/emr/finance/receipt/list",
@@ -547,7 +549,7 @@ module.exports = {
       api: auth.api,
       name: auth.sii.name,
     },
-    caps: auth.caps
+    caps: uris2caps(auth.caps)
   },
   stream: {
     name: "corner.stream",
@@ -559,7 +561,7 @@ module.exports = {
       stream: corner_stream.stream,
       name: corner_stream.sii.name
     },
-    caps: corner_stream.caps
+    caps: uris2caps(corner_stream.caps)
   },
   corner_notif: {
     name: "corner.notif",
@@ -570,7 +572,7 @@ module.exports = {
       api: corner_notif.api,
       name: corner_notif.sii.name
     },
-    caps: corner_notif.caps
+    caps: uris2caps(corner_notif.caps)
   },
   mru: {
     name: "emr.mru",
@@ -582,7 +584,7 @@ module.exports = {
       name: mru.sii.name,
       mrn: mru.mrn
     },
-    caps: mru.caps
+    caps: uris2caps(mru.caps)
   },
   triage: {
     name: "emr.triage",
@@ -593,7 +595,7 @@ module.exports = {
       api: triage.api,
       name: triage.sii.name
     },
-    caps: triage.caps
+    caps: uris2caps(triage.caps)
   },
   practner: {
     name: "emr.practner",
@@ -603,7 +605,7 @@ module.exports = {
       api: practner.api,
       name: practner.sii.name
     },
-    caps: practner.caps
+    caps: uris2caps(practner.caps)
   },
   infotics: {
     name: "emr.infotics",
@@ -613,7 +615,7 @@ module.exports = {
       api: infotics.api,
       name: infotics.sii.name
     },
-    caps: infotics.caps
+    caps: uris2caps(infotics.caps)
   },
   lab: {
     name: "emr.lab",
@@ -623,7 +625,7 @@ module.exports = {
       api: lab.api,
       name: lab.sii.name
     },
-    caps: lab.caps
+    caps: uris2caps(lab.caps)
   },
   pharmacy: {
     name: "emr.pharmacy",
@@ -633,7 +635,7 @@ module.exports = {
       api: pharmacy.api,
       name: pharmacy.sii.name
     },
-    caps: pharmacy.caps
+    caps: uris2caps(pharmacy.caps)
   },
   finance: {
     name: "emr.finance",
@@ -643,7 +645,7 @@ module.exports = {
       api: finance.api,
       name: finance.sii.name
     },
-    caps: finance.caps
+    caps: uris2caps(finance.caps)
   },
   payment: {
     name: "emr.payment",
@@ -653,7 +655,7 @@ module.exports = {
       api: payment.api,
       name: payment.sii.name
     },
-    caps: payment.caps
+    caps: uris2caps(payment.caps)
   },
   admin: {
     name: "emr.admin",
@@ -663,7 +665,7 @@ module.exports = {
       api: admin.api,
       name: admin.sii.name
     },
-    caps: admin.caps
+    caps: uris2caps(admin.caps)
   },
   emr_notif: {
     name: "emr.notif",
@@ -674,7 +676,7 @@ module.exports = {
       stream: stream,
       name: emr_notif.sii.name
     },
-    caps: emr_notif.caps
+    caps: uris2caps(emr_notif.caps)
   },
   storeSimulator: {
     name: "emr.storeSimulator",
@@ -684,7 +686,7 @@ module.exports = {
       api: storeSimulator.api,
       name: storeSimulator.sii.name
     },
-    caps: storeSimulator.caps
+    caps: uris2caps(storeSimulator.caps)
   }
 }
 

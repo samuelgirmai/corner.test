@@ -1,20 +1,19 @@
 import inquirer from 'inquirer'
 
 import {
-  configure,
-  mkfs,
-  install,
-  allow,
-  start,
-  get_info
-} from './controller';
+  service_controller
+} from './service/main';
+
+import {
+  client_controller
+} from './client/main';
 
 const main_prompt = [
   {
     type: 'list',
     name: 'main',
     message: 'controller test window',
-    choices: ['get_info', 'configure', 'mkfs', 'install', 'allow', 'start', '<<back']
+    choices: ['service', 'client', '<<back']
   }
 ];
 
@@ -23,23 +22,11 @@ export async function controller_start()
   let option = await inquirer.prompt(main_prompt);
 
   switch(option.main){
-    case 'configure':
-      await configure();
+    case 'service':
+      await service_controller();
       break;
-    case 'mkfs':
-      await mkfs();
-      break;
-    case 'install':
-      await install();
-      break;
-    case 'allow':
-      await allow();
-      break;
-    case 'start':
-      await start();
-      break;
-    case 'get_info':
-      await get_info();
+    case 'client':
+      await client_controller();
       break;
     case '<<back':
       return;
