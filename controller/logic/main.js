@@ -8,12 +8,16 @@ import {
   client_controller
 } from './client/main';
 
+import {
+  person_controller
+} from './person/main';
+
 const main_prompt = [
   {
     type: 'list',
     name: 'main',
     message: 'controller test window',
-    choices: ['service', 'client', '<<back']
+    choices: ['service', 'client', 'person', 'exit']
   }
 ];
 
@@ -28,11 +32,12 @@ export async function controller_start()
     case 'client':
       await client_controller();
       break;
-    case '<<back':
-      return;
+    case 'person':
+      await person_controller();
+      break;
+    case 'exit':
+      process.exit();
   }
-
-  controller_start();
 }
 
 controller_start();

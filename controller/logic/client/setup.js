@@ -15,7 +15,9 @@ let mru = {
     }
   },
   caps: [
-    "/app/emr/mru/user/access/write"
+    "/app/emr/mru/user/access/write",
+    "/app/emr/mru/search/join",
+    "/app/emr/mru/search/exit",
   ]
 }
 
@@ -29,6 +31,7 @@ let triage = {
     }
   },
   caps: [
+    "/app/emr/triage/user/access/write"
   ]
 }
 

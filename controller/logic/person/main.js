@@ -18,7 +18,7 @@ const main_prompt = [
   }
 ];
 
-export async function client_controller()
+export async function person_controller()
 {
   let option = await inquirer.prompt(main_prompt);
 
@@ -34,6 +34,6 @@ export async function client_controller()
       return;
   }
 
-  client_controller()
+  person_controller()
 }
 

@@ -4,11 +4,11 @@ export async function read_license(name)
 {
   let r;
 
-  if(!fs.existsSync(__dirname+"/.client.lic")){
+  if(!fs.existsSync(__dirname+"/.licenses")){
     return 0;
   }
 
-  r = JSON.parse(fs.readFileSync(__dirname+"/.client.lic", 'utf8'));
+  r = JSON.parse(fs.readFileSync(__dirname+"/.licenses", 'utf8'));
 
   console.log(":::"+JSON.stringify(r, 0, '  '))
 
@@ -21,26 +21,34 @@ export async function read_license(name)
 
 export async function write_license(l)
 {
-  if(!fs.existsSync(__dirname+"/.client.lic")){
-    console.log(":::client.lic file not found");
+  if(!fs.existsSync(__dirname+"/.licenses")){
+    console.log(":::.licenses file not found");
     return 0;
   }
 
-  if(!l.license || !l.name || !l.user_id){
-    console.log(":::unknown client license format");
+  if(!l.name || !l.user_id || !(l.license || l.password)){
+    console.log(":::unknown license format");
     return 0;
   }
 
   let r = await read_license(null);
 
-  r[l.name] = {
-    user_id: l.user_id,
-    license: l.license
+  if(l.license){
+    r[l.name] = {
+      user_id: l.user_id,
+      license: l.license
+    }
+  }
+  else if(l.password){
+    r[l.name] = {
+      user_id: l.user_id,
+      password: l.password
+    }
   }
 
   console.log(JSON.stringify(r, 0, '  '));
 
-  fs.writeFileSync(__dirname+"/.client.lic", JSON.stringify(r, 0, '  '), 'utf8');
+  fs.writeFileSync(__dirname+"/.licenses", JSON.stringify(r, 0, '  '), 'utf8');
 
   return 1;
 }

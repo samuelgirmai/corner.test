@@ -25,12 +25,12 @@ async function _create(cnf)
       license: root_license
     },
     param: {
-      cii: cnf.cii
+      pii: cnf.pii
     }
   }
 
   _print(
-    r = await API.run(CONFIG.proxy.url, data, '/platform/auth/users/client/write'),
+    r = await API.run(CONFIG.proxy.url, data, '/platform/auth/users/person/write'),
     null
   );
 
@@ -42,7 +42,7 @@ async function _create(cnf)
   await write_license({
     name: cnf.name,
     user_id: r.result.user_id,
-    license: r.result.license
+    password: "toor"
   });
   
   return r;
@@ -50,18 +50,18 @@ async function _create(cnf)
 
 export async function _allow(cnf)
 {
-  let r, data, client;
+  let r, data, person;
 
   root_license = (await read_license("root")).license;
 
-  client = await read_license(cnf.name);
+  person = await read_license(cnf.name);
 
   data = {
     auth: {
       license: root_license
     },
     param: {
-      uid: client.user_id,
+      uid: person.user_id,
       caps: cnf.caps
     }
   }
@@ -82,13 +82,6 @@ export async function create()
 {
   var r;
 
-  await _create(require('./setup').mru);
-  await _create(require('./setup').triage);
-  await _create(require('./setup').practner);
-  await _create(require('./setup').infotics);
-  await _create(require('./setup').lab);
-  await _create(require('./setup').pharmacy);
-  await _create(require('./setup').cashier);
   await _create(require('./setup').admin);
 }
 
@@ -96,13 +89,6 @@ export async function allow()
 {
   var r;
 
-  await _allow(require('./setup').mru);
-  await _allow(require('./setup').triage);
-  await _allow(require('./setup').practner);
-  await _allow(require('./setup').infotics);
-  await _allow(require('./setup').lab);
-  await _allow(require('./setup').pharmacy);
-  await _allow(require('./setup').cashier);
   await _allow(require('./setup').admin);
 }
 

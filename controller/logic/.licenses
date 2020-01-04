@@ -1,0 +1,38 @@
+{
+  "root": {
+    "user_id": "212406",
+    "license": "236020923357"
+  },
+  "emr.mru": {
+    "user_id": "133721",
+    "license": "386403869725"
+  },
+  "emr.triage": {
+    "user_id": "563034",
+    "license": "313054552523"
+  },
+  "emr.practner": {
+    "user_id": "582614",
+    "license": "706977210358"
+  },
+  "emr.infotics": {
+    "user_id": "497758",
+    "license": "358371393398"
+  },
+  "emr.lab": {
+    "user_id": "562768",
+    "license": "925839032613"
+  },
+  "emr.pharmacy": {
+    "user_id": "880417",
+    "license": "305521290270"
+  },
+  "emr.cashier": {
+    "user_id": "698088",
+    "license": "674892427138"
+  },
+  "emr.admin": {
+    "user_id": "119668",
+    "password": "toor"
+  }
+}

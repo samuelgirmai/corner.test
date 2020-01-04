@@ -46,8 +46,8 @@ export async function service_controller()
       await get_info();
       break;
     case '<<back':
+      controller_start();
       return;
-      //controller_start();
   }
 
   service_controller()
