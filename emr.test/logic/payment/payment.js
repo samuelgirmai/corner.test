@@ -49,7 +49,7 @@ export async function create_order(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/order/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/payment/order/write');
 
   //invoice_id = ret.result.invoice.invoice_id;
 
@@ -70,7 +70,7 @@ export async function create_payment(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/payment/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/payment/payment/write');
 
   _print(ret, null);
 }
@@ -88,7 +88,7 @@ export async function settle_account(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/account/settlement/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/payment/account/settlement/write');
 
   _print(ret, null);
 }
@@ -107,7 +107,7 @@ export async function assert_payment(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/items/price/assert');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/payment/items/price/assert');
 
   _print(ret, null);
 }
@@ -123,7 +123,7 @@ export async function list_drivers(token)
     param: {}
   }
 
-  ret = await API.run(data, '/app/emr/payment/drivers/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/payment/drivers/list');
 
   _print(ret, null);
 }

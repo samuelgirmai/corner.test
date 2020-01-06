@@ -54,7 +54,7 @@ export async function create_user()
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/user/write');
 
   _print(ret, null);
 }
@@ -72,7 +72,7 @@ export async function get_user(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/user/read');
 
   _print(ret, null);
 }
@@ -87,7 +87,7 @@ export async function list_users(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/user/list');
 
   _print(ret, null);
 }
@@ -113,7 +113,7 @@ export async function change_passwd(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/security/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/user/security/update');
 
   _print(ret, null);
 }
@@ -132,7 +132,7 @@ export async function signin()
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/user/access/write');
   
   _print(ret, 'token');
 
@@ -157,7 +157,7 @@ export async function signout(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/access/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/user/access/delete');
 
   _print(ret, null);
 }
@@ -183,7 +183,7 @@ export async function create_assign(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/assign/write');
 
   _print(ret, null);
 }
@@ -209,7 +209,7 @@ export async function update_assign(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/assign/update');
 
   _print(ret, null);
 }
@@ -234,7 +234,7 @@ export async function update_status(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/status/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/assign/status/update');
 
   _print(ret, null);
 }
@@ -258,7 +258,7 @@ export async function read_assign(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/assign/read');
 
   _print(ret, null);
 }
@@ -282,7 +282,7 @@ export async function remove_assign(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/assign/delete');
 
   _print(ret, null);
 }
@@ -305,7 +305,7 @@ export async function list_assign(token)
       order_type: 'asc'
     }
     data.param.pagin = pagin;
-    ret = await API.run(data, '/app/emr/triage/assign/list');
+    ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/assign/list');
     _print(ret, null);
     if(ret.status !== 'err')
       console.log("######################### PAGE ",i, "##########################")
@@ -335,7 +335,7 @@ export async function read_stats(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/stats/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/triage/stats/read');
 
   _print(ret, null);
 }

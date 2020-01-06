@@ -54,7 +54,7 @@ export async function create_user()
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/write');
 
   _print(ret, null);
 
@@ -73,7 +73,7 @@ export async function get_user()
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/read');
 
   _print(ret, null);
 }
@@ -88,7 +88,7 @@ export async function list_users()
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/list');
 
   _print(ret, null);
 }
@@ -115,7 +115,7 @@ export async function change_passwd(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/security/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/security/update');
 
   _print(ret, null);
 }
@@ -134,7 +134,7 @@ export async function signin()
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/access/write');
   
   _print(ret, 'token');
 
@@ -159,7 +159,7 @@ export async function signout(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/access/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/access/delete');
 
   _print(ret, null);
 }
@@ -191,7 +191,7 @@ export async function create_dispense(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/dispense/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/dispense/write');
 
   _print(ret, null);
 
@@ -216,7 +216,7 @@ export async function read_dispense(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/dispense/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/dispense/read');
 
   _print(ret, null);
 }
@@ -237,7 +237,7 @@ export async function list_invoice(token)
     },
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/invoice/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/invoice/list');
 
   _print(ret, null);
 }
@@ -258,7 +258,7 @@ export async function list_receipt(token)
     },
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/receipt/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/receipt/list');
 
   _print(ret, null);
 }
@@ -288,7 +288,7 @@ export async function create_order(token)
      }
   }
   
-  ret = await API.run(data, '/app/emr/pharmacy/order/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/order/write');
   
   _print(ret, null);
 }
@@ -313,7 +313,7 @@ export async function create_payment(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/payment/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/payment/write');
 
   _print(ret, null);
 }
@@ -337,7 +337,7 @@ export async function settle_account(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/account/settlement/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/account/settlement/write');
 
   _print(ret, null);
 }
@@ -368,7 +368,7 @@ export async function assert_payment(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/items/price/assert');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/items/price/assert');
 
   _print(ret, null);
 }
