@@ -1,5 +1,5 @@
 import API from '../../tools/net';
-import CONFIG from '../../config/config'
+import CONFIG from './config/config'
 
 function _print(o, key) 
 {

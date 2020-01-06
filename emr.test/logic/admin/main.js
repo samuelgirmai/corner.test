@@ -20,35 +20,35 @@ const main_prompt = [
   }
 ];
 
+var token = null;
+
 export async function admin_start()
 {
-  var token;
-
   let option = await inquirer.prompt(main_prompt);
   switch(option.main){
     case 'create.user':
-      await create_user();
+      await create_user(token);
       break;
     case 'remove.user':
-      await remove_user();
+      await remove_user(token);
       break;
     case 'list.users':
-     await list_users();
+     await list_users(token);
      break;
     case 'assign.role':
-      await assign_role();
+      await assign_role(token);
       break;
     case 'revoke.role':
-      await revoke_role();
+      await revoke_role(token);
       break;
     case 'get.role':
-      await get_role();
+      await get_role(token);
       break;
     case 'get.stats':
-      await get_stats();;
+      await get_stats(token);;
       break;
     case 'signin':
-      await signin();;
+      token = await signin();;
       break;
     case '<<back':
       return;

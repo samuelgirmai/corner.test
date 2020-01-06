@@ -1,5 +1,5 @@
 import API from '../../tools/net';
-import CONFIG from '../../config/config'
+import CONFIG from './config/config'
 import moment from 'moment';
 
 function _print(o, key) 

@@ -38,7 +38,7 @@ let admin = {
 
 module.exports = {
   admin: {
-    name: "emr.admin",
+    name: "emr.person.admin",
     pii: admin.pii,
     caps: uris2caps(admin.caps)
   }

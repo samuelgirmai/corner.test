@@ -1,5 +1,5 @@
 import API from '../../tools/net';
-import CONFIG from '../../config/config'
+import CONFIG from './config/config'
 
 function _print(o, key) 
 {
@@ -25,9 +25,14 @@ function _print(o, key)
   console.log(JSON.stringify(o, 0, '  '));
 }
 
-export async function create_user()
+export async function create_user(token)
 {
   let ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
 
   let u = {
     name: "Beriha",
@@ -48,35 +53,42 @@ export async function create_user()
 
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     }, 
     param: {
       pii: u,
-      //user_type: 'cofficer'
+      user_type: 'cofficer'
       //user_type: 'triage'
       //user_type: 'practitioner'
       //user_type: 'informatics'
       //user_type: 'labtech'
-      user_type: 'pharmacist'
+      //user_type: 'pharmacist'
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/write');
 
   _print(ret, null);
 
 }
 
-export async function remove_user()
+export async function remove_user(token)
 {
   let ret, data;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
-      user_id: "766266",
+      user_id: "899775",
       user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
@@ -86,18 +98,24 @@ export async function remove_user()
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/delete');
 
   _print(ret, null);
 }
 
-export async function list_users()
+export async function list_users(token)
 {
   let ret, data;;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
    param: {
      //user_type: 'cofficer',
@@ -105,67 +123,85 @@ export async function list_users()
    }
   },
 
-  ret = await API.run(data, '/app/emr/admin/user/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/list');
 
   _print(ret, null);
 }
 
-export async function assign_role()
+export async function assign_role(token)
 {
   let ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
  
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     }, 
     param: {
-      user_id: "293273",
-      //user_type: "cofficer"
+      user_id: "899775",
+      user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
       //user_type: "labtech"
       //user_type: "informatics"
-      user_type: "pharmacist"
+      //user_type: "pharmacist"
     }
 
     }
 
-  ret = await API.run(data, '/app/emr/admin/user/role/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/role/write');
   
   _print(ret, 'ret');
 }
 
-export async function revoke_role()
+export async function revoke_role(token)
 {
   let ret;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
-      user_id: "840146",
+      user_id: "899775",
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/role/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/role/delete');
 
   _print(ret, null);
 }
-export async function get_role()
+export async function get_role(token)
 {
   let ret;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     },
     param: {
-      user_id: "141714",
+      user_id: "899775",
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/role/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/role/read');
 
   _print(ret, null);
 }
@@ -179,12 +215,12 @@ export async function signin()
       license: CONFIG.auth.license,
     },
     param: {
-      username: "544860",
+      username: "634551",
       password: "toor",
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/access/write');
 
   _print(ret, 'token');
 
@@ -192,17 +228,23 @@ export async function signin()
 }
 
 
-export async function get_stats()
+export async function get_stats(token)
 {
   let ret;
 
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
   let data = {
     auth: {
-      license: CONFIG.auth.license,
+      //license: CONFIG.auth.license,
+      token: token
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/stats/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/stats/read');
 
   _print(ret, null);
 }

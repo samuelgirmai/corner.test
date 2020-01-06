@@ -1,4 +1,4 @@
-import CONFIG from '../../config/config'
+import CONFIG from './config/config'
 import STREAM from '../../../../tools/stream'
 
 var notif_init = async() => {
