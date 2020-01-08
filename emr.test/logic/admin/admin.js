@@ -88,7 +88,7 @@ export async function remove_user(token)
       token: token
     },
     param: {
-      user_id: "899775",
+      user_id: "708876",
       user_type: "cofficer"
       //user_type: "triage"
       //user_type: "practitioner"
@@ -143,16 +143,9 @@ export async function assign_role(token)
       token: token
     }, 
     param: {
-      user_id: "899775",
-      user_type: "cofficer"
-      //user_type: "triage"
-      //user_type: "practitioner"
-      //user_type: "labtech"
-      //user_type: "informatics"
-      //user_type: "pharmacist"
+      user_id: "708876"
     }
-
-    }
+  }
 
   ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/role/write');
   
@@ -174,7 +167,7 @@ export async function revoke_role(token)
       token: token
     },
     param: {
-      user_id: "899775",
+      user_id: "708876",
     }
   }
 
@@ -215,7 +208,7 @@ export async function signin()
       license: CONFIG.auth.license,
     },
     param: {
-      username: "634551",
+      username: "353604",
       password: "toor",
     }
   }
