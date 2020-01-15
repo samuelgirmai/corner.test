@@ -21,7 +21,6 @@ async function init_data()
   await AUTH.list_persons();
   await AUTH.list_clients();
   await AUTH.list_services();
-  await AUTH.list_logs();
   await AUTH.get_stats("users_count", null);
   await AUTH.get_stats("caps_count", null);
 }

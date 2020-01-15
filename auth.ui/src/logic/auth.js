@@ -87,27 +87,6 @@ export async function create_person(u)
   return ret;
 }
 
-export async function list_logs()
-{
-  let ret;
-
-  let data = {
-    auth: {
-      license: CONFIG.auth.license
-    }
-  }
-
-  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/log/access/read');
-
-  if(ret.status == "ok"){
-    STORE.write('logs', ret.result.logs);
-  }
-
-  _print(ret, 'logs');
-
-  return ret;
-}
-
 export async function list_services()
 {
   let ret;
@@ -410,7 +389,6 @@ const AUTH =  {
   list_maps:		list_maps,
   allow_caps:		allow_caps,
   revoke_caps:		revoke_caps,
-  list_logs:		list_logs,
   get_stats:		get_stats
 };
 
