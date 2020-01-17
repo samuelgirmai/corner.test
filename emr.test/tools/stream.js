@@ -1,5 +1,4 @@
 import io from 'socket.io-client';
-import CONFIG from '../config/config';
 import NET from './net';
 
 var streams = {};
@@ -47,7 +46,10 @@ export async function stream_listen(s_name, events)
   }
 }
 
-export async function stream_open(s_name, license)
+/*
+ * NOT usually used by clients
+ */
+/*export async function stream_open(s_name, license)
 {
   let r, data, stream;
 
@@ -76,7 +78,7 @@ export async function stream_open(s_name, license)
   
   return 1;
 
-}
+}*/
 
 const STREAM = {
   open: stream_open,
