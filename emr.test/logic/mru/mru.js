@@ -379,12 +379,18 @@ export async function list_receipt(token)
 
   let filters = [
     {
-      name: "receipt_date",
+      name: "date",
       arg: {
         date: "29/01/2020"
        }
-     }
-   ]
+    },
+    {
+      name: "mrn",
+      arg: {
+        mrn: "352646",
+       }
+    }
+  ]
 
   data = {
    auth: {
