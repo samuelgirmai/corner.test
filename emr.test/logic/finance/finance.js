@@ -1,5 +1,4 @@
 import API from '../../tools/net';
-import STREAM from '../../tools/stream';
 
 import CONFIG from './config/config'
 
@@ -33,6 +32,7 @@ export async function create_cashier()
   let u = {
     name: "Beriha",
     fname: "Araari",
+    gfname: "Girma",
     mname: "Zimam",
     mfname: "Ayyantu",
     gender: "M",
@@ -130,7 +130,7 @@ export async function signin()
       license: CONFIG.auth.license,
     },
     param: {
-      username: "256108",
+      username: "728632",
       password: "toor",
     }
   }
@@ -180,7 +180,7 @@ export async function create_account(token)
       token: token
     },
     param: {
-      mrn: "093540"
+      mrn: "352646"
     }
   }
 
@@ -348,7 +348,7 @@ export async function create_transaction(token)
       token: token
     },
     param: {
-      mrn: "093540",
+      mrn: "352646",
       transaction: {
         type: "deposit",
         reason: "",
@@ -376,7 +376,7 @@ export async function create_deposit(token)
       token: token
     },
     param: {
-      mrn: "093540",
+      mrn: "352646",
       transaction: {
         reason: "",
         amount: 3287.01
@@ -404,7 +404,7 @@ export async function create_withdraw(token)
       token: token
     },
     param: {
-      mrn: "093540",
+      mrn: "352646",
       transaction: {
         reason: "",
         amount: 320.01
@@ -458,7 +458,7 @@ export async function create_order(token)
       token: token
     },
     param: {
-      mrn: "213318",
+      mrn: "352646",
       items: [{
         type: "lab",
         id: "764620",
@@ -568,7 +568,7 @@ export async function create_invoice(token)
       token: token
     },
     param: {
-      mrn: "213318",
+      mrn: "352646",
       order_id: "6981822346",
       service_type: "mru"
     }

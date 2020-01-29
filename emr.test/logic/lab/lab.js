@@ -31,6 +31,7 @@ export async function create_user()
   let u = {
     name: "Jamal",
     fname: "Mohammed",
+    gfname: "Girma",
     mname: "Hassan",
     mfname: "Abulrahman",
     gender: "M",

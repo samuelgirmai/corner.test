@@ -9,6 +9,7 @@ let admin = {
   pii: {
     name: "Silas",
     fname: "Berhane",
+    gfname: "Solomon",
     mname: "Zimam",
     mfname: "Berhane",
     gender: "F",

@@ -28,6 +28,7 @@ class PersonReg extends React.Component{
         this.pii = {
           name: "",
           fname: "",
+	  gfname: "blob",
           mname: "blob",
           mfname: "blob",
           dob: "",

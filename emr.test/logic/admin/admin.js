@@ -37,6 +37,7 @@ export async function create_user(token)
   let u = {
     name: "Beriha",
     fname: "Jawar",
+    gfname: "Abebe",
     mname: "Fana",
     mfname: "Salsawi",
     gender: "F",
@@ -64,6 +65,7 @@ export async function create_user(token)
       //user_type: 'informatics'
       //user_type: 'labtech'
       //user_type: 'pharmacist'
+      //user_type: 'cashier'
     }
   }
 
@@ -143,7 +145,7 @@ export async function assign_role(token)
       token: token
     }, 
     param: {
-      user_id: "708876"
+      user_id: "728632"
     }
   }
 
@@ -208,7 +210,7 @@ export async function signin()
       license: CONFIG.auth.license,
     },
     param: {
-      username: "353604",
+      username: "903105",
       password: "toor",
     }
   }
