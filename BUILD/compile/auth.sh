@@ -10,6 +10,10 @@ auth_compile()
   #change directory for a build
   cd $AUTH_PATH
 
+  if [ ! -d "$AUTH_PATH/node_modules" ]; then
+    npm install
+  fi
+
   NODE_PATH=src npm run build
 
   if [ -d "$BUILD_DIR/builds/public/auth" ]; then
