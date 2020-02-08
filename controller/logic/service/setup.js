@@ -98,7 +98,7 @@ let corner_stream = {
     bind: "0.0.0.0",
     addr: "0.0.0.0"
   },
-  caps: uris2caps([])
+  caps: []
 }
 corner_stream.sii.host = corner_stream.api.addr+":"+corner_stream.api.port;
 
