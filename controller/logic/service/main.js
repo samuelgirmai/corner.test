@@ -50,6 +50,6 @@ export async function service_controller()
       return;
   }
 
-  service_controller()
+  service_controller();
 }
 
