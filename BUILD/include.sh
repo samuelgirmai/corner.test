@@ -4,7 +4,7 @@ source ./compile/_main.sh
 
 compile()
 {
-  compile_all $1
+  compile_all $1 $2
 }
 
 build()

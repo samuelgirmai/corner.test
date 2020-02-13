@@ -9,9 +9,9 @@ deploy()
 {
   printf "\n\x1b[32mdeploying images...\n\x1b[0m"
 
-  scp ./images/corner.fe.tar.gz $MACHINE_FE:/home/docker/
+  scp ./images/corner.fe.tar.gz $MACHINE_FE:/home/rufta/
 
-  ssh $MACHINE_FE docker load -i /home/docker/corner.fe.tar.gz
+  ssh $MACHINE_FE docker load -i /home/rufta/corner.fe.tar.gz
 
   printf "\n\x1b[32mimages deployed to machines\n\x1b[0m"
 }
@@ -66,7 +66,7 @@ run()
 }
 
 if [ "$1" = "compile" ]; then
-  compile $2
+  compile $2 $3
 elif [ "$1" = "build" ]; then
   build
 elif [ "$1" = "deploy" ]; then
@@ -82,7 +82,7 @@ elif [ "$1" = "restart" ]; then
 elif [ "$1" = "mrproper" ]; then
   mrproper
 else
-  printf "\n\x1b[31m$>$0 [compile|build|deploy|mkvol|run|stop|restart|mrproper]\n\n\x1b[0m"
+  printf "\n\x1b[31m$>script [compile|build|deploy|mkvol|run|stop|restart|mrproper]\n\n\x1b[0m"
   exit
 fi
 
