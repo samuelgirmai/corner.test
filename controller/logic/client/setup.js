@@ -45,7 +45,9 @@ let practner = {
     }
   },
   caps: [
-    "/app/emr/practner/user/access/write"
+    "/app/emr/practner/user/access/write",
+    "/app/emr/notif/join",
+    "/app/emr/notif/exit"
   ]
 }
 
@@ -73,7 +75,9 @@ let lab = {
     }
   },
   caps: [
-    "/app/emr/lab/user/access/write"
+    "/app/emr/lab/user/access/write",
+    "/app/emr/notif/join",
+    "/app/emr/notif/exit"
   ]
 }
 
@@ -87,7 +91,9 @@ let pharmacy = {
     }
   },
   caps: [
-    "/app/emr/pharmacy/user/access/write"
+    "/app/emr/pharmacy/user/access/write",
+    "/app/emr/notif/join",
+    "/app/emr/notif/exit"
   ]
 }
 

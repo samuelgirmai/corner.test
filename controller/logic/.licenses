@@ -1,42 +1,42 @@
 {
   "root": {
-    "user_id": "656941",
-    "license": "571485949092"
+    "user_id": "909308",
+    "license": "553347743630"
   },
   "emr.mru": {
-    "user_id": "366071",
-    "license": "046889842820"
+    "user_id": "593573",
+    "license": "523439673997"
   },
   "emr.triage": {
-    "user_id": "649501",
-    "license": "125944679558"
+    "user_id": "883407",
+    "license": "862375123080"
   },
   "emr.practner": {
-    "user_id": "886748",
-    "license": "350003863358"
+    "user_id": "856817",
+    "license": "598382515948"
   },
   "emr.infotics": {
-    "user_id": "156211",
-    "license": "557104637631"
+    "user_id": "136346",
+    "license": "993695904484"
   },
   "emr.lab": {
-    "user_id": "345231",
-    "license": "824519661694"
+    "user_id": "830845",
+    "license": "300096951263"
   },
   "emr.pharmacy": {
-    "user_id": "468414",
-    "license": "381017676842"
+    "user_id": "679044",
+    "license": "266484364418"
   },
   "emr.cashier": {
-    "user_id": "729856",
-    "license": "920369320447"
+    "user_id": "291435",
+    "license": "657001133031"
   },
   "emr.admin": {
-    "user_id": "151114",
-    "license": "490311487704"
+    "user_id": "063574",
+    "license": "084407198431"
   },
   "emr.person.admin": {
-    "user_id": "278179",
+    "user_id": "691265",
     "password": "toor"
   }
 }

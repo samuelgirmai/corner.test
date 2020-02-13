@@ -9,8 +9,7 @@ let filesystem = {
   //port: 28015,
   name: "mongodb",
   port: 27017,
-  host: "rufta.cornerhealth.io"
-  //host: "rufta@cornerhealth.io"
+  host: "corner.fs"
 }
 
 /*
@@ -433,6 +432,7 @@ let admin = {
     "/app/emr/practner/user/read",
     "/app/emr/practner/user/delete",
     "/app/emr/practner/user/update",
+    "/app/emr/practner/user/list",
     "/app/emr/infotics/user/write",
     "/app/emr/infotics/user/read",
     "/app/emr/infotics/user/list",

@@ -7,19 +7,20 @@ import {
  */
 let admin = {
   pii: {
-    name: "Silas",
-    fname: "Berhane",
-    mname: "Zimam",
-    mfname: "Berhane",
+    name: "admin",
+    fname: "rufta",
+    gfname: "taye",
+    mname: "zimam",
+    mfname: "berhane",
     gender: "F",
-    dob: "12/12/1995",
+    dob: "12/12/1985",
     address: {
-      region: "Tigray",
-      zone: "Mekelle",
-      woreda: "Hadinet",
+      region: "tigray",
+      zone: "mekelle",
+      woreda: "hadinet",
       kebele: "16",
-      house_number: "NULL",
-      phone_number: "+251914000020"
+      house_number: "213",
+      phone_number: "0914198976"
     }
   },
   caps: [
@@ -29,6 +30,8 @@ let admin = {
     '/app/emr/admin/user/role/write',
     '/app/emr/admin/user/role/delete',
     '/app/emr/admin/user/role/read',
+    /*FIXME: /app/emr/practner/opd/list shouldn't be here*/
+    '/app/emr/practner/opd/list',
     '/app/emr/admin/stats/read',
     '/app/emr/admin/access/write',
     '/app/emr/admin/access/delete',
