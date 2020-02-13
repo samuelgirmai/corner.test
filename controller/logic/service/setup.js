@@ -5,10 +5,11 @@ import {
  * filesystem SoT
  */
 let filesystem = {
-  name: "rethinkdb",
-  port: 28015,
-  host: "0.0.0.0"
-  //host: "0.0.0.0"
+  //name: "rethinkdb",
+  //port: 28015,
+  name: "mongodb",
+  port: 27017,
+  host: "corner.fs"
 }
 
 /*
@@ -431,6 +432,8 @@ let admin = {
     "/app/emr/practner/user/read",
     "/app/emr/practner/user/delete",
     "/app/emr/practner/user/update",
+    "/app/emr/practner/user/list",
+    "/app/emr/practner/opd/list",
     "/app/emr/infotics/user/write",
     "/app/emr/infotics/user/read",
     "/app/emr/infotics/user/list",
