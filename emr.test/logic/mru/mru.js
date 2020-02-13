@@ -32,6 +32,7 @@ export async function create_cofficer()
   let u = {
     name: "Solomon",
     fname: "Leul",
+    gfname: "Girma",
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",
@@ -130,7 +131,7 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "498706",
+      username: "453766",
       password: "toor",
     }
   }
@@ -177,6 +178,7 @@ export async function create_patient(token)
   u = {
     name: "Berhe",
     fname: "Belay",
+    gfname: "Girma",
     mname: "Zimam",
     mfname: "Taye",
     gender: "M",
@@ -222,7 +224,7 @@ export async function read_patient(token)
       token: token,
     },
     param: {
-      mrn: "336163"
+      mrn: "352646"
     }
   }
 
@@ -271,7 +273,7 @@ export async function renew_pcard(token)
       token: token,
       },
       param: {
-        mrn: "191379"
+        mrn: "352646"
       }
    }
 
@@ -295,7 +297,7 @@ export async function print_pcard(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "510226"
+      mrn: "352646"
     }
   }
 
@@ -375,11 +377,29 @@ export async function list_receipt(token)
     return;
   }
 
+  let filters = [
+    {
+      name: "date",
+      arg: {
+        date: "29/01/2020"
+       }
+    },
+    {
+      name: "mrn",
+      arg: {
+        mrn: "352646",
+       }
+    }
+  ]
+
   data = {
    auth: {
       token: token,
       //license: CONFIG.auth.license,
     },
+    param: {
+      //filters: filters
+    }
   }
 
   ret = await API.run(data, CONFIG.proxy.url, '/app/emr/mru/receipt/list');
@@ -402,7 +422,7 @@ export async function create_order(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "641067",
+      mrn: "352646",
       items: [
         {
           type: 'card',
@@ -432,8 +452,8 @@ export async function create_payment(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "641067",
-      invoice_id: '2995452144'
+      mrn: "352646",
+      invoice_id: '6970012798'
     }
   }
 
@@ -457,7 +477,7 @@ export async function settle_account(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "641067"
+      mrn: "352646"
     }
   }
 
@@ -481,7 +501,7 @@ export async function assert_payment(token)
       //license: CONFIG.auth.license,
     },
     param: {
-      mrn: "641067",
+      mrn: "352646",
       items: [
         {
           type: 'card',

@@ -15,7 +15,7 @@ import ImageUploader from 'react-images-upload'
 
 import Card from 'components/Card/Card.jsx';
 import Button from 'elements/CustomButton/CustomButton.jsx';
-
+import moment from 'moment';
 //import CommonModal from 'views/CBHI/CommonModal.jsx'
 //import PhotoPreview from 'views/CBHI/PhotoPreview'
 import STREAM from 'api/stream';
@@ -70,7 +70,7 @@ class PersonalInfo extends React.Component{
                           <Datetime name="dob"
                             timeFormat={false}
                             inputProps={{placeholder:"Date of Birth"}}
-                            onChange={(t)=>{this.props.pinfo.dob=t}}
+                            onChange={(t)=>{this.props.pinfo.dob=moment(t).format('DD/MM/YYYY')}}
                         />
                       </FormGroup>
                   </div>

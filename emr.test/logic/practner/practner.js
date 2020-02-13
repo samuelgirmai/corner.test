@@ -86,6 +86,7 @@ export async function create_user(token)
   let u = {
     name: "Yohanes",
     fname: "Adane",
+    gfname: "Girma",
     mname: "Zemzem",
     mfname: "Gidey",
     gender: "M",

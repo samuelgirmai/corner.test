@@ -5,11 +5,10 @@ import {
  * filesystem SoT
  */
 let filesystem = {
-  //name: "rethinkdb",
-  //port: 28015,
-  name: "mongodb",
+  name: "mongnodb",
   port: 27017,
-  host: "corner.fs"
+  host: "0.0.0.0"
+  //host: "0.0.0.0"
 }
 
 /*
@@ -391,6 +390,7 @@ let payment = {
     '/app/emr/finance/account/balance/read',
     '/app/emr/finance/order/write',
     '/app/emr/finance/invoice/write',
+    '/app/emr/finance/invoice/read',
     '/app/emr/finance/account/transaction/write',
     '/app/emr/finance/receipt/write',
     '/app/emr/finance/insurance/scheme/write'
