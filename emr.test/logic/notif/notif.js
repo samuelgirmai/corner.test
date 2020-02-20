@@ -5,7 +5,8 @@ var notif_init = async() => {
   await STREAM.connect(CONFIG.stream, "/app/emr/notif")
 
   STREAM.join("/app/emr/notif", {
-    id: CONFIG.auth.license
+    license: CONFIG.auth.license,
+    id: '123432'
   });
 
   let events = [
