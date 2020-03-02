@@ -5,7 +5,7 @@ launcher_compile()
 {
   printf "\n\x1b[32mbuiding launcher fe...\n\x1b[0m"
 
-  LAUNCHER_PATH="/home/samuel/current_tasks/personal/bokri/corner/clients/launcher"
+  LAUNCHER_PATH="/home/samuel/current_tasks/personal/bokri/corner/launcher"
 
   #change directory for a build
   cd $LAUNCHER_PATH

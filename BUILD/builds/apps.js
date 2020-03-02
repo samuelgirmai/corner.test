@@ -1,11 +1,11 @@
 export var apps = [
-  /*{
+  {
     name: "launcher",
-    version: "integrate13",
+    version: "v0.1",
     mnt: "/launcher",
     bind: "0.0.0.0",
-    port: 80
-  },*/
+    port: 9090
+  },
   {
     name: "auth",
     version: "v1.1.qa",
