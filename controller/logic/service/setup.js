@@ -7,7 +7,7 @@ import {
 let filesystem = {
   name: "mongodb",
   port: 27017,
-  host: "0.0.0.0"
+  host: "corner.fs"
   //host: "0.0.0.0"
 }
 
@@ -203,6 +203,7 @@ let triage = {
     "/app/emr/triage/stats/exit",
     "/app/emr/practner/opd/assert",
     "/app/emr/practner/opd/read",
+    "/app/emr/practner/user/read",
     "/app/emr/mru/patient/lastVisit/update",
     "/app/emr/notif/write",
     "/app/emr/notif/read",
