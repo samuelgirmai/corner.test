@@ -60,7 +60,7 @@ run()
 {
   printf "\n\x1b[32mrunning corner on machines...\n\x1b[0m"
 
-  ssh $MACHINE_FE docker run --name corner.fe --hostname host.fe -v corner.fe:/corner.fe -p 4000-4020:3000-3020 -d --restart unless-stopped bokri/corner.fe:latest
+  ssh $MACHINE_FE docker run --name corner.fe --hostname host.fe -v corner.fe:/corner.fe -p 4000-4020:3000-3020 -p 90:90 -d --restart unless-stopped bokri/corner.fe:latest
 
   printf "\n\x1b[32mrun\n\x1b[0m"
 }

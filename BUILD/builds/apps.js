@@ -4,7 +4,7 @@ export var apps = [
     version: "v0.1",
     mnt: "/launcher",
     bind: "0.0.0.0",
-    port: 9090
+    port: 90
   },
   {
     name: "auth",
