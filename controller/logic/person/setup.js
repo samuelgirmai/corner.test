@@ -35,7 +35,10 @@ let admin = {
     '/app/emr/admin/stats/read',
     '/app/emr/admin/access/write',
     '/app/emr/admin/access/delete',
-    '/app/emr/admin/security/update'
+    '/app/emr/admin/security/update',
+    '/app/emr/mru/stats/read',
+    '/app/emr/practner/stats/read',
+    '/app/emr/triage/stats/read'
   ]
 }
 
