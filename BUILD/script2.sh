@@ -60,12 +60,14 @@ run()
 {
   printf "\n\x1b[32mrunning corner on machines...\n\x1b[0m"
 
-  ssh $MACHINE_FE docker run --name corner.fe --hostname host.fe -v corner.fe:/corner.fe -p 4000-4020:3000-3020 -p 90:90 -d --restart unless-stopped bokri/corner.fe:latest
+  ssh $MACHINE_FE docker run --name corner.fe --hostname host.fe -v corner.fe:/corner.fe -p 4000-4020:3000-3020 -p 80:80 -d --restart unless-stopped bokri/corner.fe:latest
 
   printf "\n\x1b[32mrun\n\x1b[0m"
 }
 
-if [ "$1" = "compile" ]; then
+if [ "$1" = "configure" ]; then
+  configure
+elif [ "$1" = "compile" ]; then
   compile $2 $3
 elif [ "$1" = "build" ]; then
   build
@@ -82,7 +84,7 @@ elif [ "$1" = "restart" ]; then
 elif [ "$1" = "mrproper" ]; then
   mrproper
 else
-  printf "\n\x1b[31m$>script [compile|build|deploy|mkvol|run|stop|restart|mrproper]\n\n\x1b[0m"
+  printf "\n\x1b[31m$>script [configure|compile|build|deploy|mkvol|run|stop|restart|mrproper]\n\n\x1b[0m"
   exit
 fi
 

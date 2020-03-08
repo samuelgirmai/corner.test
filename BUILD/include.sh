@@ -1,6 +1,12 @@
 #!/bin/bash
 
 source ./compile/_main.sh
+source ./configure/_main.sh
+
+configure()
+{
+  configure_all $1
+}
 
 compile()
 {
