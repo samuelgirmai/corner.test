@@ -129,7 +129,7 @@ export async function list_clients()
   return ret;
 }
 
-export async function list_persons()
+export async function list_persons(user_id)
 {
   let ret;
 
@@ -145,9 +145,15 @@ export async function list_persons()
     }
   }
 
+  if(user_id){
+    data['param'] = {
+      user_id: user_id
+    }
+  }
+
   ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/persons/list');
 
-  if(ret.status == "ok"){
+  if(ret.status == "ok" && !user_id){
     STORE.write('persons', ret.result.persons);
   }
 
