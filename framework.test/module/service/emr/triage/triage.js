@@ -20,7 +20,7 @@ export async function create_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/write');
+  ret = await API.run(data, '/app/rufta/triage/user/write');
 
  console.log(ret)
 
@@ -40,7 +40,7 @@ export async function get_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/read');
+  ret = await API.run(data, '/app/rufta/triage/user/read');
 
   return ret.status == "ok"?ret.result: null;
 }
@@ -59,7 +59,7 @@ export async function change_security(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/security/write');
+  ret = await API.run(data, '/app/rufta/triage/user/security/write');
 
   return ret;
 }
@@ -79,7 +79,7 @@ export async function signin(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/access/write');
+  ret = await API.run(data, '/app/rufta/triage/user/access/write');
   
   return ret;
 }
@@ -98,7 +98,7 @@ export async function signout(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/user/access/delete');
+  ret = await API.run(data, '/app/rufta/triage/user/access/delete');
 
   return ret;
 }
@@ -118,7 +118,7 @@ export async function create_assign(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/write');
+  ret = await API.run(data, '/app/rufta/triage/assign/write');
 console.log(ret)
   return ret.status == "ok"?ret.result.tid: null;
 }
@@ -141,7 +141,7 @@ export async function update_assign(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/update');
+  ret = await API.run(data, '/app/rufta/triage/assign/update');
 
   return ret;
 }
@@ -160,7 +160,7 @@ export async function update_status(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/status/update');
+  ret = await API.run(data, '/app/rufta/triage/assign/status/update');
 
   return ret;
 }
@@ -178,7 +178,7 @@ export async function get_assign(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/assign/read');
+  ret = await API.run(data, '/app/rufta/triage/assign/read');
 
   return ret;
 }
@@ -200,7 +200,7 @@ export async function read_stats(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/triage/stats/read');
+  ret = await API.run(data, '/app/rufta/triage/stats/read');
 
   return ret;
 }

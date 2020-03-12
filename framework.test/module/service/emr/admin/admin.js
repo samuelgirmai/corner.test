@@ -28,7 +28,7 @@ export async function create_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/write');
+  ret = await API.run(data, '/app/rufta/admin/user/write');
 
   //console.log(ret);
 
@@ -45,7 +45,7 @@ export async function list_users(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/list');
+  ret = await API.run(data, '/app/rufta/admin/user/list');
 
   return (ret.status === 'ok')? ret.result.users: null
 }
@@ -68,7 +68,7 @@ export async function assign_role(arg)
 
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/role/write');
+  ret = await API.run(data, '/app/rufta/admin/user/role/write');
 
   return (ret.status == 'err')? null: ret.result.user_id;
 }
@@ -86,7 +86,7 @@ export async function revoke_role(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/role/delete');
+  ret = await API.run(data, '/app/rufta/admin/user/role/delete');
 
   //console.log(ret);
   return (ret.status == 'err')? null: ret.result.user_id;
@@ -109,7 +109,7 @@ export async function get_role(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/user/role/read');
+  ret = await API.run(data, '/app/rufta/admin/user/role/read');
 
   //console.log('Role: ', ret);
 
@@ -126,7 +126,7 @@ export async function get_stats(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/admin/stats/read');
+  ret = await API.run(data, '/app/rufta/admin/stats/read');
 
   return (ret.status == 'err')? null: ret.result.user_id;
 }

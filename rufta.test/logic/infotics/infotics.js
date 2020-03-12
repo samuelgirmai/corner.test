@@ -55,7 +55,7 @@ export async function create_user()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/user/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/user/write');
 
   _print(ret, null);
 }
@@ -73,7 +73,7 @@ export async function get_user()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/user/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/user/read');
 
   _print(ret, null);
 }
@@ -88,7 +88,7 @@ export async function list_users()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/user/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/user/list');
 
   _print(ret, null);
 }
@@ -118,7 +118,7 @@ export async function change_passwd(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/user/security/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/user/security/update');
 
   _print(ret, null);
 }
@@ -137,7 +137,7 @@ export async function signin()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/user/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/user/access/write');
   
   _print(ret, 'token');
 
@@ -162,7 +162,7 @@ export async function signout(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/user/access/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/user/access/delete');
 
   _print(ret, null);
 }
@@ -191,7 +191,7 @@ export async function create_idata(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/idata/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/idata/write');
 
   _print(ret, null);
 
@@ -217,7 +217,7 @@ export async function read_idata(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/idata/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/idata/read');
 
   _print(ret, null);
 }
@@ -241,7 +241,7 @@ export async function list_idata(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/infotics/idata/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/infotics/idata/list');
 
   _print(ret, null);
 }

@@ -24,27 +24,27 @@ let admin = {
     }
   },
   caps: [
-    '/app/emr/admin/user/write',
-    '/app/emr/admin/user/delete',
-    '/app/emr/admin/user/list',
-    '/app/emr/admin/user/role/write',
-    '/app/emr/admin/user/role/delete',
-    '/app/emr/admin/user/role/read',
+    '/app/rufta/admin/user/write',
+    '/app/rufta/admin/user/delete',
+    '/app/rufta/admin/user/list',
+    '/app/rufta/admin/user/role/write',
+    '/app/rufta/admin/user/role/delete',
+    '/app/rufta/admin/user/role/read',
     /*FIXME: /app/emr/practner/opd/list shouldn't be here*/
-    '/app/emr/practner/opd/list',
-    '/app/emr/admin/stats/read',
-    '/app/emr/admin/access/write',
-    '/app/emr/admin/access/delete',
-    '/app/emr/admin/security/update',
-    '/app/emr/mru/stats/read',
-    '/app/emr/practner/stats/read',
-    '/app/emr/triage/stats/read'
+    '/app/rufta/practner/opd/list',
+    '/app/rufta/admin/stats/read',
+    '/app/rufta/admin/access/write',
+    '/app/rufta/admin/access/delete',
+    '/app/rufta/admin/security/update',
+    '/app/rufta/mru/stats/read',
+    '/app/rufta/practner/stats/read',
+    '/app/rufta/triage/stats/read'
   ]
 }
 
 module.exports = {
   admin: {
-    name: "emr.person.admin",
+    name: "rufta.person.admin",
     pii: admin.pii,
     caps: uris2caps(admin.caps)
   }

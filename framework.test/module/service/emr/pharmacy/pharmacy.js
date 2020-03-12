@@ -19,7 +19,7 @@ export async function create_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/write');
+  ret = await API.run(data, '/app/rufta/pharmacy/user/write');
 
   return (ret.status === 'ok')? ret.result.user.user_id: null
 }
@@ -39,7 +39,7 @@ export async function get_user(arg)
       user_id: arg.user_id
     }
   }
-  ret = await API.run(data, '/app/emr/pharmacy/user/read');
+  ret = await API.run(data, '/app/rufta/pharmacy/user/read');
 
   return (ret.status === 'ok')? ret.result: null
 }
@@ -58,7 +58,7 @@ export async function change_security(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/security/write');
+  ret = await API.run(data, '/app/rufta/pharmacy/user/security/write');
 
   return ret.status == 'ok'?ret.status: null;
 }
@@ -77,7 +77,7 @@ export async function signin(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/access/write');
+  ret = await API.run(data, '/app/rufta/pharmacy/user/access/write');
   
   return ret.status == 'ok'?ret.result.token:null;
 }
@@ -95,7 +95,7 @@ export async function signout(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/user/access/delete');
+  ret = await API.run(data, '/app/rufta/pharmacy/user/access/delete');
 
   return ret.status == 'ok'?ret.status: null;
 }
@@ -124,7 +124,7 @@ export async function create_dispense(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/dispense/write');
+  ret = await API.run(data, '/app/rufta/pharmacy/dispense/write');
 
   return ret.status = "ok"?ret.result.did: null;
 }
@@ -145,7 +145,7 @@ export async function get_dispense(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/pharmacy/dispense/read');
+  ret = await API.run(data, '/app/rufta/pharmacy/dispense/read');
   
   return ret.status = "ok"?ret.result.dispense: null;
 }

@@ -20,7 +20,7 @@ export async function create_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/user/write');
+  ret = await API.run(data, '/app/rufta/infotics/user/write');
 
   return ret.status == "ok"?ret.result.user.user_id: null;
 }
@@ -41,7 +41,7 @@ export async function get_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/user/read');
+  ret = await API.run(data, '/app/rufta/infotics/user/read');
 
   return ret.status == 'ok'?ret.result.user: null;
 }
@@ -60,7 +60,7 @@ export async function change_security(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/user/security/write');
+  ret = await API.run(data, '/app/rufta/infotics/user/security/write');
 
   return ret.status == 'ok'? ret.status: null
 }
@@ -79,7 +79,7 @@ export async function signin(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/user/access/write');
+  ret = await API.run(data, '/app/rufta/infotics/user/access/write');
   
   return ret.status == 'ok'?ret.result.token: null;
 }
@@ -97,7 +97,7 @@ export async function signout(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/user/access/delete');
+  ret = await API.run(data, '/app/rufta/infotics/user/access/delete');
 
   return ret.status == 'ok'?ret.status: null;
 }
@@ -121,7 +121,7 @@ export async function batch_create_idata(arg)
   for(let i = 0; i<arg.data.length; i++){
     data['param'].data = arg.data[i];
     console.log(JSON.stringify(data, 0, '  '));
-    ret = await API.run(data, '/app/emr/infotics/idata/write');
+    ret = await API.run(data, '/app/rufta/infotics/idata/write');
     console.log(ret);
   }
 
@@ -142,7 +142,7 @@ export async function create_idata(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/idata/write');
+  ret = await API.run(data, '/app/rufta/infotics/idata/write');
 
   console.log(ret)
 
@@ -166,7 +166,7 @@ export async function get_idata(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/infotics/idata/read');
+  ret = await API.run(data, '/app/rufta/infotics/idata/read');
 
   return ret.status == 'ok'? ret.result.idata: null;
 }

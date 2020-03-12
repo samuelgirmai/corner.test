@@ -19,7 +19,7 @@ export async function create_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/user/write');
+  ret = await API.run(data, '/app/rufta/practner/user/write');
 
   return (ret.status === 'ok')? ret.result.user.user_id: null
 }
@@ -40,7 +40,7 @@ export async function get_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/user/read');
+  ret = await API.run(data, '/app/rufta/practner/user/read');
 
   return ret.status == "ok"?ret.result.user: null;
 }
@@ -59,7 +59,7 @@ export async function change_security(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/user/security/write');
+  ret = await API.run(data, '/app/rufta/practner/user/security/write');
 
   return ret.status == "ok"?ret.result.token: null;
 }
@@ -78,7 +78,7 @@ export async function signin(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/user/access/write');
+  ret = await API.run(data, '/app/rufta/practner/user/access/write');
  
   return ret.status == "ok"?ret.result.token: null;
 }
@@ -97,7 +97,7 @@ export async function signout(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/user/access/delete');
+  ret = await API.run(data, '/app/rufta/practner/user/access/delete');
   
   return ret.status == "ok"?ret.status: null;
 }
@@ -120,7 +120,7 @@ export async function create_precord(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/patient/record/write');
+  ret = await API.run(data, '/app/rufta/practner/patient/record/write');
 
   return ret.status == "ok"?{rid: ret.result.rid, mrn: arg.mrn}: null
 }
@@ -142,7 +142,7 @@ export async function create_order(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/patient/record/order/update');
+  ret = await API.run(data, '/app/rufta/practner/patient/record/order/update');
 
   console.log(ret);
   return ret.status == "ok"?{rid: arg.result.rid, mrn: arg.result.mrn, order: data.param.order.lab}: null
@@ -166,7 +166,7 @@ export async function create_outcome(arg)
   }
 console.log(data);
 
-  ret = await API.run(data, '/app/emr/practner/patient/record/outcome/update');
+  ret = await API.run(data, '/app/rufta/practner/patient/record/outcome/update');
 
 console.log(ret);
   return ret.status == "ok"?{rid: arg.result.rid, mrn: arg.result.mrn}: null
@@ -192,7 +192,7 @@ export async function create_exam(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/patient/record/exam/update');
+  ret = await API.run(data, '/app/rufta/practner/patient/record/exam/update');
 
   return ret.status == "ok"?true: false
 }
@@ -211,7 +211,7 @@ export async function get_precord(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/patient/record/read');
+  ret = await API.run(data, '/app/rufta/practner/patient/record/read');
 
   return ret.status == "ok"?ret.result.record: null
 }
@@ -230,7 +230,7 @@ export async function get_order(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/patient/record/order/read');
+  ret = await API.run(data, '/app/rufta/practner/patient/record/order/read');
 
   return ret.status == "ok"?{order: ret.result.order, mrn: arg.result.mrn}: null
 }
@@ -249,7 +249,7 @@ export async function get_outcome(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/patient/record/outcome/read');
+  ret = await API.run(data, '/app/rufta/practner/patient/record/outcome/read');
   console.log(ret)
   return ret.status == "ok"?{outcome: ret.result.outcome, mrn: arg.result.mrn}: null
 }
@@ -274,7 +274,7 @@ export async function create_opd(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/opd/write');
+  ret = await API.run(data, '/app/rufta/practner/opd/write');
   
   return ret.status == "ok"?ret.result.opd_id:null
 }
@@ -302,7 +302,7 @@ export async function read_stats(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/practner/stats/read');
+  ret = await API.run(data, '/app/rufta/practner/stats/read');
 
   return ret.status == "ok"?ret.result.stats: null
 }

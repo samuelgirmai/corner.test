@@ -29,7 +29,7 @@ export async function create_user()
   let ret;
 
   let u = {
-    name: "Yohanes",
+    name: "Kebede",
     fname: "Adane",
     gfname: "Girma",
     mname: "Zemzem",
@@ -55,13 +55,12 @@ export async function create_user()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/user/write');
 
   _print(ret, null);
-
 }
 
-export async function get_user()
+export async function get_user(token)
 {
   let ret, data;
 
@@ -70,16 +69,16 @@ export async function get_user()
       license: CONFIG.auth.license,
     },
     param: {
-      user_id: "038868"
+      user_id: "664035"
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/user/read');
 
   _print(ret, null);
 }
 
-export async function list_users()
+export async function list_users(token)
 {
   let ret, data;
 
@@ -89,11 +88,10 @@ export async function list_users()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/user/list');
 
   _print(ret, null);
 }
-
 
 export async function change_passwd(token)
 {
@@ -116,7 +114,7 @@ export async function change_passwd(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/security/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/user/security/update');
 
   _print(ret, null);
 }
@@ -130,21 +128,21 @@ export async function signin()
       license: CONFIG.auth.license,
     }, 
     param: {
-      username: "293273",
+      username: "897655",
       password: "toor",
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/user/access/write');
   
   _print(ret, 'token');
 
-  return ret.status == "ok"?ret.result.token: null;
+  return ret.status == "ok"?ret.result.token:null
 }
 
 export async function signout(token)
 {
-  let ret, data;
+  let data,ret;
 
   if(!token){
     console.log('   [!] not logged in?');
@@ -160,141 +158,162 @@ export async function signout(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/user/access/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/user/access/delete');
 
   _print(ret, null);
 }
 
-export async function create_dispense(token)
+export async function create_assign(token)
 {
-  let dispense, ret;
+  let ret, data;
 
   if(!token){
     console.log('   [!] not logged in?');
     return;
   }
 
-  dispense  = {
-    info: {
-      instruction: "one per day"
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      mrn: '767028',
+      status: 'Blue',
+      opd_id: '038689'
     }
   }
 
-  let data = {
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/assign/write');
+
+  _print(ret, null);
+}
+
+export async function update_assign(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+    auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      tid: '875991',
+      status: 2,
+      opd_id: '133133'
+    }
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/assign/update');
+
+  _print(ret, null);
+}
+
+export async function update_status(token)
+{
+  let ret, data;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
+   auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    },
+    param: {
+      tid: '763601',
+      status: 2
+    }
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/assign/status/update');
+
+  _print(ret, null);
+}
+
+export async function read_assign(token)
+{
+  let data, ret;
+
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
+  }
+
+  data = {
     auth: {
       //license: CONFIG.auth.license,
       token: token
     }, 
     param: {
-      mrn: "510226",
-      rid: "598096",
-      dispense: dispense
+      tid: '797193'
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/dispense/write');
-
-  _print(ret, null);
-
-}
-
-export async function read_dispense(token)
-{
-  let ret, data;
-
-  if(!token){
-    console.log('   [!] not logged in?');
-    return;
-  }
-
-  data = {
-   auth: {
-     //license: CONFIG.auth.license,
-     token: token 
-    },
-    param: {
-      did: "210132"
-    }
-  }
-
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/dispense/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/assign/read');
 
   _print(ret, null);
 }
 
-export async function list_invoice(token)
+export async function remove_assign(token)
 {
-  let ret, data;
-
-  if(!token){
-    console.log('   [!] not logged in?');
-    return;
-  }
-
-  data = {
-   auth: {
-      token: token,
-      //license: CONFIG.auth.license,
-    },
-  }
-
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/invoice/list');
-
-  _print(ret, null);
-}
-
-export async function list_receipt(token)
-{
-  let ret, data;
-
-  if(!token){
-    console.log('   [!] not logged in?');
-    return;
-  }
-
-  data = {
-   auth: {
-      token: token,
-      //license: CONFIG.auth.license,
-    },
-  }
-
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/receipt/list');
-
-  _print(ret, null);
-}
-
-export async function create_order(token)
-{
-  let ret, data;
-
-  if(!token){
-    console.log('   [!] not logged in?');
-    return;
-  }
+  let data, ret;
   
-  data = {
-   auth: {
-      token: token,
-      //license: CONFIG.auth.license,
-    },
-    param: {
-      mrn: '093540',
-      items: [
-       {
-         type: "drug",
-         id: "881842",
-         qty: 2
-       }]
-     }
+  if(!token){
+    console.log('   [!] not logged in?');
+    return;
   }
-  
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/order/write');
-  
+
+  data = {
+    auth: {
+      //license: CONFIG.auth.license,
+      token: token
+    }, 
+    param: {
+      tid: '875991'
+    }
+  }
+
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/assign/delete');
+
   _print(ret, null);
 }
 
-export async function create_payment(token)
+export async function list_assign(token)
+{
+  let ret, data, pagin = {};
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license,
+    },
+    param: {}
+  }
+
+  for(let i = 1; i < 5; i++){
+    pagin = {
+      page: i,
+      size: 3,
+      order_type: 'asc'
+    }
+    data.param.pagin = pagin;
+    ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/assign/list');
+    _print(ret, null);
+    if(ret.status !== 'err')
+      console.log("######################### PAGE ",i, "##########################")
+  }
+}
+
+export async function read_stats(token)
 {
   let ret, data;
 
@@ -304,72 +323,20 @@ export async function create_payment(token)
   }
 
   data = {
-   auth: {
-      token: token,
+    auth: {
       //license: CONFIG.auth.license,
+      token: token
     },
     param: {
-      mrn: '093540',
-      invoice_id: '2465020031'
+      type: "queue_length",
+      args: {
+        type: "daily",
+        date: "11/08/2019"
+      }
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/payment/write');
-
-  _print(ret, null);
-}
-
-export async function settle_account(token)
-{
-  let ret, data;
-
-  if(!token){
-    console.log('   [!] not logged in?');
-    return;
-  }
-
-  data = {
-   auth: {
-      token: token,
-      //license: CONFIG.auth.license,
-    },
-    param: {
-      mrn: "093540"
-    }
-  }
-
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/account/settlement/write');
-
-  _print(ret, null);
-}
-
-export async function assert_payment(token)
-{
-  let ret, data;
-
-  if(!token){
-    console.log('   [!] not logged in?');
-    return;
-  }
-
-  data = {
-   auth: {
-      token: token,
-      //license: CONFIG.auth.license,
-    },
-    param: {
-      mrn: "093540",
-      items: [
-        {
-          type: 'drug',
-          id: '881842',
-          qty: 1
-        }
-      ]
-    }
-  }
-
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/pharmacy/items/price/assert');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/triage/stats/read');
 
   _print(ret, null);
 }

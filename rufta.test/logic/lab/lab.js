@@ -55,7 +55,7 @@ export async function create_user()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/user/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/user/write');
 
   _print(ret, null);
 
@@ -74,7 +74,7 @@ export async function get_user()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/user/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/user/read');
 
   _print(ret, null);
 }
@@ -89,7 +89,7 @@ export async function list_users()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/user/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/user/list');
 
   _print(ret, null);
 }
@@ -115,7 +115,7 @@ export async function change_passwd(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/user/security/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/user/security/update');
 
   _print(ret, null);
 }
@@ -134,7 +134,7 @@ export async function signin()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/user/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/user/access/write');
   
   _print(ret, 'token');
 
@@ -159,7 +159,7 @@ export async function signout(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/user/access/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/user/access/delete');
 
   _print(ret, null);
 }
@@ -196,7 +196,7 @@ export async function create_result(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/result/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/result/write');
 
   _print(ret, null);
 
@@ -221,7 +221,7 @@ export async function read_result(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/result/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/result/read');
 
   _print(ret, null);
 }
@@ -242,7 +242,7 @@ export async function list_invoice(token)
     },
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/invoice/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/invoice/list');
 
   _print(ret, null);
 }
@@ -263,7 +263,7 @@ export async function list_receipt(token)
     },
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/receipt/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/receipt/list');
 
   _print(ret, null);
 }
@@ -293,7 +293,7 @@ export async function create_order(token)
      }
   }
   
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/order/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/order/write');
   
   _print(ret, null);
 }
@@ -318,7 +318,7 @@ export async function create_payment(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/payment/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/payment/write');
 
   _print(ret, null);
 }
@@ -342,7 +342,7 @@ export async function settle_account(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/account/settlement/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/account/settlement/write');
 
   _print(ret, null);
 }
@@ -372,7 +372,7 @@ export async function assert_payment(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/lab/items/price/assert');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/lab/items/price/assert');
 
   _print(ret, null);
 }

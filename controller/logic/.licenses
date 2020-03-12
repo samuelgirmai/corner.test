@@ -1,42 +1,42 @@
 {
   "root": {
-    "user_id": "909308",
-    "license": "553347743630"
+    "user_id": "417569",
+    "license": "625192037073"
   },
-  "emr.mru": {
-    "user_id": "593573",
-    "license": "523439673997"
+  "rufta.mru": {
+    "user_id": "774987",
+    "license": "729316416219"
   },
-  "emr.triage": {
-    "user_id": "883407",
-    "license": "862375123080"
+  "rufta.triage": {
+    "user_id": "700989",
+    "license": "062739168839"
   },
-  "emr.practner": {
-    "user_id": "856817",
-    "license": "598382515948"
+  "rufta.practner": {
+    "user_id": "732669",
+    "license": "370711384513"
   },
-  "emr.infotics": {
-    "user_id": "136346",
-    "license": "993695904484"
+  "rufta.infotics": {
+    "user_id": "830272",
+    "license": "226504512587"
   },
-  "emr.lab": {
-    "user_id": "830845",
-    "license": "300096951263"
+  "rufta.lab": {
+    "user_id": "329974",
+    "license": "973888098405"
   },
-  "emr.pharmacy": {
-    "user_id": "679044",
-    "license": "266484364418"
+  "rufta.pharmacy": {
+    "user_id": "777769",
+    "license": "993433658734"
   },
-  "emr.cashier": {
-    "user_id": "291435",
-    "license": "657001133031"
+  "rufta.cashier": {
+    "user_id": "457935",
+    "license": "198137437151"
   },
-  "emr.admin": {
-    "user_id": "063574",
-    "license": "084407198431"
+  "rufta.admin": {
+    "user_id": "108692",
+    "license": "630464275564"
   },
-  "emr.person.admin": {
-    "user_id": "691265",
+  "rufta.person.admin": {
+    "user_id": "853918",
     "password": "toor"
   }
 }

@@ -36,7 +36,7 @@ const main_prompt = [
   {
     type: 'list',
     name: 'main',
-    message: 'EMR Test application',
+    message: 'RUFTA Test application',
     choices: ['MRU', 'Triage', 'Practitioner', 'Laboratory', 'Informatics', 'Pharmacy', 'Finance', 'Payment', 'Exit']
   }
 ];

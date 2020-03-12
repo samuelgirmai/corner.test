@@ -21,7 +21,7 @@ export async function create_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/lab/user/write');
+  ret = await API.run(data, '/app/rufta/lab/user/write');
 
   return ret.status == "ok"? ret.result.user.user_id: null;
 }
@@ -39,7 +39,7 @@ export async function get_user(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/lab/user/read');
+  ret = await API.run(data, '/app/rufta/lab/user/read');
 
   return ret;
 }
@@ -58,7 +58,7 @@ export async function change_security(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/lab/user/security/update');
+  ret = await API.run(data, '/app/rufta/lab/user/security/update');
 
   return ret;
 }
@@ -78,7 +78,7 @@ export async function signin(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/lab/user/access/write');
+  ret = await API.run(data, '/app/rufta/lab/user/access/write');
   
   return ret;
 }
@@ -97,7 +97,7 @@ export async function signout(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/lab/user/access/delete');
+  ret = await API.run(data, '/app/rufta/lab/user/access/delete');
 
   return ret;
 }
@@ -126,7 +126,7 @@ export async function create_result(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/lab/result/write');
+  ret = await API.run(data, '/app/rufta/lab/result/write');
 
   console.log('ret: ', ret)
   return ret.status == "ok"? ret.result.lid: null;
@@ -145,7 +145,7 @@ export async function get_result(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/lab/result/read');
+  ret = await API.run(data, '/app/rufta/lab/result/read');
 
   return ret;
 }

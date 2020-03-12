@@ -7,7 +7,7 @@ import {
 let filesystem = {
   name: "mongodb",
   port: 27017,
-  host: "corner.fs"
+  host: "127.0.0.1"
   //host: "0.0.0.0"
 }
 
@@ -60,17 +60,17 @@ let auth = {
     "/platform/auth/heartbeat",
     "/platform/notif/heartbeat",
     "/platform/stream/heartbeat",
-    "/app/emr/admin/heartbeat",
-    "/app/emr/infotics/heartbeat",
-    "/app/emr/notif/heartbeat",
-    "/app/emr/pharmacy/heartbeat",
-    "/app/emr/store/heartbeat",
-    "/app/emr/finance/heartbeat",
-    "/app/emr/payment/heartbeat",
-    "/app/emr/lab/heartbeat",
-    "/app/emr/mru/heartbeat",
-    "/app/emr/practner/heartbeat",
-    "/app/emr/triage/heartbeat"
+    "/app/rufta/admin/heartbeat",
+    "/app/rufta/infotics/heartbeat",
+    "/app/rufta/notif/heartbeat",
+    "/app/rufta/pharmacy/heartbeat",
+    "/app/rufta/store/heartbeat",
+    "/app/rufta/finance/heartbeat",
+    "/app/rufta/payment/heartbeat",
+    "/app/rufta/lab/heartbeat",
+    "/app/rufta/mru/heartbeat",
+    "/app/rufta/practner/heartbeat",
+    "/app/rufta/triage/heartbeat"
   ]
 };
 auth.sii.host = auth.api.addr+":"+auth.api.port;
@@ -134,12 +134,12 @@ corner_notif.sii.host = corner_notif.api.addr+":"+corner_notif.api.port;
  */
 let mru = {
   sii: {
-    name: "emr.mru",
-    desc: "EMR medical record unit (MRU) service",
+    name: "rufta.mru",
+    desc: "Rufta medical record unit (MRU) service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -159,28 +159,28 @@ let mru = {
     "/platform/auth/users/person/security/update",
     "/platform/stream/open",
     "/platform/stream/close",
-    "/app/emr/mru/stats/join",
-    "/app/emr/mru/stats/exit",
-    "/app/emr/mru/search/join",
-    "/app/emr/mru/search/exit",
-    "/app/emr/finance/invoice/list",
-    "/app/emr/finance/receipt/list",
-    "/app/emr/payment/order/write",
-    "/app/emr/payment/payment/write",
-    "/app/emr/payment/items/price/assert",
-    "/app/emr/payment/account/settlement/write"
+    "/app/rufta/mru/stats/join",
+    "/app/rufta/mru/stats/exit",
+    "/app/rufta/mru/search/join",
+    "/app/rufta/mru/search/exit",
+    "/app/rufta/finance/invoice/list",
+    "/app/rufta/finance/receipt/list",
+    "/app/rufta/payment/order/write",
+    "/app/rufta/payment/payment/write",
+    "/app/rufta/payment/items/price/assert",
+    "/app/rufta/payment/account/settlement/write"
   ]
 }
 mru.sii.host = mru.api.addr+":"+mru.api.port;
 
 let triage = {
   sii: {
-    name: "emr.triage",
-    desc: "EMR triage service",
+    name: "rufta.triage",
+    desc: "Rufta triage service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -195,32 +195,32 @@ let triage = {
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
-    "/app/emr/mru/patient/assert",
-    "/app/emr/mru/patient/read",
+    "/app/rufta/mru/patient/assert",
+    "/app/rufta/mru/patient/read",
     "/platform/stream/open",
     "/platform/stream/close",
-    "/app/emr/triage/stats/join",
-    "/app/emr/triage/stats/exit",
-    "/app/emr/practner/opd/assert",
-    "/app/emr/practner/opd/read",
-    "/app/emr/practner/user/read",
-    "/app/emr/mru/patient/lastVisit/update",
-    "/app/emr/notif/write",
-    "/app/emr/notif/read",
-    "/app/emr/triage/search/join",
-    "/app/emr/triage/search/exit"
+    "/app/rufta/triage/stats/join",
+    "/app/rufta/triage/stats/exit",
+    "/app/rufta/practner/opd/assert",
+    "/app/rufta/practner/opd/read",
+    "/app/rufta/practner/user/read",
+    "/app/rufta/mru/patient/lastVisit/update",
+    "/app/rufta/notif/write",
+    "/app/rufta/notif/read",
+    "/app/rufta/triage/search/join",
+    "/app/rufta/triage/search/exit"
   ]
 }
 triage.sii.host = triage.api.addr+":"+triage.api.port;
 
 let practner = {
   sii: {
-    name: "emr.practner",
-    desc: "EMR practitioner service",
+    name: "rufta.practner",
+    desc: "Rufta practitioner service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -235,25 +235,25 @@ let practner = {
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
-    "/app/emr/mru/patient/assert",
-    "/app/emr/mru/patient/read",
-    "/app/emr/infotics/idata/assert",
-    "/app/emr/infotics/idata/read",
-    "/app/emr/notif/write",
-    "/app/emr/notif/read",
-    "/app/emr/mru/patient/appointment/update",
+    "/app/rufta/mru/patient/assert",
+    "/app/rufta/mru/patient/read",
+    "/app/rufta/infotics/idata/assert",
+    "/app/rufta/infotics/idata/read",
+    "/app/rufta/notif/write",
+    "/app/rufta/notif/read",
+    "/app/rufta/mru/patient/appointment/update",
   ]
 }
 practner.sii.host = practner.api.addr+":"+practner.api.port;
 
 let infotics = {
   sii: {
-    name: "emr.infotics",
-    desc: "EMR informatics service",
+    name: "rufta.infotics",
+    desc: "Rufta informatics service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -274,12 +274,12 @@ infotics.sii.host = infotics.api.addr+":"+infotics.api.port;
 
 let lab = {
   sii: {
-    name: "emr.lab",
-    desc: "EMR laboratory service",
+    name: "rufta.lab",
+    desc: "Rufta laboratory service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -294,28 +294,28 @@ let lab = {
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
-    "/app/emr/mru/patient/assert",
-    "/app/emr/practner/patient/record/order/read",
-    "/app/emr/notif/write",
-    "/app/emr/notif/read",
-    "/app/emr/finance/invoice/list",
-    "/app/emr/finance/receipt/list",
-    "/app/emr/payment/order/write",
-    "/app/emr/payment/payment/write",
-    "/app/emr/payment/items/price/assert",
-    "/app/emr/payment/account/settlement/write"
+    "/app/rufta/mru/patient/assert",
+    "/app/rufta/practner/patient/record/order/read",
+    "/app/rufta/notif/write",
+    "/app/rufta/notif/read",
+    "/app/rufta/finance/invoice/list",
+    "/app/rufta/finance/receipt/list",
+    "/app/rufta/payment/order/write",
+    "/app/rufta/payment/payment/write",
+    "/app/rufta/payment/items/price/assert",
+    "/app/rufta/payment/account/settlement/write"
   ]
 }
 lab.sii.host = lab.api.addr+":"+lab.api.port;
 
 let pharmacy = {
   sii: {
-    name: "emr.pharmacy",
-    desc: "EMR pharmacy service",
+    name: "rufta.pharmacy",
+    desc: "Rufta pharmacy service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -330,26 +330,26 @@ let pharmacy = {
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
-    "/app/emr/mru/patient/assert",
-    "/app/emr/notif/read",
-    "/app/emr/finance/invoice/list",
-    "/app/emr/finance/receipt/list",
-    "/app/emr/payment/order/write",
-    "/app/emr/payment/payment/write",
-    "/app/emr/payment/items/price/assert",
-    "/app/emr/payment/account/settlement/write"
+    "/app/rufta/mru/patient/assert",
+    "/app/rufta/notif/read",
+    "/app/rufta/finance/invoice/list",
+    "/app/rufta/finance/receipt/list",
+    "/app/rufta/payment/order/write",
+    "/app/rufta/payment/payment/write",
+    "/app/rufta/payment/items/price/assert",
+    "/app/rufta/payment/account/settlement/write"
   ]
 }
 pharmacy.sii.host = pharmacy.api.addr+":"+pharmacy.api.port;
 
 let finance = {
   sii: {
-    name: "emr.finance",
-    desc: "EMR finance service",
+    name: "rufta.finance",
+    desc: "rufta finance service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -364,20 +364,20 @@ let finance = {
     "/platform/auth/users/access/write",
     "/platform/auth/users/access/delete",
     "/platform/auth/users/person/security/update",
-    "/app/emr/store/items/price/read",
-    "/app/emr/mru/patient/assert"
+    "/app/rufta/store/items/price/read",
+    "/app/rufta/mru/patient/assert"
   ]
 }
 finance.sii.host = finance.api.addr+":"+finance.api.port;
 
 let payment = {
   sii: {
-    name: "emr.payment",
-    desc: "EMR payment service",
+    name: "rufta.payment",
+    desc: "Rufta payment service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -386,27 +386,27 @@ let payment = {
     addr: "0.0.0.0",
   },
   caps: [
-    '/app/emr/finance/account/read',
-    '/app/emr/store/items/price/read',
-    '/app/emr/finance/account/balance/read',
-    '/app/emr/finance/order/write',
-    '/app/emr/finance/invoice/write',
-    '/app/emr/finance/invoice/read',
-    '/app/emr/finance/account/transaction/write',
-    '/app/emr/finance/receipt/write',
-    '/app/emr/finance/insurance/scheme/write'
+    '/app/rufta/finance/account/read',
+    '/app/rufta/store/items/price/read',
+    '/app/rufta/finance/account/balance/read',
+    '/app/rufta/finance/order/write',
+    '/app/rufta/finance/invoice/write',
+    '/app/rufta/finance/invoice/read',
+    '/app/rufta/finance/account/transaction/write',
+    '/app/rufta/finance/receipt/write',
+    '/app/rufta/finance/insurance/scheme/write'
   ]
 }
 payment.sii.host = payment.api.addr+":"+payment.api.port;
 
 let admin = {
   sii: {
-    name: "emr.admin",
-    desc: "EMR administrator service",
+    name: "rufta.admin",
+    desc: "Rufta administrator service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -424,53 +424,53 @@ let admin = {
     "/platform/auth/caps/list",
     "/platform/auth/caps/allow",
     "/platform/auth/caps/revoke",
-    "/app/emr/mru/user/write",
-    "/app/emr/mru/user/read",
-    "/app/emr/mru/user/delete",
-    "/app/emr/mru/user/update",
-    "/app/emr/mru/user/list",
-    "/app/emr/practner/user/write",
-    "/app/emr/practner/user/read",
-    "/app/emr/practner/user/delete",
-    "/app/emr/practner/user/update",
-    "/app/emr/practner/user/list",
-    "/app/emr/infotics/user/write",
-    "/app/emr/infotics/user/read",
-    "/app/emr/infotics/user/list",
-    "/app/emr/infotics/user/delete",
-    "/app/emr/infotics/user/update",
-    "/app/emr/lab/user/write",
-    "/app/emr/lab/user/delete",
-    "/app/emr/lab/user/update",
-    "/app/emr/lab/user/read",
-    "/app/emr/lab/user/list",
-    "/app/emr/pharmacy/user/write",
-    "/app/emr/pharmacy/user/read",
-    "/app/emr/pharmacy/user/update",
-    "/app/emr/pharmacy/user/delete",
-    "/app/emr/pharmacy/user/list",
-    "/app/emr/finance/user/delete",
-    "/app/emr/finance/user/write",
-    "/app/emr/finance/user/read",
-    "/app/emr/finance/user/update",
-    "/app/emr/finance/user/list",
-    "/app/emr/triage/user/update",
-    "/app/emr/triage/user/read",
-    "/app/emr/triage/user/write",
-    "/app/emr/triage/user/delete",
-    "/app/emr/triage/user/list"
+    "/app/rufta/mru/user/write",
+    "/app/rufta/mru/user/read",
+    "/app/rufta/mru/user/delete",
+    "/app/rufta/mru/user/update",
+    "/app/rufta/mru/user/list",
+    "/app/rufta/practner/user/write",
+    "/app/rufta/practner/user/read",
+    "/app/rufta/practner/user/delete",
+    "/app/rufta/practner/user/update",
+    "/app/rufta/practner/user/list",
+    "/app/rufta/infotics/user/write",
+    "/app/rufta/infotics/user/read",
+    "/app/rufta/infotics/user/list",
+    "/app/rufta/infotics/user/delete",
+    "/app/rufta/infotics/user/update",
+    "/app/rufta/lab/user/write",
+    "/app/rufta/lab/user/delete",
+    "/app/rufta/lab/user/update",
+    "/app/rufta/lab/user/read",
+    "/app/rufta/lab/user/list",
+    "/app/rufta/pharmacy/user/write",
+    "/app/rufta/pharmacy/user/read",
+    "/app/rufta/pharmacy/user/update",
+    "/app/rufta/pharmacy/user/delete",
+    "/app/rufta/pharmacy/user/list",
+    "/app/rufta/finance/user/delete",
+    "/app/rufta/finance/user/write",
+    "/app/rufta/finance/user/read",
+    "/app/rufta/finance/user/update",
+    "/app/rufta/finance/user/list",
+    "/app/rufta/triage/user/update",
+    "/app/rufta/triage/user/read",
+    "/app/rufta/triage/user/write",
+    "/app/rufta/triage/user/delete",
+    "/app/rufta/triage/user/list"
   ]
 }
 admin.sii.host = admin.api.addr+":"+admin.api.port;
 
 let emr_notif = {
   sii: {
-    name: "emr.notif",
-    desc: "EMR notification service",
+    name: "rufta.notif",
+    desc: "Rufta notification service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -481,20 +481,20 @@ let emr_notif = {
   caps: [
     "/platform/stream/open",
     "/platform/stream/close",
-    "/app/emr/notif/join",
-    "/app/emr/notif/exit",
+    "/app/rufta/notif/join",
+    "/app/rufta/notif/exit",
   ]
 }
 emr_notif.sii.host = emr_notif.api.addr+":"+emr_notif.api.port;
 
 let storeSimulator = {
   sii: {
-    name: "emr.storeSimulator",
-    desc: "EMR store simulator service",
+    name: "rufta.storeSimulator",
+    desc: "Rufta store simulator service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "emr@allena.xyz"
+      email: "rufta@allena.xyz"
     }
   },
   api: {
@@ -503,7 +503,7 @@ let storeSimulator = {
     addr: "0.0.0.0",
   },
   caps: [
-    "/app/emr/infotics/idata/read",
+    "/app/rufta/infotics/idata/read",
   ]
 }
 storeSimulator.sii.host = storeSimulator.api.addr+":"+storeSimulator.api.port;
@@ -578,7 +578,7 @@ module.exports = {
     caps: uris2caps(corner_notif.caps)
   },
   mru: {
-    name: "emr.mru",
+    name: "rufta.mru",
     sii: mru.sii,
     conf: {
       proxy: proxy,
@@ -590,7 +590,7 @@ module.exports = {
     caps: uris2caps(mru.caps)
   },
   triage: {
-    name: "emr.triage",
+    name: "rufta.triage",
     sii: triage.sii,
     conf: {
       proxy: proxy,
@@ -601,7 +601,7 @@ module.exports = {
     caps: uris2caps(triage.caps)
   },
   practner: {
-    name: "emr.practner",
+    name: "rufta.practner",
     sii: practner.sii,
     conf: {
       proxy: proxy,
@@ -611,7 +611,7 @@ module.exports = {
     caps: uris2caps(practner.caps)
   },
   infotics: {
-    name: "emr.infotics",
+    name: "rufta.infotics",
     sii: infotics.sii,
     conf: {
       proxy: proxy,
@@ -621,7 +621,7 @@ module.exports = {
     caps: uris2caps(infotics.caps)
   },
   lab: {
-    name: "emr.lab",
+    name: "rufta.lab",
     sii: lab.sii,
     conf: {
       proxy: proxy,
@@ -631,7 +631,7 @@ module.exports = {
     caps: uris2caps(lab.caps)
   },
   pharmacy: {
-    name: "emr.pharmacy",
+    name: "rufta.pharmacy",
     sii: pharmacy.sii,
     conf: {
       proxy: proxy,
@@ -641,7 +641,7 @@ module.exports = {
     caps: uris2caps(pharmacy.caps)
   },
   finance: {
-    name: "emr.finance",
+    name: "rufta.finance",
     sii: finance.sii,
     conf: {
       proxy: proxy,
@@ -651,7 +651,7 @@ module.exports = {
     caps: uris2caps(finance.caps)
   },
   payment: {
-    name: "emr.payment",
+    name: "rufta.payment",
     sii: payment.sii,
     conf: {
       proxy: proxy,
@@ -661,7 +661,7 @@ module.exports = {
     caps: uris2caps(payment.caps)
   },
   admin: {
-    name: "emr.admin",
+    name: "rufta.admin",
     sii: admin.sii,
     conf: {
       proxy: proxy,
@@ -671,7 +671,7 @@ module.exports = {
     caps: uris2caps(admin.caps)
   },
   emr_notif: {
-    name: "emr.notif",
+    name: "rufta.notif",
     sii: emr_notif.sii,
     conf: {
       proxy: proxy,
@@ -682,7 +682,7 @@ module.exports = {
     caps: uris2caps(emr_notif.caps)
   },
   storeSimulator: {
-    name: "emr.storeSimulator",
+    name: "rufta.storeSimulator",
     sii: storeSimulator.sii,
     conf: {
       proxy: proxy,

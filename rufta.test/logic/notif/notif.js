@@ -2,9 +2,9 @@ import CONFIG from './config/config'
 import STREAM from '../../../../tools/stream'
 
 var notif_init = async() => {
-  await STREAM.connect(CONFIG.stream, "/app/emr/notif")
+  await STREAM.connect(CONFIG.stream, "/app/rufta/notif")
 
-  STREAM.join("/app/emr/notif", {
+  STREAM.join("/app/rufta/notif", {
     license: CONFIG.auth.license,
     id: '123432'
   });
@@ -28,7 +28,7 @@ var notif_init = async() => {
     }
   ]
 
-  STREAM.listen("/app/emr/notif", events);
+  STREAM.listen("/app/rufta/notif", events);
 }
 
 function send_notif(e_name)
@@ -40,7 +40,7 @@ function send_notif(e_name)
     data: "we are live!"
   }
 
-  STREAM.send("/app/emr/notif", p);
+  STREAM.send("/app/rufta/notif", p);
 }
 
 function on_assign(p)
