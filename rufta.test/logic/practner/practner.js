@@ -1,5 +1,5 @@
 import API from '../../tools/net';
-import STREAM from '../../tools/stream';
+// import STREAM from '../../tools/stream';
 
 import CONFIG from './config/config'
 
@@ -54,16 +54,16 @@ export async function mark_notif(nid, mark)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/notif/mark');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/notif/mark');
 
   _print(ret, null);
 }
 
 export async function subscribe_notification(token)
 {
-  await STREAM.connect(CONFIG.stream, '/app/emr/notif');
+  await STREAM.connect(CONFIG.stream, '/app/rufta/notif');
 
-  STREAM.join('/app/emr/notif', {id: CONFIG.auth.license});
+  STREAM.join('/app/rufta/notif', {id: CONFIG.auth.license});
 
   let events = [
     {
@@ -76,7 +76,7 @@ export async function subscribe_notification(token)
     }
   ]
 
-  STREAM.listen("/app/emr/notif", events);
+  STREAM.listen("/app/rufta/notif", events);
 }
 
 export async function create_user(token)
@@ -110,7 +110,7 @@ export async function create_user(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/user/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/user/write');
 
   _print(ret, null);
 
@@ -129,7 +129,7 @@ export async function get_user()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/user/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/user/read');
 
   _print(ret, null);
 }
@@ -144,7 +144,7 @@ export async function list_users()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/user/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/user/list');
 
   _print(ret, null);
 }
@@ -171,7 +171,7 @@ export async function change_password(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/user/security/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/user/security/update');
 
   _print(ret, null);
 }
@@ -190,7 +190,7 @@ export async function signin()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/user/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/user/access/write');
   
   _print(ret, 'token');
 
@@ -215,7 +215,7 @@ export async function signout(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/user/access/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/user/access/delete');
 
   _print(ret, null);
 }
@@ -249,7 +249,7 @@ export async function create_exam(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/exam/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/exam/update');
 
   _print(ret, null);
 
@@ -281,7 +281,7 @@ export async function create_order(token)
     }
   }
   
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/order/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/order/update');
   
   _print(ret, null);
 
@@ -314,7 +314,7 @@ export async function create_outcome(token)
     }
   }
   
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/outcome/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/outcome/update');
   
   _print(ret, null);
 
@@ -346,7 +346,7 @@ export async function create_diagnosis(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/diagnosis/update');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/diagnosis/update');
 
   _print(ret, null);
 
@@ -371,7 +371,7 @@ export async function create_precord(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/write');
 
   _print(ret, null);
 
@@ -397,7 +397,7 @@ export async function read_precord(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/read');
 
   _print(ret, null);
 }
@@ -421,7 +421,7 @@ export async function read_outcome(token)
     }
   }
   
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/outcome/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/outcome/read');
   
   _print(ret, null);
 }
@@ -445,7 +445,7 @@ export async function read_order(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/order/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/order/read');
 
   _print(ret, null);
 }
@@ -470,7 +470,7 @@ export async function remove_precord(token)
     }
   }
   
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/patient/record/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/patient/record/delete');
   
   _print(ret, null);
 }
@@ -504,7 +504,7 @@ export async function read_stats(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/stats/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/stats/read');
 
   _print(ret, null);
 }
@@ -530,7 +530,7 @@ export async function create_opd(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/opd/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/opd/write');
 
   _print(ret, null);
 }
@@ -547,7 +547,7 @@ export async function get_opd(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/practner/opd/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/practner/opd/read');
 
   _print(ret, null);
 }

@@ -17,7 +17,7 @@ export async function create_payment(arg)
 
 console.log(arg, arg.result.items)
 
-  ret = await API.run(data, '/app/emr/payment/write');
+  ret = await API.run(data, '/app/rufta/payment/write');
 
 console.log(ret);
   return (ret.status === 'ok')? ret.result.receipt: null
@@ -36,7 +36,7 @@ export async function settle_account(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/account/settlement/write');
+  ret = await API.run(data, '/app/rufta/payment/account/settlement/write');
 
   return (ret.status === 'ok')? arg.result: null
 }
@@ -55,7 +55,7 @@ export async function assert_payment(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/payment/items/price/balance/assert');
+  ret = await API.run(data, '/app/rufta/payment/items/price/balance/assert');
 
   return (ret.status === 'ok')? ret.result: null
 }

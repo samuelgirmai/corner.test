@@ -14,7 +14,7 @@ export async function create_account(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/account/write');
+  ret = await API.run(data, '/app/rufta/finance/account/write');
 console.log(ret)
   return ret.status == "ok"?arg.mrn:null
 }
@@ -32,7 +32,7 @@ export async function get_account(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/account/read');
+  ret = await API.run(data, '/app/rufta/finance/account/read');
 
   return ret.status == "ok"?ret.result.account: null
 }
@@ -55,7 +55,7 @@ export async function create_transaction(arg)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/account/transaction/write');
+  ret = await API.run(data, '/app/rufta/finance/account/transaction/write');
 
   return ret.status == "ok"?arg.mrn: null
 }
@@ -73,7 +73,7 @@ export async function get_balance(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/account/balance/read');
+  ret = await API.run(data, '/app/rufta/finance/account/balance/read');
 
   _print(ret, null);
 }
@@ -98,7 +98,7 @@ export async function create_order(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/order/write');
+  ret = await API.run(data, '/app/rufta/finance/order/write');
 
   _print(ret, null);
 }
@@ -116,7 +116,7 @@ export async function get_order(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/order/read');
+  ret = await API.run(data, '/app/rufta/finance/order/read');
 
   _print(ret, null);
 }
@@ -141,7 +141,7 @@ export async function modify_order(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/order/update');
+  ret = await API.run(data, '/app/rufta/finance/order/update');
 
   _print(ret, null);
 }
@@ -159,7 +159,7 @@ export async function remove_order(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/order/delete');
+  ret = await API.run(data, '/app/rufta/finance/order/delete');
 
   _print(ret, null);
 }
@@ -177,7 +177,7 @@ export async function create_invoice(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/invoice/write');
+  ret = await API.run(data, '/app/rufta/finance/invoice/write');
 
   _print(ret, null);
 }
@@ -195,7 +195,7 @@ export async function get_invoice(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/invoice/read');
+  ret = await API.run(data, '/app/rufta/finance/invoice/read');
 
   _print(ret, null);
 }
@@ -213,7 +213,7 @@ export async function remove_invoice(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/invoice/delete');
+  ret = await API.run(data, '/app/rufta/finance/invoice/delete');
 
   _print(ret, null);
 }
@@ -231,7 +231,7 @@ export async function create_receipt(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/receipt/write');
+  ret = await API.run(data, '/app/rufta/finance/receipt/write');
 
   _print(ret, null);
 }
@@ -249,7 +249,7 @@ export async function get_receipt(token)
     }
   }
 
-  ret = await API.run(data, '/app/emr/finance/receipt/read');
+  ret = await API.run(data, '/app/rufta/finance/receipt/read');
 
   _print(ret, null);
 }

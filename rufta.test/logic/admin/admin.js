@@ -69,7 +69,7 @@ export async function create_user(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/admin/user/write');
 
   _print(ret, null);
 
@@ -100,7 +100,7 @@ export async function remove_user(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/admin/user/delete');
 
   _print(ret, null);
 }
@@ -125,7 +125,7 @@ export async function list_users(token)
    }
   },
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/list');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/admin/user/list');
 
   _print(ret, null);
 }
@@ -149,7 +149,7 @@ export async function assign_role(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/role/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/admin/user/role/write');
   
   _print(ret, 'ret');
 }
@@ -173,7 +173,7 @@ export async function revoke_role(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/role/delete');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/admin/user/role/delete');
 
   _print(ret, null);
 }
@@ -196,7 +196,7 @@ export async function get_role(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/user/role/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/admin/user/role/read');
 
   _print(ret, null);
 }
@@ -215,7 +215,7 @@ export async function signin()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/admin/access/write');
 
   _print(ret, 'token');
 
@@ -239,7 +239,7 @@ export async function get_stats(token)
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/emr/admin/stats/read');
+  ret = await API.run(data, CONFIG.proxy.url, '/app/rufta/admin/stats/read');
 
   _print(ret, null);
 }

@@ -208,17 +208,17 @@ export async function start()
   await start_service("corner.stream", "start");
   await start_service("corner.notif", "start");
 
-  await start_service("emr.mru", "start");
-  await start_service("emr.triage", "start");
-  await start_service("emr.practner", "start");
-  await start_service("emr.infotics", "start");
-  await start_service("emr.lab", "start");
-  await start_service("emr.pharmacy", "start");
-  await start_service("emr.finance", "start");
-  await start_service("emr.payment", "start");
-  await start_service("emr.admin", "start");
-  await start_service("emr.notif", "start");
-  await start_service("emr.storeSimulator", "start");
+  await start_service("rufta.mru", "start");
+  await start_service("rufta.triage", "start");
+  await start_service("rufta.practner", "start");
+  await start_service("rufta.infotics", "start");
+  await start_service("rufta.lab", "start");
+  await start_service("rufta.pharmacy", "start");
+  await start_service("rufta.finance", "start");
+  await start_service("rufta.payment", "start");
+  await start_service("rufta.admin", "start");
+  await start_service("rufta.notif", "start");
+  await start_service("rufta.storeSimulator", "start");
 }
 
 export async function get_info()

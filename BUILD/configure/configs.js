@@ -6,35 +6,35 @@ export var conf = [
     file: "/home/samuel/current_tasks/personal/bokri/corner/clients/auth.ui/src/config/license.js"
   },
   {
-    name: "emr.admin",
+    name: "rufta.admin",
     file: APPS_ROOT_DIR+"/admin/src/config/license.js"
   },
   {
-    name: "emr.infotics",
+    name: "rufta.infotics",
     file: APPS_ROOT_DIR+"/infotics/src/config/license.js"
   },
   {
-    name: "emr.mru",
+    name: "rufta.mru",
     file: APPS_ROOT_DIR+"/mru/src/config/license.js"
   },
   {
-    name: "emr.triage",
+    name: "rufta.triage",
     file: APPS_ROOT_DIR+"/triage/src/config/license.js"
   },
   {
-    name: "emr.practner",
+    name: "rufta.practner",
     file: APPS_ROOT_DIR+"/practner/src/config/license.js"
   },
   {
-    name: "emr.lab",
+    name: "rufta.lab",
     file: APPS_ROOT_DIR+"/lab/src/config/license.js"
   },
   {
-    name: "emr.pharmacy",
+    name: "rufta.pharmacy",
     file: APPS_ROOT_DIR+"/pharmacy/src/config/license.js"
   },
   {
-    name: "emr.cashier",
+    name: "rufta.cashier",
     file: APPS_ROOT_DIR+"/cashier/src/config/license.js"
   }
 ]
