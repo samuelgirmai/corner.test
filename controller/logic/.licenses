@@ -1,2 +1,42 @@
 {
+  "root": {
+    "user_id": "586185",
+    "license": "908208155919"
+  },
+  "rufta.mru": {
+    "user_id": "042312",
+    "license": "968465896033"
+  },
+  "rufta.triage": {
+    "user_id": "466072",
+    "license": "478023751657"
+  },
+  "rufta.practner": {
+    "user_id": "624571",
+    "license": "000603293462"
+  },
+  "rufta.infotics": {
+    "user_id": "802037",
+    "license": "264036858933"
+  },
+  "rufta.lab": {
+    "user_id": "086494",
+    "license": "329076836853"
+  },
+  "rufta.pharmacy": {
+    "user_id": "503599",
+    "license": "110069266149"
+  },
+  "rufta.cashier": {
+    "user_id": "077617",
+    "license": "975591835214"
+  },
+  "rufta.admin": {
+    "user_id": "625582",
+    "license": "674040561087"
+  },
+  "rufta.person.admin": {
+    "user_id": "330094",
+    "password": "toor"
+  }
 }
