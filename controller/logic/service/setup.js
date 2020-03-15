@@ -130,8 +130,9 @@ let corner_notif = {
 corner_notif.sii.host = corner_notif.api.addr+":"+corner_notif.api.port;
 
 /*
- * EMR services SoT
+ * RUFTAservices SoT
  */
+/*
 let mru = {
   sii: {
     name: "rufta.mru",
@@ -463,7 +464,7 @@ let admin = {
 }
 admin.sii.host = admin.api.addr+":"+admin.api.port;
 
-let emr_notif = {
+let rufta_notif = {
   sii: {
     name: "rufta.notif",
     desc: "Rufta notification service",
@@ -485,7 +486,7 @@ let emr_notif = {
     "/app/rufta/notif/exit",
   ]
 }
-emr_notif.sii.host = emr_notif.api.addr+":"+emr_notif.api.port;
+rufta_notif.sii.host = rufta_notif.api.addr+":"+rufta_notif.api.port;
 
 let storeSimulator = {
   sii: {
@@ -507,7 +508,7 @@ let storeSimulator = {
   ]
 }
 storeSimulator.sii.host = storeSimulator.api.addr+":"+storeSimulator.api.port;
-
+*/
 
 /*
  * NOTICE: don't put any const here; it is
@@ -577,7 +578,7 @@ module.exports = {
     },
     caps: uris2caps(corner_notif.caps)
   },
-  mru: {
+/*  mru: {
     name: "rufta.mru",
     sii: mru.sii,
     conf: {
@@ -670,16 +671,16 @@ module.exports = {
     },
     caps: uris2caps(admin.caps)
   },
-  emr_notif: {
+  rufta_notif: {
     name: "rufta.notif",
-    sii: emr_notif.sii,
+    sii: rufta_notif.sii,
     conf: {
       proxy: proxy,
-      api: emr_notif.api,
+      api: rufta_notif.api,
       stream: stream,
-      name: emr_notif.sii.name
+      name: rufta_notif.sii.name
     },
-    caps: uris2caps(emr_notif.caps)
+    caps: uris2caps(rufta_notif.caps)
   },
   storeSimulator: {
     name: "rufta.storeSimulator",
@@ -690,7 +691,7 @@ module.exports = {
       name: storeSimulator.sii.name
     },
     caps: uris2caps(storeSimulator.caps)
-  }
+  }*/
 }
 
 
