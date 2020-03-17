@@ -3,7 +3,7 @@ source ./include.sh
 
 MACHINE_FE="rufta@cornerhealth.io"
 
-BUILD_DIR="/home/samuel/current_tasks/personal/bokri/corner/clients/BUILD"
+#BUILD_DIR="/home/samuel/current_tasks/personal/bokri/corner/frontend/BUILD"
 
 deploy()
 {

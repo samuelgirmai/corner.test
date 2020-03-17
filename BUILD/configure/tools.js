@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-var license_dir = "/home/samuel/current_tasks/personal/bokri/corner/clients/controller/logic"
+var license_dir = "/home/samuel/current_tasks/personal/bokri/products/corner/tools/controller/logic"
 
 export async function read_license(name)
 {

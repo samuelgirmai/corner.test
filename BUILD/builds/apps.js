@@ -13,7 +13,7 @@ export var apps = [
     bind: "0.0.0.0",
     port: 3000
   },
-  {
+  /*{
     name: "rufta/admin",
     version: "v1.1.qa",
     mnt: "/rufta/admin",
@@ -61,5 +61,5 @@ export var apps = [
     mnt: "/rufta/infotics",
     bind: "0.0.0.0",
     port: 3007
-  }
+  }*/
 ]

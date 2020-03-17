@@ -2,7 +2,6 @@
 
 source ./compile/launcher.sh
 source ./compile/auth.sh
-source ./compile/rufta.sh
 
 compile_all()
 {
@@ -10,14 +9,11 @@ compile_all()
     launcher_compile
   elif [ "$1" = "auth" ]; then
     auth_compile
-  elif [ "$1" = "rufta" ]; then
-    rufta_compile $2
   elif [ "$1" = "all" ]; then
     launcher_compile
     auth_compile
-    rufta_compile "all"
   else
-    printf "\n\x1b[31m$>compile [launcher|auth|rufta|all]\n\n\x1b[0m"
+    printf "\n\x1b[31m$>compile [launcher|auth|all]\n\n\x1b[0m"
     exit
   fi
 

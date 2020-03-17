@@ -1,11 +1,11 @@
 #!/bin/bash
-BUILD_DIR="/home/samuel/current_tasks/personal/bokri/corner/clients/BUILD"
+BUILD_DIR="/home/samuel/current_tasks/personal/bokri/products/corner/tools/BUILD"
 
 launcher_compile()
 {
   printf "\n\x1b[32mbuiding launcher fe...\n\x1b[0m"
 
-  LAUNCHER_PATH="/home/samuel/current_tasks/personal/bokri/corner/launcher"
+  LAUNCHER_PATH="/home/samuel/current_tasks/personal/bokri/products/corner/frontend/launcher"
 
   #change directory for a build
   cd $LAUNCHER_PATH

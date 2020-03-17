@@ -2,7 +2,7 @@
 
 configure_all()
 {
-  CONFIG_SCRIPT_PATH="/home/samuel/current_tasks/personal/bokri/corner/clients/BUILD/configure"
+  CONFIG_SCRIPT_PATH="/home/samuel/current_tasks/personal/bokri/products/corner/tools/BUILD/configure"
 
   #change directory to configure script
 

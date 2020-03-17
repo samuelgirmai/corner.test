@@ -1,11 +1,12 @@
 #!/bin/bash
-BUILD_DIR="/home/samuel/current_tasks/personal/bokri/corner/clients/BUILD"
+BUILD_DIR="/home/samuel/current_tasks/personal/bokri/products/corner/tools/BUILD"
+APPS_DIR="/home/samuel/current_tasks/personal/bokri/products/corner/frontend"
 
 auth_compile()
 {
   printf "\n\x1b[32mbuiding auth fe...\n\x1b[0m"
 
-  AUTH_PATH="/home/samuel/current_tasks/personal/bokri/corner/clients/auth.ui"
+  AUTH_PATH="$APPS_DIR/auth.ui"
 
   #change directory for a build
   cd $AUTH_PATH
