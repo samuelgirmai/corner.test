@@ -3,8 +3,6 @@ source ./include.sh
 
 MACHINE_FE="rufta@cornerhealth.io"
 
-#BUILD_DIR="/home/samuel/current_tasks/personal/bokri/corner/frontend/BUILD"
-
 deploy()
 {
   printf "\n\x1b[32mdeploying images...\n\x1b[0m"

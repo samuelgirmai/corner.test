@@ -1,5 +1,5 @@
 #!/bin/bash
-BUILD_DIR="/home/samuel/current_tasks/personal/bokri/products/corner/tools/BUILD"
+BUILD_DIR="/home/samuel/current_tasks/personal/bokri/products/corner/tools/BUILD/fe"
 
 launcher_compile()
 {
