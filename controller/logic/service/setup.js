@@ -8,7 +8,9 @@ let filesystem = {
   name: "mongodb",
   port: 27017,
   host: "corner.fs"
-  //host: "0.0.0.0"
+  /*name: "rethinkdb",
+  port: 28015,
+  host: "0.0.0.0"*/
 }
 
 /*
