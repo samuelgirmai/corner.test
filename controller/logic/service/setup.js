@@ -5,12 +5,12 @@ import {
  * filesystem SoT
  */
 let filesystem = {
-  name: "mongodb",
+  /*name: "mongodb",
   port: 27017,
-  host: "corner.fs"
-  /*name: "rethinkdb",
+  host: "corner.fs"*/
+  name: "rethinkdb",
   port: 28015,
-  host: "0.0.0.0"*/
+  host: "0.0.0.0"
 }
 
 /*
@@ -59,10 +59,11 @@ let auth = {
     addr: "0.0.0.0",
   },
   caps: [
-    "/platform/auth/heartbeat",
     "/platform/notif/heartbeat",
     "/platform/stream/heartbeat",
-    "/app/rufta/admin/heartbeat",
+    "/platform/finance/heartbeat",
+    "/platform/payment/heartbeat",
+    /*"/app/rufta/admin/heartbeat",
     "/app/rufta/infotics/heartbeat",
     "/app/rufta/notif/heartbeat",
     "/app/rufta/pharmacy/heartbeat",
@@ -72,7 +73,7 @@ let auth = {
     "/app/rufta/lab/heartbeat",
     "/app/rufta/mru/heartbeat",
     "/app/rufta/practner/heartbeat",
-    "/app/rufta/triage/heartbeat"
+    "/app/rufta/triage/heartbeat"*/
   ]
 };
 auth.sii.host = auth.api.addr+":"+auth.api.port;
@@ -107,7 +108,7 @@ corner_stream.sii.host = corner_stream.api.addr+":"+corner_stream.api.port;
 /*
  * notif service SoT
  */
-let corner_notif = {
+let notif = {
   sii: {
     name: "corner.notif",
     desc: "corner notification service",
@@ -129,388 +130,56 @@ let corner_notif = {
     "/platform/notif/exit",
   ]
 }
-corner_notif.sii.host = corner_notif.api.addr+":"+corner_notif.api.port;
-
-/*
- * RUFTAservices SoT
- */
-/*
-let mru = {
-  sii: {
-    name: "rufta.mru",
-    desc: "Rufta medical record unit (MRU) service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 26001,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  mrn: {
-    start: 300000
-  },
-  caps: [
-    "/platform/auth/users/person/write",
-    "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",
-    "/platform/auth/users/access/write",
-    "/platform/auth/users/access/delete",
-    "/platform/auth/users/person/security/update",
-    "/platform/stream/open",
-    "/platform/stream/close",
-    "/app/rufta/mru/stats/join",
-    "/app/rufta/mru/stats/exit",
-    "/app/rufta/mru/search/join",
-    "/app/rufta/mru/search/exit",
-    "/app/rufta/finance/invoice/list",
-    "/app/rufta/finance/receipt/list",
-    "/app/rufta/payment/order/write",
-    "/app/rufta/payment/payment/write",
-    "/app/rufta/payment/items/price/assert",
-    "/app/rufta/payment/account/settlement/write"
-  ]
-}
-mru.sii.host = mru.api.addr+":"+mru.api.port;
-
-let triage = {
-  sii: {
-    name: "rufta.triage",
-    desc: "Rufta triage service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 26002,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  caps: [
-    "/platform/auth/users/person/write",
-    "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",
-    "/platform/auth/users/access/write",
-    "/platform/auth/users/access/delete",
-    "/platform/auth/users/person/security/update",
-    "/app/rufta/mru/patient/assert",
-    "/app/rufta/mru/patient/read",
-    "/platform/stream/open",
-    "/platform/stream/close",
-    "/app/rufta/triage/stats/join",
-    "/app/rufta/triage/stats/exit",
-    "/app/rufta/practner/opd/assert",
-    "/app/rufta/practner/opd/read",
-    "/app/rufta/practner/user/read",
-    "/app/rufta/mru/patient/lastVisit/update",
-    "/app/rufta/notif/write",
-    "/app/rufta/notif/read",
-    "/app/rufta/triage/search/join",
-    "/app/rufta/triage/search/exit"
-  ]
-}
-triage.sii.host = triage.api.addr+":"+triage.api.port;
-
-let practner = {
-  sii: {
-    name: "rufta.practner",
-    desc: "Rufta practitioner service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 26003,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  caps: [
-    "/platform/auth/users/person/write",
-    "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",
-    "/platform/auth/users/access/write",
-    "/platform/auth/users/access/delete",
-    "/platform/auth/users/person/security/update",
-    "/app/rufta/mru/patient/assert",
-    "/app/rufta/mru/patient/read",
-    "/app/rufta/infotics/idata/assert",
-    "/app/rufta/infotics/idata/read",
-    "/app/rufta/notif/write",
-    "/app/rufta/notif/read",
-    "/app/rufta/mru/patient/appointment/update",
-  ]
-}
-practner.sii.host = practner.api.addr+":"+practner.api.port;
-
-let infotics = {
-  sii: {
-    name: "rufta.infotics",
-    desc: "Rufta informatics service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 26004,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  caps: [
-    "/platform/auth/users/person/write",
-    "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",
-    "/platform/auth/users/access/write",
-    "/platform/auth/users/access/delete",
-    "/platform/auth/users/person/security/update",
-  ]
-}
-infotics.sii.host = infotics.api.addr+":"+infotics.api.port;
-
-let lab = {
-  sii: {
-    name: "rufta.lab",
-    desc: "Rufta laboratory service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 26005,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  caps: [
-    "/platform/auth/users/person/write",
-    "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",
-    "/platform/auth/users/access/write",
-    "/platform/auth/users/access/delete",
-    "/platform/auth/users/person/security/update",
-    "/app/rufta/mru/patient/assert",
-    "/app/rufta/practner/patient/record/order/read",
-    "/app/rufta/notif/write",
-    "/app/rufta/notif/read",
-    "/app/rufta/finance/invoice/list",
-    "/app/rufta/finance/receipt/list",
-    "/app/rufta/payment/order/write",
-    "/app/rufta/payment/payment/write",
-    "/app/rufta/payment/items/price/assert",
-    "/app/rufta/payment/account/settlement/write"
-  ]
-}
-lab.sii.host = lab.api.addr+":"+lab.api.port;
-
-let pharmacy = {
-  sii: {
-    name: "rufta.pharmacy",
-    desc: "Rufta pharmacy service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 26006,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  caps: [
-    "/platform/auth/users/person/write",
-    "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",
-    "/platform/auth/users/access/write",
-    "/platform/auth/users/access/delete",
-    "/platform/auth/users/person/security/update",
-    "/app/rufta/mru/patient/assert",
-    "/app/rufta/notif/read",
-    "/app/rufta/finance/invoice/list",
-    "/app/rufta/finance/receipt/list",
-    "/app/rufta/payment/order/write",
-    "/app/rufta/payment/payment/write",
-    "/app/rufta/payment/items/price/assert",
-    "/app/rufta/payment/account/settlement/write"
-  ]
-}
-pharmacy.sii.host = pharmacy.api.addr+":"+pharmacy.api.port;
+notif.sii.host = notif.api.addr+":"+notif.api.port;
 
 let finance = {
   sii: {
-    name: "rufta.finance",
-    desc: "rufta finance service",
+    name: "corner.finance",
+    desc: "corner finance service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
+      email: "corner@bokri.xyz"
     }
   },
   api: {
-    port: 26007,
+    port: 22005,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
   },
   caps: [
-    "/platform/auth/users/person/write",
-    "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",
-    "/platform/auth/users/access/write",
-    "/platform/auth/users/access/delete",
-    "/platform/auth/users/person/security/update",
-    "/app/rufta/store/items/price/read",
-    "/app/rufta/mru/patient/assert"
+    "/platform/auth/users/person/read"
   ]
-}
+};
 finance.sii.host = finance.api.addr+":"+finance.api.port;
 
 let payment = {
   sii: {
-    name: "rufta.payment",
-    desc: "Rufta payment service",
+    name: "corner.payment",
+    desc: "corner payment service",
     host: null,
     address: {
       phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
+      email: "corner@bokri.xyz"
     }
   },
   api: {
-    port: 26008,
+    port: 22006,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
   },
   caps: [
-    '/app/rufta/finance/account/read',
-    '/app/rufta/store/items/price/read',
-    '/app/rufta/finance/account/balance/read',
-    '/app/rufta/finance/order/write',
-    '/app/rufta/finance/invoice/write',
-    '/app/rufta/finance/invoice/read',
-    '/app/rufta/finance/account/transaction/write',
-    '/app/rufta/finance/receipt/write',
-    '/app/rufta/finance/insurance/scheme/write'
+    '/platform/finance/account/read',
+    '/platform/finance/account/balance/read',
+    '/platform/finance/order/write',
+    '/platform/finance/invoice/write',
+    '/platform/finance/invoice/read',
+    '/platform/finance/account/transaction/write',
+    '/platform/finance/receipt/write',
+    '/platform/finance/insurance/scheme/write'
   ]
-}
+};
 payment.sii.host = payment.api.addr+":"+payment.api.port;
-
-let admin = {
-  sii: {
-    name: "rufta.admin",
-    desc: "Rufta administrator service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 27001,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  caps: [
-    "/platform/auth/users/person/write",
-    "/platform/auth/users/person/update",
-    "/platform/auth/users/person/delete",
-    "/platform/auth/users/access/write",
-    "/platform/auth/users/access/delete",
-    "/platform/auth/users/person/security/update",
-    "/platform/auth/caps/list",
-    "/platform/auth/caps/allow",
-    "/platform/auth/caps/revoke",
-    "/app/rufta/mru/user/write",
-    "/app/rufta/mru/user/read",
-    "/app/rufta/mru/user/delete",
-    "/app/rufta/mru/user/update",
-    "/app/rufta/mru/user/list",
-    "/app/rufta/practner/user/write",
-    "/app/rufta/practner/user/read",
-    "/app/rufta/practner/user/delete",
-    "/app/rufta/practner/user/update",
-    "/app/rufta/practner/user/list",
-    "/app/rufta/infotics/user/write",
-    "/app/rufta/infotics/user/read",
-    "/app/rufta/infotics/user/list",
-    "/app/rufta/infotics/user/delete",
-    "/app/rufta/infotics/user/update",
-    "/app/rufta/lab/user/write",
-    "/app/rufta/lab/user/delete",
-    "/app/rufta/lab/user/update",
-    "/app/rufta/lab/user/read",
-    "/app/rufta/lab/user/list",
-    "/app/rufta/pharmacy/user/write",
-    "/app/rufta/pharmacy/user/read",
-    "/app/rufta/pharmacy/user/update",
-    "/app/rufta/pharmacy/user/delete",
-    "/app/rufta/pharmacy/user/list",
-    "/app/rufta/finance/user/delete",
-    "/app/rufta/finance/user/write",
-    "/app/rufta/finance/user/read",
-    "/app/rufta/finance/user/update",
-    "/app/rufta/finance/user/list",
-    "/app/rufta/triage/user/update",
-    "/app/rufta/triage/user/read",
-    "/app/rufta/triage/user/write",
-    "/app/rufta/triage/user/delete",
-    "/app/rufta/triage/user/list"
-  ]
-}
-admin.sii.host = admin.api.addr+":"+admin.api.port;
-
-let rufta_notif = {
-  sii: {
-    name: "rufta.notif",
-    desc: "Rufta notification service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 27002,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  caps: [
-    "/platform/stream/open",
-    "/platform/stream/close",
-    "/app/rufta/notif/join",
-    "/app/rufta/notif/exit",
-  ]
-}
-rufta_notif.sii.host = rufta_notif.api.addr+":"+rufta_notif.api.port;
-
-let storeSimulator = {
-  sii: {
-    name: "rufta.storeSimulator",
-    desc: "Rufta store simulator service",
-    host: null,
-    address: {
-      phone_number: "+251000000000",
-      email: "rufta@allena.xyz"
-    }
-  },
-  api: {
-    port: 27003,
-    bind: "0.0.0.0",
-    addr: "0.0.0.0",
-  },
-  caps: [
-    "/app/rufta/infotics/idata/read",
-  ]
-}
-storeSimulator.sii.host = storeSimulator.api.addr+":"+storeSimulator.api.port;
-*/
 
 /*
  * NOTICE: don't put any const here; it is
@@ -569,131 +238,39 @@ module.exports = {
     },
     caps: uris2caps(corner_stream.caps)
   },
-  corner_notif: {
+  notif: {
     name: "corner.notif",
-    sii: corner_notif.sii,
+    sii: notif.sii,
     conf: {
       proxy: proxy,
       stream: stream,
-      api: corner_notif.api,
-      name: corner_notif.sii.name
+      api: notif.api,
+      name: notif.sii.name
     },
-    caps: uris2caps(corner_notif.caps)
-  },
-/*  mru: {
-    name: "rufta.mru",
-    sii: mru.sii,
-    conf: {
-      proxy: proxy,
-      stream: stream,
-      api: mru.api,
-      name: mru.sii.name,
-      mrn: mru.mrn
-    },
-    caps: uris2caps(mru.caps)
-  },
-  triage: {
-    name: "rufta.triage",
-    sii: triage.sii,
-    conf: {
-      proxy: proxy,
-      stream: stream,
-      api: triage.api,
-      name: triage.sii.name
-    },
-    caps: uris2caps(triage.caps)
-  },
-  practner: {
-    name: "rufta.practner",
-    sii: practner.sii,
-    conf: {
-      proxy: proxy,
-      api: practner.api,
-      name: practner.sii.name
-    },
-    caps: uris2caps(practner.caps)
-  },
-  infotics: {
-    name: "rufta.infotics",
-    sii: infotics.sii,
-    conf: {
-      proxy: proxy,
-      api: infotics.api,
-      name: infotics.sii.name
-    },
-    caps: uris2caps(infotics.caps)
-  },
-  lab: {
-    name: "rufta.lab",
-    sii: lab.sii,
-    conf: {
-      proxy: proxy,
-      api: lab.api,
-      name: lab.sii.name
-    },
-    caps: uris2caps(lab.caps)
-  },
-  pharmacy: {
-    name: "rufta.pharmacy",
-    sii: pharmacy.sii,
-    conf: {
-      proxy: proxy,
-      api: pharmacy.api,
-      name: pharmacy.sii.name
-    },
-    caps: uris2caps(pharmacy.caps)
+    caps: uris2caps(notif.caps)
   },
   finance: {
-    name: "rufta.finance",
+    name: "corner.finance",
     sii: finance.sii,
     conf: {
       proxy: proxy,
+      stream: stream,
       api: finance.api,
       name: finance.sii.name
     },
     caps: uris2caps(finance.caps)
   },
   payment: {
-    name: "rufta.payment",
+    name: "corner.payment",
     sii: payment.sii,
     conf: {
       proxy: proxy,
+      stream: stream,
       api: payment.api,
       name: payment.sii.name
     },
     caps: uris2caps(payment.caps)
-  },
-  admin: {
-    name: "rufta.admin",
-    sii: admin.sii,
-    conf: {
-      proxy: proxy,
-      api: admin.api,
-      name: admin.sii.name
-    },
-    caps: uris2caps(admin.caps)
-  },
-  rufta_notif: {
-    name: "rufta.notif",
-    sii: rufta_notif.sii,
-    conf: {
-      proxy: proxy,
-      api: rufta_notif.api,
-      stream: stream,
-      name: rufta_notif.sii.name
-    },
-    caps: uris2caps(rufta_notif.caps)
-  },
-  storeSimulator: {
-    name: "rufta.storeSimulator",
-    sii: storeSimulator.sii,
-    conf: {
-      proxy: proxy,
-      api: storeSimulator.api,
-      name: storeSimulator.sii.name
-    },
-    caps: uris2caps(storeSimulator.caps)
-  }*/
+  }
 }
 
 

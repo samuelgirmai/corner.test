@@ -104,18 +104,9 @@ export async function configure()
   await configure_service(require('./setup').muxer);
   await configure_service(require('./setup').auth);
   await configure_service(require('./setup').stream);
-  await configure_service(require('./setup').corner_notif);
-  /*await configure_service(require('./setup').mru);
-  await configure_service(require('./setup').triage);
-  await configure_service(require('./setup').practner);
-  await configure_service(require('./setup').infotics);
-  await configure_service(require('./setup').lab);
-  await configure_service(require('./setup').pharmacy);
+  await configure_service(require('./setup').notif);
   await configure_service(require('./setup').finance);
   await configure_service(require('./setup').payment);
-  await configure_service(require('./setup').admin);
-  await configure_service(require('./setup').emr_notif);
-  await configure_service(require('./setup').storeSimulator);*/
 
   await reboot();
 }
@@ -141,20 +132,10 @@ export async function install()
 
   root_license = r.result.client.license;
 
-
   await install_service(require('./setup').stream);
-  await install_service(require('./setup').corner_notif);
-  /*await install_service(require('./setup').mru);
-  await install_service(require('./setup').triage);
-  await install_service(require('./setup').practner);
-  await install_service(require('./setup').infotics);
-  await install_service(require('./setup').lab);
-  await install_service(require('./setup').pharmacy);
+  await install_service(require('./setup').notif);
   await install_service(require('./setup').finance);
   await install_service(require('./setup').payment);
-  await install_service(require('./setup').admin);
-  await install_service(require('./setup').emr_notif);
-  await install_service(require('./setup').storeSimulator);*/
 
   var root = {
     name: "root",
@@ -180,18 +161,9 @@ export async function allow()
 
   await allow_service(require('./setup').auth);
   await allow_service(require('./setup').stream);
-  await allow_service(require('./setup').corner_notif);
-  /*await allow_service(require('./setup').mru);
-  await allow_service(require('./setup').triage);
-  await allow_service(require('./setup').practner);
-  await allow_service(require('./setup').infotics);
-  await allow_service(require('./setup').lab);
-  await allow_service(require('./setup').pharmacy);
+  await allow_service(require('./setup').notif);
   await allow_service(require('./setup').finance);
   await allow_service(require('./setup').payment);
-  await allow_service(require('./setup').admin);
-  await allow_service(require('./setup').emr_notif);
-  await allow_service(require('./setup').storeSimulator);*/
 
   await reboot();
 
@@ -207,18 +179,8 @@ export async function start()
   await start_service("corner.auth", "start");
   await start_service("corner.stream", "start");
   await start_service("corner.notif", "start");
-
-/*  await start_service("rufta.mru", "start");
-  await start_service("rufta.triage", "start");
-  await start_service("rufta.practner", "start");
-  await start_service("rufta.infotics", "start");
-  await start_service("rufta.lab", "start");
-  await start_service("rufta.pharmacy", "start");
-  await start_service("rufta.finance", "start");
-  await start_service("rufta.payment", "start");
-  await start_service("rufta.admin", "start");
-  await start_service("rufta.notif", "start");
-  await start_service("rufta.storeSimulator", "start");*/
+  await start_service("corner.finance", "start");
+  await start_service("corner.payment", "start");
 }
 
 export async function get_info()
