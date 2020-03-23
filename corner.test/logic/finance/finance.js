@@ -25,7 +25,7 @@ function _print(o, key)
 }
 
 
-var user_id = '502490';
+var user_id = '431303';
 
 export async function create_account()
 {
@@ -55,7 +55,7 @@ export async function get_account()
       license: CONFIG.auth.license,
     },
     param: {
-      account_id: "213318",
+      account_id: "8361080617336",
 	     
     }
   }
@@ -75,7 +75,7 @@ export async function set_account_scheme()
     },
     param: {
       user_id: user_id,
-      account_id: "093540",
+      account_id: "8361080617336",
       scheme_id: "559682928"
     }
   }
@@ -94,7 +94,7 @@ export async function remove_account()
       license: CONFIG.auth.license,
     },
     param: {
-      account_id: "213318"
+      account_id: "8361080617336"
     }
   }
 
@@ -166,7 +166,7 @@ export async function create_transaction()
     },
     param: {
       user_id: user_id,
-      account_id: "352646",
+      account_id: "8361080617336",
       transaction: {
         type: "deposit",
         reason: "",
@@ -190,7 +190,7 @@ export async function create_deposit()
     },
     param: {
       user_id: user_id,
-      account_id: "352646",
+      account_id: "8361080617336",
       transaction: {
         reason: "",
         amount: 3287.01
@@ -213,7 +213,7 @@ export async function create_withdraw()
     },
     param: {
       user_id: user_id,
-      account_id: "352646",
+      account_id: "8361080617336",
       transaction: {
         reason: "",
         amount: 320.01
@@ -235,7 +235,7 @@ export async function get_balance()
       license: CONFIG.auth.license,
     },
     param: {
-      account_id: "093540"
+      account_id: "8361080617336"
     }
   }
 
@@ -254,7 +254,7 @@ export async function create_order()
     },
     param: {
       user_id: user_id,
-      account_id: "352646",
+      account_id: "8361080617336",
       items: [{
         type: "lab",
         id: "764620",
@@ -341,7 +341,7 @@ export async function create_invoice()
     },
     param: {
       user_id: user_id,
-      account_id: "352646",
+      account_id: "8361080617336",
       order_id: "6981822346",
       service_type: "mru"
     }
