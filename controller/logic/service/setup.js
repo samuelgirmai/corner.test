@@ -5,11 +5,11 @@ import {
  * filesystem SoT
  */
 let filesystem = {
-  name: "mongodb",
+  /*name: "mongodb",
   port: 27017,
-  /*host: "corner.fs"
+  host: "corner.fs"*/
   name: "rethinkdb",
-  port: 28015,*/
+  port: 28015,
   host: "0.0.0.0"
 }
 
@@ -63,17 +63,13 @@ let auth = {
     "/platform/stream/heartbeat",
     "/platform/finance/heartbeat",
     "/platform/payment/heartbeat",
-    /*"/app/rufta/admin/heartbeat",
-    "/app/rufta/infotics/heartbeat",
-    "/app/rufta/notif/heartbeat",
-    "/app/rufta/pharmacy/heartbeat",
-    "/app/rufta/store/heartbeat",
-    "/app/rufta/finance/heartbeat",
-    "/app/rufta/payment/heartbeat",
-    "/app/rufta/lab/heartbeat",
-    "/app/rufta/mru/heartbeat",
-    "/app/rufta/practner/heartbeat",
-    "/app/rufta/triage/heartbeat"*/
+    "/app/covid/admin/heartbeat",
+    "/app/covid/tracker/heartbeat",
+    "/app/covid/mru/heartbeat",
+    "/app/covid/lab/heartbeat",
+    "/app/covid/practner/heartbeat",
+    "/app/covid/infotics/hearbeat",
+    "/app/covid/notif/heartbeat"
   ]
 };
 auth.sii.host = auth.api.addr+":"+auth.api.port;

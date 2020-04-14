@@ -1,1 +1,18 @@
-{}
+{
+  "root": {
+    "user_id": "131063",
+    "license": "839371043168"
+  },
+  "covid.admin": {
+    "user_id": "072122",
+    "license": "761146932197"
+  },
+  "covid.tracker": {
+    "user_id": "782157",
+    "license": "547960946935"
+  },
+  "covid.person.admin": {
+    "user_id": "758777",
+    "password": "toor"
+  }
+}
