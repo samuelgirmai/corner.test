@@ -93,6 +93,7 @@ let corner_stream = {
     addr: "0.0.0.0",
   },
   stream: {
+    driver: "socket-io",
     port: 22003,
     bind: "0.0.0.0",
     addr: "0.0.0.0"
@@ -144,7 +145,8 @@ let finance = {
     addr: "0.0.0.0",
   },
   caps: [
-    "/platform/auth/users/person/read"
+    "/platform/auth/users/person/read",
+    "/platform/auth/prng/write"
   ]
 };
 finance.sii.host = finance.api.addr+":"+finance.api.port;
@@ -176,6 +178,7 @@ let payment = {
   ]
 };
 payment.sii.host = payment.api.addr+":"+payment.api.port;
+
 
 /*
  * NOTICE: don't put any const here; it is
