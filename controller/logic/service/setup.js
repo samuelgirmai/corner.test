@@ -97,6 +97,7 @@ let corner_stream = {
     addr: "0.0.0.0",
   },
   stream: {
+    driver: "socket-io",
     port: 22003,
     bind: "0.0.0.0",
     addr: "0.0.0.0"
