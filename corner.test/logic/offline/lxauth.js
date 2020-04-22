@@ -43,16 +43,16 @@ export async function signin()
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/app/covid/mru/user/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/access/write');
   
   _print(ret, 'token');
 
    return ret.status == "ok"?ret.result.token: null
 }
 
-export async function create_patient(token)
+export async function create_person(token)
 {
-  let ret, u, route, item;
+  let ret, u;
 
   if(!token){
     console.log('   [!] not logged in?');
@@ -62,44 +62,37 @@ export async function create_patient(token)
   u = {
     name: "Patient",
     fname: "Belay",
+    mname: "",
+    mfname:"",
     gfname: "Girma",
     gender: "M",
     dob: "12/12/2012",
-    nationalty: "Ethiopian",
     address: {
+      region: "Tigray",
+      zone: "East",
+      woreda: "wukro",
+      kebele: "hayeom",
+      house_number: "123",
       phone_number: "09"+Math.random().toString().slice(2,10)
     }
   }
-
-  route = {
-    origin_addr: {
-      country: "Ethiopia",
-      region: "oromia",
-      town: "adama"
-    },
-    final_addr: {
-      destination: "Mekelle"
-    }
-  }
-   
+ 
   let data = {
     auth: {
       token: token,
     }, 
     param: {
-      pii: u,
-      route: route,
-      checkpoint: 'Humera'
+      pii: u
     }
   }
 
   if(!offline){
-    ret = await API.run(data, CONFIG.proxy.url, '/app/covid/mru/patient/write');
+    ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/person/write');
 
     _print(ret, null);
   }
   else {
-    let r = LxSTORE.write(data, "/app/covid/mru/patient/write");
+    let r = LxSTORE.write(data, '/platform/auth/users/person/write');
 
     if(!r){
       console.log("Error: write_store");

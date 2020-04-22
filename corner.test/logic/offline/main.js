@@ -2,14 +2,12 @@ import inquirer from 'inquirer'
 
 import {
   signin,
-  signout,
-  create_cofficer,
-  create_patient,
+  create_person,
   open_store,
   read_store,
   sync_store,
   close_store
-} from './lxmru';
+} from './lxauth';
 
 import LxSTORE from './store';
 
@@ -18,7 +16,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'mru (offline/sync) test',
-    choices: ['signin', 'open.store', 'create.patient', 'read.store', 'sync.store', 'close.store', '<<back']
+    choices: ['signin', 'open.store', 'create.person', 'read.store', 'sync.store', 'close.store', '<<back']
   }
 ];
 
@@ -32,8 +30,8 @@ export async function lxmru_start()
     case 'signin':
       token = await signin();
       break;
-    case 'create.patient':
-      await create_patient(token);
+    case 'create.person':
+      await create_person(token);
       break;
     case 'open.store':
       await open_store();

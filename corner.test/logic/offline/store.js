@@ -101,7 +101,7 @@ export async function write(data, uri)
 export async function sync()
 {
   let items, ret, rlist, synced = 0, unsynced = 0;
-  console.log("Storage:: ", STORAGE);
+
   if(!STORAGE){
     return 0;
   }
@@ -118,7 +118,7 @@ export async function sync()
   }
 
   ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/lxcache/sync');
-  console.log(ret);
+  
   if(ret.status == "err"){
     return 0;
   }
