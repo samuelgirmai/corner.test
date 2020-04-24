@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Sample EMR app",
   "scripts": {
+    "admin": "babel-node ./logic/admin/main.js",
     "finance": "babel-node ./logic/finance/main.js",
     "payment": "babel-node ./logic/payment/main.js"
   },

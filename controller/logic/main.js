@@ -30,14 +30,10 @@ export async function controller_start()
       await service_controller();
       break;
     case 'client':
-      console.log("\n\n>> corner/client coming soon!\n");
-      controller_start();
-      //await client_controller();
+      await client_controller();
       break;
     case 'person':
-      console.log("\n\n>> corner/person coming soon!\n");
-      controller_start();
-      //await person_controller();
+      await person_controller();
       break;
     case 'exit':
       process.exit();

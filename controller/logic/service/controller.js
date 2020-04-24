@@ -107,6 +107,8 @@ export async function configure()
   await configure_service(require('./setup').notif);
   await configure_service(require('./setup').finance);
   await configure_service(require('./setup').payment);
+  await configure_service(require('./setup').admin);
+  await configure_service(require('./setup').system);
 
   await reboot();
 }
@@ -136,9 +138,11 @@ export async function install()
   await install_service(require('./setup').notif);
   await install_service(require('./setup').finance);
   await install_service(require('./setup').payment);
+  await install_service(require('./setup').admin);
+  await install_service(require('./setup').system);
 
   var root = {
-    name: "root",
+    name: "corner.root",
     user_id: r.result.client.user_id,
     license: r.result.client.license
   }
@@ -152,9 +156,7 @@ export async function install()
 
 export async function allow()
 {
-  root_license = (await read_license("root")).license;
-
-  console.log("::::"+root_license);
+  root_license = (await read_license("corner.root")).license;
 
   await start_service("corner.muxer", "config");
   await start_service("corner.auth", "config");
@@ -164,6 +166,8 @@ export async function allow()
   await allow_service(require('./setup').notif);
   await allow_service(require('./setup').finance);
   await allow_service(require('./setup').payment);
+  await allow_service(require('./setup').admin);
+  await allow_service(require('./setup').system);
 
   await reboot();
 
@@ -181,6 +185,9 @@ export async function start()
   await start_service("corner.notif", "start");
   await start_service("corner.finance", "start");
   await start_service("corner.payment", "start");
+  await start_service("corner.admin", "start");
+  await start_service("corner.system", "start");
+
 }
 
 export async function get_info()

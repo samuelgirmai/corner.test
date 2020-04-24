@@ -1,18 +1,18 @@
 {
-  "root": {
-    "user_id": "131063",
-    "license": "839371043168"
+  "corner.root": {
+    "user_id": "930046",
+    "license": "846081708564"
   },
-  "covid.admin": {
-    "user_id": "072122",
-    "license": "761146932197"
+  "corner.system": {
+    "user_id": "128159",
+    "license": "996877267466"
   },
-  "covid.tracker": {
-    "user_id": "782157",
-    "license": "547960946935"
+  "corner.admin": {
+    "user_id": "647079",
+    "license": "587326533164"
   },
-  "covid.person.admin": {
-    "user_id": "758777",
+  "corner.person.admin": {
+    "user_id": "548575",
     "password": "toor"
   }
 }

@@ -3,13 +3,13 @@ import {
 } from '../fcaps'
 
 /*
- * EMR clients SoT
+ * CORNER root user
  */
 let admin = {
   pii: {
     name: "admin",
-    fname: "rufta",
-    gfname: "taye",
+    fname: "corner",
+    gfname: "fana",
     mname: "zimam",
     mfname: "berhane",
     gender: "F",
@@ -24,27 +24,22 @@ let admin = {
     }
   },
   caps: [
-    '/app/rufta/admin/user/write',
-    '/app/rufta/admin/user/delete',
-    '/app/rufta/admin/user/list',
-    '/app/rufta/admin/user/role/write',
-    '/app/rufta/admin/user/role/delete',
-    '/app/rufta/admin/user/role/read',
-    /*FIXME: /app/emr/practner/opd/list shouldn't be here*/
-    '/app/rufta/practner/opd/list',
-    '/app/rufta/admin/stats/read',
-    '/app/rufta/admin/access/write',
-    '/app/rufta/admin/access/delete',
-    '/app/rufta/admin/security/update',
-    '/app/rufta/mru/stats/read',
-    '/app/rufta/practner/stats/read',
-    '/app/rufta/triage/stats/read'
+    '/platform/admin/user/write',
+    '/platform/admin/user/delete',
+    '/platform/admin/user/list',
+    '/platform/admin/user/role/write',
+    '/platform/admin/user/role/delete',
+    '/platform/admin/user/role/read',
+    '/platform/admin/stats/read',
+    '/platform/admin/access/write',
+    '/platform/admin/access/delete',
+    '/platform/admin/security/update'
   ]
 }
 
 module.exports = {
   admin: {
-    name: "rufta.person.admin",
+    name: "corner.person.admin",
     pii: admin.pii,
     caps: uris2caps(admin.caps)
   }

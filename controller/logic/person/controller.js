@@ -18,7 +18,7 @@ async function _create(cnf)
 {
   let r, data;
 
-  root_license = (await read_license("root")).license;
+  root_license = (await read_license("corner.root")).license;
 
   data = {
     auth: {
@@ -30,7 +30,7 @@ async function _create(cnf)
   }
 
   _print(
-    r = await API.run(CONFIG.proxy.url, data, '/platform/auth/users/person/write'),
+    r = await API.run(CONFIG.proxy.url, data, '/platform/auth/identity/person/write'),
     null
   );
 
@@ -52,7 +52,7 @@ export async function _allow(cnf)
 {
   let r, data, person;
 
-  root_license = (await read_license("root")).license;
+  root_license = (await read_license("corner.root")).license;
 
   person = await read_license(cnf.name);
 

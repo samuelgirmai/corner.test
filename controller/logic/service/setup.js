@@ -63,13 +63,8 @@ let auth = {
     "/platform/stream/heartbeat",
     "/platform/finance/heartbeat",
     "/platform/payment/heartbeat",
-    "/app/covid/admin/heartbeat",
-    "/app/covid/tracker/heartbeat",
-    "/app/covid/mru/heartbeat",
-    "/app/covid/lab/heartbeat",
-    "/app/covid/practner/heartbeat",
-    "/app/covid/infotics/hearbeat",
-    "/app/covid/notif/heartbeat"
+    "/platform/system/heartbeat",
+    "/platform/admin/heartbeat",
   ]
 };
 auth.sii.host = auth.api.addr+":"+auth.api.port;
@@ -145,7 +140,7 @@ let finance = {
     addr: "0.0.0.0",
   },
   caps: [
-    "/platform/auth/users/person/read",
+    "/platform/auth/identity/person/read",
     "/platform/auth/prng/write"
   ]
 };
@@ -179,6 +174,77 @@ let payment = {
 };
 payment.sii.host = payment.api.addr+":"+payment.api.port;
 
+let admin = {
+  sii: {
+    name: "corner.admin",
+    desc: "corner admin service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 22007,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  caps: [
+    '/platform/auth/identity/access/write',
+    '/platform/auth/identity/access/delete',
+    '/platform/auth/identity/person/security/update',
+    '/platform/auth/caps/allow',
+    '/platform/auth/caps/revoke',
+    '/platform/system/user/write',
+    '/platform/system/user/delete',
+    '/platform/system/user/list',
+    /*'/platform/console/user/write',
+    '/platform/console/user/delete',
+    '/platform/console/user/list',*/
+  ]
+};
+admin.sii.host = admin.api.addr+":"+admin.api.port;
+
+let system = {
+  sii: {
+    name: "corner.system",
+    desc: "corner sys service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 22008,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  caps: [
+    "/platform/auth/identity/access/write",
+    "/platform/auth/identity/access/delete",
+    "/platform/auth/identity/person/security/update",
+
+    '/platform/auth/identity/person/write',
+    '/platform/auth/identity/person/delete',
+    '/platform/auth/identity/persons/list',
+    '/platform/auth/identity/client/write',
+    '/platform/auth/identity/client/delete',
+    '/platform/auth/identity/clients/list',
+    '/platform/auth/identity/service/write',
+    '/platform/auth/identity/service/delete',
+    '/platform/auth/identity/services/list',
+    '/platform/auth/caps/list',
+    '/platform/auth/caps/delete',
+    '/platform/auth/caps/allow',
+    '/platform/auth/caps/revoke',
+    '/platform/auth/caps/export',
+    '/platform/auth/cap/state/update',
+    '/platform/auth/stats/read',
+    '/platform/auth/identity/services/state/read'
+  ]
+};
+system.sii.host = system.api.addr+":"+system.api.port;
 
 /*
  * NOTICE: don't put any const here; it is
@@ -269,7 +335,28 @@ module.exports = {
       name: payment.sii.name
     },
     caps: uris2caps(payment.caps)
+  },
+  admin: {
+    name: "corner.admin",
+    sii: admin.sii,
+    conf: {
+      proxy: proxy,
+      stream: stream,
+      api: admin.api,
+      name: admin.sii.name
+    },
+    caps: uris2caps(admin.caps)
+  },
+  system: {
+    name: "corner.system",
+    sii: system.sii,
+    conf: {
+      proxy: proxy,
+      stream: stream,
+      api: system.api,
+      name: system.sii.name
+    },
+    caps: uris2caps(system.caps)
   }
 }
-
 
