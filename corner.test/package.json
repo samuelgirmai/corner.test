@@ -4,6 +4,7 @@
   "description": "Sample EMR app",
   "scripts": {
     "admin": "babel-node ./logic/admin/main.js",
+    "sync": "babel-node ./logic/offline/main.js",
     "finance": "babel-node ./logic/finance/main.js",
     "payment": "babel-node ./logic/payment/main.js"
   },
@@ -14,6 +15,7 @@
     "node-fetch": "^1.7.3",
     "prettyjson": "^1.2.1",
     "print-message": "^2.1.0",
+    "randomstring": "^1.1.5",
     "socket.io-client": "^2.0.4",
     "uuid": "^3.1.0"
   },
