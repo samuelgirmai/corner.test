@@ -38,12 +38,12 @@ export async function signin()
       license: CONFIG.auth.license,
     },
     param: {
-      username: "942661",
+      username: "887276",
       password: "toor",
     }
   }
 
-  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/access/write');
+  ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/identity/access/write');
   
   _print(ret, 'token');
 
@@ -82,17 +82,18 @@ export async function create_person(token)
       token: token,
     }, 
     param: {
-      pii: u
+      pii: u,
+      user_type: "console"
     }
   }
 
   if(!offline){
-    ret = await API.run(data, CONFIG.proxy.url, '/platform/auth/users/person/write');
+    ret = await API.run(data, CONFIG.proxy.url, "/platform/system/user/write");
 
     _print(ret, null);
   }
   else {
-    let r = LxSTORE.write(data, '/platform/auth/users/person/write');
+    let r = LxSTORE.write(data, "/platform/system/user/write");
 
     if(!r){
       console.log("Error: write_store");

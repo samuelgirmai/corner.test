@@ -5,12 +5,12 @@ import {
  * filesystem SoT
  */
 let filesystem = {
-  /*name: "mongodb",
+  name: "mongodb",
   port: 27017,
-  host: "corner.fs"*/
+  host: "0.0.0.0"/*
   name: "rethinkdb",
   port: 28015,
-  host: "0.0.0.0"
+  host: "0.0.0.0"*/
 }
 
 /*
@@ -118,6 +118,7 @@ let notif = {
   caps: [
     "/platform/stream/open",
     "/platform/stream/close",
+    "/platform/stream/config/read",
     "/platform/notif/join",
     "/platform/notif/exit",
   ]
