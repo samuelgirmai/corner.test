@@ -22,7 +22,7 @@ async function configure_service(cnf)
   param.service = cnf;
 
   _print(
-    r = await API.run(CONFIG.master.url, param, '/platform/controller/config/update'),
+    r = await API.run(param, CONFIG.master.url, '/platform/controller/config/update'),
     null
   );
 
@@ -41,7 +41,7 @@ async function install_service(cnf)
   }
 
   _print(
-    r = await API.run(CONFIG.master.url, param, '/platform/controller/setup/update'),
+    r = await API.run(param, CONFIG.master.url, '/platform/controller/setup/update'),
     null
   );
 
@@ -60,7 +60,7 @@ async function allow_service(cnf)
   }
 
   _print(
-    r = await API.run(CONFIG.master.url, param, '/platform/controller/caps/allow'),
+    r = await API.run(param, CONFIG.master.url, '/platform/controller/caps/allow'),
     null
   );
 
@@ -78,7 +78,7 @@ async function start_service(name, state)
   }
 
   _print(
-    r = await API.run(CONFIG.master.url, param, '/platform/controller/state/update'),
+    r = await API.run(param, CONFIG.master.url, '/platform/controller/state/update'),
     null
   );
 
@@ -91,7 +91,7 @@ async function reboot()
   let param = {};
 
   _print(
-    r = await API.run(CONFIG.master.url, param, '/platform/controller/reboot'),
+    r = await API.run(param, CONFIG.master.url, '/platform/controller/reboot'),
     null
   );
 
@@ -194,9 +194,9 @@ export async function get_info()
 {
   let ret;
 
-  let data = {};
+  let param = {};
 
-  ret = await API.run(CONFIG.master.url, data, '/platform/controller/info/read');
+  ret = await API.run(param, CONFIG.master.url, '/platform/controller/info/read');
 
   _print(ret, null);
 

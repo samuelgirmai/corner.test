@@ -30,7 +30,7 @@ async function _create(cnf)
   }
 
   _print(
-    r = await API.run(CONFIG.proxy.url, data, '/platform/auth/identity/client/write'),
+    r = await API.run(data, CONFIG.proxy.url, '/platform/auth/identity/client/write'),
     null
   );
 
@@ -67,7 +67,7 @@ export async function _allow(cnf)
   }
 
   _print(
-    r = await API.run(CONFIG.proxy.url, data, '/platform/auth/caps/allow'),
+    r = await API.run(data, CONFIG.proxy.url, '/platform/auth/caps/allow'),
     null
   );
 
