@@ -256,7 +256,7 @@ system.sii.host = system.api.addr+":"+system.api.port;
  */
 
 let proxy = {
-  url: "http://"+muxer.addr+":"+muxer.port
+  url: "https://"+muxer.addr+":"+muxer.port
 }
 
 let assert = {
@@ -264,7 +264,7 @@ let assert = {
 }
 
 let stream = {
-  url: "http://"+corner_stream.stream.addr+":"+corner_stream.stream.port
+  url: "https://"+corner_stream.stream.addr+":"+corner_stream.stream.port
 }
 
 module.exports = {
