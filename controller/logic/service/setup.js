@@ -199,6 +199,8 @@ let admin = {
     '/platform/system/user/write',
     '/platform/system/user/delete',
     '/platform/system/user/list',
+    '/platform/auth/identity/person/write',
+
     /*'/platform/console/user/write',
     '/platform/console/user/delete',
     '/platform/console/user/list',*/

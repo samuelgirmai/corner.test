@@ -7,7 +7,7 @@ import {
  */
 let admin = {
   pii: {
-    name: "admin",
+    name: "admin.root",
     fname: "corner",
     gfname: "fana",
     mname: "zimam",
