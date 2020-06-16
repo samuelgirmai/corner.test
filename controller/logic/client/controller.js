@@ -16,7 +16,7 @@ function _print(o, key)
 
 async function _create(cnf)
 {
-  let r, data;
+  let r,l, data;
 
   root_license = (await read_license("corner.root")).license;
 
@@ -34,15 +34,20 @@ async function _create(cnf)
     null
   );
 
+  data.param['uid'] = r.result.user_id
+  _print(
+    l = await API.run(data, CONFIG.proxy.url, '/platform/auth/identity/license/issue'),
+    null
+  );
  
-  if(r.status == "err") {
+  if(l.status == "err") {
     return;
   }
 
   await write_license({
     name: cnf.name,
     user_id: r.result.user_id,
-    license: r.result.license
+    license: l.result.license
   });
   
   return r;
