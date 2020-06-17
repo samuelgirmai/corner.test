@@ -5,12 +5,11 @@ export async function read_license(name)
   let r;
 
   if(!fs.existsSync(__dirname+"/.licenses")){
+    console.log(":::.licenses file not found");
     return 0;
   }
 
   r = JSON.parse(fs.readFileSync(__dirname+"/.licenses", 'utf8'));
-
-  console.log(":::"+JSON.stringify(r, 0, '  '))
 
   if(name){
     return r[name];
