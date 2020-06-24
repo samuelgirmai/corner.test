@@ -1,5 +1,6 @@
 import CONFIG from './config/config'
-import STREAM from './stream/stream'
+import STREAM from './tools/stream/stream'
+import API from './tools/net';
 
 var stdin = process.openStdin();
 stdin.setRawMode(true);
@@ -7,12 +8,19 @@ stdin.resume();
 stdin.setEncoding('utf-8');
 
 var needle = "";
+var search_id = "";
 
 var test_init = async() => {
-  await STREAM.connect(CONFIG.stream, "/app/emr/triage/search")
 
-  STREAM.join("/app/emr/triage/search", {
-    id: CONFIG.auth.license
+  let r = await STREAM.connect(CONFIG, "/platform/auth/search");
+  if(!r){
+    console.log('could not connect');
+    process.exit();
+  }
+
+  STREAM.join("/platform/auth/search", {
+    license: CONFIG.auth.license,
+    id: CONFIG.auth.client_id
   });
 
   let events = [
@@ -22,7 +30,7 @@ var test_init = async() => {
     }
   ]
 
-  STREAM.listen("/app/emr/triage/search", events);
+  STREAM.listen("/platform/auth/search", events);
 }
 
 
@@ -38,20 +46,24 @@ stdin.on("data", function(key) {
     needle += key;
   }
 
+  needle = needle.replace(/(\n|\r)+$/, '');
+
+
   let p = {
-    from: CONFIG.auth.license,
-    to: "474717749188",
+    from: CONFIG.auth.client_id,
+    to: "124891",	///NB: this AUTH server service_id
     e_name: "e_search",
     data: {
-      type: "assign",
+      type: "service",	//cap | service | client
       args: {
         type: "name",
-        needle: needle
+        needle: needle,
       }
     }
   }
+  console.log(p);
 
-  STREAM.send("/app/emr/triage/search", p);
+  STREAM.send("/platform/auth/search", p);
 });
 
 function on_search(p)
@@ -59,6 +71,6 @@ function on_search(p)
   console.log(JSON.stringify(p, 0, '  '));
 }
 
-console.log("Stream test")
+console.log("Stream test");
 
 test_init();

@@ -5,12 +5,12 @@ import {
  * filesystem SoT
  */
 let filesystem = {
-  name: "mongodb",
+  /*name: "mongodb",
   port: 27017,
-  host: "0.0.0.0"/*
+  host: "0.0.0.0"*/
   name: "rethinkdb",
   port: 28015,
-  host: "0.0.0.0"*/
+  host: "0.0.0.0"
 }
 
 /*
@@ -65,6 +65,12 @@ let auth = {
     "/platform/payment/heartbeat",
     "/platform/system/heartbeat",
     "/platform/admin/heartbeat",
+     //
+    "/platform/stream/open",
+    "/platform/stream/close",
+    "/platform/stream/config/read",
+    "/platform/auth/search/join",
+    "/platform/auth/search/exit"
   ]
 };
 auth.sii.host = auth.api.addr+":"+auth.api.port;
