@@ -1,8 +1,7 @@
 const config = {
   auth: {
-    license: "716611923960",
-    client_id: "280219"
-
+    license: "278720861500",
+    client_id: "595842"
   },
   proxy: {
     url: "https://0.0.0.0:22000",

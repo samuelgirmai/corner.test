@@ -16,9 +16,8 @@ let admin = {
     dob: "12/12/1985",
     address: {
       region: "tigray",
-      zone: "mekelle",
-      woreda: "hadinet",
-      kebele: "16",
+      woreda: "hawelti",
+      tabiya: "amora",
       house_number: "213",
       phone_number: "0914198976"
     }
@@ -26,7 +25,7 @@ let admin = {
   caps: [
     '/platform/admin/user/write',
     '/platform/admin/user/delete',
-    '/platform/admin/user/list',
+    '/platform/admin/user/list/read',
     '/platform/admin/user/role/write',
     '/platform/admin/user/role/delete',
     '/platform/admin/user/role/read',

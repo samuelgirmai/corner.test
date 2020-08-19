@@ -51,7 +51,7 @@ stdin.on("data", function(key) {
 
   let p = {
     from: CONFIG.auth.client_id,
-    to: "124891",	///NB: this AUTH server service_id
+    to: "380370",	///NB: this AUTH server service_id
     e_name: "e_search",
     data: {
       type: "service",	//cap | service | client

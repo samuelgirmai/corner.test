@@ -34,6 +34,7 @@ async function _create(cnf)
     null
   );
 
+  console.log(":::::"+r);
  
   if(r.status == "err") {
     return;
@@ -67,7 +68,7 @@ export async function _allow(cnf)
   }
 
   _print(
-    r = await API.run(data, CONFIG.proxy.url, '/platform/auth/caps/allow'),
+    r = await API.run(data, CONFIG.proxy.url, '/platform/auth/cap/list/allow'),
     null
   );
 

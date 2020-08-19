@@ -60,7 +60,7 @@ async function allow_service(cnf)
   }
 
   _print(
-    r = await API.run(param, CONFIG.master.url, '/platform/controller/caps/allow'),
+    r = await API.run(param, CONFIG.master.url, '/platform/controller/cap/list/allow'),
     null
   );
 
@@ -109,6 +109,10 @@ export async function configure()
   await configure_service(require('./setup').payment);
   await configure_service(require('./setup').admin);
   await configure_service(require('./setup').system);
+  await configure_service(require('./setup').asset);
+  await configure_service(require('./setup').ashera);
+
+  await configure_service(require('./setup').issuance);
 
   await reboot();
 }
@@ -140,6 +144,10 @@ export async function install()
   await install_service(require('./setup').payment);
   await install_service(require('./setup').admin);
   await install_service(require('./setup').system);
+  await install_service(require('./setup').asset);
+  await install_service(require('./setup').ashera);
+
+  await install_service(require('./setup').issuance);
 
   var root = {
     name: "corner.root",
@@ -168,6 +176,10 @@ export async function allow()
   await allow_service(require('./setup').payment);
   await allow_service(require('./setup').admin);
   await allow_service(require('./setup').system);
+  await allow_service(require('./setup').asset);
+  await allow_service(require('./setup').ashera);
+
+  await allow_service(require('./setup').issuance);
 
   await reboot();
 
@@ -187,7 +199,10 @@ export async function start()
   await start_service("corner.payment", "start");
   await start_service("corner.admin", "start");
   await start_service("corner.system", "start");
+  await start_service("corner.asset", "start");
+  await start_service("corner.ashera", "start");
 
+  await start_service("corner.issuance", "start");
 }
 
 export async function get_info()

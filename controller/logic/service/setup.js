@@ -24,6 +24,16 @@ let cachefs = {
 }
 
 /*
+ * asset filesystem
+ */
+let assetfs = {
+  name: "seaweedfs",
+  port: 10333,
+  //host: "meninet.asset"
+  host: "0.0.0.0"
+}
+
+/*
  * muxer SoT
  */
 let muxer = {
@@ -65,6 +75,9 @@ let auth = {
     "/platform/payment/heartbeat",
     "/platform/system/heartbeat",
     "/platform/admin/heartbeat",
+    "/platform/asset/heartbeat",
+    "/platform/issuance/heartbeat",
+    "/platform/ashera/heartbeat",
      //
     "/platform/stream/open",
     "/platform/stream/close",
@@ -200,16 +213,24 @@ let admin = {
     '/platform/auth/identity/access/write',
     '/platform/auth/identity/access/delete',
     '/platform/auth/identity/person/security/update',
-    '/platform/auth/caps/allow',
-    '/platform/auth/caps/revoke',
+    '/platform/auth/cap/list/allow',
+    '/platform/auth/cap/list/revoke',
+
     '/platform/system/user/write',
     '/platform/system/user/delete',
-    '/platform/system/user/list',
-    '/platform/auth/identity/person/write',
-
+    '/platform/system/user/list/read',
+  
     /*'/platform/console/user/write',
     '/platform/console/user/delete',
-    '/platform/console/user/list',*/
+    '/platform/console/user/list/read',*/
+
+    /*for issuance user*/
+    '/platform/issuance/user/write',
+    '/platform/issuance/user/delete',
+    '/platform/issuance/user/list/read',
+
+    /*for admin user*/
+    '/platform/auth/identity/person/write',
   ]
 };
 admin.sii.host = admin.api.addr+":"+admin.api.port;
@@ -236,24 +257,99 @@ let system = {
 
     '/platform/auth/identity/person/write',
     '/platform/auth/identity/person/delete',
-    '/platform/auth/identity/persons/list',
+    '/platform/auth/identity/person/list/read',
     '/platform/auth/identity/client/write',
     '/platform/auth/identity/client/delete',
-    '/platform/auth/identity/clients/list',
+    '/platform/auth/identity/client/list/read',
     '/platform/auth/identity/service/write',
     '/platform/auth/identity/service/delete',
-    '/platform/auth/identity/services/list',
-    '/platform/auth/caps/list',
-    '/platform/auth/caps/delete',
-    '/platform/auth/caps/allow',
-    '/platform/auth/caps/revoke',
-    '/platform/auth/caps/export',
+    '/platform/auth/identity/service/list/read',
+    '/platform/auth/cap/list/read',
+    '/platform/auth/cap/list/delete',
+    '/platform/auth/cap/list/allow',
+    '/platform/auth/cap/list/revoke',
+    '/platform/auth/cap/list/export',
     '/platform/auth/cap/state/update',
     '/platform/auth/stats/read',
-    '/platform/auth/identity/services/state/read'
+    '/platform/auth/service/list/state/read'
   ]
 };
 system.sii.host = system.api.addr+":"+system.api.port;
+
+/*
+ * asset service SoT
+ */
+let asset = {
+  sii: {
+    name: "corner.asset",
+    desc: "corner asset service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 22009,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  caps: [
+    //"/platform/auth/users/person/photo/write",
+  ]
+}
+asset.sii.host = asset.api.addr+":"+asset.api.port
+
+let ashera = {
+  sii: {
+    name: "corner.ashera",
+    desc: "corner ashera service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 22010,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  fs: {
+    name: "ashera",
+    port: 29001,
+    host: "127.0.0.1"
+  },
+  caps: []
+}
+ashera.sii.host = ashera.api.addr+":"+ashera.api.port;
+
+let issuance = {
+  sii: {
+    name: "corner.issuance",
+    desc: "corner issuance service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 23001,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  caps: [
+    "/platform/auth/identity/person/write",
+    "/platform/auth/identity/person/update",
+    "/platform/auth/identity/person/delete",
+    "/platform/auth/identity/access/write",
+    "/platform/auth/identity/access/delete",
+    "/platform/auth/identity/person/security/update",
+    "/platform/auth/prng/write"
+  ]
+};
+issuance.sii.host = issuance.api.addr+":"+issuance.api.port;
 
 /*
  * NOTICE: don't put any const here; it is
@@ -263,6 +359,10 @@ system.sii.host = system.api.addr+":"+system.api.port;
 
 let proxy = {
   url: "https://"+muxer.addr+":"+muxer.port
+}
+
+let asset_proxy = {
+  url: "http://"+asset.api.addr+":"+asset.api.port
 }
 
 let assert = {
@@ -295,6 +395,7 @@ module.exports = {
     conf: {
       proxy: proxy,
       stream: stream,
+      asset: asset_proxy,
       api: auth.api,
       name: auth.sii.name,
     },
@@ -366,6 +467,39 @@ module.exports = {
       name: system.sii.name
     },
     caps: uris2caps(system.caps)
+  },
+  asset: {
+    name: "corner.asset",
+    sii: asset.sii,
+    conf: {
+      proxy: proxy,
+      api: asset.api,
+      fs: assetfs,
+      name: asset.sii.name
+    },
+    caps: uris2caps(asset.caps)
+  },
+  ashera: {
+    name: "corner.ashera",
+    sii: ashera.sii,
+    conf: {
+      proxy: proxy,
+      api: ashera.api,
+      fs: ashera.fs,
+      name: ashera.sii.name
+    },
+    caps: uris2caps(ashera.caps)
+  },
+  issuance: {
+    name: "corner.issuance",
+    sii: issuance.sii,
+    conf: {
+      proxy: proxy,
+      stream: stream,
+      api: issuance.api,
+      name: issuance.sii.name
+    },
+    caps: uris2caps(issuance.caps)
   }
 }
 

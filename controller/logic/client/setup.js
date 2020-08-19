@@ -47,6 +47,20 @@ let admin = {
   ]
 }
 
+let issuance = {
+  cii: {
+    name: "corner.issuance",
+    desc: "corner issuance client",
+    address: {
+      phone_number: "+251000000018",
+      email: "corner@bokri.xyz"
+    }
+  },
+  caps: [
+    "/platform/issuance/user/access/write",
+  ]
+}
+
 module.exports = {
   system: {
     name: "corner.system",
@@ -63,6 +77,11 @@ module.exports = {
     cii: admin.cii,
     caps: uris2caps(admin.caps)
   },
+  issuance: {
+    name: "corner.issuance",
+    cii: issuance.cii,
+    caps: uris2caps(issuance.caps)
+  }
 }
 
 

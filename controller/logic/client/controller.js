@@ -72,7 +72,7 @@ export async function _allow(cnf)
   }
 
   _print(
-    r = await API.run(data, CONFIG.proxy.url, '/platform/auth/caps/allow'),
+    r = await API.run(data, CONFIG.proxy.url, '/platform/auth/cap/list/allow'),
     null
   );
 
@@ -90,6 +90,7 @@ export async function create()
   await _create(require('./setup').system);
   //await _create(require('./setup').console);
   await _create(require('./setup').admin);
+  await _create(require('./setup').issuance);
 }
 
 export async function allow()
@@ -99,5 +100,6 @@ export async function allow()
   await _allow(require('./setup').system);
   //await _allow(require('./setup').console);
   await _allow(require('./setup').admin);
+  await _allow(require('./setup').issuance);
 }
 
