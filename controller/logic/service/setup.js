@@ -271,7 +271,7 @@ let system = {
     '/platform/auth/cap/list/export',
     '/platform/auth/cap/state/update',
     '/platform/auth/stats/read',
-    '/platform/auth/service/list/state/read'
+    '/platform/auth/service/state/list/read'
   ]
 };
 system.sii.host = system.api.addr+":"+system.api.port;
@@ -335,7 +335,7 @@ let issuance = {
     }
   },
   api: {
-    port: 23001,
+    port: 22011,
     bind: "0.0.0.0",
     addr: "0.0.0.0",
   },
