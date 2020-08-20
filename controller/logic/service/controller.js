@@ -109,7 +109,7 @@ export async function configure()
   await configure_service(require('./setup').payment);
   await configure_service(require('./setup').admin);
   await configure_service(require('./setup').system);
-
+  await configure_service(require('./setup').math);
   await reboot();
 }
 
@@ -140,6 +140,7 @@ export async function install()
   await install_service(require('./setup').payment);
   await install_service(require('./setup').admin);
   await install_service(require('./setup').system);
+  await install_service(require('./setup').math);
 
   var root = {
     name: "corner.root",
@@ -168,7 +169,7 @@ export async function allow()
   await allow_service(require('./setup').payment);
   await allow_service(require('./setup').admin);
   await allow_service(require('./setup').system);
-
+  await allow_service(require('./setup').math);
   await reboot();
 
   return true
@@ -187,6 +188,7 @@ export async function start()
   await start_service("corner.payment", "start");
   await start_service("corner.admin", "start");
   await start_service("corner.system", "start");
+  await start_service("corner.math", "start");
 
 }
 

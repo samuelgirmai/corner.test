@@ -5,12 +5,12 @@ import {
  * filesystem SoT
  */
 let filesystem = {
-  /*name: "mongodb",
+  name: "mongodb",
   port: 27017,
-  host: "0.0.0.0"*/
-  name: "rethinkdb",
-  port: 28015,
   host: "0.0.0.0"
+  /*name: "rethinkdb",
+  port: 28015,
+  host: "0.0.0.0"*/
 }
 
 /*
@@ -255,6 +255,29 @@ let system = {
 };
 system.sii.host = system.api.addr+":"+system.api.port;
 
+let math = {
+  sii: {
+    name: "corner.math",
+    desc: "corner math service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 22009,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  caps: [
+    '/platform/math/add',
+    '/platform/math/mul',
+
+  ]
+};
+math.sii.host = math.api.addr+":"+math.api.port;
+
 /*
  * NOTICE: don't put any const here; it is
  * only constructed interms of the data defined
@@ -366,6 +389,17 @@ module.exports = {
       name: system.sii.name
     },
     caps: uris2caps(system.caps)
-  }
+  },
+  math: {
+    name: "corner.math",
+    sii: math.sii,
+    conf: {
+      proxy: proxy,
+      stream: stream,
+      api: math.api,
+      name: math.sii.name
+    },
+    caps: uris2caps(math.caps)
+  },
 }
 
