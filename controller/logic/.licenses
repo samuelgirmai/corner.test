@@ -1,18 +1,18 @@
 {
   "corner.root": {
-    "user_id": "818642",
-    "license": "683337754627"
+    "user_id": "668774",
+    "license": "983182339035"
   },
   "corner.system": {
-    "user_id": "705555",
-    "license": "099661511328"
+    "user_id": "488681",
+    "license": "675899641714"
   },
   "corner.admin": {
-    "user_id": "304378",
-    "license": "859218166473"
+    "user_id": "070126",
+    "license": "098224055734"
   },
   "corner.person.admin": {
-    "user_id": "449977",
+    "user_id": "696402",
     "password": "toor"
   }
 }

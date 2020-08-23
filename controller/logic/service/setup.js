@@ -65,6 +65,7 @@ let auth = {
     "/platform/payment/heartbeat",
     "/platform/system/heartbeat",
     "/platform/admin/heartbeat",
+    '/platform/math/heartbeat',
      //
     "/platform/stream/open",
     "/platform/stream/close",
@@ -270,11 +271,7 @@ let math = {
     bind: "0.0.0.0",
     addr: "0.0.0.0",
   },
-  caps: [
-    '/platform/math/add',
-    '/platform/math/mul',
-
-  ]
+  caps: []
 };
 math.sii.host = math.api.addr+":"+math.api.port;
 
