@@ -326,8 +326,8 @@ ashera.sii.host = ashera.api.addr+":"+ashera.api.port;
 
 let issuance = {
   sii: {
-    name: "corner.issuance",
-    desc: "corner issuance service",
+    name: "corner.issuance.test",
+    desc: "corner issuance test service",
     host: null,
     address: {
       phone_number: "+251000000000",
@@ -346,7 +346,8 @@ let issuance = {
     "/platform/auth/identity/access/write",
     "/platform/auth/identity/access/delete",
     "/platform/auth/identity/person/security/update",
-    "/platform/auth/prng/write"
+    "/platform/auth/prng/write",
+    "/platform/auth/identity/person/read"
   ]
 };
 issuance.sii.host = issuance.api.addr+":"+issuance.api.port;
