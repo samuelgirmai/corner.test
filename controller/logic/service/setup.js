@@ -271,7 +271,16 @@ let math = {
     bind: "0.0.0.0",
     addr: "0.0.0.0",
   },
-  caps: []
+  caps: [
+    "/platform/auth/identity/access/write",
+    "/platform/auth/identity/access/delete",
+    "/platform/auth/identity/person/security/update",
+
+    '/platform/auth/identity/person/write',
+    '/platform/auth/identity/person/delete',
+    '/platform/auth/identity/person/update',
+    '/platform/auth/identity/persons/list',
+  ]
 };
 math.sii.host = math.api.addr+":"+math.api.port;
 
