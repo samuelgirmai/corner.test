@@ -92,6 +92,24 @@ async function modify_identity()
   return await A.modify_identity(token, reg_id, pii);
 }
 
+async function create_photo()
+{
+  const photo_prompt = [
+    {
+      name: 'reg_id',
+      message: 'Registration ID: '
+    },
+    {
+      name: 'photo',
+      message: 'Enter Absolute Photo Path'
+    }
+  ];
+
+  let p = await inquirer.prompt(photo_prompt);
+
+  return await A.create_photo(token, p.reg_id, p.photo);
+}
+
 async function remove_identity()
 {
   let reg_id;

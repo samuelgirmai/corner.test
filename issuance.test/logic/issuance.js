@@ -103,12 +103,15 @@ export async function create_photo(token, reg_id, photo)
       token: token,
     },
     param: {
-      reg_id: reg_id,
-      photo: photo
-    }
+      cb: "/platform/issuance/identity/photo/write",
+      param: {
+        reg_id: reg_id
+      }
+    },
+    file: photo
   }
 
-  let ret = await API.run(data, CONFIG.proxy.url, '/platform/issuance/identity/photo/write');
+  let ret = await API.run2(data, CONFIG.asset.url, '/platform/asset/file/write');
 
   _print(ret, null);
 }

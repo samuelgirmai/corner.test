@@ -295,7 +295,8 @@ let asset = {
     addr: "0.0.0.0",
   },
   caps: [
-    //"/platform/auth/users/person/photo/write",
+    "/platform/auth/identity/person/photo/write",
+    "/platform/issuance/identity/photo/write"
   ]
 }
 asset.sii.host = asset.api.addr+":"+asset.api.port

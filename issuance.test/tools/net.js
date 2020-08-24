@@ -1,65 +1,12 @@
-/*const fetch = require('node-fetch');
-
-async function req(prop)
-{
-  try {
-    let response = await fetch(prop.url, {
-      method: prop.method,
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: prop.data ? JSON.stringify(prop.data) : null,
-    });
-
-    if(response.status >= 200 && response.status < 300) {
-      return response.json();
-    }
-    else if(response.status >= 400 && response.status < 500){
-      return {
-        status: "err",
-        result: {
-          info: "server error"
-        }
-      }
-    }
-  } catch (error) {
-    return {
-      status: "err",
-      result: {
-        info: "network error"
-      }
-    }
-  }
-}
-
-async function run(param, proxy_url, name)
-{
-  let prop = {
-    method: 'POST',
-    url: proxy_url+name,
-    data: param
-  }
-
-  let ret = await req(prop);
-
-  return ret;
-}
-
-const NET = {
-  req: req,
-  run: run
-};
-
-export default NET*/
 
 const fetch = require('node-fetch');
 const https = require('https');
 
+import fs from 'fs'
+var FormData  = require('form-data');
+
 //FIXME: for test: self signed certificate
-const httpsAgent = new https.Agent({
-  rejectUnauthorized: false,
-});
+const httpsAgent = new https.Agent({rejectUnauthorized: false,});
 
 async function req(prop)
 {
@@ -103,6 +50,52 @@ async function req(prop)
   }
 }
 
+/*async function _get_file(file)
+{
+  return await fetch(file.uri)
+         .then(r => r.blob())
+         .then(blobFile => new File([blobFile], file.name, {type: file.type}));
+}*/
+
+async function req2(prop)
+{
+  let https = prop.url.includes('https://')?true:false;  //FIXME: for self signed cert only
+
+  //let file = await _get_file(prop.file);
+
+  var body = new FormData();
+
+  body.append('file', fs.createReadStream(prop.file));
+  body.append('data', JSON.stringify(prop.data));
+
+  try {
+    let response = await fetch(prop.url, {
+      method: prop.method,
+      body: body,
+      agent: https?httpsAgent:null
+    });
+
+    if(response.status >= 200 && response.status < 300) {
+      return response.json();
+    }
+    else if(response.status >= 400 && response.status < 500){
+      return {
+        status: "err",
+        result: {
+          info: "server error"
+        }
+      }
+    }
+  } catch (error) {
+    return {
+      status: "err",
+      result: {
+        info: "network error"
+      }
+    }
+  }
+}
+
 async function run(param, proxy_url, name)
 {
   let prop = {
@@ -116,8 +109,28 @@ async function run(param, proxy_url, name)
   return ret;
 }
 
+async function run2(param, proxy_url, name)
+{
+  let prop = {
+    method: 'POST',
+    url: proxy_url+name,
+    data: {
+      auth: param.auth,
+      param: param.param
+    },
+    file: param.file
+  }
+
+  let ret = await req2(prop);
+
+  return ret;
+}
+
 const NET = {
-  run: run
+  req:	req,
+  run:	run,
+  run2:	run2,
+  req2:	req2
 }
 
 export default NET
