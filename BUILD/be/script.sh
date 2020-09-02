@@ -1,8 +1,15 @@
 #!/bin/bash
 source ./include.sh
 
-MACHINE_FS="rufta@cornerhealth.io"
-MACHINE_LG="rufta@cornerhealth.io"
+MACHINE_FS="corner@meninet.com"
+MACHINE_LG="corner@meninet.com"
+MACHINE_ASSET="corner@meninet.com"
+
+MACHINE_FS_HOME="corner@meninet.com"
+MACHINE_LG_HOME="corner@meninet.com"
+MACHINE_ASSET_HOME="corner@meninet.com"
+
+PORT=""
 
 dependency()
 {
@@ -22,13 +29,16 @@ deploy()
   printf "\n\x1b[32mdeploying images...\n\x1b[0m"
 
   if [ "$1" = "fs" ]; then
-    scp ./images/corner.fs.tar.gz $MACHINE_FS:/home/rufta/
-    ssh $MACHINE_FS docker load -i /home/rufta/corner.fs.tar.gz
+    scp $PORT ./images/corner.fs.tar.gz $MACHINE_FS_HOME:/home/corner/
+    ssh $MACHINE_FS docker load -i /home/corner/corner.fs.tar.gz
   elif [ "$1" = "lg" ]; then
-    scp ./images/corner.lg.tar.gz $MACHINE_LG:/home/rufta/
-    ssh $MACHINE_LG docker load -i /home/rufta/corner.lg.tar.gz
+    scp $PORT ./images/corner.lg.tar.gz $MACHINE_LG_HOME:/home/corner/
+    ssh $MACHINE_LG docker load -i /home/corner/corner.lg.tar.gz
+  elif [ "$1" = "asset" ]; then
+    scp $PORT ./images/corner.asset.tar.gz $MACHINE_ASSET_HOME:/home/corner/
+    ssh $MACHINE_ASSET docker load -i /home/corner/corner.asset.tar.gz
   else
-    printf "\n\x1b[31m$>deploy [fs|lg]\n\x1b[0m"
+    printf "\n\x1b[31m$>deploy [fs|lg|asset]\n\x1b[0m"
     exit
   fi
 
@@ -44,8 +54,10 @@ mkvol()
     ssh $MACHINE_FS docker volume create corner.lg.fs
   elif [ "$1" = "lg" ]; then
     ssh $MACHINE_LG docker volume create corner.lg.lg
+  elif [ "$1" = "asset" ]; then
+    ssh $MACHINE_ASSET docker volume create corner.asset
   else
-    printf "\n\x1b[31m$>mkvol [fs|lg]\n\x1b[0m"
+    printf "\n\x1b[31m$>mkvol [fs|lg|asset]\n\x1b[0m"
     exit
   fi
 
@@ -60,8 +72,10 @@ rmvol()
     ssh $MACHINE_FS docker volume rm corner.fs corner.lg.fs
   elif [ "$1" = "lg" ]; then
     ssh $MACHINE_LG docker volume rm corner.lg.lg
+  elif [ "$1" = "asset" ]; then
+    ssh $MACHINE_ASSET docker volume rm corner.asset
   else
-    printf "\n\x1b[31m$>rmvol [fs|lg]\n\x1b[0m"
+    printf "\n\x1b[31m$>rmvol [fs|lg|asset]\n\x1b[0m"
     exit
   fi
 
@@ -76,6 +90,7 @@ mknet()
   
   ssh $MACHINE_FS docker network connect corner.net corner.fs
   ssh $MACHINE_FS docker network connect corner.net corner.lg
+  ssh $MACHINE_FS docker network connect corner.net corner.asset
 
   printf "\n\x1b[32mnetwork created\n\x1b[0m"
 }
@@ -86,6 +101,7 @@ rmnet()
 
   ssh $MACHINE_FS docker network disconnect corner.net corner.fs
   ssh $MACHINE_FS docker network disconnect corner.net corner.lg
+  ssh $MACHINE_FS docker network disconnect corner.net corner.asset
 
   #ssh $MACHINE_FS docker network rm corner.net
 
@@ -96,11 +112,13 @@ run()
 {
   printf "\n\x1b[32mrunning corner on machines...\n\x1b[0m"
   if [ "$1" = "fs" ]; then
-    ssh $MACHINE_FS docker run --name corner.fs --hostname host.fs -v corner.fs:/corner.fs -v corner.lg.fs:/corner.lg.fs -p 27017:27017 -p 28015:28015 -d --restart unless-stopped  bokri/corner.fs:latest
+    ssh $MACHINE_FS docker run --name corner.fs --hostname host.fs -v corner.fs:/corner.fs -v corner.lg.fs:/corner.lg.fs -p 8085:8080 -p 27017:27017 -p 28015:28015 -d --restart unless-stopped  bokri/corner.fs:latest
   elif [ "$1" = "lg" ]; then
-    ssh $MACHINE_LG docker run --name corner.lg --hostname host.lg -v corner.lg.lg:/corner.lg.lg -p 21000:21000 -p 22000:22000 -p 22003:22003 -d --restart unless-stopped bokri/corner.lg:latest
+    ssh $MACHINE_LG docker run --name corner.lg --hostname host.lg -v corner.lg.lg:/corner.lg.lg -p 21000:21000 -p 22000:22000 -p 22003:22003 -p 22009:22009 -d --restart unless-stopped bokri/corner.lg:latest
+  elif [ "$1" = "asset" ]; then
+    ssh $MACHINE_ASSET docker run --name corner.asset --hostname host.asset -v corner.asset:/corner.asset -p 10333:10333 -p 8083:8083 -p 18083:18083 -d --restart unless-stopped bokri/corner.asset:latest
   else
-    printf "\n\x1b[31m$>run [fs|lg]\n\x1b[0m"
+    printf "\n\x1b[31m$>run [fs|lg|asset]\n\x1b[0m"
     exit
   fi
 
@@ -117,8 +135,11 @@ _stop()
   elif [ "$1" = "lg" ]; then
     ssh $MACHINE_LG docker container kill corner.lg
     ssh $MACHINE_LG docker container rm corner.lg
+  elif [ "$1" = "asset" ]; then
+    ssh $MACHINE_ASSET docker container kill corner.asset
+    ssh $MACHINE_ASSET docker container rm corner.asset
   else
-    printf "\n\x1b[31m$>stop [fs|lg]\n\x1b[0m"
+    printf "\n\x1b[31m$>stop [fs|lg|asset]\n\x1b[0m"
     exit
   fi
 
@@ -133,8 +154,11 @@ _restart()
   elif [ "$1" = "lg" ]; then
     _stop "lg"
     run "lg"
+  elif [ "$1" = "asset" ]; then
+    _stop "asset"
+    run "asset"
   else
-    printf "\n\x1b[31m$>restart [fs|lg]\n\x1b[0m"
+    printf "\n\x1b[31m$>restart [fs|lg|asset]\n\x1b[0m"
     exit
   fi
 }
@@ -147,14 +171,19 @@ mrproper()
     _stop "fs"
     rmvol "fs"
     ssh $MACHINE_FS docker image rm bokri/corner.fs:latest
-    ssh $MACHINE_FS rm /home/rufta/corner.fs.tar.gz
+    ssh $MACHINE_FS rm /home/corner/corner.fs.tar.gz
   elif [ "$1" = "lg" ]; then
     _stop "lg"
     rmvol "lg"
     ssh $MACHINE_LG docker image rm bokri/corner.lg:latest
-    ssh $MACHINE_LG rm /home/rufta/corner.lg.tar.gz
+    ssh $MACHINE_LG rm /home/corner/corner.lg.tar.gz
+  elif [ "$1" = "asset" ]; then
+    _stop "asset"
+    rmvol "asset"
+    ssh $MACHINE_ASSET docker image rm bokri/corner.asset:latest
+    ssh $MACHINE_ASSET rm /home/corner/corner.asset.tar.gz
   else
-    printf "\n\x1b[31m$>mrproper [fs|lg]\n\x1b[0m"
+    printf "\n\x1b[31m$>mrproper [fs|lg|asset]\n\x1b[0m"
     exit
   fi
 

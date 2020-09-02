@@ -6,6 +6,25 @@
 #  fi
 #}
 
+install_asset()
+{
+  if [ $CORNER_ASSET_DRIVER = "seaweedfs" ]; then
+
+    #/usr/bin/weed server -volume.publicUrl="192.168.99.115" -ip.bind="0.0.0.0" -master.port=9333 -volume.port=7001 -dir="/corner.asset"
+
+   MSERVER_PORT=10333
+   VSERVER_PORT=8083
+   PUBLIC_URL="corner.meninet.com:$VSERVER_PORT"
+
+   mkdir /corner.asset/mdir
+   mkdir /corner.asset/vdir
+
+   /usr/bin/weed master -mdir="/corner.asset/mdir" -port=$MSERVER_PORT -ip="0.0.0.0" &
+   sleep 7
+   /usr/bin/weed volume -dir="/corner.asset/vdir" -mserver="0.0.0.0:$MSERVER_PORT" -publicUrl=$PUBLIC_URL -ip="corner.asset" -port=$VSERVER_PORT
+  fi
+}
+
 install_fs()
 {
   if [ ! -d "/corner.lg.fs/boot" ]; then
@@ -35,7 +54,7 @@ if [ "$HOSTNAME" = "host.fs" ]; then
   install_fs
 elif [ "$HOSTNAME" = "host.lg" ]; then
   install_lg
-#elif [ "$HOSTNAME" = "host.cache" ]; then
-#  install_cache
+elif [ "$HOSTNAME" = "host.asset" ]; then
+  install_asset
 fi
 

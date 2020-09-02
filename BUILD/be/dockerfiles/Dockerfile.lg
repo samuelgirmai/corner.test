@@ -23,6 +23,9 @@ EXPOSE 21000:21000
 #proxy (muxer)
 EXPOSE 22000:22000
 
+#proxy (asset)
+EXPOSE 22009:22009
+
 COPY ./storage/redis.conf /etc/redis/redis.conf
 
 #ENTRYPOINT pm2-runtime start ./boot/main.js --interpreter ./node_modules/babel-cli/bin/babel-node.js

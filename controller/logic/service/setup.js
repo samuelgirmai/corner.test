@@ -7,9 +7,10 @@ import {
 let filesystem = {
   /*name: "mongodb",
   port: 27017,
-  host: "0.0.0.0"*/
+  host: "corner.fs"*/
   name: "rethinkdb",
   port: 28015,
+  //host: "corner.fs"
   host: "0.0.0.0"
 }
 
@@ -29,7 +30,7 @@ let cachefs = {
 let assetfs = {
   name: "seaweedfs",
   port: 10333,
-  //host: "meninet.asset"
+  //host: "corner.asset"
   host: "0.0.0.0"
 }
 
@@ -213,6 +214,10 @@ let admin = {
     '/platform/auth/identity/access/write',
     '/platform/auth/identity/access/delete',
     '/platform/auth/identity/person/security/update',
+    '/platform/auth/identity/person/write',
+    '/platform/auth/identity/person/update',
+    '/platform/auth/identity/person/delete',
+
     '/platform/auth/cap/list/allow',
     '/platform/auth/cap/list/revoke',
 
@@ -227,10 +232,7 @@ let admin = {
     /*for issuance user*/
     '/platform/issuance/user/write',
     '/platform/issuance/user/delete',
-    '/platform/issuance/user/list/read',
-
-    /*for admin user*/
-    '/platform/auth/identity/person/write',
+    '/platform/issuance/user/list/read'
   ]
 };
 admin.sii.host = admin.api.addr+":"+admin.api.port;
@@ -364,7 +366,7 @@ let proxy = {
 }
 
 let asset_proxy = {
-  url: "http://"+asset.api.addr+":"+asset.api.port
+  url: "https://"+asset.api.addr+":"+asset.api.port
 }
 
 let assert = {

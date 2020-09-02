@@ -31,8 +31,19 @@ build()
     cp dockerfiles/Dockerfile.lg Dockerfile
     docker build -t bokri/corner.lg:latest .
     docker save bokri/corner.lg:latest | gzip > ./images/corner.lg.tar.gz
+  elif [ "$1" = "asset" ]; then
+    if [ "$2" = "seaweedfs" ]; then
+      printf "\n\x1b[32mbuilding with seaweedfs dockerfile\n\x1b[0m"
+      cp dockerfiles/Dockerfile.asset.seaweedfs Dockerfile
+    else
+      printf "\n\x1b[31m$>build asset [seaweedfs]\n\x1b[0m"
+      exit
+    fi
+
+    docker build -t bokri/corner.asset:latest .
+    docker save bokri/corner.asset:latest | gzip > ./images/corner.asset.tar.gz
   else
-    printf "\n\x1b[31m$>build [fs|lg]\n\x1b[0m"
+    printf "\n\x1b[31m$>build [fs|lg|asset]\n\x1b[0m"
     exit
   fi
 
