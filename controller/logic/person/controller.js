@@ -25,16 +25,17 @@ async function _create(cnf)
       license: root_license
     },
     param: {
+      user_type: "admin",
       pii: cnf.pii
     }
   }
 
+  //console.log(JSON.stringify(data, 0, '  '));
+
   _print(
-    r = await API.run(data, CONFIG.proxy.url, '/platform/auth/identity/person/write'),
+    r = await API.run(data, CONFIG.proxy.url, '/platform/admin/user/write'),
     null
   );
-
-  console.log(":::::"+r);
  
   if(r.status == "err") {
     return;
@@ -42,7 +43,7 @@ async function _create(cnf)
 
   await write_license({
     name: cnf.name,
-    user_id: r.result.user_id,
+    user_id: r.result.user.user_id,
     password: "toor"
   });
   
@@ -62,13 +63,13 @@ export async function _allow(cnf)
       license: root_license
     },
     param: {
-      uid: person.user_id,
-      caps: cnf.caps
+      user_id: person.user_id,
+      user_type: "admin"
     }
   }
 
   _print(
-    r = await API.run(data, CONFIG.proxy.url, '/platform/auth/cap/list/allow'),
+    r = await API.run(data, CONFIG.proxy.url, '/platform/admin/user/role/write'),
     null
   );
 

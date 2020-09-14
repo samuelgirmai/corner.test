@@ -7,22 +7,21 @@ import {
  */
 let admin = {
   pii: {
-    name: "admin.root",
-    fname: "corner",
+    name: "corner.person.admin",
+    fname: "user",
     gfname: "fana",
     mname: "zimam",
     mfname: "berhane",
     gender: "F",
     dob: "12/12/1985",
     address: {
-      region: "tigray",
-      woreda: "hawelti",
-      tabiya: "amora",
-      house_number: "213",
+      region: "ትግራይ",
+      woreda: "ወርቃምባ",
+      tabiya: "እንዳባኖ",
       phone_number: "0914198976"
     }
   },
-  caps: [
+  /*caps: [
     '/platform/admin/user/write',
     '/platform/admin/user/delete',
     '/platform/admin/user/list/read',
@@ -33,14 +32,14 @@ let admin = {
     '/platform/admin/access/write',
     '/platform/admin/access/delete',
     '/platform/admin/security/update'
-  ]
+  ]*/
 }
 
 module.exports = {
   admin: {
     name: "corner.person.admin",
     pii: admin.pii,
-    caps: uris2caps(admin.caps)
+    //caps: uris2caps(admin.caps)
   }
 }
 

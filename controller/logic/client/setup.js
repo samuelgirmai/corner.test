@@ -35,7 +35,7 @@ let system = {
 
 let admin = {
   cii: {
-    name: "corner.admin",
+    name: "corner.client.admin",
     desc: "Corner administrator client",
     address: {
       phone_number: "+251000000017",
@@ -73,7 +73,7 @@ module.exports = {
     caps: uris2caps(console.caps)
   },*/
   admin: {
-    name: "corner.admin",
+    name: "corner.client.admin",
     cii: admin.cii,
     caps: uris2caps(admin.caps)
   },
