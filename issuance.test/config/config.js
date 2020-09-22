@@ -5,13 +5,13 @@ const config = {
     license: license
   },
   proxy: {
-    url: "https://0.0.0.0:22000"
+    url: "https://corner.meninet.com:22000"
   },
   asset: {
-    url: "https://localhost:22009"
+    url: "https://corner.meninet.com:22009"
   },
   stream: {
-    url: "https://0.0.0.0:22003"
+    url: "https://corner.meninet.com:22003"
   }
 };
 
