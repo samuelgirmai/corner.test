@@ -297,6 +297,7 @@ let asset = {
     addr: "0.0.0.0",
   },
   caps: [
+    "/platform/auth/identity/person/fingerprint/write",
     "/platform/auth/identity/person/photo/write",
     "/platform/issuance/identity/photo/write"
   ]
