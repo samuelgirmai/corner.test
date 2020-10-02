@@ -181,7 +181,7 @@ export async function allow()
 
   await allow_service(require('./setup').issuance);
 
-  await reboot();
+  //await reboot();
 
   return true
 }
