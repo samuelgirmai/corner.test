@@ -105,7 +105,7 @@ export async function configure()
   await configure_service(require('./setup').filesystem);
   await configure_service(require('./setup').muxer);
   await configure_service(require('./setup').auth);
-  //await configure_service(require('./setup').fsys);
+  await configure_service(require('./setup').fsys);
   await configure_service(require('./setup').stream);
   await configure_service(require('./setup').notif);
   await configure_service(require('./setup').finance);
@@ -147,7 +147,7 @@ export async function install()
     await write_license("corner.client.root", r.result.client)
   }
 
-  //await install_service(require('./setup').fsys, "corner.client.root");
+  await install_service(require('./setup').fsys, "corner.client.root");
   await install_service(require('./setup').stream, "corner.client.croot");
   await install_service(require('./setup').notif, "corner.client.root");
   await install_service(require('./setup').finance, "corner.client.root");
@@ -177,7 +177,7 @@ export async function allow()
   await start_service("corner.auth", "config");
 
   await allow_service(require('./setup').auth);
-  //await allow_service(require('./setup').fsys);
+  await allow_service(require('./setup').fsys);
   await allow_service(require('./setup').stream);
   await allow_service(require('./setup').notif);
   await allow_service(require('./setup').finance);
@@ -206,7 +206,7 @@ export async function start()
 
   await start_service("corner.muxer", "start");
   await start_service("corner.auth", "start");
-  //await start_service("corner.fsys", "start");
+  await start_service("corner.fsys", "start");
   await start_service("corner.stream", "start");
   await start_service("corner.notif", "start");
   await start_service("corner.finance", "start");

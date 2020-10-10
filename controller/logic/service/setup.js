@@ -43,7 +43,7 @@ let muxer = {
   addr: "0.0.0.0"
 }
 
-/*let fsys = {
+let fsys = {
   sii: {
     name: "corner.fsys",
     desc: "corner filesystem service",
@@ -60,7 +60,7 @@ let muxer = {
   },
   caps: []
 };
-fsys.sii.host = fsys.api.addr+":"+fsys.api.port;*/
+fsys.sii.host = fsys.api.addr+":"+fsys.api.port;
 
 /*
  * auth service SoT
@@ -425,7 +425,7 @@ module.exports = {
     },
     caps: uris2caps(auth.caps)
   },
-  /*fsys: {
+  fsys: {
     name: "corner.fsys",
     sii: fsys.sii,
     conf: {
@@ -434,7 +434,7 @@ module.exports = {
       name: fsys.sii.name,
     },
     caps: uris2caps(fsys.caps)
-  },*/
+  },
   stream: {
     name: "corner.stream",
     sii: corner_stream.sii,
