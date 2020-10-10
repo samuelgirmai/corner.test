@@ -43,6 +43,25 @@ let muxer = {
   addr: "0.0.0.0"
 }
 
+/*let fsys = {
+  sii: {
+    name: "corner.fsys",
+    desc: "corner filesystem service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 23001,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  caps: []
+};
+fsys.sii.host = fsys.api.addr+":"+fsys.api.port;*/
+
 /*
  * auth service SoT
  */
@@ -57,7 +76,7 @@ let auth = {
     }
   },
   cii: {
-    name: "corner.root",
+    name: "corner.client.root",
     desc: "corner authentication root client",
     address: {
       phone_number: "+251000000000",
@@ -406,6 +425,16 @@ module.exports = {
     },
     caps: uris2caps(auth.caps)
   },
+  /*fsys: {
+    name: "corner.fsys",
+    sii: fsys.sii,
+    conf: {
+      proxy: proxy,
+      api: fsys.api,
+      name: fsys.sii.name,
+    },
+    caps: uris2caps(fsys.caps)
+  },*/
   stream: {
     name: "corner.stream",
     sii: corner_stream.sii,

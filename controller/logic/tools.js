@@ -1,54 +1,76 @@
-import fs from 'fs'
+import API from '../net/net';
+import CONFIG from '../config/config';
+
+export function _print(o, key)
+{
+  console.log(JSON.stringify(o, 0, '  '));
+}
 
 export async function read_license(name)
 {
-  let r;
+  let r, param;
 
-  if(!fs.existsSync(__dirname+"/.licenses")){
-    console.log(":::.licenses file not found");
-    return 0;
+  param = {
+    name: name
   }
 
-  r = JSON.parse(fs.readFileSync(__dirname+"/.licenses", 'utf8'));
+  _print(
+    r = await API.run(param, CONFIG.master.url,  '/platform/controller/license/read'),
+    null
+  );
 
-  if(name){
-    return r[name];
-  }
-
-  return r
+  return r;
 }
 
-export async function write_license(l)
+export async function write_license(name, l)
 {
-  if(!fs.existsSync(__dirname+"/.licenses")){
-    console.log(":::.licenses file not found");
-    return 0;
+  let r, param;
+
+  param = {
+    name: name,
+    license: l.license,
+    user_id: l.user_id
   }
 
-  if(!l.name || !l.user_id || !(l.license || l.password)){
-    console.log(":::unknown license format");
-    return 0;
+  _print(
+    r = await API.run(param, CONFIG.master.url, '/platform/controller/license/write'),
+    null
+  );
+
+  return r;
+}
+
+export async function read_password(name)
+{
+  let r, param;
+
+  param = {
+    name: name
   }
 
-  let r = await read_license(null);
+  _print(
+    r = await API.run(param, CONFIG.master.url,  '/platform/controller/password/read'),
+    null
+  );
 
-  if(l.license){
-    r[l.name] = {
-      user_id: l.user_id,
-      license: l.license
-    }
+  return r;
+}
+
+export async function write_password(name, p)
+{
+  let param, r;
+
+  param = {
+    name: name,
+    user_id: p.user_id,
+    password: p.password
   }
-  else if(l.password){
-    r[l.name] = {
-      user_id: l.user_id,
-      password: l.password
-    }
-  }
 
-  console.log(JSON.stringify(r, 0, '  '));
+  _print(
+    r = await API.run(param, CONFIG.master.url, '/platform/controller/password/write'),
+    null
+  )
 
-  fs.writeFileSync(__dirname+"/.licenses", JSON.stringify(r, 0, '  '), 'utf8');
-
-  return 1;
+  return r;
 }
 

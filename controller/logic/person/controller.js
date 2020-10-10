@@ -1,28 +1,26 @@
-import fs from 'fs'
-import API from '../../tools/net';
-import CONFIG from './config/config'
+import API from '../../net/net';
+import CONFIG from '../../config/config'
 
 import {
+  _print,
   read_license,
-  write_license
+  read_password,
+  write_password
 } from '../tools'
-
-var root_license = null;
-
-function _print(o, key) 
-{
-  console.log(JSON.stringify(o, 0, '  '));
-}
 
 async function _create(cnf)
 {
   let r, data;
 
-  root_license = (await read_license("corner.root")).license;
+  r = await read_license("corner.client.root");
+
+  if(r.status == "err") {
+    return r;
+  }
 
   data = {
     auth: {
-      license: root_license
+      license: r.result.linfo.license
     },
     param: {
       user_type: "admin",
@@ -30,67 +28,69 @@ async function _create(cnf)
     }
   }
 
-  //console.log(JSON.stringify(data, 0, '  '));
-
   _print(
     r = await API.run(data, CONFIG.proxy.url, '/platform/admin/user/write'),
     null
   );
- 
+
   if(r.status == "err") {
-    return;
+    return r;
   }
 
-  await write_license({
-    name: cnf.name,
-    user_id: r.result.user.user_id,
-    password: "toor"
-  });
-  
+  await write_password(cnf.name, {user_id: r.result.user.user_id, password: "toor"});
+
   return r;
 }
 
 export async function _allow(cnf)
 {
-  let r, data, person;
+  let r, data, p;
 
-  root_license = (await read_license("corner.root")).license;
+  r = await read_license("corner.client.root");
 
-  person = await read_license(cnf.name);
+  if(r.status == "err") {
+    return r; 
+  } 
+  
+  p = await read_password(cnf.name);
 
+  if(p.status == "err") {
+    return p; 
+  } 
+  
   data = {
     auth: {
-      license: root_license
+      license: r.result.linfo.license
     },
     param: {
-      user_id: person.user_id,
+      user_id: p.result.pinfo.user_id,
       user_type: "admin"
-    }
-  }
-
+    } 
+  } 
+  
   _print(
     r = await API.run(data, CONFIG.proxy.url, '/platform/admin/user/role/write'),
     null
   );
-
-  if(r.status == "err") {
-    return;
-  }
-
+  
   return r;
 }
 
 export async function create()
 {
-  var r;
+  let r;
 
-  await _create(require('./setup').admin);
+  r = await _create(require('./setup').admin);
+
+  return r;
 }
 
 export async function allow()
 {
-  var r;
+  let r;
 
-  await _allow(require('./setup').admin);
+  r = await _allow(require('./setup').admin);
+
+  return r;
 }
 

@@ -1,18 +1,11 @@
-import fs from 'fs'
-import API from '../../tools/net';
-import CONFIG from './config/config'
+import API from '../../net/net';
+import CONFIG from '../../config/config'
 
 import {
+  _print,
   read_license,
   write_license
 } from '../tools'
-
-var root_license = null;
-
-function _print(o, key) 
-{
-  console.log(JSON.stringify(o, 0, '  '));
-}
 
 async function configure_service(cnf)
 {
@@ -29,15 +22,21 @@ async function configure_service(cnf)
   return r;
 }
 
-async function install_service(cnf)
+async function install_service(cnf, lic)
 {
-  let r;
-  let param = {service: null};
+  let r, param;
 
-  param.service = cnf;
+  param = {service: null};
+  param.service = cnf
 
-  if(root_license){
-    param.service["license"] = root_license;
+  if(lic){
+    r = await read_license(lic);
+
+    if(r.status == "err") {
+      return r;
+    }
+
+    param.service["license"] = r.result.linfo.license;
   }
 
   _print(
@@ -50,15 +49,18 @@ async function install_service(cnf)
 
 async function allow_service(cnf)
 {
-  let r;
-  let param = {service: null};
+  let r, param;
+    
+  r = await read_license("corner.client.root");
 
-  param.service = cnf;
-
-  if(root_license){
-    param.service["license"] = root_license;
+  if(r.status == "err") {
+    return r;
   }
 
+  param = {service: null};
+  param.service = cnf;
+  param.service["license"] = r.result.linfo.license;
+  
   _print(
     r = await API.run(param, CONFIG.master.url, '/platform/controller/cap/list/allow'),
     null
@@ -103,6 +105,7 @@ export async function configure()
   await configure_service(require('./setup').filesystem);
   await configure_service(require('./setup').muxer);
   await configure_service(require('./setup').auth);
+  //await configure_service(require('./setup').fsys);
   await configure_service(require('./setup').stream);
   await configure_service(require('./setup').notif);
   await configure_service(require('./setup').finance);
@@ -133,57 +136,65 @@ export async function install()
   await install_service(require('./setup').muxer, null);
   r = await install_service(require('./setup').auth, null);
 
+  if(r.status == "err"){
+    return r;
+  }
+
   await start_service("corner.muxer", "config");
   await start_service("corner.auth", "config");
 
-  root_license = r.result.client.license;
-
-  await install_service(require('./setup').stream);
-  await install_service(require('./setup').notif);
-  await install_service(require('./setup').finance);
-  await install_service(require('./setup').payment);
-  await install_service(require('./setup').admin);
-  await install_service(require('./setup').system);
-  await install_service(require('./setup').asset);
-  await install_service(require('./setup').ashera);
-
-  await install_service(require('./setup').issuance);
-
-  var root = {
-    name: "corner.root",
-    user_id: r.result.client.user_id,
-    license: r.result.client.license
+  if(r.status == "ok"){
+    await write_license("corner.client.root", r.result.client)
   }
 
-  await write_license(root);
+  //await install_service(require('./setup').fsys, "corner.client.root");
+  await install_service(require('./setup').stream, "corner.client.croot");
+  await install_service(require('./setup').notif, "corner.client.root");
+  await install_service(require('./setup').finance, "corner.client.root");
+  await install_service(require('./setup').payment, "corner.client.root");
+  await install_service(require('./setup').admin, "corner.client.root");
+  await install_service(require('./setup').asset, "corner.client.root");
+  await install_service(require('./setup').ashera, "corner.client.root");
 
-  await reboot();
+  await install_service(require('./setup').issuance, "corner.client.root");
 
-  return true
+  r = await install_service(require('./setup').system, "corner.client.root");
+
+  if(r.status == "ok"){
+    await reboot();
+  }
+
+  /*return last message*/
+
+  return r
 }
 
 export async function allow()
 {
-  root_license = (await read_license("corner.root")).license;
+  let r;
 
   await start_service("corner.muxer", "config");
   await start_service("corner.auth", "config");
 
   await allow_service(require('./setup').auth);
+  //await allow_service(require('./setup').fsys);
   await allow_service(require('./setup').stream);
   await allow_service(require('./setup').notif);
   await allow_service(require('./setup').finance);
   await allow_service(require('./setup').payment);
   await allow_service(require('./setup').admin);
-  await allow_service(require('./setup').system);
   await allow_service(require('./setup').asset);
   await allow_service(require('./setup').ashera);
-
   await allow_service(require('./setup').issuance);
 
-  //await reboot();
+  r = await allow_service(require('./setup').system);
 
-  return true
+  if(r.status == "ok"){
+    //await reboot();
+  }
+
+  /*return last message*/
+  return r;
 }
 
 export async function start()
@@ -191,18 +202,24 @@ export async function start()
   //highly probable that the fs is going to be
   //started by the storage technology
 
+  let r;
+
   await start_service("corner.muxer", "start");
   await start_service("corner.auth", "start");
+  //await start_service("corner.fsys", "start");
   await start_service("corner.stream", "start");
   await start_service("corner.notif", "start");
   await start_service("corner.finance", "start");
   await start_service("corner.payment", "start");
   await start_service("corner.admin", "start");
-  await start_service("corner.system", "start");
   await start_service("corner.asset", "start");
   await start_service("corner.ashera", "start");
-
   await start_service("corner.issuance", "start");
+
+  r = await start_service("corner.system", "start");
+
+  /*return last message*/
+  return r;
 }
 
 export async function get_info()

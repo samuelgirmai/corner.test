@@ -1,28 +1,25 @@
-import fs from 'fs'
-import API from '../../tools/net';
-import CONFIG from './config/config'
+import API from '../../net/net';
+import CONFIG from '../../config/config'
 
 import {
+  _print,
   read_license,
   write_license
 } from '../tools'
 
-var root_license = null;
-
-function _print(o, key) 
-{
-  console.log(JSON.stringify(o, 0, '  '));
-}
-
 async function _create(cnf)
 {
-  let r,l, data;
+  let r, i, data;
 
-  root_license = (await read_license("corner.root")).license;
+  r = await read_license("corner.client.root");
+
+  if(r.status == "err") {
+    return r;
+  }
 
   data = {
     auth: {
-      license: root_license
+      license: r.result.linfo.license
     },
     param: {
       cii: cnf.cii
@@ -34,39 +31,44 @@ async function _create(cnf)
     null
   );
 
-  data.param['uid'] = r.result.user_id
-  _print(
-    l = await API.run(data, CONFIG.proxy.url, '/platform/auth/identity/license/issue'),
-    null
-  );
- 
-  if(l.status == "err") {
-    return;
+  if(r.status == "err") {
+    return r;
   }
 
-  await write_license({
-    name: cnf.name,
-    user_id: r.result.user_id,
-    license: l.result.license
-  });
-  
+  data.param['uid'] = r.result.user_id;
+
+  _print(
+    i = await API.run(data, CONFIG.proxy.url, '/platform/auth/identity/license/issue'),
+    null
+  );
+
+  if(i.status == "err") {
+    return i;
+  }
+
+  r = await write_license(cnf.name, {user_id: r.result.user_id, license: i.result.license});
+
   return r;
 }
 
 export async function _allow(cnf)
 {
-  let r, data, client;
+  let r, data, c;
 
-  root_license = (await read_license("corner.root")).license;
+  r = await read_license("corner.client.root");
 
-  client = await read_license(cnf.name);
+  if(r.status == "err") {
+    return r;
+  }
+
+  c = await read_license(cnf.name);
 
   data = {
     auth: {
-      license: root_license
+      license: r.result.linfo.license
     },
     param: {
-      uid: client.user_id,
+      uid: c.result.linfo.user_id,
       caps: cnf.caps
     }
   }
@@ -75,10 +77,6 @@ export async function _allow(cnf)
     r = await API.run(data, CONFIG.proxy.url, '/platform/auth/cap/list/allow'),
     null
   );
-
-  if(r.status == "err") {
-    return;
-  }
 
   return r;
 }
@@ -95,11 +93,14 @@ export async function create()
 
 export async function allow()
 {
-  var r;
+  let r;
 
   await _allow(require('./setup').system);
-  //await _allow(require('./setup').console);
-  await _allow(require('./setup').admin);
   await _allow(require('./setup').issuance);
+  r = await _allow(require('./setup').admin);
+
+  /*return last message*/
+
+  return r;
 }
 

@@ -7,7 +7,7 @@ import {
  */
 let system = {
   cii: {
-    name: "corner.system",
+    name: "corner.client.system",
     desc: "corner sys client",
     address: {
       phone_number: "+251000000010",
@@ -21,7 +21,7 @@ let system = {
 
 /*let console = {
   cii: {
-    name: "corner.console",
+    name: "corner.client.console",
     desc: "corner console client",
     address: {
       phone_number: "+251000000015",
@@ -49,7 +49,7 @@ let admin = {
 
 let issuance = {
   cii: {
-    name: "corner.issuance",
+    name: "corner.client.issuance",
     desc: "corner issuance client",
     address: {
       phone_number: "+251000000018",
@@ -63,12 +63,12 @@ let issuance = {
 
 module.exports = {
   system: {
-    name: "corner.system",
+    name: "corner.client.system",
     cii: system.cii,
     caps: uris2caps(system.caps)
   },
   /*console: {
-    name: "corner.console",
+    name: "corner.client.console",
     cii: console.cii,
     caps: uris2caps(console.caps)
   },*/
@@ -78,7 +78,7 @@ module.exports = {
     caps: uris2caps(admin.caps)
   },
   issuance: {
-    name: "corner.issuance",
+    name: "corner.client.issuance",
     cii: issuance.cii,
     caps: uris2caps(issuance.caps)
   }
