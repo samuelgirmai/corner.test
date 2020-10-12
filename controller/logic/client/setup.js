@@ -47,6 +47,38 @@ let admin = {
   ]
 }
 
+let fsys = {
+  cii: {
+    name: "corner.client.fsys",
+    desc: "corner fsys client",
+    address: {
+      phone_number: "+251000000019",
+      email: "corner@bokri.xyz"
+    }
+  },
+  caps: [
+    '/platform/fsys/driver/load',
+    '/platform/fsys/driver/unload',
+    '/platform/fsys/driver/list/read',
+    '/platform/fsys/conn/write',
+    '/platform/fsys/conn/delete',
+    '/platform/fsys/conn/list/read',
+    '/platform/fsys/fs/write',
+    '/platform/fsys/fs/delete',
+    '/platform/fsys/dir/write',
+    '/platform/fsys/dir/delete',
+    '/platform/fsys/file/write',
+    '/platform/fsys/file/delete',
+    '/platform/fsys/index/write',
+    '/platform/fsys/index/delete',
+    '/platform/fsys/data/write',
+    '/platform/fsys/data/read',
+    '/platform/fsys/data/update',
+    '/platform/fsys/data/delete',
+    '/platform/fsys/data/count',
+  ]
+}
+
 let issuance = {
   cii: {
     name: "corner.client.issuance",
@@ -76,6 +108,11 @@ module.exports = {
     name: "corner.client.admin",
     cii: admin.cii,
     caps: uris2caps(admin.caps)
+  },
+  fsys: {
+    name: "corner.client.fsys",
+    cii: fsys.cii,
+    caps: uris2caps(fsys.caps)
   },
   issuance: {
     name: "corner.client.issuance",

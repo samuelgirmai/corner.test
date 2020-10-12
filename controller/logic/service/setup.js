@@ -97,6 +97,7 @@ let auth = {
     "/platform/admin/heartbeat",
     "/platform/asset/heartbeat",
     "/platform/issuance/heartbeat",
+    "/platform/fsys/heartbeat",
     "/platform/ashera/heartbeat",
      //
     "/platform/stream/open",

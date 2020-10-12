@@ -86,9 +86,12 @@ export async function create()
   var r;
 
   await _create(require('./setup').system);
-  //await _create(require('./setup').console);
-  await _create(require('./setup').admin);
+  await _create(require('./setup').fsys);
   await _create(require('./setup').issuance);
+
+  r = await _create(require('./setup').admin);
+
+  return r;
 }
 
 export async function allow()
@@ -96,7 +99,9 @@ export async function allow()
   let r;
 
   await _allow(require('./setup').system);
+  await _allow(require('./setup').fsys);
   await _allow(require('./setup').issuance);
+
   r = await _allow(require('./setup').admin);
 
   /*return last message*/
