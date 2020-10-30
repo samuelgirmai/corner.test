@@ -1,237 +1,132 @@
-import API from '../../net/net';
-import CONFIG from '../../config/config'
+import PROC from './proc'
 
-import {
-  _print,
-  read_license,
-  write_license
-} from '../tools'
-
-async function configure_service(cnf)
+export async function proc_reboot()
 {
-  let r;
-  let param = {service: null};
-
-  param.service = cnf;
-
-  _print(
-    r = await API.run(param, CONFIG.master.url, '/platform/controller/config/update'),
-    null
-  );
-
-  return r;
+  return PROC.reboot();
 }
 
-async function install_service(cnf, lic)
+export async function proc_info()
 {
-  let r, param;
+  return await PROC.info();
+}
 
-  param = {service: null};
-  param.service = cnf
+export async function proc_fs(proc, arg)
+{
+  let r, ctx;
 
-  if(lic){
-    r = await read_license(lic);
+  ctx = require('./ctx/fs');
+
+  if(proc == "config") {
+    return await PROC.config(ctx.corner);
+  }
+
+  if(proc == "setup") {
+    return await PROC.setup(ctx[fs], null);
+  }
+}
+
+export async function proc_basic(proc, arg)
+{
+  let r, ctx;
+
+  ctx = require('./ctx/basic');
+
+  if(proc == "config"){
+    r = await PROC.config(ctx.muxer);
+    if(r.status == "err"){
+      return r;
+    }
+
+    return await PROC.config(ctx.auth);
+  }
+
+  if(proc == "session"){
+    r = await PROC.session(ctx.muxer);
 
     if(r.status == "err") {
       return r;
     }
 
-    param.service["license"] = r.result.linfo.license;
+    return await PROC.session(ctx.auth);
   }
 
-  _print(
-    r = await API.run(param, CONFIG.master.url, '/platform/controller/setup/update'),
-    null
-  );
+  if(proc == "setup"){
+    r = await PROC.setup(ctx.muxer, arg);
+
+    if(r.status == "err") {
+      return r;
+    }
+
+    return await PROC.setup(ctx.auth, arg);
+  }
+
+  if(proc == "allow"){
+    r = await PROC.allow(ctx.muxer);
+
+    if(r.status == "err") {
+      return r;
+    }
+
+    return await PROC.allow(ctx.auth);
+  }
+
+  if(proc == "state"){
+    r = await PROC.state(ctx.muxer, arg);
+
+    if(r.status == "err") {
+      return r;
+    }
+
+    return await PROC.allow(ctx.auth, arg);
+  }
+}
+
+export async function proc_third(proc, arg)
+{
+  let r, ctx, keys;
+
+  ctx = require('./ctx/service');
+  key = Object.keys(ctx);
+
+  if(proc == "config"){
+    for(let i = 0; i<key.length; i++){
+      r = await PROC.config(ctx[key[i]])
+    }
+  }
+
+  if(proc == "session"){
+    for(let i = 0; i<key.length; i++){
+      r = await PROC.session(ctx[key[i]])
+    }
+  }
+
+  if(proc == "setup"){
+    for(let i = 0; i<key.length; i++){
+      r = await PROC.setup(ctx[key[i]], arg)
+    }
+  }
+
+  if(proc == "allow"){
+    for(let i = 0; i<key.length; i++){
+      r = await PROC.allow(ctx[key[i]])
+    }
+  }
+
+  if(proc == "state"){
+    for(let i = 0; i<key.length; i++){
+      r = await PROC.state(ctx[key[i]], arg)
+    }
+  }
 
   return r;
 }
 
-async function allow_service(cnf)
-{
-  let r, param;
-    
-  r = await read_license("corner.client.root");
-
-  if(r.status == "err") {
-    return r;
-  }
-
-  param = {service: null};
-  param.service = cnf;
-  param.service["license"] = r.result.linfo.license;
-  
-  _print(
-    r = await API.run(param, CONFIG.master.url, '/platform/controller/cap/list/allow'),
-    null
-  );
-
-  return r;
+const CTRL = {
+  proc_info:	proc_info,
+  proc_fs:	proc_fs,
+  proc_basic:	proc_basic,
+  proc_third:	proc_third,
+  proc_reboot:	proc_reboot
 }
 
-async function start_service(name, state)
-{
-  let r;
-  let param = {service: null};
-
-  param.service = {
-    name: name,
-    state: state
-  }
-
-  _print(
-    r = await API.run(param, CONFIG.master.url, '/platform/controller/state/update'),
-    null
-  );
-
-  return r;
-}
-
-async function reboot()
-{
-  let r;
-  let param = {};
-
-  _print(
-    r = await API.run(param, CONFIG.master.url, '/platform/controller/reboot'),
-    null
-  );
-
-  return r;
-}
-
-export async function configure()
-{
-  await configure_service(require('./setup').filesystem);
-  await configure_service(require('./setup').muxer);
-  await configure_service(require('./setup').auth);
-  await configure_service(require('./setup').fsys);
-  await configure_service(require('./setup').stream);
-  await configure_service(require('./setup').notif);
-  await configure_service(require('./setup').finance);
-  await configure_service(require('./setup').payment);
-  await configure_service(require('./setup').admin);
-  await configure_service(require('./setup').system);
-  await configure_service(require('./setup').asset);
-  await configure_service(require('./setup').ashera);
-
-  await configure_service(require('./setup').issuance);
-
-  await reboot();
-}
-
-export async function mkfs()
-{
-  await install_service(require('./setup').filesystem, null);
-
-  await reboot();
-}
-
-export async function install()
-{
-  var r;
-
-  let param = {service: null};
-
-  await install_service(require('./setup').muxer, null);
-  r = await install_service(require('./setup').auth, null);
-
-  if(r.status == "err"){
-    return r;
-  }
-
-  await start_service("corner.muxer", "config");
-  await start_service("corner.auth", "config");
-
-  if(r.status == "ok"){
-    await write_license("corner.client.root", r.result.client)
-  }
-
-  await install_service(require('./setup').fsys, "corner.client.root");
-  await install_service(require('./setup').stream, "corner.client.croot");
-  await install_service(require('./setup').notif, "corner.client.root");
-  await install_service(require('./setup').finance, "corner.client.root");
-  await install_service(require('./setup').payment, "corner.client.root");
-  await install_service(require('./setup').admin, "corner.client.root");
-  await install_service(require('./setup').asset, "corner.client.root");
-  await install_service(require('./setup').ashera, "corner.client.root");
-
-  await install_service(require('./setup').issuance, "corner.client.root");
-
-  r = await install_service(require('./setup').system, "corner.client.root");
-
-  if(r.status == "ok"){
-    await reboot();
-  }
-
-  /*return last message*/
-
-  return r
-}
-
-export async function allow()
-{
-  let r;
-
-  await start_service("corner.muxer", "config");
-  await start_service("corner.auth", "config");
-
-  await allow_service(require('./setup').auth);
-  await allow_service(require('./setup').fsys);
-  await allow_service(require('./setup').stream);
-  await allow_service(require('./setup').notif);
-  await allow_service(require('./setup').finance);
-  await allow_service(require('./setup').payment);
-  await allow_service(require('./setup').admin);
-  await allow_service(require('./setup').asset);
-  await allow_service(require('./setup').ashera);
-  await allow_service(require('./setup').issuance);
-
-  r = await allow_service(require('./setup').system);
-
-  if(r.status == "ok"){
-    //await reboot();
-  }
-
-  /*return last message*/
-  return r;
-}
-
-export async function start()
-{
-  //highly probable that the fs is going to be
-  //started by the storage technology
-
-  let r;
-
-  await start_service("corner.muxer", "start");
-  await start_service("corner.auth", "start");
-  await start_service("corner.fsys", "start");
-  await start_service("corner.stream", "start");
-  await start_service("corner.notif", "start");
-  await start_service("corner.finance", "start");
-  await start_service("corner.payment", "start");
-  await start_service("corner.admin", "start");
-  await start_service("corner.asset", "start");
-  await start_service("corner.ashera", "start");
-  await start_service("corner.issuance", "start");
-
-  r = await start_service("corner.system", "start");
-
-  /*return last message*/
-  return r;
-}
-
-export async function get_info()
-{
-  let ret;
-
-  let param = {};
-
-  ret = await API.run(param, CONFIG.master.url, '/platform/controller/info/read');
-
-  _print(ret, null);
-
-  return ret;
-}
-
+export default CTRL;

@@ -15,7 +15,7 @@ export async function read_license(name)
   }
 
   _print(
-    r = await API.run(param, CONFIG.master.url,  '/platform/controller/license/read'),
+    r = await API.run(param, CONFIG.master.url,  '/platform/boot/license/read'),
     null
   );
 
@@ -33,7 +33,7 @@ export async function write_license(name, l)
   }
 
   _print(
-    r = await API.run(param, CONFIG.master.url, '/platform/controller/license/write'),
+    r = await API.run(param, CONFIG.master.url, '/platform/boot/license/write'),
     null
   );
 
@@ -49,7 +49,7 @@ export async function read_password(name)
   }
 
   _print(
-    r = await API.run(param, CONFIG.master.url,  '/platform/controller/password/read'),
+    r = await API.run(param, CONFIG.master.url,  '/platform/boot/password/read'),
     null
   );
 
@@ -67,7 +67,7 @@ export async function write_password(name, p)
   }
 
   _print(
-    r = await API.run(param, CONFIG.master.url, '/platform/controller/password/write'),
+    r = await API.run(param, CONFIG.master.url, '/platform/boot/password/write'),
     null
   )
 

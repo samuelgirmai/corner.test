@@ -1,6 +1,6 @@
 import {
   uris2caps
-} from '../fcaps'
+} from '../../fcaps'
 /*
  * filesystem SoT
  */
@@ -399,13 +399,6 @@ let stream = {
 }
 
 module.exports = {
-  filesystem: {
-    name: "corner.fs",
-    conf: {
-      fs: filesystem,
-      cachefs: cachefs
-    }
-  },
   muxer: {
     name: "corner.muxer",
     conf: {
@@ -425,116 +418,6 @@ module.exports = {
       name: auth.sii.name,
     },
     caps: uris2caps(auth.caps)
-  },
-  fsys: {
-    name: "corner.fsys",
-    sii: fsys.sii,
-    conf: {
-      proxy: proxy,
-      api: fsys.api,
-      name: fsys.sii.name,
-    },
-    caps: uris2caps(fsys.caps)
-  },
-  stream: {
-    name: "corner.stream",
-    sii: corner_stream.sii,
-    conf: {
-      proxy: proxy,
-      assert: assert,
-      api: corner_stream.api,
-      stream: corner_stream.stream,
-      name: corner_stream.sii.name
-    },
-    caps: uris2caps(corner_stream.caps)
-  },
-  notif: {
-    name: "corner.notif",
-    sii: notif.sii,
-    conf: {
-      proxy: proxy,
-      stream: stream,
-      api: notif.api,
-      name: notif.sii.name
-    },
-    caps: uris2caps(notif.caps)
-  },
-  finance: {
-    name: "corner.finance",
-    sii: finance.sii,
-    conf: {
-      proxy: proxy,
-      stream: stream,
-      api: finance.api,
-      name: finance.sii.name
-    },
-    caps: uris2caps(finance.caps)
-  },
-  payment: {
-    name: "corner.payment",
-    sii: payment.sii,
-    conf: {
-      proxy: proxy,
-      stream: stream,
-      api: payment.api,
-      name: payment.sii.name
-    },
-    caps: uris2caps(payment.caps)
-  },
-  admin: {
-    name: "corner.admin",
-    sii: admin.sii,
-    conf: {
-      proxy: proxy,
-      stream: stream,
-      api: admin.api,
-      name: admin.sii.name
-    },
-    caps: uris2caps(admin.caps)
-  },
-  system: {
-    name: "corner.system",
-    sii: system.sii,
-    conf: {
-      proxy: proxy,
-      stream: stream,
-      api: system.api,
-      name: system.sii.name
-    },
-    caps: uris2caps(system.caps)
-  },
-  asset: {
-    name: "corner.asset",
-    sii: asset.sii,
-    conf: {
-      proxy: proxy,
-      api: asset.api,
-      fs: assetfs,
-      name: asset.sii.name
-    },
-    caps: uris2caps(asset.caps)
-  },
-  ashera: {
-    name: "corner.ashera",
-    sii: ashera.sii,
-    conf: {
-      proxy: proxy,
-      api: ashera.api,
-      fs: ashera.fs,
-      name: ashera.sii.name
-    },
-    caps: uris2caps(ashera.caps)
-  },
-  issuance: {
-    name: "corner.issuance",
-    sii: issuance.sii,
-    conf: {
-      proxy: proxy,
-      stream: stream,
-      api: issuance.api,
-      name: issuance.sii.name
-    },
-    caps: uris2caps(issuance.caps)
   }
 }
 
