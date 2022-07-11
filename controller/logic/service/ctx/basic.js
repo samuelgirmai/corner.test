@@ -4,10 +4,14 @@ import {
 /*
  * filesystem SoT
  */
-let filesystem = {
-  /*name: "mongodb",
+let filesystem_m = {
+  name: "mongodb",
   port: 27017,
-  host: "corner.fs"*/
+  //host: "corner.fs"
+  host: "0.0.0.0"
+}
+
+let filesystem_r = {
   name: "rethinkdb",
   port: 28015,
   //host: "corner.fs"
@@ -414,6 +418,7 @@ module.exports = {
       proxy: proxy,
       stream: stream,
       asset: asset_proxy,
+      fs: filesystem_r,
       api: auth.api,
       name: auth.sii.name,
     },

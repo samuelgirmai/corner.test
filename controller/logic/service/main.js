@@ -10,12 +10,12 @@ const main_prompt = [
   {
     type: 'list',
     name: 'main',
-    message: 'controller test window',
-    choices: ['info', 'fs', 'basic', 'other', 'start', '<<back']
+    message: 'controller test shell',
+    choices: ['stage1: init', 'stage2: basic', 'stage3: services', 'stage4: fini', 'stage5: boot', '<<back']
   }
 ];
 
-async function info()
+export async function show_service()
 {
   let r;
 
@@ -26,34 +26,49 @@ async function info()
   }
 
   console.log(JSON.stringify(r.result, 0, '  '));
+
+  controller_start();
 }
 
-async function fs()
+async function init()
 {
   let r;
 
-  r = await CTRL.proc_fs("config");
+  r = await CTRL.proc_fs("mkfs", "boot");
 
   if(r.status == "err"){
-    console.log(".err.fs.config");
+    console.log(".err.fs.mkfs.boot");
   }
 
-  r = await CTRL.proc_fs("setup", "boot");
-
-  if(r.status == "err"){
-    console.log(".err.fs.setup.boot");
-  }
-
-  r = await CTRL.proc_fs("setup", "corner");
+  r = await CTRL.proc_fs("mkfs", "corner");
   
   if(r.status == "err"){
-    console.log(".err.fs.setup.corner");
+    console.log(".err.fs.mkfs.corner");
   }
 
-  r = await CTRL.proc_fs("setup", "issuance");
+  r = await CTRL.proc_fs("mkfs", "finance");
+
+  if(r.status == "err"){
+    console.log(".err.fs.mkfs.finance");
+  }
+
+  r = await CTRL.proc_fs("mkfs", "issuance");
   
   if(r.status == "err"){
-    console.log(".err.fs.setup.issuance");
+    console.log(".err.fs.mkfs.issuance");
+  }
+
+
+  r = await CTRL.proc_basic("config");
+
+  if(r.status == "err"){
+    console.log(".err.basic.config");
+  }
+
+  r = await CTRL.proc_basic("session");
+
+  if(r.status == "err"){
+    console.log(".err.basic.session");
   }
 
   await CTRL.proc_reboot();
@@ -65,16 +80,23 @@ async function basic()
 {
   let r;
 
-  r = await CTRL.proc_basic("config");
+  r = await CTRL.proc_basic("session");
 
   if(r.status == "err"){
-    console.log(".err.basic.config");
+    console.log(".err.basic.session");
   }
 
   r = await CTRL.proc_basic("setup", null);
 
   if(r.status == "err"){
     console.log(".err.basic.setup");
+  }
+
+  /*FIXME:*/
+  r = await CTRL.proc_basic("state", "config");
+
+  if(r.status == "err"){
+    console.log(".err.basic.state");
   }
 
   r = await CTRL.proc_basic("allow");
@@ -116,7 +138,7 @@ async function other()
     console.log(".err.third.state");
   }
 
-  r = await CTRL.proc_thrid("allow");
+  r = await CTRL.proc_third("allow");
 
   if(r.status == "err"){
     console.log(".err.third.allow");
@@ -133,10 +155,43 @@ async function other()
   return;
 }
 
-async function start()
+async function fini()
 {
   let r;
-  
+
+  r = await CTRL.proc_basic("state", "config");
+
+  if(r.status == "err"){
+    console.log(".err.basic.state");
+  }
+
+  r = await CTRL.proc_basic("allow");
+
+  if(r.status == "err"){
+    console.log(".err.basic.allow");
+  }
+
+  r = await CTRL.proc_basic("session");
+
+  if(r.status == "err"){
+    console.log(".err.basic.session");
+  }
+
+  await CTRL.proc_reboot();
+
+  return;
+}
+
+async function boot()
+{
+  let r;
+ 
+  r = await CTRL.proc_basic("session");
+
+  if(r.status == "err"){
+    console.log(".err.basic.session");
+  }
+
   r = await CTRL.proc_basic("state", "start");
 
   if(r.status == "err"){
@@ -152,25 +207,44 @@ async function start()
   return;
 }
 
+export async function start_service()
+{
+  let r;
+
+  r = await CTRL.proc_basic("state", "start");
+
+  if(r.status == "err"){
+    console.log(".err.basic.state");
+  }
+
+  r = await CTRL.proc_third("state", "start");
+
+  if(r.status == "err"){
+    console.log(".err.third.state");
+  }
+
+  controller_start();
+}
+
 export async function service_controller()
 {
   let option = await inquirer.prompt(main_prompt);
 
   switch(option.main){
-    case 'info':
-      await info();
+    case 'stage1: init':
+      await init();
       break;
-    case 'fs':
-      await fs();
-      break;
-    case 'basic':
+    case 'stage2: basic':
       await basic();
       break;
-    case 'other':
+    case 'stage3: services':
       await other();
       break;
-    case 'start':
-      await start();
+    case 'stage4: fini':
+      await fini();
+      break;
+    case 'stage5: boot':
+      await boot();
       break;
     case '<<back':
       controller_start();

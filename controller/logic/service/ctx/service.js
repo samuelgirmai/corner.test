@@ -5,10 +5,14 @@ import {
 /*
  * filesystem SoT
  */
-let filesystem = {
-  /*name: "mongodb",
+let filesystem_m = {
+  name: "mongodb",
   port: 27017,
-  host: "corner.fs"*/
+  //host: "corner.fs"
+  host: "0.0.0.0"
+}
+
+let filesystem_r = {
   name: "rethinkdb",
   port: 28015,
   //host: "corner.fs"
@@ -417,6 +421,7 @@ module.exports = {
       proxy: proxy,
       assert: assert,
       api: corner_stream.api,
+      cachefs: cachefs,
       stream: corner_stream.stream,
       name: corner_stream.sii.name
     },
@@ -439,6 +444,7 @@ module.exports = {
     conf: {
       proxy: proxy,
       stream: stream,
+      fs: filesystem_r,
       api: finance.api,
       name: finance.sii.name
     },
@@ -461,6 +467,7 @@ module.exports = {
     conf: {
       proxy: proxy,
       stream: stream,
+      fs: filesystem_r,
       api: admin.api,
       name: admin.sii.name
     },
@@ -494,6 +501,7 @@ module.exports = {
     conf: {
       proxy: proxy,
       stream: stream,
+      fs: filesystem_r,
       api: issuance.api,
       name: issuance.sii.name
     },

@@ -7,6 +7,27 @@ import {
   write_license
 } from '../tools'
 
+async function fsys(ctx)
+{
+  let r;
+
+  let param = {
+    name: ctx.name,
+    arg: {
+      version: ctx.version,
+      config: ctx.conf,
+      dir: ctx.dir
+    }
+  }
+
+  _print(
+    r = await API.run(param, CONFIG.master.url, '/platform/boot/proc/fsys'),
+    null
+  );
+
+  return r;
+}
+
 async function config(ctx)
 {
   let r;
@@ -31,7 +52,7 @@ async function session(ctx)
 {
   let r;
   
-  param = {
+  let param = {
     name: ctx.name,
     arg: {
       version: ctx.version
@@ -54,7 +75,8 @@ async function setup(ctx, lic)
     name: ctx.name,
     arg: {
       version: ctx.version,
-      sii: ctx.sii
+      sii: ctx.sii,
+      cii: ctx.cii
     }
   }
 
@@ -90,7 +112,8 @@ async function allow(ctx)
     name: ctx.name,
     arg: {
       version: ctx.version,
-      license: r.result.linfo.license
+      license: r.result.linfo.license,
+      caps: ctx.caps
     }
   }
 
@@ -102,7 +125,7 @@ async function allow(ctx)
   return r;
 }
 
-async function state(name, state)
+async function state(ctx, state)
 {
   let r;
 
@@ -144,6 +167,7 @@ async function info()
 }
 
 const PROC = {
+  fsys:		fsys,
   config:	config,
   session:	session,
   setup:	setup,

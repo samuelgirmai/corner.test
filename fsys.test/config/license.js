@@ -1,3 +1,3 @@
-const license = "525110655672";
+const license = "324634867414";
 
 export default license;

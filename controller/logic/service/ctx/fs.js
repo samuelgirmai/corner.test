@@ -4,10 +4,14 @@ import {
 /*
  * filesystem SoT
  */
-let filesystem = {
-  /*name: "mongodb",
+let filesystem_m = {
+  name: "mongodb",
   port: 27017,
-  host: "corner.fs"*/
+  //host: "corner.fs"
+  host: "0.0.0.0"
+}
+
+let filesystem_r = {
   name: "rethinkdb",
   port: 28015,
   //host: "corner.fs"
@@ -400,31 +404,36 @@ let stream = {
 
 module.exports = {
   boot: {
-    name: "corner.fs",
+    name: "boot",
     version: "v1.0",
     conf: {
-      fs: filesystem,
-      dir: require('./_fs_struct').boot,
-      cachefs: cachefs
-    }
+      fs: filesystem_r
+    },
+    dir: require('./_fs_struct').boot
   },
   corner: {
-    name: "corner.fs",
+    name: "corner",
     version: "v1.0",
     conf: {
-      fs: filesystem,
-      dir: require('./_fs_struct').corner,
-      cachefs: cachefs
-    }
+      fs: filesystem_r
+    },
+    dir: require('./_fs_struct').corner
+  },
+  finance: {
+    name: "finance",
+    version: "v1.0",
+    conf: {
+      fs: filesystem_r
+    },
+    dir: require('./_fs_struct').finance
   },
   issuance: {
-    name: "corner.fs",
+    name: "issuance",
     version: "v1.0",
     conf: {
-      fs: filesystem,
-      cachefs: cachefs,
-      dir: require('./_fs_struct').issuance
-    }
+      fs: filesystem_r
+    },
+    dir: require('./_fs_struct').issuance
   }
 }
 

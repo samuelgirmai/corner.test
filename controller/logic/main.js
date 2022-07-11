@@ -1,7 +1,9 @@
 import inquirer from 'inquirer'
 
 import {
-  service_controller
+  show_service,
+  service_controller,
+  start_service
 } from './service/main';
 
 import {
@@ -21,7 +23,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'controller test window',
-    choices: ['service', 'client', 'person', 'admin', 'exit']
+    choices: ['show services', 'install services', 'create clients', 'create admin', 'show credentials', 'start services', 'exit']
   }
 ];
 
@@ -30,17 +32,23 @@ export async function controller_start()
   let option = await inquirer.prompt(main_prompt);
 
   switch(option.main){
-    case 'service':
+    case 'show services':
+      await show_service();
+      break;
+    case 'install services':
       await service_controller();
       break;
-    case 'client':
+    case 'create clients':
       await client_controller();
       break;
-    case 'person':
+    case 'create admin':
       await person_controller();
       break;
-    case 'admin':
+    case 'show credentials':
       await get_admin();
+      break;
+    case 'start services':
+      await start_service();
       break;
     case 'exit':
       process.exit();

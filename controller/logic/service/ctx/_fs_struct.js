@@ -26,6 +26,46 @@ let corner = [
         "name": "access",
         "index": []
       },
+      /*{
+        "name": "financeAccount",
+        "index": []
+      },
+      {
+        "name": "insuranceScheme",
+        "index": []
+      },
+      {
+        "name": "transaction",
+        "index": []
+      },
+      {
+        "name": "serviceOrder",
+        "index": []
+      },
+      {
+        "name": "bill",
+        "index": []
+      },*/
+      {
+        "name": "notif",
+        "index": []
+      },
+      {
+        "name": "stats",
+        "index": []
+      },
+      {
+        "name": "prn",
+        "index": []
+      }      
+    ]
+  }
+]
+
+let finance = [
+  {
+    "name": "finance",
+    "file": [
       {
         "name": "financeAccount",
         "index": []
@@ -45,19 +85,7 @@ let corner = [
       {
         "name": "bill",
         "index": []
-      },
-      {
-        "name": "notif",
-        "index": []
-      },
-      {
-        "name": "stats",
-        "index": []
-      },
-      {
-        "name": "prn",
-        "index": []
-      }      
+      }
     ]
   }
 ]
@@ -105,6 +133,7 @@ let issuance = [
 module.exports = {
   boot: boot,
   corner: corner,
+  finance: finance,
   issuance: issuance
 }
 

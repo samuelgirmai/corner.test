@@ -16,12 +16,8 @@ export async function proc_fs(proc, arg)
 
   ctx = require('./ctx/fs');
 
-  if(proc == "config") {
-    return await PROC.config(ctx.corner);
-  }
-
-  if(proc == "setup") {
-    return await PROC.setup(ctx[fs], null);
+  if(proc == "mkfs") {
+    return await PROC.fsys(ctx[arg]);
   }
 }
 
@@ -51,39 +47,28 @@ export async function proc_basic(proc, arg)
   }
 
   if(proc == "setup"){
-    r = await PROC.setup(ctx.muxer, arg);
-
-    if(r.status == "err") {
-      return r;
-    }
-
     return await PROC.setup(ctx.auth, arg);
   }
 
   if(proc == "allow"){
-    r = await PROC.allow(ctx.muxer);
-
-    if(r.status == "err") {
-      return r;
-    }
-
     return await PROC.allow(ctx.auth);
   }
 
   if(proc == "state"){
+	  console.log(ctx.muxer);
     r = await PROC.state(ctx.muxer, arg);
 
     if(r.status == "err") {
       return r;
     }
 
-    return await PROC.allow(ctx.auth, arg);
+    return await PROC.state(ctx.auth, arg);
   }
 }
 
 export async function proc_third(proc, arg)
 {
-  let r, ctx, keys;
+  let r, ctx, key;
 
   ctx = require('./ctx/service');
   key = Object.keys(ctx);
