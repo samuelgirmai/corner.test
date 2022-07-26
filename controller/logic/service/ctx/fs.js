@@ -376,7 +376,9 @@ let issuance = {
     "/platform/auth/identity/person/security/update",
     "/platform/auth/prng/write",
     "/platform/auth/identity/person/read"
-  ]
+  ],
+  fsys: {
+  }
 };
 issuance.sii.host = issuance.api.addr+":"+issuance.api.port;
 

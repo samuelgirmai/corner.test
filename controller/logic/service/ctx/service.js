@@ -444,11 +444,18 @@ module.exports = {
     conf: {
       proxy: proxy,
       stream: stream,
-      fs: filesystem_r,
+      //fs: filesystem_r,
       api: finance.api,
       name: finance.sii.name
     },
-    caps: uris2caps(finance.caps)
+    caps: uris2caps(finance.caps),
+    fsys: {
+      version: "v1.0",
+      conf: {
+        fs: filesystem_r
+      },
+      dir: require('./_fs_struct').finance
+    }
   },
   payment: {
     name: "corner.payment",
@@ -467,6 +474,10 @@ module.exports = {
     conf: {
       proxy: proxy,
       stream: stream,
+      /*
+       * FIXME: this breaks the "Corner SoT" principle
+       * i.e admin uservice should have its own fs
+       * */
       fs: filesystem_r,
       api: admin.api,
       name: admin.sii.name
@@ -501,11 +512,18 @@ module.exports = {
     conf: {
       proxy: proxy,
       stream: stream,
-      fs: filesystem_r,
+      //fs: filesystem_r,
       api: issuance.api,
       name: issuance.sii.name
     },
-    caps: uris2caps(issuance.caps)
+    caps: uris2caps(issuance.caps),
+    fsys: {
+      version: "v1.0",
+      conf: {
+        fs: filesystem_r
+      },
+      dir: require('./_fs_struct').issuance
+    }
   }
 }
 

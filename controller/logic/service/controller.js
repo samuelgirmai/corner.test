@@ -10,7 +10,7 @@ export async function proc_info()
   return await PROC.info();
 }
 
-export async function proc_fs(proc, arg)
+/*export async function proc_fs(proc, arg)
 {
   let r, ctx;
 
@@ -19,7 +19,7 @@ export async function proc_fs(proc, arg)
   if(proc == "mkfs") {
     return await PROC.fsys(ctx[arg]);
   }
-}
+}*/
 
 export async function proc_basic(proc, arg)
 {
@@ -34,6 +34,10 @@ export async function proc_basic(proc, arg)
     }
 
     return await PROC.config(ctx.auth);
+  }
+
+  if(proc == "fsys") {
+    return await PROC.fsys(ctx.auth);
   }
 
   if(proc == "session"){
@@ -55,7 +59,6 @@ export async function proc_basic(proc, arg)
   }
 
   if(proc == "state"){
-	  console.log(ctx.muxer);
     r = await PROC.state(ctx.muxer, arg);
 
     if(r.status == "err") {
@@ -75,31 +78,39 @@ export async function proc_third(proc, arg)
 
   if(proc == "config"){
     for(let i = 0; i<key.length; i++){
-      r = await PROC.config(ctx[key[i]])
+      r = await PROC.config(ctx[key[i]]);
+    }
+  }
+
+  if(proc == "fsys"){
+    for(let i = 0; i<key.length; i++){
+      if(ctx[key[i]].fsys) {
+        r = await PROC.fsys(ctx[key[i]]);
+      }
     }
   }
 
   if(proc == "session"){
     for(let i = 0; i<key.length; i++){
-      r = await PROC.session(ctx[key[i]])
+      r = await PROC.session(ctx[key[i]]);
     }
   }
 
   if(proc == "setup"){
     for(let i = 0; i<key.length; i++){
-      r = await PROC.setup(ctx[key[i]], arg)
+      r = await PROC.setup(ctx[key[i]], arg);
     }
   }
 
   if(proc == "allow"){
     for(let i = 0; i<key.length; i++){
-      r = await PROC.allow(ctx[key[i]])
+      r = await PROC.allow(ctx[key[i]]);
     }
   }
 
   if(proc == "state"){
     for(let i = 0; i<key.length; i++){
-      r = await PROC.state(ctx[key[i]], arg)
+      r = await PROC.state(ctx[key[i]], arg);
     }
   }
 
@@ -108,7 +119,7 @@ export async function proc_third(proc, arg)
 
 const CTRL = {
   proc_info:	proc_info,
-  proc_fs:	proc_fs,
+  //proc_fs:	proc_fs,
   proc_basic:	proc_basic,
   proc_third:	proc_third,
   proc_reboot:	proc_reboot

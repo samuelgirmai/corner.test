@@ -34,7 +34,7 @@ async function init()
 {
   let r;
 
-  r = await CTRL.proc_fs("mkfs", "boot");
+  /*r = await CTRL.proc_fs("mkfs", "boot");
 
   if(r.status == "err"){
     console.log(".err.fs.mkfs.boot");
@@ -56,7 +56,7 @@ async function init()
   
   if(r.status == "err"){
     console.log(".err.fs.mkfs.issuance");
-  }
+  }*/
 
 
   r = await CTRL.proc_basic("config");
@@ -65,13 +65,21 @@ async function init()
     console.log(".err.basic.config");
   }
 
+  r = await CTRL.proc_basic("fsys");
+  
+  if(r.status == "err"){
+    console.log(".err.basic.fsys");
+  }
+
   r = await CTRL.proc_basic("session");
 
   if(r.status == "err"){
     console.log(".err.basic.session");
   }
 
-  await CTRL.proc_reboot();
+  r = await CTRL.proc_reboot();
+
+  console.log(r);
 
   return;
 }
@@ -80,11 +88,17 @@ async function basic()
 {
   let r;
 
+  /*r = await CTRL.proc_basic("fsys");
+
+  if(r.status == "err"){
+    console.log(".err.basic.fsys");
+  }
+
   r = await CTRL.proc_basic("session");
 
   if(r.status == "err"){
     console.log(".err.basic.session");
-  }
+  }*/
 
   r = await CTRL.proc_basic("setup", null);
 
@@ -130,6 +144,12 @@ async function other()
 
   if(r.status == "err"){
     console.log(".err.third.config");
+  }
+
+  r = await CTRL.proc_third("fsys");
+
+  if(r.status == "err"){
+    console.log(".err.third.fsys");
   }
 
   r = await CTRL.proc_third("setup", "corner.client.root");
@@ -186,11 +206,11 @@ async function boot()
 {
   let r;
  
-  r = await CTRL.proc_basic("session");
+  /*r = await CTRL.proc_basic("session");
 
   if(r.status == "err"){
     console.log(".err.basic.session");
-  }
+  }*/
 
   r = await CTRL.proc_basic("state", "start");
 

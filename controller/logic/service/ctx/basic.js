@@ -418,11 +418,18 @@ module.exports = {
       proxy: proxy,
       stream: stream,
       asset: asset_proxy,
-      fs: filesystem_r,
+      //fs: filesystem_r,
       api: auth.api,
       name: auth.sii.name,
     },
-    caps: uris2caps(auth.caps)
+    caps: uris2caps(auth.caps),
+    fsys: {
+      version: "v1.0",
+      conf: {
+        fs: filesystem_r
+      },
+      dir: require('./_fs_struct').corner
+    }
   }
 }
 

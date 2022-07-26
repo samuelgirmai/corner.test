@@ -7,6 +7,10 @@ import {
   write_license
 } from '../tools'
 
+async function mkbootfs()
+{
+}
+
 async function fsys(ctx)
 {
   let r;
@@ -16,7 +20,7 @@ async function fsys(ctx)
     arg: {
       version: ctx.version,
       config: ctx.conf,
-      dir: ctx.dir
+      fsys: ctx.fsys
     }
   }
 
@@ -25,6 +29,7 @@ async function fsys(ctx)
     null
   );
 
+  console.log("r = ", r);
   return r;
 }
 
