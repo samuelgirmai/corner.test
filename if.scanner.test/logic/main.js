@@ -7,7 +7,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'Scanner Test',
-    choices: ['scan', 'download', 'upload', 'Exit']
+    choices: ['scan', 'asset', 'upload', 'Exit']
   }
 ];
 
@@ -29,6 +29,24 @@ async function scan_fingerprint()
   return await S.scan_fingerprint(p.user_id);
 }
 
+async function get_scan()
+{
+  const fp_prompt = [
+    {
+      name: 'type',
+      message: 'Asset Type [image, feature]'
+    },
+    {
+      name: 'user_id',
+      message: 'User ID: '
+    }
+  ];
+
+  let p = await inquirer.prompt(fp_prompt);
+
+  return await S.get_scan(p.type, p.user_id);
+}
+
 async function _start()
 {
   var ret;
@@ -38,6 +56,9 @@ async function _start()
   switch(option.main){
     case 'scan':
       await scan_fingerprint();
+      break;
+    case 'asset':
+      await get_scan();
       break;
   }
 

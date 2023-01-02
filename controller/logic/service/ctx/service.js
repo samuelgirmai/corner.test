@@ -388,11 +388,11 @@ issuance.sii.host = issuance.api.addr+":"+issuance.api.port;
  */
 
 let proxy = {
-  url: "https://"+muxer.addr+":"+muxer.port
+  url: "http://"+muxer.addr+":"+muxer.port
 }
 
 let asset_proxy = {
-  url: "https://"+asset.api.addr+":"+asset.api.port
+  url: "http://"+asset.api.addr+":"+asset.api.port
 }
 
 let assert = {
@@ -400,7 +400,7 @@ let assert = {
 }
 
 let stream = {
-  url: "https://"+corner_stream.stream.addr+":"+corner_stream.stream.port
+  url: "http://"+corner_stream.stream.addr+":"+corner_stream.stream.port
 }
 
 module.exports = {

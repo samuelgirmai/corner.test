@@ -1,31 +1,30 @@
-import {
-  Data
-} from './data'
+import {Data} from './data'
 
 var stats = {
   failed: 0,
   passed: 0
 }
 
-async function Run(f, prog)
+async function Run(f, prog, dstype)
 {
   let ret, arg = {};
-  
+ 
   for(let i = 0; i<f.arg.length; i++){
     if(f.arg[i].type == "func"){
-      arg[f.arg[i].name] = await Run(prog[f.arg[i].data], prog);
+      arg[f.arg[i].name] = await Run(prog[f.arg[i].data], prog, dstype);
     }
     else if(f.arg[i].type == "var"){
-      arg[f.arg[i].name] = await Data(f.arg[i].data);
+      arg[f.arg[i].name] = (await Data(dstype, f.arg[i].data))[f.arg[i].name];
     }
     else if(f.arg[i].type == "const"){
       arg[f.arg[i].name] = f.arg[i].data;
     }
-    else
-        Print();
+    else{
+      Print();
+    }
   }
 
-  console.log("running func(%s) ...", f.name);
+  console.log("running %s ...", f.name);
 
   ret =  await f.cb(arg);
 
@@ -49,15 +48,66 @@ export function Print()
   console.log("---------------------------"); 
 }
 
-export async function Test(prog, loop)
-{ 
-  if(isNaN(loop)){
+export function _syntax(prog) 
+{
+  if(!prog['_main']) {
+    return 0;
+  }
+
+  return 1;
+}
+
+export async function _init(prog, dstype)
+{
+  let r = await Run(prog['_init'], prog, dstype);
+
+  Print();
+
+  return r;
+}
+
+export async function _fini(prog, dstype)
+{
+  let r = await Run(prog['_fini'], prog, dstype);
+  
+  Print();
+
+  return r;
+}
+
+export async function _main(prog, dstype, loop)
+{
+  if(isNaN(loop)) {
     console.log('Error: invalid input loop');
     return;
   }
 
-  for(let i = 0; i < loop; i++)
-    await Run(prog['_start'], prog);
+  for(let i = 0; i < loop; i++) {
+    await Run(prog['_main'], prog, dstype);
+  }
 
   Print();
+}
+
+export async function Test(prog, dstype, loop)
+{ 
+  if(!_syntax(prog)) {
+    console.log("Error: scenario program syntax error");
+
+    return;
+  }
+
+  let r = await _init(prog, dstype);
+
+  if(!r) {
+    return;
+  }
+
+  await _main(prog, dstype, loop);
+
+  /*r = await _fini(prog, dstype);
+
+  if(!r) {
+    return;
+  }*/
 }

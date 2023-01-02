@@ -1,10 +1,11 @@
 import NET from '../net/api'
+import OFF from '../data/set'
 
 async function Mockaroo(type)
 {
   let prop = {
     method: 'GET',
-    url: 'https://my.api.mockaroo.com/corner/'+type+'?key=87829bf0',
+    url: 'https://my.api.mockaroo.com/corner/'+type+'?key=8bdfe090',
     data: null
   }
 
@@ -15,10 +16,26 @@ async function Mockaroo(type)
   return ret;
 }
 
-export async function Data(type)
+async function Offline(type)
 {
-  console.log("fetching data (%s) ...", type);
+  let ret = await OFF.select('corner/'+type);
 
-  return await Mockaroo(type);
+  return ret;
+}
+
+export async function Data(dstype, type)
+{
+  console.log("fetching data(%s) . dataset type(%s)", type, dstype);
+
+  if(dstype == 'online') {
+    return await Mockaroo(type);
+  }
+  else if(dstype == 'offline'){
+    return await Offline(type);
+  }
+  else {
+    console.log("unknow dataset type options are [online, offline]");
+    return []
+  }
 }
 

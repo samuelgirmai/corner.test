@@ -50,6 +50,53 @@ function _print(o, key)
       alert("Not Scanned: "+JSON.stringify(r, 0, '  '));
     }
 */
+export async function get_scan(type, user_id)
+{
+  let data, ret;
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license
+    },
+    param: {}
+  }
+
+  ret = await API.run(data, CONFIG.scanner.url, "/scan/"+type+"?user_id="+user_id);
+
+  _print(ret, null);
+}
+
+export async function upload_scan(user_id)
+{
+  let u, data, ret;
+
+  u = {
+    user_id: user_id,
+    file: {
+      uri: CONFIG.scanner.url+"/scan/feature?user_id="+user_id,
+      name: "template",
+      type: "data/dat"
+    }
+  }
+
+  data = {
+    auth: {
+      license: CONFIG.auth.license
+    },
+    param: {
+      cb: "/platform/auth/identity/person/fingerprint/write",
+      param: {
+        user_id: u.user_id
+      }
+    },
+    file: u.file
+  }
+
+  ret = await API.run2(data, CONFIG.asset.url, '/platform/asset/file/write');
+
+  _print(ret, null);
+}
+
 export async function scan_fingerprint(user_id)
 {
   let data, ret;
@@ -61,15 +108,13 @@ export async function scan_fingerprint(user_id)
     param: {}
   }
 
-  console.log(CONFIG.scanner.url);
-
   ret = await API.run(data, CONFIG.scanner.url, "/scanner/open");
 
   _print(ret, null);
 
-  /*if(ret.status == "err") {
+  if(ret.status == "err") {
     return;
-  }*/
+  }
 
   data = {
     auth: {
@@ -87,7 +132,8 @@ export async function scan_fingerprint(user_id)
 
 
 const S = {
-  scan_fingerprint:	scan_fingerprint
+  scan_fingerprint:	scan_fingerprint,
+  get_scan:		get_scan
 };
 
 export default S;
