@@ -5,13 +5,29 @@ var stats = {
   passed: 0
 }
 
+var CTX = {};
+
+export function CTX_put(ctx_name, key, val)
+{
+  if(!CTX[ctx_name]) {
+    CTX[ctx_name] = {};
+  }
+
+  CTX[ctx_name][key] = val;
+}
+
+export function CTX_get(ctx_name, key)
+{
+  return CTX[ctx_name][key]
+}
+
 async function Run(f, prog, dstype)
 {
   let ret, arg = {};
  
   for(let i = 0; i<f.arg.length; i++){
-    if(f.arg[i].type == "func"){
-      arg[f.arg[i].name] = await Run(prog[f.arg[i].data], prog, dstype);
+    if(f.arg[i].type == "ctx"){
+      arg[f.arg[i].name] = CTX_get(f.arg[i].data, f.arg[i].name);
     }
     else if(f.arg[i].type == "var"){
       arg[f.arg[i].name] = (await Data(dstype, f.arg[i].data))[f.arg[i].name];
@@ -26,16 +42,20 @@ async function Run(f, prog, dstype)
 
   console.log("running %s ...", f.name);
 
-  ret =  await f.cb(arg);
+  ret =  await f.cb(arg, f.name);
 
-  if(ret){
+  if(ret) {
     console.log("func (%s) status = \x1b[32m PASS \x1b[0m", f.name);
     ++stats.passed;
   }
   else {
     console.log("func (%s) status = \x1b[31m FAILED \x1b[0m", f.name);
     ++stats.failed;
-   }
+  }
+
+  if(ret && f.nxt && prog[f.nxt]) {
+    ret = await Run(prog[f.nxt], prog, dstype);
+  }
 
   return ret;
 }

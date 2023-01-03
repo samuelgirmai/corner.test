@@ -1,3 +1,4 @@
+import {CTX_put} from '../../../core/logic'
 const CORNER = require('libsdkeid');
 var sdk = null;
 
@@ -50,7 +51,7 @@ async function create_person(arg)
   return arg.reg_id;
 }
 
-async function create_issue(arg)
+async function create_issue(arg, ctx)
 {
   //console.log("CREATE_ISSUE", JSON.stringify(arg, 0, '  '));
   let r = await sdk.Create_issue(arg.reg_id, arg.pii, arg.uri);
@@ -62,11 +63,15 @@ async function create_issue(arg)
     return null;
   }
 
+  //console.log("CTX:::", ctx);
+  CTX_put(ctx, "reg_id", arg.reg_id);
+
   return arg.reg_id;
 }
 
 async function modify_issue(arg)
 {
+  //console.log("MODIFY::", arg.reg_id);
   let r = await sdk.Modify_issue(arg.reg_id, arg.pii, arg.uri);
 
   if(r < 0) {
@@ -77,7 +82,7 @@ async function modify_issue(arg)
   return arg.reg_id;
 }
 
-async function remove_issue(arg)
+async function remove_issue(arg, ctx)
 {
   let r = await sdk.Remove_issue(arg.reg_id);
 
@@ -147,7 +152,7 @@ async function modify_person_photo(arg)
   return true;
 }
 
-async function list_person(arg)
+async function list_person(arg, ctx)
 {
   let r = await sdk.List_person(arg.state);
 
@@ -163,12 +168,14 @@ async function list_person(arg)
     return null;
   }
 
+  CTX_put(ctx, "reg_id", r[0].reg_id);
+
   return r[0].reg_id;
 }
 
 async function create_auth_person(arg)
 { 
-  let r = await asdk.Create_auth_person(arg.reg_id);
+  let r = await sdk.Create_auth_person(arg.reg_id);
 
   if(r < 0) {
     console.log("SDK Error: ", sdk.Last_error());
