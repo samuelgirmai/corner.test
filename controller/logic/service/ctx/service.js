@@ -324,7 +324,8 @@ let asset = {
   caps: [
     "/platform/auth/identity/person/fingerprint/write",
     "/platform/auth/identity/person/photo/write",
-    "/platform/issuance/identity/photo/write"
+    "/platform/issuance/identity/photo/write",
+    "/platform/issuance/identity/photo/update"
   ]
 }
 asset.sii.host = asset.api.addr+":"+asset.api.port

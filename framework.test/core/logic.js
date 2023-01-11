@@ -23,7 +23,7 @@ export function CTX_get(ctx_name, key)
 
 async function Run(f, prog, dstype)
 {
-  let ret, arg = {};
+  let ret = null, arg = {};
  
   for(let i = 0; i<f.arg.length; i++){
     if(f.arg[i].type == "ctx"){
@@ -36,7 +36,8 @@ async function Run(f, prog, dstype)
       arg[f.arg[i].name] = f.arg[i].data;
     }
     else{
-      Print();
+      console.log("Error: scenario program syntax error. unknown type '%s'", f.arg[i].type);
+      return ret;
     }
   }
 
@@ -62,7 +63,8 @@ async function Run(f, prog, dstype)
 
 export function Print()
 {
-  console.log("\n--------------------------\nExecution Summary:"); 
+  console.log("\n--------------------------"); 
+  console.log("Execution Summary");
   console.log("   Success: \x1b[32m %s \x1b[0m", stats.passed); 
   console.log("   Failed: \x1b[31m %s \x1b[0m", stats.failed); 
   console.log("---------------------------"); 

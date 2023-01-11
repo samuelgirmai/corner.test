@@ -15,7 +15,7 @@ let scenario = {
     cb: I.open,
     arg: [
       {
-        type: "const",
+        type: "cons",
         name: "config",
         data: CONFIG
       }
