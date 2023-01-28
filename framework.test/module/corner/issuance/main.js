@@ -64,7 +64,7 @@ async function create_issue(arg, ctx)
   }
 
   //console.log("CTX:::", ctx);
-  CTX_put(ctx, "reg_id", arg.reg_id);
+  await CTX_put(ctx, "reg_id", arg.reg_id);
 
   return arg.reg_id;
 }

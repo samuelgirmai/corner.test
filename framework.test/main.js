@@ -17,5 +17,28 @@ async function _main()
   //S.url2file("corner/uri", "corner/file");
 }
 
+/*function _main()
+{
+  var fs = require('fs');
+  var n = require('./data/corner/db.names');
+
+  let t = JSON.parse(fs.readFileSync('./data/corner/pii.json', 'utf8'));
+
+  
+  console.log(t.length, n.length);
+
+  console.log(JSON.stringify(t[0], 0, '  '));
+
+  for(let i = 0; i<t.length; i++) {
+    t[i].pii.name = n[Math.floor(Math.random()*n.length)];
+    t[i].pii.fname = n[Math.floor(Math.random()*n.length)];
+    t[i].pii.mname = n[Math.floor(Math.random()*n.length)];
+    t[i].pii.mfname = n[Math.floor(Math.random()*n.length)];
+    t[i].pii.gfname = n[Math.floor(Math.random()*n.length)];
+  }
+
+  console.log(JSON.stringify(t));
+}*/
+
 _main();
 

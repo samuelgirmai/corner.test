@@ -67,7 +67,7 @@ export async function _allow(cnf)
       user_type: "admin"
     } 
   } 
-  
+
   _print(
     r = await API.run(data, CONFIG.proxy.url, '/platform/admin/user/role/write'),
     null

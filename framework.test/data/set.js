@@ -2,6 +2,13 @@ import fs from 'fs'
 import https from 'https'
 import crypto from 'crypto'
 
+//IMPORT MODULE DATA HANDLERS HERE
+//
+
+var D = {
+  corner:  require('./corner/index.js')
+}
+
 function Download(url)
 {
   let cl;
@@ -62,15 +69,21 @@ async function url2file(inp, out)
   fs.writeFileSync('./data/'+out+'.json', JSON.stringify(l))
 }
 
-async function select(type)
+async function select(module, type)
 {
   let t, i;
+  //console.log(":::", Object.keys(D[module]['default']));
 
-  t = JSON.parse(fs.readFileSync('./data/'+type+'.json', 'utf8'));
+  t = await (D[module]['default'][type])();
 
-  i = Math.floor(Math.random()*1001);
+  //console.log(JSON.stringify(t, 0, ' '))
 
-  return t[i];
+  return t;
+  //t = JSON.parse(fs.readFileSync('./data/'+type+'.json', 'utf8'));
+
+  //i = Math.floor(Math.random()*t.length);
+
+  //return t[i];
 }
 
 const S = {

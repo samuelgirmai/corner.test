@@ -1,3 +1,8 @@
+import { createClient } from 'redis';
+const REDC = createClient();
+REDC.on('error', err => console.log('Redis Client Error', err));
+
+
 import {Data} from './data'
 
 var stats = {
@@ -7,18 +12,24 @@ var stats = {
 
 var CTX = {};
 
-export function CTX_put(ctx_name, key, val)
+export async function CTX_put(ctx_name, key, val)
 {
-  if(!CTX[ctx_name]) {
+  //NOTE: STORE in REDIS
+
+  await REDC.set("framework.test/"+ctx_name+key, val)
+
+  /*if(!CTX[ctx_name]) {
     CTX[ctx_name] = {};
   }
 
-  CTX[ctx_name][key] = val;
+  CTX[ctx_name][key] = val;*/
 }
 
-export function CTX_get(ctx_name, key)
+export async function CTX_get(ctx_name, key)
 {
-  return CTX[ctx_name][key]
+  return await REDC.get("framework.test/"+ctx_name+key);
+
+  //return CTX[ctx_name][key]
 }
 
 async function Run(f, prog, dstype)
@@ -27,7 +38,7 @@ async function Run(f, prog, dstype)
  
   for(let i = 0; i<f.arg.length; i++){
     if(f.arg[i].type == "ctx"){
-      arg[f.arg[i].name] = CTX_get(f.arg[i].data, f.arg[i].name);
+      arg[f.arg[i].name] = await CTX_get(f.arg[i].data, f.arg[i].name);
     }
     else if(f.arg[i].type == "var"){
       arg[f.arg[i].name] = (await Data(dstype, f.arg[i].data))[f.arg[i].name];
@@ -38,7 +49,7 @@ async function Run(f, prog, dstype)
     else{
       console.log("Error: scenario program syntax error. unknown type '%s'", f.arg[i].type);
       return ret;
-    }
+    i}
   }
 
   console.log("running %s ...", f.name);
@@ -113,6 +124,8 @@ export async function _main(prog, dstype, loop)
 
 export async function Test(prog, dstype, loop)
 { 
+  await REDC.connect();
+
   if(!_syntax(prog)) {
     console.log("Error: scenario program syntax error");
 

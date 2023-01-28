@@ -102,6 +102,7 @@ let auth = {
     "/platform/admin/heartbeat",
     "/platform/asset/heartbeat",
     "/platform/issuance/heartbeat",
+    "/platform/dedup/heartbeat",
     "/platform/fsys/heartbeat",
     "/platform/ashera/heartbeat",
      //
@@ -257,7 +258,12 @@ let admin = {
     /*for issuance user*/
     '/platform/issuance/user/write',
     '/platform/issuance/user/delete',
-    '/platform/issuance/user/list/read'
+    '/platform/issuance/user/list/read',
+
+    /*for deduplication user*/
+    '/platform/dedup/user/write',
+    '/platform/dedup/user/delete',
+    '/platform/dedup/user/list/read'
   ]
 };
 admin.sii.host = admin.api.addr+":"+admin.api.port;
@@ -381,6 +387,36 @@ let issuance = {
   ]
 };
 issuance.sii.host = issuance.api.addr+":"+issuance.api.port;
+
+let dedup = {
+  sii: {
+    name: "corner.dedup",
+    desc: "corner deduplication service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 22012,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  caps: [
+    "/platform/auth/identity/person/write",
+    "/platform/auth/identity/person/update",
+    "/platform/auth/identity/person/delete",
+    "/platform/auth/identity/access/write",
+    "/platform/auth/identity/access/delete",
+    "/platform/auth/identity/person/security/update",
+
+    "/platform/auth/identity/person/read",
+    "/platform/auth/identity/client/read",
+    "/platform/auth/identity/service/read"
+  ]
+};
+dedup.sii.host = dedup.api.addr+":"+dedup.api.port;
 
 /*
  * NOTICE: don't put any const here; it is
@@ -525,6 +561,17 @@ module.exports = {
       },
       dir: require('./_fs_struct').issuance
     }
+  },
+  dedup: {
+    name: "corner.dedup",
+    sii: dedup.sii,
+    conf: {
+      proxy: proxy,
+      fs: filesystem_r,
+      api: dedup.api,
+      name: dedup.sii.name
+    },
+    caps: uris2caps(dedup.caps)
   }
 }
 

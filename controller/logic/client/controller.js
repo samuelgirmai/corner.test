@@ -88,6 +88,7 @@ export async function create()
   await _create(require('./setup').system);
   await _create(require('./setup').fsys);
   await _create(require('./setup').issuance);
+  await _create(require('./setup').dedup);
 
   r = await _create(require('./setup').admin);
 
@@ -101,6 +102,7 @@ export async function allow()
   await _allow(require('./setup').system);
   await _allow(require('./setup').fsys);
   await _allow(require('./setup').issuance);
+  await _allow(require('./setup').dedup);
 
   r = await _allow(require('./setup').admin);
 

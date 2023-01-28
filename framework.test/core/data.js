@@ -18,7 +18,7 @@ async function Mockaroo(type)
 
 async function Offline(type)
 {
-  let ret = await OFF.select('corner/'+type);
+  let ret = await OFF.select('corner', type);
 
   return ret;
 }

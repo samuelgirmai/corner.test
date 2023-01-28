@@ -1,15 +1,17 @@
 [Unit]
-Description=MongoDB Database Server
-Documentation=https://docs.mongodb.org/manual
+Description=Corner FE
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 User=root
 Group=root
-EnvironmentFile=-/etc/default/mongod
-ExecStart=/usr/bin/mongod --config /etc/mongod.conf
-PIDFile=/var/run/mongodb/mongod.pid
+WorkingDirectory=/opt/corner.frontend/root.ui
+#EnvironmentFile=/opt/corner.backend/.args
+Environment=NODE_VERSION=v13.9.0
+ExecStart=/home/adolis/.nvm/nvm-exec npm start
+PIDFile=/var/run/corner/corner.fe.pid
+Restart=always
 # file size
 LimitFSIZE=infinity
 # cpu time
@@ -31,3 +33,4 @@ TasksAccounting=false
 
 [Install]
 WantedBy=multi-user.target
+

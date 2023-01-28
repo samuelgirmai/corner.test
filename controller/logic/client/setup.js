@@ -93,6 +93,20 @@ let issuance = {
   ]
 }
 
+let dedup = {
+  cii: {
+    name: "corner.client.dedup",
+    desc: "corner deduplication client",
+    address: {
+      phone_number: "+251000000020",
+      email: "corner@bokri.xyz"
+    }
+  },
+  caps: [
+    "/platform/dedup/user/access/write",
+  ]
+}
+
 module.exports = {
   system: {
     name: "corner.client.system",
@@ -118,7 +132,11 @@ module.exports = {
     name: "corner.client.issuance",
     cii: issuance.cii,
     caps: uris2caps(issuance.caps)
+  },
+  dedup: {
+    name: "corner.client.dedup",
+    cii: dedup.cii,
+    caps: uris2caps(dedup.caps)
   }
 }
-
 

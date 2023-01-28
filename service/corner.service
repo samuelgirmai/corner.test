@@ -1,16 +1,17 @@
 [Unit]
-Description=MongoDB Database Server
-Documentation=https://docs.mongodb.org/manual
+Description=Corner Identity Platform
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 User=root
 Group=root
-WorkingDirectory=/home/samuel/current_tasks/corner/corner.backend
-EnvironmentFile=-/etc/default/corner
-ExecStart=/usr/local/bin/node ./node_modules/babel-cli/bin/babel-node.js ./main bios
+WorkingDirectory=/opt/corner.backend
+EnvironmentFile=/opt/corner.backend/.args
+Environment=NODE_VERSION=v19.1.0
+ExecStart=/home/adolis/.nvm/nvm-exec node ./node_modules/babel-cli/bin/babel-node.js ./main $ARG
 PIDFile=/var/run/corner/corner.pid
+Restart=always
 # file size
 LimitFSIZE=infinity
 # cpu time

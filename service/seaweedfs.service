@@ -1,15 +1,17 @@
 [Unit]
-Description=SeaweedFS Master Server
-# Documentation=https://docs.mongodb.org/manual
+Description=Corner Identity Platform Asset FS
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 User=root
 Group=root
-EnvironmentFile=-/etc/default/weed
-ExecStart=/home/samuel/go/bin/weed master -mdir=/opt/weed -port=9993 -ip=0.0.0.0
-PIDFile=/var/run/seaweedfs/seaweedfs.pid
+WorkingDirectory=/opt/corner.tools/BUILD/be/seaweedfs
+# EnvironmentFile=/opt/corner.backend/.args
+# Environment=NODE_VERSION=v19.1.0
+ExecStart=/opt/corner.tools/BUILD/be/seaweedfs/run.sh
+PIDFile=/var/run/corner/seaweed.pid
+Restart=always
 # file size
 LimitFSIZE=infinity
 # cpu time

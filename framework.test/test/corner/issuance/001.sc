@@ -4,8 +4,8 @@ import I from '../../../module/corner/issuance/main'
 let CONFIG = {
   muxer_host: "http://localhost:22000",
   asset_host: "http://localhost:22009",
-  license: "235775209229",
-  user_id: "736094",
+  license: "944377674847",
+  user_id: "116262",
   secret: "toor"
 }
 

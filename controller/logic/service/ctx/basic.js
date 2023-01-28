@@ -103,6 +103,7 @@ let auth = {
     "/platform/issuance/heartbeat",
     "/platform/fsys/heartbeat",
     "/platform/ashera/heartbeat",
+    "/platform/dedup/heartbeat",
      //
     "/platform/stream/open",
     "/platform/stream/close",

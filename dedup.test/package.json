@@ -1,25 +1,24 @@
 {
-  "name": "EMR",
+  "name": "Security",
   "version": "0.1.0",
-  "description": "Sample EMR app",
+  "description": "Security management client app",
   "scripts": {
-    "test": "babel-node ./main.js"
+    "start": "babel-node ./logic/main.js"
   },
-  "author": "Samuel Girmay <samuel@bokri.xyz>",
+  "author": "Samuel Girmay  <samuel@bokri.xyz>",
   "dependencies": {
+    "form-data": "^3.0.0",
     "inquirer": "^4.0.1",
-    "libsdkeid": "file:../../../sdk/eid/libsdkeid",
     "moment": "^2.19.4",
     "node-fetch": "^1.7.3",
     "prettyjson": "^1.2.1",
     "print-message": "^2.1.0",
-    "randomstring": "^1.2.3",
-    "redis": "^4.6.2",
+    "randomstring": "^1.1.5",
     "socket.io-client": "^2.0.4",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "babel-cli": "6.5.1",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.5.2",
     "babel-eslint": "^6.0.0-beta.6",
     "babel-polyfill": "6.5.0",
@@ -29,7 +28,7 @@
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-import": "^1.1.0",
     "eslint-plugin-react": "^4.2.3",
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.19.1"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
