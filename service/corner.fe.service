@@ -6,10 +6,8 @@ Wants=network-online.target
 [Service]
 User=root
 Group=root
-WorkingDirectory=/opt/corner.frontend/root.ui
-#EnvironmentFile=/opt/corner.backend/.args
 Environment=NODE_VERSION=v13.9.0
-ExecStart=/home/adolis/.nvm/nvm-exec npm start
+ExecStart=/opt/corner.frontend/root.ui/run.sh
 PIDFile=/var/run/corner/corner.fe.pid
 Restart=always
 # file size

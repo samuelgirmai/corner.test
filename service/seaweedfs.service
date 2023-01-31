@@ -7,8 +7,6 @@ Wants=network-online.target
 User=root
 Group=root
 WorkingDirectory=/opt/corner.tools/BUILD/be/seaweedfs
-# EnvironmentFile=/opt/corner.backend/.args
-# Environment=NODE_VERSION=v19.1.0
 ExecStart=/opt/corner.tools/BUILD/be/seaweedfs/run.sh
 PIDFile=/var/run/corner/seaweed.pid
 Restart=always
