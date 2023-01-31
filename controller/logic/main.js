@@ -3,7 +3,8 @@ import inquirer from 'inquirer'
 import {
   show_service,
   service_controller,
-  start_service
+  start_service,
+  restore_config
 } from './service/main';
 
 import {
@@ -23,7 +24,7 @@ const main_prompt = [
     type: 'list',
     name: 'main',
     message: 'controller test window',
-    choices: ['show services', 'install services', 'create clients', 'create admin', 'show credentials', 'start services', 'exit']
+    choices: ['show services', 'install services', 'create clients', 'create admin', 'show credentials', 'start services', 'restore config', 'exit']
   }
 ];
 
@@ -49,6 +50,9 @@ export async function controller_start()
       break;
     case 'start services':
       await start_service();
+      break;
+    case 'restore config':
+      await restore_config();
       break;
     case 'exit':
       process.exit();

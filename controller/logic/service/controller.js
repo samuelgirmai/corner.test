@@ -117,11 +117,21 @@ export async function proc_third(proc, arg)
   return r;
 }
 
+export async function proc_restore(proc, arg)
+{
+  let r;
+
+  r = await PROC.restore();
+
+  return r;
+}
+
 const CTRL = {
   proc_info:	proc_info,
   //proc_fs:	proc_fs,
   proc_basic:	proc_basic,
   proc_third:	proc_third,
+  proc_restore: proc_restore,
   proc_reboot:	proc_reboot
 }
 

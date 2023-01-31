@@ -149,6 +149,20 @@ async function state(ctx, state)
   return r;
 }
 
+async function restore()
+{
+  let r;
+
+  let param = {};
+
+  _print(
+    r = await API.run(param, CONFIG.master.url, '/platform/boot/proc/restore'),
+    null
+  );
+
+  return r;
+}
+
 async function reboot()
 {
   let r;
@@ -178,6 +192,7 @@ const PROC = {
   setup:	setup,
   allow:	allow,
   state:	state,
+  restore:	restore,
   reboot:	reboot,
   info:		info
 }

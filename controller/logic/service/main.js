@@ -246,6 +246,19 @@ export async function start_service()
   controller_start();
 }
 
+export async function restore_config()
+{
+  let r;
+
+  r = await CTRL.proc_restore();
+
+  if(r.status == "err"){
+    console.log(".err.restore");
+  }
+
+  controller_start();
+}
+
 export async function service_controller()
 {
   let option = await inquirer.prompt(main_prompt);
