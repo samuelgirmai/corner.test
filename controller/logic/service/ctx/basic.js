@@ -33,7 +33,7 @@ let cachefs = {
  */
 let assetfs = {
   name: "seaweedfs",
-  port: 10333,
+  port: 9333,
   //host: "corner.asset"
   host: "0.0.0.0"
 }
@@ -427,7 +427,7 @@ module.exports = {
     fsys: {
       version: "v1.0",
       conf: {
-        fs: filesystem_r
+        fs: filesystem_m
       },
       dir: require('./_fs_struct').corner
     }
