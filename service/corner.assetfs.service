@@ -7,8 +7,8 @@ Wants=network-online.target
 Type=simple
 User=root
 Group=root
-WorkingDirectory=/opt/corner.tools/BUILD/be/seaweedfs
-ExecStart=/opt/corner.tools/BUILD/be/seaweedfs/run.sh
+WorkingDirectory=/opt/corner.tools/assetfs
+ExecStart=/opt/corner.tools/assetfs/run.sh
 Restart=always
 LimitNOFILE=64000
 
