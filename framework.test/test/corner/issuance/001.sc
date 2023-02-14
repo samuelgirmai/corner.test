@@ -1,6 +1,14 @@
 import {Test} from '../../../core/logic'
 import I from '../../../module/corner/issuance/main'
 
+/*let CONFIG = {
+  muxer_host: "http://192.168.1.143:22000",
+  asset_host: "http://192.168.1.143:22009",
+  license: "144429564632",
+  user_id: "075866",
+  secret: "toor"
+}*/
+
 let CONFIG = {
   muxer_host: "http://localhost:22000",
   asset_host: "http://localhost:22009",

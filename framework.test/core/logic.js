@@ -12,6 +12,8 @@ var stats = {
 
 var CTX = {};
 
+var PROFILE = {};
+
 export async function CTX_put(ctx_name, key, val)
 {
   //NOTE: STORE in REDIS
@@ -34,8 +36,8 @@ export async function CTX_get(ctx_name, key)
 
 async function Run(f, prog, dstype)
 {
-  let ret = null, arg = {};
- 
+  let avg, t1, t2, ret = null, arg = {};
+
   for(let i = 0; i<f.arg.length; i++){
     if(f.arg[i].type == "ctx"){
       arg[f.arg[i].name] = await CTX_get(f.arg[i].data, f.arg[i].name);
@@ -54,13 +56,24 @@ async function Run(f, prog, dstype)
 
   console.log("running %s ...", f.name);
 
+  t1 = process.hrtime.bigint();
+
   ret =  await f.cb(arg, f.name);
 
+  t2 = process.hrtime.bigint();
+
+  avg = Number((t2 - t1) / BigInt(10 ** 6));
+
+  PROFILE[f.name].avg_time = (avg + PROFILE[f.name].avg_time)/2;
+
   if(ret) {
+    ++PROFILE[f.name].pass_cnt
+
     console.log("func (%s) status = \x1b[32m PASS \x1b[0m", f.name);
     ++stats.passed;
   }
   else {
+    ++PROFILE[f.name].fail_cnt;
     console.log("func (%s) status = \x1b[31m FAILED \x1b[0m", f.name);
     ++stats.failed;
   }
@@ -74,11 +87,10 @@ async function Run(f, prog, dstype)
 
 export function Print()
 {
-  console.log("\n--------------------------"); 
-  console.log("Execution Summary");
-  console.log("   Success: \x1b[32m %s \x1b[0m", stats.passed); 
-  console.log("   Failed: \x1b[31m %s \x1b[0m", stats.failed); 
-  console.log("---------------------------"); 
+  console.log("\n\nExecution Summary");
+  console.table(PROFILE);
+  //console.log("   Success: \x1b[32m %s \x1b[0m", stats.passed); 
+  //console.log("   Failed: \x1b[31m %s \x1b[0m", stats.failed); 
 }
 
 export function _syntax(prog) 
@@ -88,6 +100,24 @@ export function _syntax(prog)
   }
 
   return 1;
+}
+
+function _setup_profiling(prog)
+{
+  let o, p;
+
+  p = Object.keys(prog);
+ 
+  for(let i=0; i<p.length; i++) {
+    o = prog[p[i]];
+
+    PROFILE[o.name] = {};
+    PROFILE[o.name]["avg_time"] = 0;
+    PROFILE[o.name]["pass_cnt"] = 0;
+    PROFILE[o.name]["fail_cnt"] = 0;
+    PROFILE[o.name]["pass_avg_time"] = 0;
+    PROFILE[o.name]["fail_avg_time"] = 0;
+  }
 }
 
 export async function _init(prog, dstype)
@@ -131,6 +161,8 @@ export async function Test(prog, dstype, loop)
 
     return;
   }
+
+  _setup_profiling(prog);
 
   let r = await _init(prog, dstype);
 
