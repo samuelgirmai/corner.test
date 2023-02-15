@@ -62,9 +62,11 @@ async function Run(f, prog, dstype)
 
   t2 = process.hrtime.bigint();
 
-  avg = Number((t2 - t1) / BigInt(10 ** 6));
+  avg = t2-t1;//Number((t2 - t1) / BigInt(10 ** 6));
 
-  PROFILE[f.name].avg_time = (avg + PROFILE[f.name].avg_time)/2;
+  ++PROFILE[f.name].tot_cnt;
+
+  PROFILE[f.name].avg_time = PROFILE[f.name].avg_time + avg;
 
   if(ret) {
     ++PROFILE[f.name].pass_cnt
@@ -87,8 +89,17 @@ async function Run(f, prog, dstype)
 
 export function Print()
 {
+  let p = Object.keys(PROFILE);
+
+  for(let i = 0; i < p.length; i++) {
+    if(PROFILE[p[i]].tot_cnt) {
+      PROFILE[p[i]].avg_time = (Number(PROFILE[p[i]].avg_time / BigInt(PROFILE[p[i]].tot_cnt)))/10**6
+    }
+  }
+
   console.log("\n\nExecution Summary");
   console.table(PROFILE);
+
   //console.log("   Success: \x1b[32m %s \x1b[0m", stats.passed); 
   //console.log("   Failed: \x1b[31m %s \x1b[0m", stats.failed); 
 }
@@ -112,7 +123,8 @@ function _setup_profiling(prog)
     o = prog[p[i]];
 
     PROFILE[o.name] = {};
-    PROFILE[o.name]["avg_time"] = 0;
+    PROFILE[o.name]["tot_cnt"] = 0;
+    PROFILE[o.name]["avg_time"] = BigInt(0);
     PROFILE[o.name]["pass_cnt"] = 0;
     PROFILE[o.name]["fail_cnt"] = 0;
     PROFILE[o.name]["pass_avg_time"] = 0;
@@ -124,7 +136,7 @@ export async function _init(prog, dstype)
 {
   let r = await Run(prog['_init'], prog, dstype);
 
-  Print();
+  //Print();
 
   return r;
 }
