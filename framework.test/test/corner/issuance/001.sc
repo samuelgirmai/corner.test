@@ -1,21 +1,29 @@
 import {Test} from '../../../core/logic'
 import I from '../../../module/corner/issuance/main'
 
-/*let CONFIG = {
+let CONFIG = {
   muxer_host: "http://192.168.1.143:22000",
   asset_host: "http://192.168.1.143:22009",
   license: "144429564632",
   user_id: "075866",
   secret: "toor"
+}
+
+/*let CONFIG = {
+  muxer_host: "http://10.60.30.16:22000",
+  asset_host: "http://10.60.30.16:22009",
+  license: "931106113489",
+  user_id: "069873482",
+  secret: "toor"
 }*/
 
-let CONFIG = {
+/*let CONFIG = {
   muxer_host: "http://localhost:22000",
   asset_host: "http://localhost:22009",
   license: "274908493325",
   user_id: "069470781",
   secret: "toor"
-}
+}*/
 
 let scenario = {
   _init: {
@@ -49,7 +57,7 @@ let scenario = {
         data: "uri"
       }
     ],
-    nxt: "modify_issue"
+    nxt: null//"modify_issue"
   },
   modify_issue: {
     name: "modify_issue",

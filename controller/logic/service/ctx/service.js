@@ -103,6 +103,7 @@ let auth = {
     "/platform/asset/heartbeat",
     "/platform/issuance/heartbeat",
     "/platform/dedup/heartbeat",
+    "/platform/dummy/heartbeat",
     "/platform/fsys/heartbeat",
     "/platform/ashera/heartbeat",
      //
@@ -418,6 +419,34 @@ let dedup = {
 };
 dedup.sii.host = dedup.api.addr+":"+dedup.api.port;
 
+let dummy = {
+  sii: {
+    name: "corner.dummy",
+    desc: "corner dummy test service",
+    host: null,
+    address: {
+      phone_number: "+251000000000",
+      email: "corner@bokri.xyz"
+    }
+  },
+  api: {
+    port: 32000,
+    bind: "0.0.0.0",
+    addr: "0.0.0.0",
+  },
+  caps: [
+    "/platform/auth/identity/person/write",
+    "/platform/auth/identity/person/update",
+    "/platform/auth/identity/person/delete",
+    "/platform/auth/identity/access/write",
+    "/platform/auth/identity/access/delete",
+    "/platform/auth/identity/person/security/update",
+    "/platform/auth/prng/write",
+    "/platform/auth/identity/person/read"
+  ]
+};
+dummy.sii.host = dummy.api.addr+":"+dummy.api.port;
+
 /*
  * NOTICE: don't put any const here; it is
  * only constructed interms of the data defined
@@ -572,6 +601,23 @@ module.exports = {
       name: dedup.sii.name
     },
     caps: uris2caps(dedup.caps)
+  },
+  dummy: {
+    name: "corner.dummy",
+    sii: dummy.sii,
+    conf: {
+      proxy: proxy,
+      api: dummy.api,
+      name: dummy.sii.name
+    },
+    caps: uris2caps(dummy.caps),
+    fsys: {
+      version: "v1.0",
+      conf: {
+        fs: filesystem_m
+      },
+      dir: require('./_fs_struct').dummy
+    }
   }
 }
 

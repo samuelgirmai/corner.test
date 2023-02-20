@@ -84,9 +84,24 @@ let issuance = [
   }
 ]
 
+let dummy = [
+  {
+    "name": "dummy",
+    "file": [
+      {
+        "name": "data",
+        "index": [
+          "data_id"
+        ]
+      }
+    ]
+  }
+]
+
 module.exports = {
   corner: corner,
   finance: finance,
-  issuance: issuance
+  issuance: issuance,
+  dummy: dummy
 }
 
