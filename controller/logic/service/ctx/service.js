@@ -248,14 +248,6 @@ let admin = {
     '/platform/auth/cap/list/allow',
     '/platform/auth/cap/list/revoke',
 
-    '/platform/system/user/write',
-    '/platform/system/user/delete',
-    '/platform/system/user/list/read',
-  
-    /*'/platform/console/user/write',
-    '/platform/console/user/delete',
-    '/platform/console/user/list/read',*/
-
     /*for issuance user*/
     '/platform/issuance/user/write',
     '/platform/issuance/user/delete',
@@ -264,7 +256,12 @@ let admin = {
     /*for deduplication user*/
     '/platform/dedup/user/write',
     '/platform/dedup/user/delete',
-    '/platform/dedup/user/list/read'
+    '/platform/dedup/user/list/read',
+
+    /*for dummy user*/
+    '/platform/dummy/user/write',
+    '/platform/dummy/user/delete',
+    '/platform/dummy/user/list/read'
   ]
 };
 admin.sii.host = admin.api.addr+":"+admin.api.port;
