@@ -8,7 +8,7 @@
   "author": "Samuel Girmay <samuel@bokri.xyz>",
   "dependencies": {
     "inquirer": "^4.0.1",
-    "libsdkeid": "file:../../../sdk/eid/libsdkeid",
+    "libsdkeid": "file:../corner.sdk/eid/libsdkeid",
     "moment": "^2.19.4",
     "node-fetch": "^1.7.3",
     "prettyjson": "^1.2.1",
