@@ -232,7 +232,9 @@ async function list_auth_person(arg, ctx)
 
 async function modify_auth_person2(arg)
 {
-  /*let r = await sdk.Modify_auth_person2(arg.user_id, arg.pii);
+  console.log(JSON.stringify(arg, 0, '  '));
+
+  let r = await sdk.Modify_auth_person2(arg.user_id, arg.pii);
 
   if(r < 0) {
     console.log("SDK Error: ", sdk.Last_error());
@@ -240,9 +242,7 @@ async function modify_auth_person2(arg)
     return null;
   }
 
-  return 1;*/
-
-  console.log("HELLO = ", arg.user_id, arg.pii);
+  return 1;
 }
 
 const I = {
