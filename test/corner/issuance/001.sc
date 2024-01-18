@@ -18,10 +18,10 @@ import I from '../../../module/corner/issuance/main'
 }*/
 
 let CONFIG = {
-  muxer_host: "http://localhost:22000",
-  asset_host: "http://localhost:22009",
-  license: "274908493325",
-  user_id: "069470781",
+  muxer_host: "https://test.bokri.xyz:5556",
+  asset_host: "https://test.bokri.xyz:5557",
+  license: "931106113489",
+  user_id: "181168",
   secret: "toor"
 }
 
@@ -57,9 +57,9 @@ let scenario = {
         data: "uri"
       }
     ],
-    nxt: "modify_issue"
+    //nxt: "modify_issue"
   },
-  modify_issue: {
+  /*modify_issue: {
     name: "modify_issue",
     cb: I.modify_issue,
     arg: [
@@ -79,7 +79,7 @@ let scenario = {
         data: "uri"
       }
     ]
-  }
+  }*/
 }
 
 module.exports = async(dstype, num) => {

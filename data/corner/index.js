@@ -9,14 +9,21 @@ var names = require('./db.names');
 
 async function get_pii()
 {
-  var p = pii[Math.floor(Math.random()*pii.length)];
+  var p = {pii:{address:{}}};// = pii[Math.floor(Math.random()*pii.length)];
 
-  p.pii.name = names[Math.floor(Math.random()*names.length)];
-  p.pii.fname = names[Math.floor(Math.random()*names.length)];
-  p.pii.mname = names[Math.floor(Math.random()*names.length)];
-  p.pii.mfname = names[Math.floor(Math.random()*names.length)];
-  p.pii.gfname = names[Math.floor(Math.random()*names.length)];
-  p.pii.address.phone_number = "+251"+randomstring.generate({length: 9 , charset: 'numeric'});
+  p.pii["name"] = names[Math.floor(Math.random()*names.length)];
+  p.pii["fname"] = names[Math.floor(Math.random()*names.length)];
+  p.pii["mname"] = names[Math.floor(Math.random()*names.length)];
+  p.pii["mfname"] = names[Math.floor(Math.random()*names.length)];
+  p.pii["gfname"] = names[Math.floor(Math.random()*names.length)];
+  p.pii["gender"] = "F";
+  p.pii["dob"] = "10/12/1986";
+  p.pii.address["phone_number"] = "+2519"+randomstring.generate({length: 8 , charset: 'numeric'});
+  p.pii.address["region"] = "ትግራይ";
+  p.pii.address["woreda"] = "ኣላጀ";
+  p.pii.address["tabiya"] = "ስምረት";
+
+  console.log(JSON.stringify(p, 0, '  '));
 
   return p;
 }
