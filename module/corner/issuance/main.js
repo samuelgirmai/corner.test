@@ -209,6 +209,42 @@ async function get_auth_person(arg)
   }
 }
 
+async function list_auth_person(arg, ctx)
+{
+  let r = await sdk.List_auth_person(arg.pagin);
+
+  if(r < 0) {
+    console.log("SDK Error: ", sdk.Last_error());
+
+    return null;
+  }
+
+  if(!r.length) {
+    return null;
+  }
+
+  console.log("user_id = ", r[0].user_id);
+
+  CTX_put(ctx, "user_id", r[0].user_id);
+
+  return r[0].user_id;
+}
+
+async function modify_auth_person2(arg)
+{
+  /*let r = await sdk.Modify_auth_person2(arg.user_id, arg.pii);
+
+  if(r < 0) {
+    console.log("SDK Error: ", sdk.Last_error());
+
+    return null;
+  }
+
+  return 1;*/
+
+  console.log("HELLO = ", arg.user_id, arg.pii);
+}
+
 const I = {
   open:			open,
   create_issue:		create_issue,
@@ -217,7 +253,10 @@ const I = {
   create_person:	create_person,
   create_person_photo:	create_person_photo,
   list_person:		list_person,
-  remove_person:	remove_person
+  remove_person:	remove_person,
+
+  list_auth_person:	list_auth_person,
+  modify_auth_person2:	modify_auth_person2
 }
 
 export default I
