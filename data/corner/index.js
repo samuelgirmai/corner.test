@@ -1,11 +1,13 @@
 import fs from 'fs'
 import randomstring from 'randomstring';
 
+//var uri = JSON.parse(fs.readFileSync('data/corner/uri.json', 'utf8'));
 var uri = JSON.parse(fs.readFileSync('data/corner/uri.json', 'utf8'));
 var pii = JSON.parse(fs.readFileSync('data/corner/pii.json', 'utf8'));
 //var reg_id = JSON.parse(fs.readFileSync('data/corner/reg_id.json', 'utf8'));
 
 var names = require('./db.names');
+var tigrai = require('./tigrai').default;
 
 async function get_pii()
 {
@@ -16,15 +18,19 @@ async function get_pii()
   p.pii["mname"] = names[Math.floor(Math.random()*names.length)];
   p.pii["mfname"] = names[Math.floor(Math.random()*names.length)];
   p.pii["gfname"] = names[Math.floor(Math.random()*names.length)];
-  p.pii["gender"] = "F";
-  p.pii["dob"] = "10/12/1986";
+
+  let i = Math.random();
+
+  p.pii["gender"] = Math.floor(i*2) ? "M" : "F";
+  p.pii["dob"] = Math.floor(i*28).toString()+"/"+Math.floor(i*12).toString()+"/"+(1920+Math.floor(i*88)).toString();
+ 
   p.pii.address["phone_number"] = "+2519"+randomstring.generate({length: 8 , charset: 'numeric'});
+
   p.pii.address["region"] = "ትግራይ";
-  p.pii.address["woreda"] = "ኣላጀ";
-  p.pii.address["tabiya"] = "ስምረት";
+  p.pii.address["woreda"] = (tigrai[p.pii.address["region"]][Math.floor(i*tigrai[p.pii.address["region"]].length)]).value;
+  p.pii.address["tabiya"] = (tigrai[p.pii.address["woreda"]][Math.floor(i*tigrai[p.pii.address["woreda"]].length)]).value;;
 
-  console.log(JSON.stringify(p, 0, '  '));
-
+  //console.log(p.pii.address);
   return p;
 }
 
