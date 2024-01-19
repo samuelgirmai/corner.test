@@ -56,7 +56,12 @@ let scenario = {
   _main: {
     name: "list_auth_person",
     cb: I.list_auth_person,
-    arg: [],
+    arg: [
+      {
+        type: "arg",
+        name: "page"
+      }
+    ],
     nxt: "modify_auth_person"
   },
   modify_auth_person: {
@@ -77,7 +82,7 @@ let scenario = {
   }
 }
 
-module.exports = async(dstype, num) => {
-  await Test(scenario, dstype, num);
+module.exports = async(dstype, num, arg) => {
+  await Test(scenario, dstype, num, arg);
 }
 

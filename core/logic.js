@@ -34,7 +34,7 @@ export async function CTX_get(ctx_name, key)
   //return CTX[ctx_name][key]
 }
 
-async function Run(f, prog, dstype)
+async function Run(f, prog, dstype, argv)
 {
   let avg, t1, t2, ret = null, arg = {};
 
@@ -48,10 +48,13 @@ async function Run(f, prog, dstype)
     else if(f.arg[i].type == "const"){
       arg[f.arg[i].name] = f.arg[i].data;
     }
+    else if(f.arg[i].type == "arg"){
+      arg[f.arg[i].name] = argv;
+    }
     else{
       console.log("Error: scenario program syntax error. unknown type '%s'", f.arg[i].type);
       return ret;
-    i}
+    }
   }
 
   console.log("running %s ...", f.name);
@@ -81,7 +84,7 @@ async function Run(f, prog, dstype)
   }
 
   if(ret && f.nxt && prog[f.nxt]) {
-    ret = await Run(prog[f.nxt], prog, dstype);
+    ret = await Run(prog[f.nxt], prog, dstype, argv);
   }
 
   return ret;
@@ -150,7 +153,7 @@ export async function _fini(prog, dstype)
   return r;
 }
 
-export async function _main(prog, dstype, loop)
+export async function _main(prog, dstype, loop, arg)
 {
   if(isNaN(loop)) {
     console.log('Error: invalid input loop');
@@ -158,13 +161,13 @@ export async function _main(prog, dstype, loop)
   }
 
   for(let i = 0; i < loop; i++) {
-    await Run(prog['_main'], prog, dstype);
+    await Run(prog['_main'], prog, dstype, arg);
   }
 
   Print();
 }
 
-export async function Test(prog, dstype, loop)
+export async function Test(prog, dstype, loop, arg)
 { 
   await REDC.connect();
 
@@ -182,7 +185,7 @@ export async function Test(prog, dstype, loop)
     return;
   }
 
-  await _main(prog, dstype, loop);
+  await _main(prog, dstype, loop, arg);
 
   /*r = await _fini(prog, dstype);
 

@@ -2,8 +2,8 @@ import S from './data/set'
 
 async function _main()
 {
-  if(process.argv.length != 5) {
-    console.log("usage: npm test <scenario_file>  <dstype = [online, offline]> <num>");
+  if(process.argv.length != 5 && process.argv.length != 6) {
+    console.log("usage: npm test <scenario_file>  <dstype = [online, offline]> <num> [<arg>]");
     process.exit();
   }
 
@@ -11,7 +11,7 @@ async function _main()
 
   let Test = require(process.argv[2]);
 
-  Test(process.argv[3], process.argv[4]);
+  Test(process.argv[3], process.argv[4], process.argv[5]);
 
   //S.download("corner/uri");
   //S.url2file("corner/uri", "corner/file");

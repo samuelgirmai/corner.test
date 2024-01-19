@@ -209,9 +209,17 @@ async function get_auth_person(arg)
   }
 }
 
+var PAGE = null;
+
 async function list_auth_person(arg, ctx)
 {
-  let r = await sdk.List_auth_person(arg.pagin);
+
+  if(!PAGE) {
+    console.log(PAGE);
+    PAGE = Number(arg.page);
+  }
+
+  let r = await sdk.List_auth_person(PAGE++);
 
   if(r < 0) {
     console.log("SDK Error: ", sdk.Last_error());
