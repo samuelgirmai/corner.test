@@ -171,10 +171,13 @@ export async function Test(prog, dstype, loop, arg)
 { 
   await REDC.connect();
 
-  if(!_syntax(prog)) {
+  let s = _syntax(prog);
+
+
+  if(!s) {
     console.log("Error: scenario program syntax error");
 
-    return;
+    //return;
   }
 
   _setup_profiling(prog);
@@ -185,7 +188,9 @@ export async function Test(prog, dstype, loop, arg)
     return;
   }
 
-  await _main(prog, dstype, loop, arg);
+  if(s) {
+    await _main(prog, dstype, loop, arg);
+  }
 
   /*r = await _fini(prog, dstype);
 

@@ -62,7 +62,7 @@ let scenario = {
         name: "page"
       }
     ],
-    nxt: "modify_auth_person"
+    nxt: null//"modify_auth_person"
   },
   modify_auth_person: {
     name: "modify_auth_person",

@@ -6,7 +6,8 @@ import crypto from 'crypto'
 //
 
 var D = {
-  corner:  require('./corner/index.js')
+  corner:  require('./corner/index.js'),
+  cexch:  require('./cexch/index.js')
 }
 
 function Download(url)
@@ -72,18 +73,12 @@ async function url2file(inp, out)
 async function select(module, type)
 {
   let t, i;
-  //console.log(":::", Object.keys(D[module]['default']));
 
   t = await (D[module]['default'][type])();
 
   //console.log(JSON.stringify(t, 0, ' '))
 
   return t;
-  //t = JSON.parse(fs.readFileSync('./data/'+type+'.json', 'utf8'));
-
-  //i = Math.floor(Math.random()*t.length);
-
-  //return t[i];
 }
 
 const S = {
